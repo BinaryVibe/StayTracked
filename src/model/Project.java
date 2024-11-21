@@ -20,6 +20,13 @@ public class Project {
     private Status projectStatus;
     
     // METHODS
+
+    public Project(String title, String description, ArrayList<Task> tasks, Status projectStatus) {
+        this.title = title;
+        this.description = description;
+        this.tasks = tasks;
+        this.projectStatus = projectStatus;
+    }
     
     
 }
