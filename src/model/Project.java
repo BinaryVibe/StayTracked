@@ -30,12 +30,13 @@ public class Project {
         this.projectPriority = Priority.LOW;
     }
 
-    public Project(String title, String description, ArrayList<Task> tasks, Status projectStatus) {
+    public Project(String title, String description, ArrayList<Task> tasks, Status projectStatus, Date startDate, Date endDate, Priority projectPriority) {
         this.title = title;
         this.description = description;
         this.tasks = tasks;
         this.projectStatus = projectStatus;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.projectPriority = projectPriority;
     }
-    
-    
 }
