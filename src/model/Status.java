@@ -9,5 +9,7 @@ package model;
  * @author samtheradiant
  */
 public enum Status {
-    
+    PENDING,
+    IN_PROGRESS,
+    DONE
 }
