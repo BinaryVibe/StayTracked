@@ -27,7 +27,7 @@ public class Project {
         this.description = "";
         this.projectStatus = Status.PENDING;
         this.startDate = new Date();
-        this.projectPriority = Priority.LOW;
+        this.projectPriority = Priority.NONE;
     }
 
     public Project(String title, String description, ArrayList<Task> tasks, Status projectStatus, Date startDate, Date endDate, Priority projectPriority) {
