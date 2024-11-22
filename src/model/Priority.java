@@ -9,6 +9,7 @@ package model;
  * @author samtheradiant
  */
 public enum Priority {
+    NONE,
     LOW,
     MEDIUM,
     HIGH
