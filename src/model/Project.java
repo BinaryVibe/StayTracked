@@ -20,7 +20,15 @@ public class Project {
     private Status projectStatus;
     private Date startDate, endDate;
     private Priority projectPriority;
+
     // METHODS
+    public Project() {
+        this.title = "Untitled";
+        this.description = "";
+        this.projectStatus = Status.PENDING;
+        this.startDate = new Date();
+        this.projectPriority = Priority.LOW;
+    }
 
     public Project(String title, String description, ArrayList<Task> tasks, Status projectStatus) {
         this.title = title;
