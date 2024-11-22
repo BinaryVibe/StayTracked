@@ -39,4 +39,62 @@ public class Project {
         this.endDate = endDate;
         this.projectPriority = projectPriority;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
+    public Status getProjectStatus() {
+        return projectStatus;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public Priority getProjectPriority() {
+        return projectPriority;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setTasks(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public void setProjectStatus(Status projectStatus) {
+        this.projectStatus = projectStatus;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        // TODO: Add comparison here or in gui code
+        this.endDate = endDate;
+    }
+
+    public void setProjectPriority(Priority projectPriority) {
+        this.projectPriority = projectPriority;
+    }
+
 }
