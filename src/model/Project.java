@@ -19,6 +19,7 @@ public class Project {
     private ArrayList<Task> tasks;
     private Status projectStatus;
     private Date startDate, endDate;
+    private Priority projectPriority;
     // METHODS
 
     public Project(String title, String description, ArrayList<Task> tasks, Status projectStatus) {
