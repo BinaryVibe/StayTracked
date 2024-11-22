@@ -5,20 +5,20 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
  * @author samtheradiant
  */
 public class Project {
-    
+
     // ATTRIBUTES
-    
     // TODO: Decide whether projectID and assignedTo should be added
     private String title, description;
     private ArrayList<Task> tasks;
     private Status projectStatus;
-    
+    private Date startDate, endDate;
     // METHODS
 
     public Project(String title, String description, ArrayList<Task> tasks, Status projectStatus) {
