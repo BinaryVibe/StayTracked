@@ -7,7 +7,7 @@ public class NormalAccount extends Account {
     private boolean isPartOfTeam;
     
     @Override
-    protected void viewDetails() {
+    public void viewDetails() {
        //Display Personal Account details
     }
     
