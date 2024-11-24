@@ -31,6 +31,8 @@ public class MainScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(45, 168, 216));
+
         jTabbedPane1.setBackground(new java.awt.Color(45, 168, 216));
 
         dashboardScreen2.setBackground(new java.awt.Color(21, 25, 34));
