@@ -2,7 +2,6 @@
 package model;
 
 public class ManagerAccount extends Account {
-    private String managerName;
     private Team managedTeam;
     
     
