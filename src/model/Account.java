@@ -1,7 +1,8 @@
 package model;
 
 public abstract class Account {
-    protected String accountID, email, password;
+    protected String firstName, lastName, userName;
+    protected String accountID, contactNum, email, password;
     
     protected void logIn(){
         
