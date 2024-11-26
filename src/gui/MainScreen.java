@@ -33,6 +33,8 @@ public class MainScreen extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(45, 168, 216));
 
+        jTabbedPane1.setBackground(new java.awt.Color(45, 168, 216));
+
         javax.swing.GroupLayout dashboardScreen1Layout = new javax.swing.GroupLayout(dashboardScreen1);
         dashboardScreen1.setLayout(dashboardScreen1Layout);
         dashboardScreen1Layout.setHorizontalGroup(
