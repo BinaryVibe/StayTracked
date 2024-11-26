@@ -7,13 +7,13 @@ import java.sql.SQLException;
 
 public class DBConnectionManager {
     
-    static String url = "jdbc:mysql://localhost:3306/staytracked";
-    static String userName = "Hmember";
+    static String url = "jdbc:mariadb://192.168.1.8:3306/StayTracked";
+    static String userName = "Ayaan";
     static String passWord = "123Password";
     
     static {
         try {
-        Class.forName("com.mysql.cj.jdbc.Driver");
+        Class.forName("org.mariadb.jdbc.Driver");
         }
         catch (ClassNotFoundException e){
             System.out.println(e);
