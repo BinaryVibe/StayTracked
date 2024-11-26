@@ -11,5 +11,11 @@ import javax.swing.JPanel;
  * @author samtheradiant
  */
 public class ProjectScreen extends JPanel {
+    public ProjectScreen() {
+        initCompenents();
+    }
     
+    private void initCompenents() {
+        this.setBackground(new java.awt.Color(21, 25, 34));
+    }
 }

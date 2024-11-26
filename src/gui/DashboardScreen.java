@@ -11,5 +11,12 @@ import javax.swing.JPanel;
  * @author samtheradiant
  */
 public class DashboardScreen extends JPanel {
-    
+
+    public DashboardScreen() {
+        initComponents();
+    }
+ 
+    private void initComponents() {
+        this.setBackground(new java.awt.Color(21, 25, 34));
+    }
 }
