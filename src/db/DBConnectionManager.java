@@ -8,8 +8,8 @@ import java.sql.SQLException;
 public class DBConnectionManager {
     
     static String url = "jdbc:mysql://localhost:3306/staytracked";
-    static String userName = "root";
-    static String passWord = "ersatzSQL";
+    static String userName = "Hmember";
+    static String passWord = "123Password";
     
     static {
         try {
