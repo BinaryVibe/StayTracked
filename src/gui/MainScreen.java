@@ -26,32 +26,54 @@ public class MainScreen extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        dashboardScreen2 = new gui.DashboardScreen();
+        dashboardScreen1 = new gui.DashboardScreen();
         projectScreen1 = new gui.ProjectScreen();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(45, 168, 216));
 
-        jTabbedPane1.setBackground(new java.awt.Color(45, 168, 216));
+        javax.swing.GroupLayout dashboardScreen1Layout = new javax.swing.GroupLayout(dashboardScreen1);
+        dashboardScreen1.setLayout(dashboardScreen1Layout);
+        dashboardScreen1Layout.setHorizontalGroup(
+            dashboardScreen1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1121, Short.MAX_VALUE)
+        );
+        dashboardScreen1Layout.setVerticalGroup(
+            dashboardScreen1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 635, Short.MAX_VALUE)
+        );
 
-        dashboardScreen2.setBackground(new java.awt.Color(21, 25, 34));
-        jTabbedPane1.addTab("Dashboard", dashboardScreen2);
+        jTabbedPane1.addTab("Dashboard", dashboardScreen1);
 
-        projectScreen1.setBackground(new java.awt.Color(21, 25, 34));
+        javax.swing.GroupLayout projectScreen1Layout = new javax.swing.GroupLayout(projectScreen1);
+        projectScreen1.setLayout(projectScreen1Layout);
+        projectScreen1Layout.setHorizontalGroup(
+            projectScreen1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1121, Short.MAX_VALUE)
+        );
+        projectScreen1Layout.setVerticalGroup(
+            projectScreen1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 635, Short.MAX_VALUE)
+        );
+
         jTabbedPane1.addTab("Projects", projectScreen1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1133, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 41, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -95,7 +117,7 @@ public class MainScreen extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private gui.DashboardScreen dashboardScreen2;
+    private gui.DashboardScreen dashboardScreen1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private gui.ProjectScreen projectScreen1;
