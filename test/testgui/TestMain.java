@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package gui;
+package testgui;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import gui.MainScreen;
 import javax.swing.UIManager;
 
 /**
@@ -50,7 +51,7 @@ public class TestMain {
             public void run() {
                 // new MainScreen().setVisible(true);
                 MainScreen main = new MainScreen();
-                main.pack();
+                //main.pack();
                 main.setVisible(true);
             }
         });
