@@ -12,7 +12,10 @@ public class NormalAccount extends Account {
     public void setIsPartOfTeam(boolean isPartOfTeam) {
         this.isPartOfTeam = isPartOfTeam;
     }
-    
+
+    public boolean isIsPartOfTeam() {
+        return isPartOfTeam;
+    }
     
     
     @Override
