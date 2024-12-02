@@ -1,5 +1,7 @@
-
 package gui;
+
+import customExceptions.InvalidInputException;
+import db.AccountsDb;
 
 public class Login extends javax.swing.JFrame {
 
@@ -7,11 +9,11 @@ public class Login extends javax.swing.JFrame {
         initComponents();
     }
 
-  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel7 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         Right = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -25,6 +27,9 @@ public class Login extends javax.swing.JFrame {
         loginBtn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         signUpBtn = new javax.swing.JButton();
+        loginResult = new javax.swing.JLabel();
+
+        jLabel7.setText("jLabel7");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LOGIN");
@@ -87,6 +92,11 @@ public class Login extends javax.swing.JFrame {
 
         loginEmail.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         loginEmail.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        loginEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginEmailActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 204, 204));
@@ -119,6 +129,8 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        loginResult.setForeground(new java.awt.Color(45, 168, 216));
+
         javax.swing.GroupLayout LeftLayout = new javax.swing.GroupLayout(Left);
         Left.setLayout(LeftLayout);
         LeftLayout.setHorizontalGroup(
@@ -136,7 +148,10 @@ public class Login extends javax.swing.JFrame {
                                 .addComponent(jLabel3)
                                 .addComponent(loginPass, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                                 .addComponent(loginEmail)
-                                .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(LeftLayout.createSequentialGroup()
+                                    .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(loginResult)))
                             .addGroup(LeftLayout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -157,7 +172,9 @@ public class Login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(loginPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(loginBtn)
+                .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(loginBtn)
+                    .addComponent(loginResult))
                 .addGap(65, 65, 65)
                 .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -189,7 +206,18 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-        // TODO add your handling code here:
+        String email = loginEmail.getText();
+        String password = loginPass.getText();
+        AccountsDb acc = new AccountsDb();
+        try {
+            acc.validateUser(email, password);
+            loginResult.setText("Login Successful! ");
+            
+        } catch (InvalidInputException e) {
+            String errMsg = e.getMessage();
+            System.out.println("Error: " + errMsg);
+            loginResult.setText(errMsg);
+        }
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void signUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpBtnActionPerformed
@@ -200,8 +228,10 @@ public class Login extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_signUpBtnActionPerformed
 
-    
-    
+    private void loginEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_loginEmailActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Left;
@@ -212,10 +242,12 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton loginBtn;
     private javax.swing.JTextField loginEmail;
     private javax.swing.JPasswordField loginPass;
+    private javax.swing.JLabel loginResult;
     private javax.swing.JButton signUpBtn;
     // End of variables declaration//GEN-END:variables
 }
