@@ -3,8 +3,13 @@ package model;
 
 public class ManagerAccount extends Account {
     private Team managedTeam;
-    
-    
+
+    public ManagerAccount(Team managedTeam, String firstName, String lastName, String userName, String contactNum, String email, String password) {
+        super(firstName, lastName, userName, contactNum, email, password);
+        this.managedTeam = managedTeam;
+    }
+
+   
     @Override
     public void viewDetails() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
