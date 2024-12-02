@@ -8,6 +8,10 @@ public class NormalAccount extends Account {
         super(firstName, lastName, userName, contactNum, email, password);
         this.isPartOfTeam = isPartOfTeam;
     }
+
+    public void setIsPartOfTeam(boolean isPartOfTeam) {
+        this.isPartOfTeam = isPartOfTeam;
+    }
     
     
     
