@@ -211,7 +211,13 @@ public class Login extends javax.swing.JFrame {
         AccountsDb acc = new AccountsDb();
         try {
             acc.validateUser(email, password);
-            loginResult.setText("Login Successful! ");
+            
+            //Opening MainScreen
+            MainScreen MainScreenFrame = new MainScreen();
+            MainScreenFrame.setVisible(true);
+            MainScreenFrame.pack();
+            MainScreenFrame.setLocationRelativeTo(null);
+            this.dispose();
             
         } catch (InvalidInputException e) {
             String errMsg = e.getMessage();
