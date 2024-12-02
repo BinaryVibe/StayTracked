@@ -9,7 +9,10 @@ public class ManagerAccount extends Account {
         this.managedTeam = managedTeam;
     }
 
-   
+    public void setManagedTeam(Team managedTeam) {
+        this.managedTeam = managedTeam;
+    }
+
     @Override
     public void viewDetails() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
