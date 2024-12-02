@@ -41,6 +41,34 @@ public abstract class Account {
     public void setAccountID(int accountID) {
         this.accountID = accountID;
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getContactNum() {
+        return contactNum;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public int getAccountID() {
+        return accountID;
+    }
     
     
     
