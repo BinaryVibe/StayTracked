@@ -39,8 +39,14 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         descField = new javax.swing.JTextField();
         startDateLbl = new javax.swing.JLabel();
         startDateChooser = new com.toedter.calendar.JDateChooser();
+        for (Component c : startDateChooser.getComponents()) {
+            ((JComponent) c).setBackground(new Color(40, 40, 39));
+        }
         endDateLbl = new javax.swing.JLabel();
         endDateChooser = new com.toedter.calendar.JDateChooser();
+        for (Component c : endDateChooser.getComponents()) {
+            ((JComponent) c).setBackground(new Color(40, 40, 39));
+        }
         okButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
