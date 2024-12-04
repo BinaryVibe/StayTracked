@@ -5,10 +5,15 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Frame;
+import java.awt.Window;
 import javax.swing.BoxLayout;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 /**
  *
  * @author samtheradiant
@@ -94,6 +99,18 @@ public class ProjectsScreen extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void createProjectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createProjectBtnActionPerformed
+        Window parentWindow = SwingUtilities.windowForComponent(this);
+        Frame parentFrame = null;
+        if (parentWindow instanceof Frame) {
+            parentFrame = (Frame) parentWindow;
+        }
+        CreateProjectScreen screen1 = new CreateProjectScreen(parentFrame, true);
+        screen1.pack();
+        screen1.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        screen1.setVisible(true);
+    }//GEN-LAST:event_createProjectBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
