@@ -9,6 +9,15 @@ import javax.swing.Timer;
 
 public class PanelSlide extends javax.swing.JPanel {
 
+    
+     public int getAnimate() {
+        return animate;
+    }
+
+    public void setAnimate(int animate) {
+        this.animate = animate;
+    }
+    
     public PanelSlide() {
         initComponents();
         list = new ArrayList<>();
