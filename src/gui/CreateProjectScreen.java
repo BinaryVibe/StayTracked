@@ -173,6 +173,7 @@ public class CreateProjectScreen extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cancelBtn;
     private javax.swing.JTextField descField;
     private javax.swing.JLabel descLbl;
     private com.toedter.calendar.JDateChooser endDateChooser;
