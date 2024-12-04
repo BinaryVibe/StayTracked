@@ -52,25 +52,57 @@ public class CreateProjectScreen extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(21, 25, 34));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        titleLbl.setForeground(new java.awt.Color(247, 255, 247));
         titleLbl.setText("Title:");
 
+        titleField.setBackground(new java.awt.Color(40, 40, 39));
+        titleField.setForeground(new java.awt.Color(221, 255, 255));
+        titleField.setCaretColor(new java.awt.Color(221, 255, 255));
         titleField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 titleFieldActionPerformed(evt);
             }
         });
 
+        descLbl.setForeground(new java.awt.Color(247, 255, 247));
         descLbl.setText("Description:");
 
+        descField.setBackground(new java.awt.Color(40, 40, 39));
+        descField.setForeground(new java.awt.Color(221, 255, 255));
+        descField.setCaretColor(new java.awt.Color(221, 255, 255));
+        descField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         descField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 descFieldActionPerformed(evt);
             }
         });
 
+        startDateLbl.setForeground(new java.awt.Color(247, 255, 247));
         startDateLbl.setText("Start Date:");
 
-        endDateLbl.setText("End Date");
+        startDateChooser.setBackground(new java.awt.Color(40, 40, 39));
+
+        endDateLbl.setForeground(new java.awt.Color(247, 255, 247));
+        endDateLbl.setText("End Date:");
+
+        endDateChooser.setBackground(new java.awt.Color(40, 40, 39));
+
+        okButton.setBackground(new java.awt.Color(86, 86, 87));
+        okButton.setForeground(new java.awt.Color(221, 255, 255));
+        okButton.setText("OK");
+
+        cancelBtn.setBackground(new java.awt.Color(86, 86, 87));
+        cancelBtn.setForeground(new java.awt.Color(221, 255, 255));
+        cancelBtn.setText("Cancel");
+        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
