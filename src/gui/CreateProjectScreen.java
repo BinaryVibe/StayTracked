@@ -8,6 +8,8 @@ import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JComponent;
+import javax.swing.UIManager;
+
 /**
  *
  * @author samtheradiant
