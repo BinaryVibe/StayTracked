@@ -5,6 +5,9 @@
 package gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.Color;
+import java.awt.Component;
+import javax.swing.JComponent;
 /**
  *
  * @author samtheradiant
@@ -36,6 +39,7 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         startDateChooser = new com.toedter.calendar.JDateChooser();
         endDateLbl = new javax.swing.JLabel();
         endDateChooser = new com.toedter.calendar.JDateChooser();
+        okButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
