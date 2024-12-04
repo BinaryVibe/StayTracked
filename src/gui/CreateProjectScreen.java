@@ -48,6 +48,7 @@ public class CreateProjectScreen extends javax.swing.JDialog {
             ((JComponent) c).setBackground(new Color(40, 40, 39));
         }
         okButton = new javax.swing.JButton();
+        cancelBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -135,6 +136,10 @@ public class CreateProjectScreen extends javax.swing.JDialog {
     private void descFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_descFieldActionPerformed
+
+    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_cancelBtnActionPerformed
 
     /**
      * @param args the command line arguments
