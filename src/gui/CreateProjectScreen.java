@@ -180,6 +180,7 @@ public class CreateProjectScreen extends javax.swing.JDialog {
     private javax.swing.JLabel endDateLbl;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JButton okButton;
     private com.toedter.calendar.JDateChooser startDateChooser;
     private javax.swing.JLabel startDateLbl;
     private javax.swing.JTextField titleField;
