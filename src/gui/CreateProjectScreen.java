@@ -166,6 +166,7 @@ public class CreateProjectScreen extends javax.swing.JDialog {
                         System.exit(0);
                     }
                 });
+                dialog.setLocationRelativeTo(null);
                 dialog.setVisible(true);
             }
         });
