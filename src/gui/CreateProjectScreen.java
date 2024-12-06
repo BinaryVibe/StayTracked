@@ -5,10 +5,12 @@
 package gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import customExceptions.InvalidDateException;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.Date;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 /**
@@ -199,6 +201,12 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         }
         try {
         Date endDate = endDateChooser.getDate();
+        if (!(startDate.compareTo(endDate) < 0)) {
+            throw new InvalidDateException("End Date cannot be before than Start Date.");
+        }}
+        catch (InvalidDateException invD) {
+            JOptionPane.showMessageDialog(rootPane, invD.getMessage());
+        }
         
     }//GEN-LAST:event_okButtonActionPerformed
 
