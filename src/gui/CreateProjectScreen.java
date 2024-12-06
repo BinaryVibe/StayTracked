@@ -21,6 +21,8 @@ public class CreateProjectScreen extends javax.swing.JDialog {
 
     /**
      * Creates new form CreateProjectScreen
+     * @param parent
+     * @param modal
      */
     public CreateProjectScreen(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
