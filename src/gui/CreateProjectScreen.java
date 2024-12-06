@@ -91,6 +91,11 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         okButton.setBackground(new java.awt.Color(86, 86, 87));
         okButton.setForeground(new java.awt.Color(221, 255, 255));
         okButton.setText("OK");
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
 
         cancelBtn.setBackground(new java.awt.Color(86, 86, 87));
         cancelBtn.setForeground(new java.awt.Color(221, 255, 255));
@@ -178,6 +183,10 @@ public class CreateProjectScreen extends javax.swing.JDialog {
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         this.dispose();
     }//GEN-LAST:event_cancelBtnActionPerformed
+
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
+        
+    }//GEN-LAST:event_okButtonActionPerformed
 
     /**
      * @param args the command line arguments
