@@ -7,6 +7,7 @@ package gui;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
 import java.awt.Component;
+import java.util.Date;
 import javax.swing.JComponent;
 import javax.swing.UIManager;
 
@@ -185,6 +186,19 @@ public class CreateProjectScreen extends javax.swing.JDialog {
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
+        // TODO: Check what getText() returns where there is no input by user
+        String title = titleField.getText();
+        if (title.isEmpty()) {
+            title = "Unknown";
+        }
+        String desc = descTextArea.getText();
+        Date startDate = startDateChooser.getDate();
+        // Set start date to current date if user leaves the field empty
+        if (startDate == null) {
+            startDate = new Date();
+        }
+        try {
+        Date endDate = endDateChooser.getDate();
         
     }//GEN-LAST:event_okButtonActionPerformed
 
