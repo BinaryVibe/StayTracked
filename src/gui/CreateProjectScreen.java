@@ -32,11 +32,12 @@ public class CreateProjectScreen extends javax.swing.JDialog {
     private void initComponents() {
 
         jProgressBar1 = new javax.swing.JProgressBar();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         titleLbl = new javax.swing.JLabel();
         titleField = new javax.swing.JTextField();
         descLbl = new javax.swing.JLabel();
-        descField = new javax.swing.JTextField();
         startDateLbl = new javax.swing.JLabel();
         startDateChooser = new com.toedter.calendar.JDateChooser();
         for (Component c : startDateChooser.getComponents()) {
@@ -49,6 +50,12 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         }
         okButton = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        descTextArea = new javax.swing.JTextArea();
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -70,16 +77,6 @@ public class CreateProjectScreen extends javax.swing.JDialog {
 
         descLbl.setForeground(new java.awt.Color(247, 255, 247));
         descLbl.setText("Description:");
-
-        descField.setBackground(new java.awt.Color(40, 40, 39));
-        descField.setForeground(new java.awt.Color(221, 255, 255));
-        descField.setCaretColor(new java.awt.Color(221, 255, 255));
-        descField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        descField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                descFieldActionPerformed(evt);
-            }
-        });
 
         startDateLbl.setForeground(new java.awt.Color(247, 255, 247));
         startDateLbl.setText("Start Date:");
@@ -104,18 +101,24 @@ public class CreateProjectScreen extends javax.swing.JDialog {
             }
         });
 
+        descTextArea.setBackground(new java.awt.Color(40, 40, 39));
+        descTextArea.setColumns(20);
+        descTextArea.setForeground(new java.awt.Color(221, 255, 255));
+        descTextArea.setRows(5);
+        descTextArea.setCaretColor(new java.awt.Color(221, 255, 255));
+        jScrollPane2.setViewportView(descTextArea);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(47, 47, 47)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(descField, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
-                        .addComponent(descLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(titleLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(titleField, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2)
+                    .addComponent(descLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(titleLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(titleField, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(okButton)
@@ -138,8 +141,8 @@ public class CreateProjectScreen extends javax.swing.JDialog {
                 .addGap(26, 26, 26)
                 .addComponent(descLbl)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(descField, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(startDateLbl)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(startDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,10 +174,6 @@ public class CreateProjectScreen extends javax.swing.JDialog {
     private void titleFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_titleFieldActionPerformed
-
-    private void descFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_descFieldActionPerformed
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         this.dispose();
@@ -230,12 +229,15 @@ public class CreateProjectScreen extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelBtn;
-    private javax.swing.JTextField descField;
     private javax.swing.JLabel descLbl;
+    private javax.swing.JTextArea descTextArea;
     private com.toedter.calendar.JDateChooser endDateChooser;
     private javax.swing.JLabel endDateLbl;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton okButton;
     private com.toedter.calendar.JDateChooser startDateChooser;
     private javax.swing.JLabel startDateLbl;
