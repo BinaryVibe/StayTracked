@@ -1,9 +1,13 @@
 package model;
 
+import java.util.ArrayList;
+
 public abstract class Account {
     protected String firstName, lastName, userName;
     protected String contactNum, email, password;
     protected int accountID;
+    // Array List to store projects assigned to user/account
+    static ArrayList<Project> projects = new ArrayList<>();
 
     public Account(String firstName, String lastName, String userName, String contactNum, String email, String password) {
         this.firstName = firstName;
