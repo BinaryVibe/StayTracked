@@ -207,7 +207,7 @@ public class CreateProjectScreen extends javax.swing.JDialog {
                 throw new InvalidDateException("End Date cannot be before than Start Date.");
             }
         } catch (InvalidDateException invD) {
-            JOptionPane.showMessageDialog(rootPane, invD.getMessage());
+            JOptionPane.showMessageDialog(rootPane, invD.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_okButtonActionPerformed
