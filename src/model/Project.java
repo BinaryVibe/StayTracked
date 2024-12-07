@@ -41,6 +41,17 @@ public class Project {
         this.projectPriority = projectPriority;
     }
 
+    public Project(String title, String desc, Status projectStatus, Date startDate, Date endDate, Priority projectPriority) {
+        this.title = title;
+        this.desc = desc;
+        this.projectStatus = projectStatus;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.projectPriority = projectPriority;
+    }
+    
+    
+
     public int getProjectID() {
         return projectID;
     }
