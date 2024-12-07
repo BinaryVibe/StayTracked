@@ -202,14 +202,14 @@ public class CreateProjectScreen extends javax.swing.JDialog {
             startDate = new Date();
         }
         try {
-        Date endDate = endDateChooser.getDate();
-        if (!(startDate.compareTo(endDate) < 0)) {
-            throw new InvalidDateException("End Date cannot be before than Start Date.");
-        }}
-        catch (InvalidDateException invD) {
+            Date endDate = endDateChooser.getDate();
+            if (!(startDate.compareTo(endDate) < 0)) {
+                throw new InvalidDateException("End Date cannot be before than Start Date.");
+            }
+        } catch (InvalidDateException invD) {
             JOptionPane.showMessageDialog(rootPane, invD.getMessage());
         }
-        
+
     }//GEN-LAST:event_okButtonActionPerformed
 
     /**
