@@ -15,6 +15,7 @@ public class Project {
 
     // ATTRIBUTES
     // TODO: Decide whether projectID and assignedTo should be added
+    private int projectID;
     private String title, description;
     private ArrayList<Task> tasks;
     private Status projectStatus;
@@ -39,6 +40,16 @@ public class Project {
         this.endDate = endDate;
         this.projectPriority = projectPriority;
     }
+
+    public int getProjectID() {
+        return projectID;
+    }
+
+    public void setProjectID(int projectID) {
+        this.projectID = projectID;
+    }
+    
+    
 
     public String getTitle() {
         return title;
