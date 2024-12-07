@@ -16,7 +16,7 @@ public class Project {
     // ATTRIBUTES
     // TODO: Decide whether projectID and assignedTo should be added
     private int projectID;
-    private String title, description;
+    private String title, desc;
     private ArrayList<Task> tasks;
     private Status projectStatus;
     private Date startDate, endDate;
@@ -25,7 +25,7 @@ public class Project {
     // METHODS
     public Project() {
         this.title = "Untitled";
-        this.description = "";
+        this.desc = "";
         this.projectStatus = Status.PENDING;
         this.startDate = new Date();
         this.projectPriority = Priority.NONE;
@@ -33,7 +33,7 @@ public class Project {
 
     public Project(String title, String description, ArrayList<Task> tasks, Status projectStatus, Date startDate, Date endDate, Priority projectPriority) {
         this.title = title;
-        this.description = description;
+        this.desc = description;
         this.tasks = tasks;
         this.projectStatus = projectStatus;
         this.startDate = startDate;
@@ -55,8 +55,8 @@ public class Project {
         return title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDesc() {
+        return desc;
     }
 
     public ArrayList<Task> getTasks() {
@@ -83,8 +83,8 @@ public class Project {
         this.title = title;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public void setTasks(ArrayList<Task> tasks) {
