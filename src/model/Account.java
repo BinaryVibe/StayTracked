@@ -7,7 +7,7 @@ public abstract class Account {
     protected String contactNum, email, password;
     protected int accountID;
     // Array List to store projects assigned to user/account
-    static protected ArrayList<Project> projects = new ArrayList<>();
+    protected ArrayList<Project> projects = new ArrayList<>();
 
     public Account(String firstName, String lastName, String userName, String contactNum, String email, String password) {
         this.firstName = firstName;
