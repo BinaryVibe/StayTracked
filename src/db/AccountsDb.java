@@ -1,4 +1,3 @@
-
 package db;
 
 import java.sql.Connection;
@@ -6,12 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import customExceptions.InvalidInputException;
+import model.Account;
 
 public class AccountsDb {
-    
-    
+
     //method to validate Input
-     public static void validateUser(String email, String password) throws InvalidInputException {
+    public static void validateUser(String email, String password) throws InvalidInputException {
         try (Connection c = DBConnectionManager.getConnection()) {
             if (c == null) {
                 throw new InvalidInputException("Database connection failed!");
@@ -32,8 +31,22 @@ public class AccountsDb {
                 }
             }
         } catch (SQLException e) {
-            throw new InvalidInputException("Database error occurred: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
-     
+
+    //method to add a new account in database
+    public static void addAccount(Account account) {
+        try(Connection c = DBConnectionManager.getConnection()) {
+            if (c == null) {
+                String error = "Database connection failed!";
+            }
+            
+            //add a logic to insert Account Details in database
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
