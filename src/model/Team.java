@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Team {
     private String teamName;
     private int teamID;
-    private ManagerAccount manager;
+    
     ArrayList<NormalAccount> teamMembers = new ArrayList<>();
     
 
