@@ -12,6 +12,10 @@ import java.util.Date;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import model.DataLayer;
+import model.Priority;
+import model.Project;
+import model.Status;
 
 /**
  *
@@ -21,6 +25,7 @@ public class CreateProjectScreen extends javax.swing.JDialog {
 
     /**
      * Creates new form CreateProjectScreen
+     *
      * @param parent
      * @param modal
      */
@@ -201,15 +206,17 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         if (startDate == null) {
             startDate = new Date();
         }
+        Date endDate = null;
         try {
-            Date endDate = endDateChooser.getDate();
+            endDate = endDateChooser.getDate();
             if (!(startDate.compareTo(endDate) < 0)) {
                 throw new InvalidDateException("End Date cannot be before than Start Date.");
             }
         } catch (InvalidDateException invD) {
             JOptionPane.showMessageDialog(rootPane, invD.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
         }
-
+        Project project = new Project(title, desc, Status.PENDING, startDate, endDate, Priority.NONE);
+        DataLayer.saveProjecttoDB(project);
     }//GEN-LAST:event_okButtonActionPerformed
 
     /**
