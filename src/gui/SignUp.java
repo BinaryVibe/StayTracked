@@ -18,6 +18,7 @@ public class SignUp extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        accTypeBtnGrp = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         backSlide = new javax.swing.JButton();
         nextSlide = new javax.swing.JButton();
@@ -38,8 +39,6 @@ public class SignUp extends javax.swing.JFrame {
         jTextField7 = new javax.swing.JTextField();
         accountTypePanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -49,6 +48,8 @@ public class SignUp extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
         signupPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -248,28 +249,6 @@ public class SignUp extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(45, 168, 216));
         jLabel4.setText("MANAGER ACCOUNT");
 
-        jButton3.setBackground(new java.awt.Color(45, 168, 216));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Manager");
-        jButton3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setBackground(new java.awt.Color(45, 168, 216));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Personal");
-        jButton4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(45, 168, 216));
         jLabel8.setText("ACCOUNT TYPE");
@@ -306,10 +285,39 @@ public class SignUp extends javax.swing.JFrame {
         jLabel21.setForeground(new java.awt.Color(204, 204, 204));
         jLabel21.setText("Perfect for those in leadership roles.");
 
+        jRadioButton1.setBackground(new java.awt.Color(45, 168, 216));
+        accTypeBtnGrp.add(jRadioButton1);
+        jRadioButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jRadioButton1.setForeground(new java.awt.Color(45, 168, 216));
+        jRadioButton1.setText("Personal");
+        jRadioButton1.setToolTipText("");
+        jRadioButton1.setBorderPainted(true);
+        jRadioButton1.setContentAreaFilled(false);
+        jRadioButton1.setName(""); // NOI18N
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+
+        jRadioButton2.setBackground(new java.awt.Color(45, 168, 216));
+        accTypeBtnGrp.add(jRadioButton2);
+        jRadioButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jRadioButton2.setForeground(new java.awt.Color(45, 168, 216));
+        jRadioButton2.setText("Manager");
+        jRadioButton2.setToolTipText("");
+        jRadioButton2.setBorderPainted(true);
+        jRadioButton2.setContentAreaFilled(false);
+        jRadioButton2.setName(""); // NOI18N
+
         javax.swing.GroupLayout accountTypePanelLayout = new javax.swing.GroupLayout(accountTypePanel);
         accountTypePanel.setLayout(accountTypePanelLayout);
         accountTypePanelLayout.setHorizontalGroup(
             accountTypePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(accountTypePanelLayout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(jLabel8)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(accountTypePanelLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(accountTypePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,9 +325,7 @@ public class SignUp extends javax.swing.JFrame {
                     .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
                     .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(accountTypePanelLayout.createSequentialGroup()
-                        .addGroup(accountTypePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel14)
                         .addContainerGap())
                     .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -327,13 +333,10 @@ public class SignUp extends javax.swing.JFrame {
                     .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(accountTypePanelLayout.createSequentialGroup()
                         .addGroup(accountTypePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jRadioButton2)
+                            .addComponent(jRadioButton1)
                             .addComponent(jLabel4))
                         .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(accountTypePanelLayout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(jLabel8)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         accountTypePanelLayout.setVerticalGroup(
             accountTypePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,7 +352,7 @@ public class SignUp extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton4)
+                .addComponent(jRadioButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -361,8 +364,8 @@ public class SignUp extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addComponent(jRadioButton2)
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         jPanel1.add(accountTypePanel);
@@ -474,16 +477,9 @@ public class SignUp extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
-
     private void backSlideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backSlideActionPerformed
         // TODO add your handling code here:
+        
         if (currentPanelIndex > 0) {
         currentPanelIndex--; // Move to the previous panel
         slider.show(currentPanelIndex);
@@ -493,11 +489,17 @@ public class SignUp extends javax.swing.JFrame {
     private void nextSlideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextSlideActionPerformed
         // TODO add your handling code here:
       
+        
           if (currentPanelIndex < totalPanels - 1) {
         currentPanelIndex++; // Move to the next panel
         slider.show(currentPanelIndex);
+              System.out.println(totalPanels);
     }
     }//GEN-LAST:event_nextSlideActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -532,11 +534,10 @@ public class SignUp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup accTypeBtnGrp;
     private javax.swing.JPanel accountTypePanel;
     private javax.swing.JButton backSlide;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -560,6 +561,8 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
