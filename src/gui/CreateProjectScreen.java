@@ -215,7 +215,12 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         } catch (InvalidDateException invD) {
             JOptionPane.showMessageDialog(rootPane, invD.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
         }
-        Project project = new Project(title, desc, Status.PENDING, startDate, endDate, Priority.NONE);
+        Project project;
+        if (endDate != null) {
+            project = new Project(title, desc, Status.PENDING, startDate, endDate, Priority.NONE);
+        } else {
+            project = new Project(title, desc, Status.PENDING, startDate, Priority.NONE);
+        }
         DataLayer.saveProjecttoDB(project);
     }//GEN-LAST:event_okButtonActionPerformed
 
