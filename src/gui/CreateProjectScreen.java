@@ -227,7 +227,6 @@ public class CreateProjectScreen extends javax.swing.JDialog {
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        // TODO: Check what getText() returns where there is no input by user
         String title = titleField.getText();
         if (title.isEmpty()) {
             title = "Unknown";
@@ -247,11 +246,13 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         } catch (InvalidDateException invD) {
             JOptionPane.showMessageDialog(rootPane, invD.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
         }
+        Status projectStatus = Status.getEnum(statusComBox.getSelectedItem().toString());
+        Priority projectPriority = Priority.getEnum(priorityComBox.getSelectedItem().toString());
         Project project;
         if (endDate != null) {
-            project = new Project(title, desc, Status.PENDING, startDate, endDate, Priority.NONE);
+            project = new Project(title, desc, projectStatus, startDate, endDate, projectPriority);
         } else {
-            project = new Project(title, desc, Status.PENDING, startDate, Priority.NONE);
+            project = new Project(title, desc, projectStatus, startDate, projectPriority);
         }
         DataLayer.saveProjecttoDB(project);
     }//GEN-LAST:event_okButtonActionPerformed
