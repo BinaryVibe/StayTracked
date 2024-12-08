@@ -48,5 +48,30 @@ public class AccountsDb {
             System.out.println(e.getMessage());
         }
     }
+    
+    public static void validateUserName(String userName) throws InvalidInputException {
+        try(Connection c = DBConnectionManager.getConnection()) {
+            if (c == null) {
+                throw new InvalidInputException("Database connection failed!");
+            }
+            
+            if (userName.isEmpty()){
+                throw new InvalidInputException("Enter user name!");
+            }
+            
+            //add a logic to check if userName is already taken
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public static void validatePassword(String password) throws InvalidInputException {
+        
+        if(password.isEmpty()){
+            throw new InvalidInputException("Enter password!");
+        }
+        
+    }
 
 }
