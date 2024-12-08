@@ -12,5 +12,19 @@ public enum Priority {
     NONE,
     LOW,
     MEDIUM,
-    HIGH
+    HIGH;
+    
+    public static Priority getEnum(String value) {
+        switch (value) {
+            case "NONE":
+                return NONE;
+            case "LOW":
+                return LOW;
+            case "MEDIUM":
+                return MEDIUM;
+            case "HIGH":
+                return HIGH;
+        }
+        return NONE;
+    }
 }
