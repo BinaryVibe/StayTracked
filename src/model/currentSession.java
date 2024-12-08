@@ -7,6 +7,10 @@ public class currentSession {
     public static String getAccountID() {
         return accountID;
     }
+
+    public static void setAccountID(String accountID) {
+        currentSession.accountID = accountID;
+    }
     
     
 }
