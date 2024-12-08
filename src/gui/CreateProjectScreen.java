@@ -64,7 +64,7 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         descTextArea = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        StatusComBox = new javax.swing.JComboBox<>();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -129,9 +129,9 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(221, 255, 255));
         jLabel1.setText("Status");
 
-        jComboBox1.setBackground(new java.awt.Color(40, 40, 39));
-        jComboBox1.setForeground(new java.awt.Color(221, 255, 255));
-        jComboBox1.setModel(new DefaultComboBoxModel<>(Status.values()));
+        StatusComBox.setBackground(new java.awt.Color(40, 40, 39));
+        StatusComBox.setForeground(new java.awt.Color(221, 255, 255));
+        StatusComBox.setModel(new DefaultComboBoxModel<>(Status.values()));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -289,12 +289,12 @@ public class CreateProjectScreen extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<Status> StatusComBox;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JLabel descLbl;
     private javax.swing.JTextArea descTextArea;
     private com.toedter.calendar.JDateChooser endDateChooser;
     private javax.swing.JLabel endDateLbl;
-    private javax.swing.JComboBox<Status> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar jProgressBar1;
