@@ -14,7 +14,7 @@ import java.util.Date;
 public class Project {
 
     // ATTRIBUTES
-    // TODO: Decide whether projectID and assignedTo should be added
+    // TODO: Decide whether assignedTo should be added
     private int projectID;
     private String title, desc;
     private ArrayList<Task> tasks;
