@@ -1,5 +1,7 @@
 package gui;
 
+import customExceptions.InvalidInputException;
+import db.AccountsDb;
 import model.ManagerAccount;
 import model.NormalAccount;
 import model.Team;
@@ -10,7 +12,9 @@ public class SignUp extends javax.swing.JFrame {
     private int totalPanels = 4;
     private String firstName, lastName, userName, contactNum, email, password;
     private String teamName;
-            
+
+    //Object of AccountDB for connection b/w database and program
+    AccountsDb acc = new AccountsDb();
 
     public SignUp() {
         initComponents();
@@ -67,6 +71,7 @@ public class SignUp extends javax.swing.JFrame {
         txtPass = new javax.swing.JPasswordField();
         jLabel7 = new javax.swing.JLabel();
         btnGoToLogin = new javax.swing.JButton();
+        lblSignUpError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SIGN UP");
@@ -466,31 +471,36 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
 
+        lblSignUpError.setForeground(new java.awt.Color(237, 60, 63));
+
         javax.swing.GroupLayout signupPanelLayout = new javax.swing.GroupLayout(signupPanel);
         signupPanel.setLayout(signupPanelLayout);
         signupPanelLayout.setHorizontalGroup(
             signupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, signupPanelLayout.createSequentialGroup()
-                .addContainerGap(56, Short.MAX_VALUE)
+                .addContainerGap(57, Short.MAX_VALUE)
                 .addGroup(signupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUsername)
-                    .addComponent(lblPass)
-                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(signupPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnGoToLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(44, 44, 44))
-            .addGroup(signupPanelLayout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblSignUpError)
+                    .addGroup(signupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, signupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblUsername)
+                            .addComponent(lblPass)
+                            .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(signupPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnGoToLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(signupPanelLayout.createSequentialGroup()
+                            .addGap(70, 70, 70)
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(43, 43, 43))
         );
         signupPanelLayout.setVerticalGroup(
             signupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(signupPanelLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addGap(40, 40, 40)
                 .addComponent(jLabel1)
                 .addGap(53, 53, 53)
                 .addComponent(lblUsername)
@@ -504,7 +514,9 @@ public class SignUp extends javax.swing.JFrame {
                 .addGroup(signupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(btnGoToLogin))
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(lblSignUpError)
+                .addContainerGap(193, Short.MAX_VALUE))
         );
 
         jPanel1.add(signupPanel);
@@ -539,56 +551,70 @@ public class SignUp extends javax.swing.JFrame {
 
     private void backSlideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backSlideActionPerformed
         // TODO add your handling code here:
-        
+
         if (currentPanelIndex > 0) {
-        currentPanelIndex--; // Move to the previous panel
-        slider.show(currentPanelIndex);
-       
-        
-    }
+            currentPanelIndex--; // Move to the previous panel
+            slider.show(currentPanelIndex);
+
+        }
     }//GEN-LAST:event_backSlideActionPerformed
 
     private void nextSlideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextSlideActionPerformed
         // TODO add your handling code here:
-      
+
+        //Validate inputs at slide 1 
+        if (currentPanelIndex == 0) {
+            try {
+                password = txtPass.getText();
+                acc.validatePassword(password);
+                userName = txtUsername.getText();
+                acc.validateUserName(userName);
+
+                //Next slide
+                if (currentPanelIndex < totalPanels - 1) {
+                    currentPanelIndex++; // Move to the next panel
+                    slider.show(currentPanelIndex);
+                }
+
+            } catch (InvalidInputException e) {
+                String errMsg = e.getMessage();
+                System.out.println("Error: " + errMsg);
+                lblSignUpError.setText("Error: " + errMsg);
+
+            }
+
+        }
+
         //if it's 2nd last panel then save the values and make an object of account and pass that to database
-        if (currentPanelIndex == totalPanels - 2){ 
-            if(btnPersonal.isSelected()){
-               firstName = txtFirstName.getText();
-            lastName = txtLastName.getText();
-            userName = txtUsername.getText();
-            contactNum = txtContact.getText();
-            email = txtEmail.getText();
-            password = txtPass.getText();
-            
-            NormalAccount user = new NormalAccount(false, firstName, lastName, userName, contactNum, email, password);
-            AccountCreatedDialog dialog = new AccountCreatedDialog(this, true);
-            dialog.setVisible(true);
-            this.dispose();
-            
+        if (currentPanelIndex == 2) {
+            if (btnPersonal.isSelected()) {
+                firstName = txtFirstName.getText();
+                lastName = txtLastName.getText();
+                contactNum = txtContact.getText();
+                email = txtEmail.getText();
+
+                NormalAccount user = new NormalAccount(false, firstName, lastName, userName, contactNum, email, password);
+                AccountCreatedDialog dialog = new AccountCreatedDialog(this, true);
+                dialog.setVisible(true);
+                this.dispose();
+
                 //System.out.println(user.getUserName());
             }
-                   
+
         }
         //if it's last panel then save the values and make an object of manager account and pass that to database
-        if (currentPanelIndex == totalPanels -1){
-            if(btnManager.isSelected()){
+        if (currentPanelIndex == 3) {
+            if (btnManager.isSelected()) {
                 firstName = txtFirstName.getText();
-            lastName = txtLastName.getText();
-            userName = txtUsername.getText();
-            contactNum = txtContact.getText();
-            email = txtEmail.getText();
-            password = txtPass.getText();
-            teamName = txtTeamName.getText();
-            Team managedTeam = new Team(teamName);
-            
-            ManagerAccount manager = new ManagerAccount(managedTeam, firstName, lastName, userName, contactNum, email, password);
+                lastName = txtLastName.getText();
+                contactNum = txtContact.getText();
+                email = txtEmail.getText();
+                teamName = txtTeamName.getText();
+                Team managedTeam = new Team(teamName);
+
+                ManagerAccount manager = new ManagerAccount(managedTeam, firstName, lastName, userName, contactNum, email, password);
             }
         }
-          if (currentPanelIndex < totalPanels - 1) {
-        currentPanelIndex++; // Move to the next panel
-        slider.show(currentPanelIndex);
-    }
     }//GEN-LAST:event_nextSlideActionPerformed
 
     private void btnPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalActionPerformed
@@ -660,6 +686,7 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JLabel lblFirstName;
     private javax.swing.JLabel lblLastName;
     private javax.swing.JLabel lblPass;
+    private javax.swing.JLabel lblSignUpError;
     private javax.swing.JLabel lblTeamName;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JPanel left;
