@@ -11,5 +11,17 @@ package model;
 public enum Status {
     PENDING,
     IN_PROGRESS,
-    DONE
+    DONE;
+    
+    public static Status getEnum(String value) {
+        switch (value) {
+            case "PENDING":
+                return PENDING;
+            case "IN_PROGRESS":
+                return IN_PROGRESS;
+            case "DONE":
+                return DONE;
+        }
+        return PENDING;
+    }
 }

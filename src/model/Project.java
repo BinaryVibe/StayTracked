@@ -14,8 +14,9 @@ import java.util.Date;
 public class Project {
 
     // ATTRIBUTES
-    // TODO: Decide whether projectID and assignedTo should be added
-    private String title, description;
+    // TODO: Decide whether assignedTo should be added
+    private int projectID;
+    private String title, desc;
     private ArrayList<Task> tasks;
     private Status projectStatus;
     private Date startDate, endDate;
@@ -24,7 +25,7 @@ public class Project {
     // METHODS
     public Project() {
         this.title = "Untitled";
-        this.description = "";
+        this.desc = "";
         this.projectStatus = Status.PENDING;
         this.startDate = new Date();
         this.projectPriority = Priority.NONE;
@@ -32,7 +33,7 @@ public class Project {
 
     public Project(String title, String description, ArrayList<Task> tasks, Status projectStatus, Date startDate, Date endDate, Priority projectPriority) {
         this.title = title;
-        this.description = description;
+        this.desc = description;
         this.tasks = tasks;
         this.projectStatus = projectStatus;
         this.startDate = startDate;
@@ -40,12 +41,41 @@ public class Project {
         this.projectPriority = projectPriority;
     }
 
+    public Project(String title, String desc, Status projectStatus, Date startDate, Date endDate, Priority projectPriority) {
+        this.title = title;
+        this.desc = desc;
+        this.projectStatus = projectStatus;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.projectPriority = projectPriority;
+    }
+
+    public Project(String title, String desc, Status projectStatus, Date startDate, Priority projectPriority) {
+        this.title = title;
+        this.desc = desc;
+        this.projectStatus = projectStatus;
+        this.startDate = startDate;
+        this.projectPriority = projectPriority;
+    }
+    
+    
+
+    public int getProjectID() {
+        return projectID;
+    }
+
+    public void setProjectID(int projectID) {
+        this.projectID = projectID;
+    }
+    
+    
+
     public String getTitle() {
         return title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDesc() {
+        return desc;
     }
 
     public ArrayList<Task> getTasks() {
@@ -72,8 +102,8 @@ public class Project {
         this.title = title;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public void setTasks(ArrayList<Task> tasks) {
@@ -89,7 +119,6 @@ public class Project {
     }
 
     public void setEndDate(Date endDate) {
-        // TODO: Add comparison here or in gui code
         this.endDate = endDate;
     }
 
