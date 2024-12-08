@@ -511,6 +511,10 @@ public class SignUp extends javax.swing.JFrame {
             password = txtPass.getText();
             
             NormalAccount user = new NormalAccount(false, firstName, lastName, userName, contactNum, email, password);
+            AccountCreatedDialog dialog = new AccountCreatedDialog(this, true);
+            this.dispose();
+            dialog.setVisible(true);
+            
                 //System.out.println(user.getUserName());
             }
             else if (btnManager.isSelected()){
