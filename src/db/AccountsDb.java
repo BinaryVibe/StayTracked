@@ -82,9 +82,25 @@ public class AccountsDb {
             throw new InvalidInputException("Enter password!");
         }
         if(!validPass){
-             throw new InvalidInputException("Password is not strong enough ");
+             throw new InvalidInputException("Password is not strong enough! ");
         }
         
+    }
+    
+    public static void validateEmail (String email) throws InvalidInputException{
+        // Regex to check valid email
+        String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]+$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(email);
+        boolean validEmail = m.matches();
+        
+        if(email.isEmpty()){
+            throw new InvalidInputException("Enter Email!");
+        }
+        if(!validEmail){
+             throw new InvalidInputException("Email s not valid! ");
+        }
+
     }
 
 }
