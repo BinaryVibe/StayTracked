@@ -126,8 +126,11 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         descTextArea.setCaretColor(new java.awt.Color(221, 255, 255));
         jScrollPane2.setViewportView(descTextArea);
 
+        jLabel1.setForeground(new java.awt.Color(221, 255, 255));
         jLabel1.setText("Status");
 
+        jComboBox1.setBackground(new java.awt.Color(40, 40, 39));
+        jComboBox1.setForeground(new java.awt.Color(221, 255, 255));
         jComboBox1.setModel(new DefaultComboBoxModel<>(Status.values()));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
