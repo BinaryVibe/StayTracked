@@ -585,34 +585,66 @@ public class SignUp extends javax.swing.JFrame {
 
         }
 
+        //Validate inputs at slide 2 
+        if (currentPanelIndex == 1) {
+            try {
+                email = txtEmail.getText();
+                acc.validateEmail(email);
+
+                firstName = txtFirstName.getText();
+                if (firstName.isEmpty()) {
+                    throw new InvalidInputException("Enter first name!");
+                }
+
+                lastName = txtLastName.getText();
+                if (lastName.isEmpty()) {
+                    throw new InvalidInputException("Enter last name!");
+                }
+                contactNum = txtContact.getText();
+                if (contactNum.isEmpty()) {
+                    throw new InvalidInputException("Enter contact number!");
+                }
+
+                //Next slide
+                if (currentPanelIndex < totalPanels - 1) {
+                    currentPanelIndex++; // Move to the next panel
+                    slider.show(currentPanelIndex);
+                }
+
+            } catch (InvalidInputException e) {
+                String errMsg = e.getMessage();
+                System.out.println("Error: " + errMsg);
+                lblSignUpError.setText("Error: " + errMsg);
+
+            }
+
+        }
+
         //if it's 2nd last panel then save the values and make an object of account and pass that to database
         if (currentPanelIndex == 2) {
             if (btnPersonal.isSelected()) {
-                firstName = txtFirstName.getText();
-                lastName = txtLastName.getText();
-                contactNum = txtContact.getText();
-                email = txtEmail.getText();
 
                 NormalAccount user = new NormalAccount(false, firstName, lastName, userName, contactNum, email, password);
                 AccountCreatedDialog dialog = new AccountCreatedDialog(this, true);
                 dialog.setVisible(true);
                 this.dispose();
-
-                //System.out.println(user.getUserName());
+            } //Next Slide
+            else if (currentPanelIndex < totalPanels - 1) {
+                currentPanelIndex++; // Move to the next panel
+                slider.show(currentPanelIndex);
             }
 
         }
         //if it's last panel then save the values and make an object of manager account and pass that to database
         if (currentPanelIndex == 3) {
             if (btnManager.isSelected()) {
-                firstName = txtFirstName.getText();
-                lastName = txtLastName.getText();
-                contactNum = txtContact.getText();
-                email = txtEmail.getText();
                 teamName = txtTeamName.getText();
                 Team managedTeam = new Team(teamName);
 
                 ManagerAccount manager = new ManagerAccount(managedTeam, firstName, lastName, userName, contactNum, email, password);
+                AccountCreatedDialog dialog = new AccountCreatedDialog(this, true);
+                dialog.setVisible(true);
+                this.dispose();
             }
         }
     }//GEN-LAST:event_nextSlideActionPerformed
