@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.regex.*;
 import customExceptions.InvalidInputException;
 import model.Account;
 
@@ -68,8 +69,20 @@ public class AccountsDb {
     
     public static void validatePassword(String password) throws InvalidInputException {
         
+        // Regex to check valid password.
+        String regex = "^(?=.*[0-9])"
+                       + "(?=.*[a-z])(?=.*[A-Z])"
+                       + "(?=.*[@#$%^&+=])"
+                       + "(?=\\S+$).{8,20}$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(password);
+        boolean validPass = m.matches();
+        
         if(password.isEmpty()){
             throw new InvalidInputException("Enter password!");
+        }
+        if(!validPass){
+             throw new InvalidInputException("Password is not strong enough ");
         }
         
     }
