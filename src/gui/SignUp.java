@@ -7,13 +7,14 @@ import model.Team;
 public class SignUp extends javax.swing.JFrame {
 
     private int currentPanelIndex = 0;
-    private int totalPanels = 3;
+    private int totalPanels = 4;
     private String firstName, lastName, userName, contactNum, email, password;
+    private String teamName;
             
 
     public SignUp() {
         initComponents();
-        slider.init(signupPanel, personalDetailsPanel, accountTypePanel);
+        slider.init(signupPanel, personalDetailsPanel, accountTypePanel, teamDetails);
         slider.setAnimate(10);
 
     }
@@ -31,6 +32,10 @@ public class SignUp extends javax.swing.JFrame {
         left = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        teamDetails = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        lblTeamName = new javax.swing.JLabel();
+        txtTeamName = new javax.swing.JTextField();
         personalDetailsPanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         lblFirstName = new javax.swing.JLabel();
@@ -162,6 +167,50 @@ public class SignUp extends javax.swing.JFrame {
 
         jPanel1.add(left);
         left.setBounds(0, 0, 400, 500);
+
+        teamDetails.setBackground(new java.awt.Color(21, 25, 34));
+        teamDetails.setMinimumSize(new java.awt.Dimension(400, 500));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 34)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(45, 168, 216));
+        jLabel10.setText("TEAM DETAILS");
+
+        lblTeamName.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        lblTeamName.setForeground(new java.awt.Color(204, 204, 204));
+        lblTeamName.setText("Team Name");
+
+        txtTeamName.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        txtTeamName.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        javax.swing.GroupLayout teamDetailsLayout = new javax.swing.GroupLayout(teamDetails);
+        teamDetails.setLayout(teamDetailsLayout);
+        teamDetailsLayout.setHorizontalGroup(
+            teamDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(teamDetailsLayout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addGroup(teamDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTeamName, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTeamName))
+                .addContainerGap(54, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, teamDetailsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel10)
+                .addGap(81, 81, 81))
+        );
+        teamDetailsLayout.setVerticalGroup(
+            teamDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(teamDetailsLayout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(jLabel10)
+                .addGap(30, 30, 30)
+                .addComponent(lblTeamName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTeamName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(320, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(teamDetails);
+        teamDetails.setBounds(0, 0, 400, 500);
 
         personalDetailsPanel.setBackground(new java.awt.Color(21, 25, 34));
         personalDetailsPanel.setMinimumSize(new java.awt.Dimension(400, 500));
@@ -502,8 +551,8 @@ public class SignUp extends javax.swing.JFrame {
     private void nextSlideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextSlideActionPerformed
         // TODO add your handling code here:
       
-        //if it's last panel then save the values and make a user
-        if (currentPanelIndex == totalPanels - 1){ 
+        //if it's 2nd last panel then save the values and make an object of account and pass that to database
+        if (currentPanelIndex == totalPanels - 2){ 
             if(btnPersonal.isSelected()){
                firstName = txtFirstName.getText();
             lastName = txtLastName.getText();
@@ -514,14 +563,27 @@ public class SignUp extends javax.swing.JFrame {
             
             NormalAccount user = new NormalAccount(false, firstName, lastName, userName, contactNum, email, password);
             AccountCreatedDialog dialog = new AccountCreatedDialog(this, true);
-            this.dispose();
             dialog.setVisible(true);
+            this.dispose();
             
                 //System.out.println(user.getUserName());
             }
-            else if (btnManager.isSelected()){
-                
-            }       
+                   
+        }
+        //if it's last panel then save the values and make an object of manager account and pass that to database
+        if (currentPanelIndex == totalPanels -1){
+            if(btnManager.isSelected()){
+                firstName = txtFirstName.getText();
+            lastName = txtLastName.getText();
+            userName = txtUsername.getText();
+            contactNum = txtContact.getText();
+            email = txtEmail.getText();
+            password = txtPass.getText();
+            teamName = txtTeamName.getText();
+            Team managedTeam = new Team(teamName);
+            
+            ManagerAccount manager = new ManagerAccount(managedTeam, firstName, lastName, userName, contactNum, email, password);
+            }
         }
           if (currentPanelIndex < totalPanels - 1) {
         currentPanelIndex++; // Move to the next panel
@@ -577,6 +639,7 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JRadioButton btnManager;
     private javax.swing.JRadioButton btnPersonal;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -597,6 +660,7 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JLabel lblFirstName;
     private javax.swing.JLabel lblLastName;
     private javax.swing.JLabel lblPass;
+    private javax.swing.JLabel lblTeamName;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JPanel left;
     private javax.swing.JButton nextSlide;
@@ -604,11 +668,13 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JPanel rightPanel;
     private javax.swing.JPanel signupPanel;
     private mySwing.PanelSlide slider;
+    private javax.swing.JPanel teamDetails;
     private javax.swing.JTextField txtContact;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtLastName;
     private javax.swing.JPasswordField txtPass;
+    private javax.swing.JTextField txtTeamName;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }
