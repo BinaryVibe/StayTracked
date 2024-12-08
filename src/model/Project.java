@@ -119,7 +119,6 @@ public class Project {
     }
 
     public void setEndDate(Date endDate) {
-        // TODO: Add comparison here or in gui code
         this.endDate = endDate;
     }
 
