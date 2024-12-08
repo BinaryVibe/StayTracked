@@ -139,6 +139,11 @@
           </Layout>
           <SubComponents>
             <Container class="mySwing.PanelSlide" name="slider">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="22" green="19" red="15" type="rgb"/>
+                </Property>
+              </Properties>
 
               <Layout>
                 <DimensionLayout dim="0">

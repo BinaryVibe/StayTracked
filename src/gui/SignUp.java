@@ -99,6 +99,8 @@ public class SignUp extends javax.swing.JFrame {
 
         rightPanel.setBackground(new java.awt.Color(255, 255, 255));
 
+        slider.setBackground(new java.awt.Color(21, 25, 34));
+
         javax.swing.GroupLayout sliderLayout = new javax.swing.GroupLayout(slider);
         slider.setLayout(sliderLayout);
         sliderLayout.setHorizontalGroup(
