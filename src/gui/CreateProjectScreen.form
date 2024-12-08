@@ -79,19 +79,19 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="okButton" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="statusLbl" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="startDateLbl" alignment="0" max="32767" attributes="0"/>
                                   <Component id="startDateChooser" alignment="0" max="32767" attributes="0"/>
                                   <Component id="endDateLbl" alignment="0" max="32767" attributes="0"/>
                                   <Component id="endDateChooser" alignment="0" pref="152" max="32767" attributes="0"/>
-                                  <Component id="StatusComBox" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="statusComBox" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="priorityLbl" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="cancelBtn" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="jComboBox2" min="-2" pref="152" max="-2" attributes="0"/>
+                      <Component id="priorityComBox" min="-2" pref="152" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="49" max="32767" attributes="0"/>
               </Group>
@@ -117,13 +117,13 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="endDateChooser" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="statusLbl" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="StatusComBox" min="-2" max="-2" attributes="0"/>
+                  <Component id="statusComBox" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <Component id="priorityLbl" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jComboBox2" min="-2" max="-2" attributes="0"/>
+                  <Component id="priorityComBox" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="31" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="okButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -258,7 +258,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="statusLbl">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="dd" type="rgb"/>
@@ -266,7 +266,7 @@
             <Property name="text" type="java.lang.String" value="Status:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="StatusComBox">
+        <Component class="javax.swing.JComboBox" name="statusComBox">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="27" green="28" red="28" type="rgb"/>
@@ -282,7 +282,7 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Status&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="priorityLbl">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="dd" type="rgb"/>
@@ -290,7 +290,7 @@
             <Property name="text" type="java.lang.String" value="Priority:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox2">
+        <Component class="javax.swing.JComboBox" name="priorityComBox">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="27" green="28" red="28" type="rgb"/>

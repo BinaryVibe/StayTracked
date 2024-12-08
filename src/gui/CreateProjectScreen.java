@@ -78,7 +78,7 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        titleLbl.setForeground(new java.awt.Color(247, 255, 247));
+        titleLbl.setForeground(new java.awt.Color(221, 255, 255));
         titleLbl.setText("Title:");
 
         titleField.setBackground(new java.awt.Color(40, 40, 39));
@@ -90,15 +90,16 @@ public class CreateProjectScreen extends javax.swing.JDialog {
             }
         });
 
-        descLbl.setForeground(new java.awt.Color(247, 255, 247));
+        descLbl.setForeground(new java.awt.Color(221, 255, 255));
         descLbl.setText("Description:");
 
-        startDateLbl.setForeground(new java.awt.Color(247, 255, 247));
+        startDateLbl.setForeground(new java.awt.Color(221, 255, 255));
         startDateLbl.setText("Start Date:");
 
         startDateChooser.setBackground(new java.awt.Color(40, 40, 39));
+        startDateChooser.setForeground(new java.awt.Color(221, 255, 255));
 
-        endDateLbl.setForeground(new java.awt.Color(247, 255, 247));
+        endDateLbl.setForeground(new java.awt.Color(221, 255, 255));
         endDateLbl.setText("End Date:");
 
         endDateChooser.setBackground(new java.awt.Color(40, 40, 39));
