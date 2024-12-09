@@ -185,7 +185,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="for (Component c : startDateChooser.getComponents()) {&#xa;    ((JComponent) c).setBackground(new Color(40, 40, 39));&#xa;}&#xa;"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="startDateChooser.setDateFormatString(&quot;dd-mm-yyyy&quot;);&#xa;&#xa;for (Component c : startDateChooser.getComponents()) {&#xa;    ((JComponent) c).setBackground(new Color(40, 40, 39));&#xa;}&#xa;&#xa;// JComponent editorUI = startDateChooser.getDateEditor().getUiComponent();&#xa;// editorUI.setForeground(new Color(221, 255, 255));&#xa;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="endDateLbl">
@@ -203,7 +203,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="for (Component c : endDateChooser.getComponents()) {&#xa;    ((JComponent) c).setBackground(new Color(40, 40, 39));&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="endDateChooser.setDateFormatString(&quot;dd-mm-yyyy&quot;);&#xa;&#xa;&#xa;for (Component c : endDateChooser.getComponents()) {&#xa;    ((JComponent) c).setBackground(new Color(40, 40, 39));&#xa;}&#xa;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="okButton">

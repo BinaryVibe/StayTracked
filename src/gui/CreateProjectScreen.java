@@ -51,11 +51,16 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         descLbl = new javax.swing.JLabel();
         startDateLbl = new javax.swing.JLabel();
         startDateChooser = new com.toedter.calendar.JDateChooser();
+        startDateChooser.setDateFormatString("dd-mm-yyyy");
+
         for (Component c : startDateChooser.getComponents()) {
             ((JComponent) c).setBackground(new Color(40, 40, 39));
         }
+
         endDateLbl = new javax.swing.JLabel();
         endDateChooser = new com.toedter.calendar.JDateChooser();
+        endDateChooser.setDateFormatString("dd-mm-yyyy");
+
         for (Component c : endDateChooser.getComponents()) {
             ((JComponent) c).setBackground(new Color(40, 40, 39));
         }
