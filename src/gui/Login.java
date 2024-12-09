@@ -1,6 +1,6 @@
 package gui;
 
-import customExceptions.InvalidInputException;
+import customexceptions.InvalidInputException;
 import db.AccountsDb;
 
 public class Login extends javax.swing.JFrame {
