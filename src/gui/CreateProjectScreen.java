@@ -13,7 +13,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import model.DataLayer;
+import helper.DataLayer;
 import model.Priority;
 import model.Project;
 import model.Status;
