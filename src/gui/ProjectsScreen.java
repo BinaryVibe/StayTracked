@@ -8,12 +8,17 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Window;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
+import model.Status;
+import model.Priority;
+
 /**
  *
  * @author samtheradiant
@@ -87,6 +92,9 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        // Set Enum columns' editor to be a JComboBox
+        jTable1.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(new JComboBox<>(Status.values())));
+        jTable1.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JComboBox<>(Priority.values())));
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(4).setResizable(false);
