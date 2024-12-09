@@ -41,14 +41,20 @@ public class ProjectsScreen extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(21, 25, 34));
 
-        createProjectBtn.setText("Create Project");
+        createProjectBtn.setBackground(new java.awt.Color(40, 40, 39));
+        createProjectBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add.png"))); // NOI18N
+        createProjectBtn.setToolTipText("Create project");
+        createProjectBtn.setContentAreaFilled(false);
         createProjectBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createProjectBtnActionPerformed(evt);
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(40, 40, 39));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/reload.png"))); // NOI18N
+        jButton2.setToolTipText("Scan for projects");
+        jButton2.setContentAreaFilled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
