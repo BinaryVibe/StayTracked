@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.regex.*;
-import customExceptions.InvalidInputException;
+import customexceptions.InvalidInputException;
 import model.Account;
 
 public class AccountsDb {
