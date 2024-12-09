@@ -173,7 +173,6 @@
                 <Property name="rolloverIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/buttonicons/HooverButton.png"/>
                 </Property>
-                <Property name="selected" type="boolean" value="true"/>
                 <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/buttonicons/SelectedButton.png"/>
                 </Property>

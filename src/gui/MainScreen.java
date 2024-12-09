@@ -4,6 +4,10 @@
  */
 package gui;
 
+import java.awt.Component;
+import javax.swing.JButton;
+import javax.swing.plaf.basic.BasicButtonUI;
+
 /**
  *
  * @author samtheradiant
@@ -15,7 +19,17 @@ public class MainScreen extends javax.swing.JFrame {
      */
     public MainScreen() {
         initComponents();
-       
+        
+        /* 
+        //we will use this incase to use basic button look and feel
+        
+       Component [] components = this.getContentPane().getComponents();
+       for(Component component : components){
+           if(component instanceof JButton){
+               ((JButton) component).setUI(new BasicButtonUI());
+           }
+       }
+        */
     }
 
     /**
@@ -70,7 +84,6 @@ public class MainScreen extends javax.swing.JFrame {
         jButton5.setBorder(null);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton5.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/buttonicons/HooverButton.png"))); // NOI18N
-        jButton5.setSelected(true);
         jButton5.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttonicons/SelectedButton.png"))); // NOI18N
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
