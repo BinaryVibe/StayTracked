@@ -5,7 +5,7 @@
 package gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
-import customExceptions.InvalidDateException;
+import customexceptions.InvalidDateException;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.Date;
