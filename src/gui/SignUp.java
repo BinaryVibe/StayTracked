@@ -1,6 +1,6 @@
 package gui;
 
-import customExceptions.InvalidInputException;
+import customexceptions.InvalidInputException;
 import db.AccountsDb;
 import model.ManagerAccount;
 import model.NormalAccount;
