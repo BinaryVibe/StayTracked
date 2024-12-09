@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.regex.*;
 import customExceptions.InvalidInputException;
 import model.Account;
 
@@ -47,6 +48,59 @@ public class AccountsDb {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+    
+    public static void validateUserName(String userName) throws InvalidInputException {
+        try(Connection c = DBConnectionManager.getConnection()) {
+            if (c == null) {
+                throw new InvalidInputException("Database connection failed!");
+            }
+            
+            if (userName.isEmpty()){
+                throw new InvalidInputException("Enter user name!");
+            }
+            
+            //add a logic to check if userName is already taken
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public static void validatePassword(String password) throws InvalidInputException {
+        
+        // Regex to check valid password.
+        String regex = "^(?=.*[0-9])"
+                       + "(?=.*[a-z])(?=.*[A-Z])"
+                       + "(?=.*[@#$%^&+=])"
+                       + "(?=\\S+$).{8,20}$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(password);
+        boolean validPass = m.matches();
+        
+        if(password.isEmpty()){
+            throw new InvalidInputException("Enter password!");
+        }
+        if(!validPass){
+             throw new InvalidInputException("Password is not strong enough! ");
+        }
+        
+    }
+    
+    public static void validateEmail (String email) throws InvalidInputException{
+        // Regex to check valid email
+        String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]+$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(email);
+        boolean validEmail = m.matches();
+        
+        if(email.isEmpty()){
+            throw new InvalidInputException("Enter Email!");
+        }
+        if(!validEmail){
+             throw new InvalidInputException("Email s not valid! ");
+        }
+
     }
 
 }

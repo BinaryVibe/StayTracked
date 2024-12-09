@@ -1,5 +1,7 @@
 package gui;
 
+import customExceptions.InvalidInputException;
+import db.AccountsDb;
 import model.ManagerAccount;
 import model.NormalAccount;
 import model.Team;
@@ -7,13 +9,16 @@ import model.Team;
 public class SignUp extends javax.swing.JFrame {
 
     private int currentPanelIndex = 0;
-    private int totalPanels = 3;
+    private int totalPanels = 4;
     private String firstName, lastName, userName, contactNum, email, password;
-            
+    private String teamName;
+
+    //Object of AccountDB for connection b/w database and program
+    AccountsDb acc = new AccountsDb();
 
     public SignUp() {
         initComponents();
-        slider.init(signupPanel, personalDetailsPanel, accountTypePanel);
+        slider.init(signupPanel, personalDetailsPanel, accountTypePanel, teamDetails);
         slider.setAnimate(10);
 
     }
@@ -31,6 +36,10 @@ public class SignUp extends javax.swing.JFrame {
         left = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        teamDetails = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        lblTeamName = new javax.swing.JLabel();
+        txtTeamName = new javax.swing.JTextField();
         personalDetailsPanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         lblFirstName = new javax.swing.JLabel();
@@ -62,6 +71,7 @@ public class SignUp extends javax.swing.JFrame {
         txtPass = new javax.swing.JPasswordField();
         jLabel7 = new javax.swing.JLabel();
         btnGoToLogin = new javax.swing.JButton();
+        lblSignUpError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SIGN UP");
@@ -98,6 +108,8 @@ public class SignUp extends javax.swing.JFrame {
         nextSlide.setBounds(700, 460, 70, 20);
 
         rightPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        slider.setBackground(new java.awt.Color(21, 25, 34));
 
         javax.swing.GroupLayout sliderLayout = new javax.swing.GroupLayout(slider);
         slider.setLayout(sliderLayout);
@@ -160,6 +172,50 @@ public class SignUp extends javax.swing.JFrame {
 
         jPanel1.add(left);
         left.setBounds(0, 0, 400, 500);
+
+        teamDetails.setBackground(new java.awt.Color(21, 25, 34));
+        teamDetails.setMinimumSize(new java.awt.Dimension(400, 500));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 34)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(45, 168, 216));
+        jLabel10.setText("TEAM DETAILS");
+
+        lblTeamName.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        lblTeamName.setForeground(new java.awt.Color(204, 204, 204));
+        lblTeamName.setText("Team Name");
+
+        txtTeamName.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        txtTeamName.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        javax.swing.GroupLayout teamDetailsLayout = new javax.swing.GroupLayout(teamDetails);
+        teamDetails.setLayout(teamDetailsLayout);
+        teamDetailsLayout.setHorizontalGroup(
+            teamDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(teamDetailsLayout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addGroup(teamDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTeamName, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTeamName))
+                .addContainerGap(54, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, teamDetailsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel10)
+                .addGap(81, 81, 81))
+        );
+        teamDetailsLayout.setVerticalGroup(
+            teamDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(teamDetailsLayout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(jLabel10)
+                .addGap(30, 30, 30)
+                .addComponent(lblTeamName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTeamName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(320, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(teamDetails);
+        teamDetails.setBounds(0, 0, 400, 500);
 
         personalDetailsPanel.setBackground(new java.awt.Color(21, 25, 34));
         personalDetailsPanel.setMinimumSize(new java.awt.Dimension(400, 500));
@@ -415,31 +471,36 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
 
+        lblSignUpError.setForeground(new java.awt.Color(237, 60, 63));
+
         javax.swing.GroupLayout signupPanelLayout = new javax.swing.GroupLayout(signupPanel);
         signupPanel.setLayout(signupPanelLayout);
         signupPanelLayout.setHorizontalGroup(
             signupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, signupPanelLayout.createSequentialGroup()
-                .addContainerGap(56, Short.MAX_VALUE)
+                .addContainerGap(57, Short.MAX_VALUE)
                 .addGroup(signupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUsername)
-                    .addComponent(lblPass)
-                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(signupPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnGoToLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(44, 44, 44))
-            .addGroup(signupPanelLayout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblSignUpError)
+                    .addGroup(signupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, signupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblUsername)
+                            .addComponent(lblPass)
+                            .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(signupPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnGoToLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(signupPanelLayout.createSequentialGroup()
+                            .addGap(70, 70, 70)
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(43, 43, 43))
         );
         signupPanelLayout.setVerticalGroup(
             signupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(signupPanelLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addGap(40, 40, 40)
                 .addComponent(jLabel1)
                 .addGap(53, 53, 53)
                 .addComponent(lblUsername)
@@ -453,7 +514,9 @@ public class SignUp extends javax.swing.JFrame {
                 .addGroup(signupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(btnGoToLogin))
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(lblSignUpError)
+                .addContainerGap(193, Short.MAX_VALUE))
         );
 
         jPanel1.add(signupPanel);
@@ -488,43 +551,102 @@ public class SignUp extends javax.swing.JFrame {
 
     private void backSlideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backSlideActionPerformed
         // TODO add your handling code here:
-        
+
         if (currentPanelIndex > 0) {
-        currentPanelIndex--; // Move to the previous panel
-        slider.show(currentPanelIndex);
-       
-        
-    }
+            currentPanelIndex--; // Move to the previous panel
+            slider.show(currentPanelIndex);
+
+        }
     }//GEN-LAST:event_backSlideActionPerformed
 
     private void nextSlideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextSlideActionPerformed
         // TODO add your handling code here:
-      
-        //if it's last panel then save the values and make a user
-        if (currentPanelIndex == totalPanels - 1){ 
-            if(btnPersonal.isSelected()){
-               firstName = txtFirstName.getText();
-            lastName = txtLastName.getText();
-            userName = txtUsername.getText();
-            contactNum = txtContact.getText();
-            email = txtEmail.getText();
-            password = txtPass.getText();
-            
-            NormalAccount user = new NormalAccount(false, firstName, lastName, userName, contactNum, email, password);
-            AccountCreatedDialog dialog = new AccountCreatedDialog(this, true);
-            this.dispose();
-            dialog.setVisible(true);
-            
-                //System.out.println(user.getUserName());
+
+        //Validate inputs at slide 1 
+        if (currentPanelIndex == 0) {
+            try {
+                password = txtPass.getText();
+                acc.validatePassword(password);
+                userName = txtUsername.getText();
+                acc.validateUserName(userName);
+
+                //Next slide
+                if (currentPanelIndex < totalPanels - 1) {
+                    currentPanelIndex++; // Move to the next panel
+                    slider.show(currentPanelIndex);
+                }
+
+            } catch (InvalidInputException e) {
+                String errMsg = e.getMessage();
+                System.out.println("Error: " + errMsg);
+                lblSignUpError.setText("Error: " + errMsg);
+
             }
-            else if (btnManager.isSelected()){
-                
-            }       
+
         }
-          if (currentPanelIndex < totalPanels - 1) {
-        currentPanelIndex++; // Move to the next panel
-        slider.show(currentPanelIndex);
-    }
+
+        //Validate inputs at slide 2 
+        if (currentPanelIndex == 1) {
+            try {
+                email = txtEmail.getText();
+                acc.validateEmail(email);
+
+                firstName = txtFirstName.getText();
+                if (firstName.isEmpty()) {
+                    throw new InvalidInputException("Enter first name!");
+                }
+
+                lastName = txtLastName.getText();
+                if (lastName.isEmpty()) {
+                    throw new InvalidInputException("Enter last name!");
+                }
+                contactNum = txtContact.getText();
+                if (contactNum.isEmpty()) {
+                    throw new InvalidInputException("Enter contact number!");
+                }
+
+                //Next slide
+                if (currentPanelIndex < totalPanels - 1) {
+                    currentPanelIndex++; // Move to the next panel
+                    slider.show(currentPanelIndex);
+                }
+
+            } catch (InvalidInputException e) {
+                String errMsg = e.getMessage();
+                System.out.println("Error: " + errMsg);
+                lblSignUpError.setText("Error: " + errMsg);
+
+            }
+
+        }
+
+        //if it's 2nd last panel then save the values and make an object of account and pass that to database
+        if (currentPanelIndex == 2) {
+            if (btnPersonal.isSelected()) {
+
+                NormalAccount user = new NormalAccount(false, firstName, lastName, userName, contactNum, email, password);
+                AccountCreatedDialog dialog = new AccountCreatedDialog(this, true);
+                dialog.setVisible(true);
+                this.dispose();
+            } //Next Slide
+            else if (currentPanelIndex < totalPanels - 1) {
+                currentPanelIndex++; // Move to the next panel
+                slider.show(currentPanelIndex);
+            }
+
+        }
+        //if it's last panel then save the values and make an object of manager account and pass that to database
+        if (currentPanelIndex == 3) {
+            if (btnManager.isSelected()) {
+                teamName = txtTeamName.getText();
+                Team managedTeam = new Team(teamName);
+
+                ManagerAccount manager = new ManagerAccount(managedTeam, firstName, lastName, userName, contactNum, email, password);
+                AccountCreatedDialog dialog = new AccountCreatedDialog(this, true);
+                dialog.setVisible(true);
+                this.dispose();
+            }
+        }
     }//GEN-LAST:event_nextSlideActionPerformed
 
     private void btnPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalActionPerformed
@@ -575,6 +697,7 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JRadioButton btnManager;
     private javax.swing.JRadioButton btnPersonal;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -595,6 +718,8 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JLabel lblFirstName;
     private javax.swing.JLabel lblLastName;
     private javax.swing.JLabel lblPass;
+    private javax.swing.JLabel lblSignUpError;
+    private javax.swing.JLabel lblTeamName;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JPanel left;
     private javax.swing.JButton nextSlide;
@@ -602,11 +727,13 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JPanel rightPanel;
     private javax.swing.JPanel signupPanel;
     private mySwing.PanelSlide slider;
+    private javax.swing.JPanel teamDetails;
     private javax.swing.JTextField txtContact;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtLastName;
     private javax.swing.JPasswordField txtPass;
+    private javax.swing.JTextField txtTeamName;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

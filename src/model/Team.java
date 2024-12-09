@@ -8,6 +8,10 @@ public class Team {
     private int teamID;
     
     ArrayList<NormalAccount> teamMembers = new ArrayList<>();
+
+    public Team(String teamName) {
+        this.teamName = teamName;
+    }
     
 
    

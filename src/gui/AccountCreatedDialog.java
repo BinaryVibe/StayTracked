@@ -40,7 +40,6 @@ public class AccountCreatedDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(400, 500));
-        setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(400, 500));
         setResizable(false);
         getContentPane().setLayout(null);
