@@ -163,6 +163,11 @@ public class ProfileScreen extends javax.swing.JPanel {
         editUserNamebtn.setContentAreaFilled(false);
         editUserNamebtn.setMinimumSize(new java.awt.Dimension(60, 17));
         editUserNamebtn.setPreferredSize(new java.awt.Dimension(60, 17));
+        editUserNamebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editUserNamebtnActionPerformed(evt);
+            }
+        });
         add(editUserNamebtn);
         editUserNamebtn.setBounds(900, 180, 60, 23);
 
@@ -193,6 +198,11 @@ public class ProfileScreen extends javax.swing.JPanel {
         editFirstNamebtn.setContentAreaFilled(false);
         editFirstNamebtn.setMinimumSize(new java.awt.Dimension(60, 17));
         editFirstNamebtn.setPreferredSize(new java.awt.Dimension(60, 17));
+        editFirstNamebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editFirstNamebtnActionPerformed(evt);
+            }
+        });
         add(editFirstNamebtn);
         editFirstNamebtn.setBounds(898, 257, 60, 23);
 
@@ -363,6 +373,18 @@ public class ProfileScreen extends javax.swing.JPanel {
         add(txtEmail1);
         txtEmail1.setBounds(630, 380, 330, 30);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void editUserNamebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserNamebtnActionPerformed
+        // TODO add your handling code here:
+        lblCurrentUserName.setVisible(false);
+        editUserNamebtn.setVisible(false);
+        txtUserName.setVisible(true);
+        updateUserNameBtn.setVisible(true);
+    }//GEN-LAST:event_editUserNamebtnActionPerformed
+
+    private void editFirstNamebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editFirstNamebtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editFirstNamebtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
