@@ -38,6 +38,27 @@ public class currentSession {
     public static void setAccountID(String accountID) {
         currentSession.accountID = accountID;
     }
+
+    public static void setUserName(String userName) {
+        currentSession.userName = userName;
+    }
+
+    public static void setFirstName(String firstName) {
+        currentSession.firstName = firstName;
+    }
+
+    public static void setLastName(String lastName) {
+        currentSession.lastName = lastName;
+    }
+
+    public static void setEmail(String email) {
+        currentSession.email = email;
+    }
+
+    public static void setContact(String contact) {
+        currentSession.contact = contact;
+    }
+    
     
     
 }
