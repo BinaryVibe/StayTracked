@@ -4,18 +4,13 @@
  */
 package gui;
 
-import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Window;
-import javax.swing.BoxLayout;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
 import model.Status;
 import model.Priority;
 
@@ -99,6 +94,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         jTable1.setBackground(new java.awt.Color(40, 40, 39));
+        jTable1.setForeground(new java.awt.Color(221, 255, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -143,8 +139,8 @@ public class ProjectsScreen extends javax.swing.JPanel {
     private void createProjectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createProjectBtnActionPerformed
         Window parentWindow = SwingUtilities.windowForComponent(this);
         Frame parentFrame = null;
-        if (parentWindow instanceof Frame) {
-            parentFrame = (Frame) parentWindow;
+        if (parentWindow instanceof Frame frame) {
+            parentFrame = frame;
         }
         CreateProjectScreen screen1 = new CreateProjectScreen(parentFrame, true);
         screen1.pack();
