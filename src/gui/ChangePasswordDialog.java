@@ -27,19 +27,118 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        PassPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        lblCurrentPassword = new javax.swing.JLabel();
+        lblNewPass = new javax.swing.JLabel();
+        txtNewPass = new javax.swing.JPasswordField();
+        loginResult = new javax.swing.JLabel();
+        lblConfirmPass = new javax.swing.JLabel();
+        txtConfirmPass = new javax.swing.JPasswordField();
+        jSeparator1 = new javax.swing.JSeparator();
+        txtCurrentPassword = new javax.swing.JPasswordField();
+        jSeparator2 = new javax.swing.JSeparator();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(400, 500));
         setPreferredSize(new java.awt.Dimension(400, 500));
+
+        PassPanel.setBackground(new java.awt.Color(21, 25, 34));
+        PassPanel.setMinimumSize(new java.awt.Dimension(400, 500));
+        PassPanel.setPreferredSize(new java.awt.Dimension(400, 500));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 33)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(45, 168, 216));
+        jLabel1.setText("CHANGE PASSWORD");
+
+        lblCurrentPassword.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        lblCurrentPassword.setForeground(new java.awt.Color(204, 204, 204));
+        lblCurrentPassword.setText("Current Password");
+
+        lblNewPass.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        lblNewPass.setForeground(new java.awt.Color(204, 204, 204));
+        lblNewPass.setText("New Password");
+
+        txtNewPass.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        loginResult.setForeground(new java.awt.Color(45, 168, 216));
+
+        lblConfirmPass.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        lblConfirmPass.setForeground(new java.awt.Color(204, 204, 204));
+        lblConfirmPass.setText("Confirm New Password");
+
+        txtConfirmPass.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        txtCurrentPassword.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        javax.swing.GroupLayout PassPanelLayout = new javax.swing.GroupLayout(PassPanel);
+        PassPanel.setLayout(PassPanelLayout);
+        PassPanelLayout.setHorizontalGroup(
+            PassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PassPanelLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(PassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(PassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblCurrentPassword, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PassPanelLayout.createSequentialGroup()
+                            .addGroup(PassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblConfirmPass)
+                                .addComponent(txtConfirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(PassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(lblNewPass, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNewPass, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(loginResult))
+                        .addComponent(txtCurrentPassword, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+        PassPanelLayout.setVerticalGroup(
+            PassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PassPanelLayout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(jLabel1)
+                .addGap(50, 50, 50)
+                .addComponent(lblCurrentPassword)
+                .addGap(8, 8, 8)
+                .addComponent(txtCurrentPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(PassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PassPanelLayout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(loginResult))
+                    .addGroup(PassPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblNewPass)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblConfirmPass)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtConfirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(137, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(PassPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 500, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(PassPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -88,5 +187,16 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PassPanel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblConfirmPass;
+    private javax.swing.JLabel lblCurrentPassword;
+    private javax.swing.JLabel lblNewPass;
+    private javax.swing.JLabel loginResult;
+    private javax.swing.JPasswordField txtConfirmPass;
+    private javax.swing.JPasswordField txtCurrentPassword;
+    private javax.swing.JPasswordField txtNewPass;
     // End of variables declaration//GEN-END:variables
 }
