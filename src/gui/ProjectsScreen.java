@@ -122,6 +122,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.getTableHeader().setReorderingAllowed(false);
         // Set Enum columns' editor to be a JComboBox
         jTable1.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(new JComboBox<>(Status.values())));
         jTable1.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JComboBox<>(Priority.values())));
