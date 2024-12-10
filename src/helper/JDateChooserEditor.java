@@ -15,6 +15,9 @@ public class JDateChooserEditor extends DefaultCellEditor {
     
     public JDateChooserEditor(JCheckBox checkBox) {
         super(checkBox);
+        this.setClickCountToStart(2);
     }
+
+    
     
 }
