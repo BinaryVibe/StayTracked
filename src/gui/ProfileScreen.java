@@ -17,6 +17,13 @@ public class ProfileScreen extends javax.swing.JPanel {
      */
     public ProfileScreen() {
         initComponents();
+        //Initially hide update buttons
+        updateEmailBtn.setVisible(false);
+        updateFirstNameBtn.setVisible(false);
+        updateLastNameBtn.setVisible(false);
+        updateUserNameBtn.setVisible(false);
+        updatecontactBtn1.setVisible(false);
+        
         
         
         //Set labels according to current User
