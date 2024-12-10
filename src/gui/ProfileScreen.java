@@ -193,6 +193,11 @@ public class ProfileScreen extends javax.swing.JPanel {
         updateFirstNameBtn.setBorder(null);
         updateFirstNameBtn.setMinimumSize(new java.awt.Dimension(80, 17));
         updateFirstNameBtn.setPreferredSize(new java.awt.Dimension(80, 17));
+        updateFirstNameBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateFirstNameBtnActionPerformed(evt);
+            }
+        });
         add(updateFirstNameBtn);
         updateFirstNameBtn.setBounds(812, 257, 80, 23);
 
@@ -453,6 +458,24 @@ public class ProfileScreen extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_updateUserNameBtnActionPerformed
+
+    private void updateFirstNameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateFirstNameBtnActionPerformed
+        // TODO add your handling code here:
+        String newFirstName = txtFirstName1.getText();
+        currentSession.setFirstName(newFirstName);
+        
+        //add a function to modify username of current logined user
+        
+        
+        //set text of label again
+        lblCurrentFirstName.setText(newFirstName);
+        
+        //again hide update button , txtField and show edit button, label
+        lblCurrentFirstName.setVisible(true);
+        editFirstNamebtn.setVisible(true);
+        txtFirstName1.setVisible(false);
+        updateFirstNameBtn.setVisible(false);
+    }//GEN-LAST:event_updateFirstNameBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
