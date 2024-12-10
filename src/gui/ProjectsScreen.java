@@ -4,6 +4,7 @@
  */
 package gui;
 
+import helper.JDateChooserEditor;
 import java.awt.Frame;
 import java.awt.Window;
 import javax.swing.DefaultCellEditor;
@@ -124,6 +125,8 @@ public class ProjectsScreen extends javax.swing.JPanel {
         // Set Enum columns' editor to be a JComboBox
         jTable1.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(new JComboBox<>(Status.values())));
         jTable1.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JComboBox<>(Priority.values())));
+        //jTable1.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));
+        jTable1.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(4).setResizable(false);
