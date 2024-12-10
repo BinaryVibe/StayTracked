@@ -41,6 +41,14 @@ public class ProfileScreen extends javax.swing.JPanel {
         lblCurrentEmail.setText(currentSession.getEmail());
         lblCurrentContact.setText(currentSession.getContact());
         
+        //Set text of textFields according to current User
+        txtUserName.setText(currentSession.getUserName());
+        txtFirstName1.setText(currentSession.getFirstName());
+        txtLastName1.setText(currentSession.getLastName());
+        txtEmail1.setText(currentSession.getEmail());
+        txtContact.setText(currentSession.getContact());
+        
+        
     }
 
     /**
