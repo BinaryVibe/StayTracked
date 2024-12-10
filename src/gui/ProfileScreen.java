@@ -349,6 +349,11 @@ public class ProfileScreen extends javax.swing.JPanel {
         updatecontactBtn1.setBorder(null);
         updatecontactBtn1.setMinimumSize(new java.awt.Dimension(80, 17));
         updatecontactBtn1.setPreferredSize(new java.awt.Dimension(80, 17));
+        updatecontactBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatecontactBtn1ActionPerformed(evt);
+            }
+        });
         add(updatecontactBtn1);
         updatecontactBtn1.setBounds(811, 511, 80, 23);
 
@@ -522,6 +527,24 @@ public class ProfileScreen extends javax.swing.JPanel {
         txtEmail1.setVisible(false);
         updateEmailBtn.setVisible(false);
     }//GEN-LAST:event_updateEmailBtnActionPerformed
+
+    private void updatecontactBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatecontactBtn1ActionPerformed
+        // TODO add your handling code here:
+        String newContact = txtContact.getText();
+        currentSession.setContact(newContact);
+        
+        //add a function to modify username of current logined user
+        
+        
+        //set text of label again
+        lblCurrentContact.setText(newContact);
+        
+        //again hide update button , txtField and show edit button, label
+        lblCurrentContact.setVisible(true);
+        editContactbtn.setVisible(true);
+        txtContact.setVisible(false);
+        updatecontactBtn1.setVisible(false);
+    }//GEN-LAST:event_updatecontactBtn1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
