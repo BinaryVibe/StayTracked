@@ -116,7 +116,7 @@ public class ProfileScreen extends javax.swing.JPanel {
         lblCurrentContact.setForeground(new java.awt.Color(204, 204, 204));
         lblCurrentContact.setText("contact");
         add(lblCurrentContact);
-        lblCurrentContact.setBounds(630, 470, 270, 25);
+        lblCurrentContact.setBounds(630, 470, 270, 20);
 
         jSeparator2.setMaximumSize(new java.awt.Dimension(32767, 2));
         jSeparator2.setMinimumSize(new java.awt.Dimension(50, 2));
@@ -223,6 +223,11 @@ public class ProfileScreen extends javax.swing.JPanel {
         editLastNamebtn.setContentAreaFilled(false);
         editLastNamebtn.setMinimumSize(new java.awt.Dimension(60, 17));
         editLastNamebtn.setPreferredSize(new java.awt.Dimension(60, 17));
+        editLastNamebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editLastNamebtnActionPerformed(evt);
+            }
+        });
         add(editLastNamebtn);
         editLastNamebtn.setBounds(898, 340, 60, 23);
 
@@ -351,7 +356,7 @@ public class ProfileScreen extends javax.swing.JPanel {
         txtFirstName1.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         txtFirstName1.setOpaque(true);
         add(txtFirstName1);
-        txtFirstName1.setBounds(630, 220, 330, 30);
+        txtFirstName1.setBounds(630, 220, 330, 20);
 
         txtLastName1.setBackground(new java.awt.Color(21, 25, 34));
         txtLastName1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -384,7 +389,15 @@ public class ProfileScreen extends javax.swing.JPanel {
 
     private void editFirstNamebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editFirstNamebtnActionPerformed
         // TODO add your handling code here:
+        lblCurrentFirstName.setVisible(false);
+        editFirstNamebtn.setVisible(false);
+        txtFirstName1.setVisible(true);
+        updateFirstNameBtn.setVisible(true);
     }//GEN-LAST:event_editFirstNamebtnActionPerformed
+
+    private void editLastNamebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editLastNamebtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editLastNamebtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
