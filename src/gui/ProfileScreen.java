@@ -397,6 +397,10 @@ public class ProfileScreen extends javax.swing.JPanel {
 
     private void editLastNamebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editLastNamebtnActionPerformed
         // TODO add your handling code here:
+        lblCurrentLastName.setVisible(false);
+        editLastNamebtn.setVisible(false);
+        txtLastName1.setVisible(true);
+        updateLastNameBtn.setVisible(true);
     }//GEN-LAST:event_editLastNamebtnActionPerformed
 
 
