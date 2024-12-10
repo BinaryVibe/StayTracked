@@ -6,6 +6,7 @@ package gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import customexceptions.InvalidDateException;
+import db.ProjectsDB;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.Date;
@@ -13,7 +14,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import helper.DataLayer;
 import model.Priority;
 import model.Project;
 import model.Status;
@@ -261,7 +261,7 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         } else {
             project = new Project(title, desc, projectStatus, startDate, projectPriority);
         }
-        DataLayer.saveProjecttoDB(project);
+        ProjectsDB.save(project);
     }//GEN-LAST:event_okButtonActionPerformed
 
     /**
