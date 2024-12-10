@@ -17,6 +17,14 @@ public class ProfileScreen extends javax.swing.JPanel {
      */
     public ProfileScreen() {
         initComponents();
+        
+        //Initially hide textFields
+        txtContact.setVisible(false);
+        txtUserName.setVisible(false);
+        txtLastName1.setVisible(false);
+        txtFirstName1.setVisible(false);
+        txtEmail1.setVisible(false);
+        
         //Initially hide update buttons
         updateEmailBtn.setVisible(false);
         updateFirstNameBtn.setVisible(false);
