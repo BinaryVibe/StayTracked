@@ -15,7 +15,10 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
      */
     public ChangePasswordDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();
+        setLocationRelativeTo(parent); // Center the dialog
+        BackToProfileBtn.setVisible(false);
     }
 
     /**
