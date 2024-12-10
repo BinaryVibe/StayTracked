@@ -253,6 +253,11 @@ public class ProfileScreen extends javax.swing.JPanel {
         updateEmailBtn.setBorder(null);
         updateEmailBtn.setMinimumSize(new java.awt.Dimension(80, 17));
         updateEmailBtn.setPreferredSize(new java.awt.Dimension(80, 17));
+        updateEmailBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateEmailBtnActionPerformed(evt);
+            }
+        });
         add(updateEmailBtn);
         updateEmailBtn.setBounds(812, 423, 80, 23);
 
@@ -499,6 +504,24 @@ public class ProfileScreen extends javax.swing.JPanel {
         txtLastName1.setVisible(false);
         updateLastNameBtn.setVisible(false);
     }//GEN-LAST:event_updateLastNameBtnActionPerformed
+
+    private void updateEmailBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateEmailBtnActionPerformed
+        // TODO add your handling code here:
+        String newEmail = txtEmail1.getText();
+        currentSession.setEmail(newEmail);
+        
+        //add a function to modify username of current logined user
+        
+        
+        //set text of label again
+        lblCurrentEmail.setText(newEmail);
+        
+        //again hide update button , txtField and show edit button, label
+        lblCurrentEmail.setVisible(true);
+        editEmailbtn.setVisible(true);
+        txtEmail1.setVisible(false);
+        updateEmailBtn.setVisible(false);
+    }//GEN-LAST:event_updateEmailBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
