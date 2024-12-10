@@ -85,6 +85,11 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
         BackToProfileBtn.setBackground(new java.awt.Color(45, 168, 216));
         BackToProfileBtn.setForeground(new java.awt.Color(21, 25, 34));
         BackToProfileBtn.setText("Back to Profile");
+        BackToProfileBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackToProfileBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PassPanelLayout = new javax.swing.GroupLayout(PassPanel);
         PassPanel.setLayout(PassPanelLayout);
@@ -172,6 +177,11 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BackToProfileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackToProfileBtnActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_BackToProfileBtnActionPerformed
 
     /**
      * @param args the command line arguments
