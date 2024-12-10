@@ -248,6 +248,11 @@ public class ProfileScreen extends javax.swing.JPanel {
         editEmailbtn.setContentAreaFilled(false);
         editEmailbtn.setMinimumSize(new java.awt.Dimension(60, 17));
         editEmailbtn.setPreferredSize(new java.awt.Dimension(60, 17));
+        editEmailbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editEmailbtnActionPerformed(evt);
+            }
+        });
         add(editEmailbtn);
         editEmailbtn.setBounds(898, 423, 60, 23);
 
@@ -402,6 +407,14 @@ public class ProfileScreen extends javax.swing.JPanel {
         txtLastName1.setVisible(true);
         updateLastNameBtn.setVisible(true);
     }//GEN-LAST:event_editLastNamebtnActionPerformed
+
+    private void editEmailbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editEmailbtnActionPerformed
+        // TODO add your handling code here:
+        lblCurrentEmail.setVisible(false);
+        editEmailbtn.setVisible(false);
+        txtEmail1.setVisible(true);
+        updateEmailBtn.setVisible(true);
+    }//GEN-LAST:event_editEmailbtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
