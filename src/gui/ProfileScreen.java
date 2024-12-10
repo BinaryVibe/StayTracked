@@ -75,6 +75,11 @@ public class ProfileScreen extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         updatecontactBtn1 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        txtUserName = new javax.swing.JTextField();
+        txtContact = new javax.swing.JTextField();
+        txtFirstName1 = new javax.swing.JTextField();
+        txtLastName1 = new javax.swing.JTextField();
+        txtEmail1 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(21, 25, 34));
         setForeground(new java.awt.Color(204, 204, 204));
@@ -91,7 +96,7 @@ public class ProfileScreen extends javax.swing.JPanel {
         add(jSeparator1);
         jSeparator1.setBounds(30, 100, 939, 10);
 
-        lblCurrentContact.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblCurrentContact.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblCurrentContact.setForeground(new java.awt.Color(204, 204, 204));
         lblCurrentContact.setText("contact");
         add(lblCurrentContact);
@@ -241,25 +246,26 @@ public class ProfileScreen extends javax.swing.JPanel {
         add(jLabel5);
         jLabel5.setBounds(30, 140, 85, 25);
 
-        lblCurrentUserName.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblCurrentUserName.setBackground(new java.awt.Color(21, 25, 34));
+        lblCurrentUserName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblCurrentUserName.setForeground(new java.awt.Color(204, 204, 204));
         lblCurrentUserName.setText("Username");
         add(lblCurrentUserName);
-        lblCurrentUserName.setBounds(630, 140, 270, 25);
+        lblCurrentUserName.setBounds(630, 145, 270, 20);
 
-        lblCurrentFirstName.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblCurrentFirstName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblCurrentFirstName.setForeground(new java.awt.Color(204, 204, 204));
         lblCurrentFirstName.setText("Firstname");
         add(lblCurrentFirstName);
         lblCurrentFirstName.setBounds(630, 220, 270, 25);
 
-        lblCurrentLastName.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblCurrentLastName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblCurrentLastName.setForeground(new java.awt.Color(204, 204, 204));
         lblCurrentLastName.setText("lastname");
         add(lblCurrentLastName);
         lblCurrentLastName.setBounds(630, 300, 270, 25);
 
-        lblCurrentEmail.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblCurrentEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblCurrentEmail.setForeground(new java.awt.Color(204, 204, 204));
         lblCurrentEmail.setText("email");
         add(lblCurrentEmail);
@@ -290,6 +296,56 @@ public class ProfileScreen extends javax.swing.JPanel {
         jLabel8.setText("Contact Number");
         add(jLabel8);
         jLabel8.setBounds(30, 470, 140, 25);
+
+        txtUserName.setBackground(new java.awt.Color(21, 25, 34));
+        txtUserName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtUserName.setForeground(new java.awt.Color(204, 204, 204));
+        txtUserName.setText("Username");
+        txtUserName.setBorder(null);
+        txtUserName.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtUserName.setOpaque(true);
+        add(txtUserName);
+        txtUserName.setBounds(630, 140, 270, 30);
+
+        txtContact.setBackground(new java.awt.Color(21, 25, 34));
+        txtContact.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtContact.setForeground(new java.awt.Color(204, 204, 204));
+        txtContact.setText("contact");
+        txtContact.setBorder(null);
+        txtContact.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtContact.setOpaque(true);
+        add(txtContact);
+        txtContact.setBounds(630, 470, 330, 25);
+
+        txtFirstName1.setBackground(new java.awt.Color(21, 25, 34));
+        txtFirstName1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtFirstName1.setForeground(new java.awt.Color(204, 204, 204));
+        txtFirstName1.setText("Firstname");
+        txtFirstName1.setBorder(null);
+        txtFirstName1.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtFirstName1.setOpaque(true);
+        add(txtFirstName1);
+        txtFirstName1.setBounds(630, 220, 330, 30);
+
+        txtLastName1.setBackground(new java.awt.Color(21, 25, 34));
+        txtLastName1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtLastName1.setForeground(new java.awt.Color(204, 204, 204));
+        txtLastName1.setText("lastname");
+        txtLastName1.setBorder(null);
+        txtLastName1.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtLastName1.setOpaque(true);
+        add(txtLastName1);
+        txtLastName1.setBounds(630, 300, 330, 30);
+
+        txtEmail1.setBackground(new java.awt.Color(21, 25, 34));
+        txtEmail1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtEmail1.setForeground(new java.awt.Color(204, 204, 204));
+        txtEmail1.setText("email");
+        txtEmail1.setBorder(null);
+        txtEmail1.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtEmail1.setOpaque(true);
+        add(txtEmail1);
+        txtEmail1.setBounds(630, 380, 330, 30);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -320,6 +376,11 @@ public class ProfileScreen extends javax.swing.JPanel {
     private javax.swing.JLabel lblCurrentFirstName;
     private javax.swing.JLabel lblCurrentLastName;
     private javax.swing.JLabel lblCurrentUserName;
+    private javax.swing.JTextField txtContact;
+    private javax.swing.JTextField txtEmail1;
+    private javax.swing.JTextField txtFirstName1;
+    private javax.swing.JTextField txtLastName1;
+    private javax.swing.JTextField txtUserName;
     private javax.swing.JButton updateEmailBtn;
     private javax.swing.JButton updateFirstNameBtn;
     private javax.swing.JButton updateLastNameBtn;
