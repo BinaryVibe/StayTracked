@@ -283,6 +283,11 @@ public class ProfileScreen extends javax.swing.JPanel {
         changePassBtn.setBorder(null);
         changePassBtn.setMinimumSize(new java.awt.Dimension(80, 17));
         changePassBtn.setPreferredSize(new java.awt.Dimension(80, 17));
+        changePassBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changePassBtnActionPerformed(evt);
+            }
+        });
         add(changePassBtn);
         changePassBtn.setBounds(810, 610, 150, 23);
 
@@ -545,6 +550,12 @@ public class ProfileScreen extends javax.swing.JPanel {
         txtContact.setVisible(false);
         updatecontactBtn1.setVisible(false);
     }//GEN-LAST:event_updatecontactBtn1ActionPerformed
+
+    private void changePassBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changePassBtnActionPerformed
+        // TODO add your handling code here:
+        ChangePasswordDialog dialog = new ChangePasswordDialog(null, true); //When you add it to mainScreen , change null to this
+        dialog.setVisible(true);
+    }//GEN-LAST:event_changePassBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
