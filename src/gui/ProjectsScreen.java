@@ -129,9 +129,6 @@ public class ProjectsScreen extends javax.swing.JPanel {
         //jTable1.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));
         jTable1.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));
         jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-        }
 
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
