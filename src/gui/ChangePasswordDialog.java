@@ -40,6 +40,8 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
         jSeparator2 = new javax.swing.JSeparator();
         lblError = new javax.swing.JLabel();
         lblSucces = new javax.swing.JLabel();
+        updatePassBtn = new javax.swing.JButton();
+        BackToProfileBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(400, 500));
@@ -76,6 +78,14 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
 
         lblSucces.setForeground(new java.awt.Color(45, 168, 216));
 
+        updatePassBtn.setBackground(new java.awt.Color(45, 168, 216));
+        updatePassBtn.setForeground(new java.awt.Color(21, 25, 34));
+        updatePassBtn.setText("Update");
+
+        BackToProfileBtn.setBackground(new java.awt.Color(45, 168, 216));
+        BackToProfileBtn.setForeground(new java.awt.Color(21, 25, 34));
+        BackToProfileBtn.setText("Back to Profile");
+
         javax.swing.GroupLayout PassPanelLayout = new javax.swing.GroupLayout(PassPanel);
         PassPanel.setLayout(PassPanelLayout);
         PassPanelLayout.setHorizontalGroup(
@@ -97,6 +107,10 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
                     .addComponent(txtCurrentPassword)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(PassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PassPanelLayout.createSequentialGroup()
+                            .addComponent(updatePassBtn)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BackToProfileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(lblError, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                         .addComponent(lblSucces, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -132,7 +146,11 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
                 .addComponent(lblError)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblSucces)
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addGap(56, 56, 56)
+                .addGroup(PassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(updatePassBtn)
+                    .addComponent(BackToProfileBtn))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -198,6 +216,7 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BackToProfileBtn;
     private javax.swing.JPanel PassPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
@@ -211,5 +230,6 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
     private javax.swing.JPasswordField txtConfirmPass;
     private javax.swing.JPasswordField txtCurrentPassword;
     private javax.swing.JPasswordField txtNewPass;
+    private javax.swing.JButton updatePassBtn;
     // End of variables declaration//GEN-END:variables
 }
