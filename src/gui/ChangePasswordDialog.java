@@ -15,7 +15,7 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
      */
     public ChangePasswordDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        setUndecorated(true);
+        setResizable(false);
         initComponents();
         setLocationRelativeTo(parent); // Center the dialog
         BackToProfileBtn.setVisible(false);
@@ -84,6 +84,11 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
         updatePassBtn.setBackground(new java.awt.Color(45, 168, 216));
         updatePassBtn.setForeground(new java.awt.Color(21, 25, 34));
         updatePassBtn.setText("Update");
+        updatePassBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatePassBtnActionPerformed(evt);
+            }
+        });
 
         BackToProfileBtn.setBackground(new java.awt.Color(45, 168, 216));
         BackToProfileBtn.setForeground(new java.awt.Color(21, 25, 34));
@@ -185,6 +190,32 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_BackToProfileBtnActionPerformed
+
+    private void updatePassBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePassBtnActionPerformed
+        // TODO add your handling code here:
+        
+        //add method to check currentPassword from database
+        //through exceptions if needed
+        
+        boolean confirmPassMatched = false; //flag which tells us if new pass is equals to confirm pass text field
+        boolean currentPassMatched = false; //flag which tells us if current pass from text field is equals to pass in database
+        
+        if(txtConfirmPass.getText().equals(txtNewPass.getText())){
+            lblError.setText("");
+            lblSucces.setText("Password successfuly updates! \n Go back to profile...");
+            updatePassBtn.setVisible(false);
+            BackToProfileBtn.setVisible(true);
+            txtCurrentPassword.setEnabled(false);
+            txtNewPass.setEnabled(false);
+            txtConfirmPass.setEnabled(false);
+            
+            confirmPassMatched = true;
+        }
+        else if(!confirmPassMatched){
+            lblError.setText("Password doesn't match");
+            
+        }
+    }//GEN-LAST:event_updatePassBtnActionPerformed
 
     /**
      * @param args the command line arguments
