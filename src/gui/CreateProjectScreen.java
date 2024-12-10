@@ -6,6 +6,7 @@ package gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import customexceptions.InvalidDateException;
+import db.ProjectsDB;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.Date;
@@ -13,7 +14,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import model.DataLayer;
 import model.Priority;
 import model.Project;
 import model.Status;
@@ -33,6 +33,7 @@ public class CreateProjectScreen extends javax.swing.JDialog {
     public CreateProjectScreen(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -51,15 +52,17 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         descLbl = new javax.swing.JLabel();
         startDateLbl = new javax.swing.JLabel();
         startDateChooser = new com.toedter.calendar.JDateChooser();
-        startDateChooser.setDateFormatString("dd-mm-yyyy");
+        //startDateChooser.setDateFormatString("dd-MM-yyyy");
 
         for (Component c : startDateChooser.getComponents()) {
             ((JComponent) c).setBackground(new Color(40, 40, 39));
         }
 
+        // JComponent editorUI = startDateChooser.getDateEditor().getUiComponent();
+        // editorUI.setForeground(new Color(221, 255, 255));
         endDateLbl = new javax.swing.JLabel();
         endDateChooser = new com.toedter.calendar.JDateChooser();
-        endDateChooser.setDateFormatString("dd-mm-yyyy");
+        // endDateChooser.setDateFormatString("dd-mm-yyyy");
 
         for (Component c : endDateChooser.getComponents()) {
             ((JComponent) c).setBackground(new Color(40, 40, 39));
@@ -103,11 +106,13 @@ public class CreateProjectScreen extends javax.swing.JDialog {
 
         startDateChooser.setBackground(new java.awt.Color(40, 40, 39));
         startDateChooser.setForeground(new java.awt.Color(221, 255, 255));
+        startDateChooser.setDateFormatString("dd-MM-yyyy");
 
         endDateLbl.setForeground(new java.awt.Color(221, 255, 255));
         endDateLbl.setText("End Date:");
 
         endDateChooser.setBackground(new java.awt.Color(40, 40, 39));
+        endDateChooser.setDateFormatString("dd-MM-yyyy");
 
         okButton.setBackground(new java.awt.Color(86, 86, 87));
         okButton.setForeground(new java.awt.Color(221, 255, 255));
@@ -259,7 +264,7 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         } else {
             project = new Project(title, desc, projectStatus, startDate, projectPriority);
         }
-        DataLayer.saveProjecttoDB(project);
+        ProjectsDB.save(project);
     }//GEN-LAST:event_okButtonActionPerformed
 
     /**
