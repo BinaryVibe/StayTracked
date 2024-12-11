@@ -373,6 +373,7 @@ public class ProfileScreen extends javax.swing.JPanel {
         txtUserName.setForeground(new java.awt.Color(204, 204, 204));
         txtUserName.setText("Username");
         txtUserName.setBorder(null);
+        txtUserName.setCaretColor(new java.awt.Color(255, 255, 255));
         txtUserName.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         txtUserName.setOpaque(true);
         add(txtUserName);
@@ -383,6 +384,7 @@ public class ProfileScreen extends javax.swing.JPanel {
         txtContact.setForeground(new java.awt.Color(204, 204, 204));
         txtContact.setText("contact");
         txtContact.setBorder(null);
+        txtContact.setCaretColor(new java.awt.Color(255, 255, 255));
         txtContact.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         txtContact.setOpaque(true);
         add(txtContact);
@@ -393,6 +395,7 @@ public class ProfileScreen extends javax.swing.JPanel {
         txtFirstName1.setForeground(new java.awt.Color(204, 204, 204));
         txtFirstName1.setText("Firstname");
         txtFirstName1.setBorder(null);
+        txtFirstName1.setCaretColor(new java.awt.Color(255, 255, 255));
         txtFirstName1.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         txtFirstName1.setOpaque(true);
         add(txtFirstName1);
@@ -403,6 +406,7 @@ public class ProfileScreen extends javax.swing.JPanel {
         txtLastName1.setForeground(new java.awt.Color(204, 204, 204));
         txtLastName1.setText("lastname");
         txtLastName1.setBorder(null);
+        txtLastName1.setCaretColor(new java.awt.Color(255, 255, 255));
         txtLastName1.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         txtLastName1.setOpaque(true);
         add(txtLastName1);
@@ -413,6 +417,7 @@ public class ProfileScreen extends javax.swing.JPanel {
         txtEmail1.setForeground(new java.awt.Color(204, 204, 204));
         txtEmail1.setText("email");
         txtEmail1.setBorder(null);
+        txtEmail1.setCaretColor(new java.awt.Color(255, 255, 255));
         txtEmail1.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         txtEmail1.setOpaque(true);
         add(txtEmail1);
