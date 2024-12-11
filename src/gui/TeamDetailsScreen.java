@@ -37,6 +37,10 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         lblCurrentUserName = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(21, 25, 34));
         setMinimumSize(new java.awt.Dimension(1000, 720));
@@ -111,6 +115,33 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
         lblCurrentUserName.setText("Team Name");
         add(lblCurrentUserName);
         lblCurrentUserName.setBounds(630, 145, 270, 20);
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(45, 168, 216));
+        jLabel3.setText("TEAM MEMBERS");
+        add(jLabel3);
+        jLabel3.setBounds(30, 220, 330, 48);
+
+        jSeparator3.setForeground(new java.awt.Color(45, 168, 216));
+        add(jSeparator3);
+        jSeparator3.setBounds(30, 270, 939, 10);
+
+        jTable1.setBackground(new java.awt.Color(21, 25, 34));
+        jTable1.setForeground(new java.awt.Color(153, 153, 153));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Member ID", "Name", "Contact", "Email"
+            }
+        ));
+        jTable1.setGridColor(new java.awt.Color(45, 168, 216));
+        jTable1.setShowGrid(true);
+        jScrollPane1.setViewportView(jTable1);
+
+        add(jScrollPane1);
+        jScrollPane1.setBounds(30, 290, 940, 402);
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateTeamNameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateTeamNameBtnActionPerformed
@@ -142,9 +173,13 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton editTeamNamebtn;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCurrentUserName;
     private javax.swing.JTextField txtTeamName;
     private javax.swing.JButton updateTeamNameBtn;
