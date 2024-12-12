@@ -1,6 +1,7 @@
 package gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import customexceptions.FailureException;
 import customexceptions.InvalidInputException;
 import db.AccountsDb;
 import javax.swing.UIManager;
@@ -9,7 +10,7 @@ import model.NormalAccount;
 import model.Team;
 
 public class SignUp extends javax.swing.JFrame {
-
+    
     private int currentPanelIndex = 0;
     private int totalPanels = 4;
     private String firstName, lastName, userName, contactNum, email, password;
@@ -17,14 +18,13 @@ public class SignUp extends javax.swing.JFrame {
 
     //Object of AccountDB for connection b/w database and program
     //AccountsDb acc = new AccountsDb();
-
     public SignUp() {
         initComponents();
         slider.init(signupPanel, personalDetailsPanel, accountTypePanel, teamDetails);
         slider.setAnimate(10);
-
+        
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -42,6 +42,7 @@ public class SignUp extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         lblTeamName = new javax.swing.JLabel();
         txtTeamName = new javax.swing.JTextField();
+        lblTeamDetailsError = new javax.swing.JLabel();
         personalDetailsPanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         lblFirstName = new javax.swing.JLabel();
@@ -52,6 +53,7 @@ public class SignUp extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         lblContact = new javax.swing.JLabel();
         txtContact = new javax.swing.JTextField();
+        lblDetailsError = new javax.swing.JLabel();
         accountTypePanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -65,6 +67,7 @@ public class SignUp extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         btnPersonal = new javax.swing.JRadioButton();
         btnManager = new javax.swing.JRadioButton();
+        lblAccountTypeError = new javax.swing.JLabel();
         signupPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lblUsername = new javax.swing.JLabel();
@@ -189,20 +192,23 @@ public class SignUp extends javax.swing.JFrame {
         txtTeamName.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         txtTeamName.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
+        lblTeamDetailsError.setForeground(new java.awt.Color(237, 60, 63));
+
         javax.swing.GroupLayout teamDetailsLayout = new javax.swing.GroupLayout(teamDetails);
         teamDetails.setLayout(teamDetailsLayout);
         teamDetailsLayout.setHorizontalGroup(
             teamDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(teamDetailsLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(teamDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTeamName, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTeamName))
-                .addContainerGap(54, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, teamDetailsLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(81, Short.MAX_VALUE)
                 .addComponent(jLabel10)
                 .addGap(81, 81, 81))
+            .addGroup(teamDetailsLayout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addGroup(teamDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtTeamName, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                    .addComponent(lblTeamName)
+                    .addComponent(lblTeamDetailsError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         teamDetailsLayout.setVerticalGroup(
             teamDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,7 +219,9 @@ public class SignUp extends javax.swing.JFrame {
                 .addComponent(lblTeamName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTeamName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(320, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(lblTeamDetailsError, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(277, Short.MAX_VALUE))
         );
 
         jPanel1.add(teamDetails);
@@ -254,6 +262,8 @@ public class SignUp extends javax.swing.JFrame {
         txtContact.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         txtContact.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
+        lblDetailsError.setForeground(new java.awt.Color(237, 60, 63));
+
         javax.swing.GroupLayout personalDetailsPanelLayout = new javax.swing.GroupLayout(personalDetailsPanel);
         personalDetailsPanel.setLayout(personalDetailsPanelLayout);
         personalDetailsPanelLayout.setHorizontalGroup(
@@ -262,15 +272,16 @@ public class SignUp extends javax.swing.JFrame {
                 .addGroup(personalDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(personalDetailsPanelLayout.createSequentialGroup()
                         .addGap(46, 46, 46)
-                        .addGroup(personalDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(personalDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                             .addComponent(lblFirstName)
-                            .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtLastName, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                             .addComponent(lblLastName)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                             .addComponent(lblEmail)
                             .addComponent(lblContact)
-                            .addComponent(txtContact, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtContact, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(lblDetailsError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(personalDetailsPanelLayout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addComponent(jLabel9)))
@@ -297,7 +308,9 @@ public class SignUp extends javax.swing.JFrame {
                 .addComponent(lblContact)
                 .addGap(4, 4, 4)
                 .addComponent(txtContact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(lblDetailsError, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         jPanel1.add(personalDetailsPanel);
@@ -377,6 +390,8 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
 
+        lblAccountTypeError.setForeground(new java.awt.Color(237, 60, 63));
+
         javax.swing.GroupLayout accountTypePanelLayout = new javax.swing.GroupLayout(accountTypePanel);
         accountTypePanel.setLayout(accountTypePanelLayout);
         accountTypePanelLayout.setHorizontalGroup(
@@ -402,7 +417,8 @@ public class SignUp extends javax.swing.JFrame {
                         .addGroup(accountTypePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnManager)
                             .addComponent(btnPersonal)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel4)
+                            .addComponent(lblAccountTypeError, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         accountTypePanelLayout.setVerticalGroup(
@@ -432,7 +448,9 @@ public class SignUp extends javax.swing.JFrame {
                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnManager)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblAccountTypeError, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         jPanel1.add(accountTypePanel);
@@ -544,14 +562,14 @@ public class SignUp extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGoToLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoToLoginActionPerformed
-        
+
         //adding flatLife
-            try {
-                UIManager.setLookAndFeel(new FlatLightLaf());
-            } catch (Exception ex) {
-                System.err.println("Failed to initialize LaF");
-            }
-            
+        try {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize LaF");
+        }
+        
         Login LoginFrame = new Login();
         LoginFrame.setVisible(true);
         LoginFrame.pack();
@@ -565,7 +583,7 @@ public class SignUp extends javax.swing.JFrame {
         if (currentPanelIndex > 0) {
             currentPanelIndex--; // Move to the previous panel
             slider.show(currentPanelIndex);
-
+            
         }
     }//GEN-LAST:event_backSlideActionPerformed
 
@@ -585,27 +603,26 @@ public class SignUp extends javax.swing.JFrame {
                     currentPanelIndex++; // Move to the next panel
                     slider.show(currentPanelIndex);
                 }
-
+                
             } catch (InvalidInputException e) {
                 String errMsg = e.getMessage();
-                System.out.println("Error: " + errMsg);
                 lblSignUpError.setText("Error: " + errMsg);
-
+                
             }
-
+            
         }
 
         //Validate inputs at slide 2 
-        if (currentPanelIndex == 1) {
+        else if (currentPanelIndex == 1) {
             try {
                 email = txtEmail.getText();
                 AccountsDb.validateEmail(email);
-
+                
                 firstName = txtFirstName.getText();
                 if (firstName.isEmpty()) {
                     throw new InvalidInputException("Enter first name!");
                 }
-
+                
                 lastName = txtLastName.getText();
                 if (lastName.isEmpty()) {
                     throw new InvalidInputException("Enter last name!");
@@ -620,37 +637,47 @@ public class SignUp extends javax.swing.JFrame {
                     currentPanelIndex++; // Move to the next panel
                     slider.show(currentPanelIndex);
                 }
-
+                
             } catch (InvalidInputException e) {
                 String errMsg = e.getMessage();
                 System.out.println("Error: " + errMsg);
-                lblSignUpError.setText("Error: " + errMsg);
-
+                lblDetailsError.setText("Error: " + errMsg);
+                
             }
-
+            
         }
 
-        //if it's 2nd last panel then save the values and make an object of account and pass that to database
-        if (currentPanelIndex == 2) {
+        //if it's 2nd last panel and personal is selected then save the values and make an object of account and pass that to database
+        else if (currentPanelIndex == 2) {
             if (btnPersonal.isSelected()) {
+                try {
+                    NormalAccount user = new NormalAccount(false, firstName, lastName, userName, contactNum, email, password);
 
-                NormalAccount user = new NormalAccount(false, firstName, lastName, userName, contactNum, email, password);
-                AccountCreatedDialog dialog = new AccountCreatedDialog(this, true);
-                dialog.setVisible(true);
-                this.dispose();
+                    //add account into databse 
+                    AccountsDb.addNormalAccount(user);
+                    //Show success
+                    AccountCreatedDialog dialog = new AccountCreatedDialog(this, true);
+                    dialog.setVisible(true);
+                    this.dispose();
+                    
+                } catch (FailureException e) {
+                    
+                    String errMsg = e.getMessage();
+                    lblSignUpError.setText(errMsg);
+                }
             } //Next Slide
             else if (currentPanelIndex < totalPanels - 1) {
                 currentPanelIndex++; // Move to the next panel
                 slider.show(currentPanelIndex);
             }
-
+            
         }
         //if it's last panel then save the values and make an object of manager account and pass that to database
-        if (currentPanelIndex == 3) {
+        else if (currentPanelIndex == 3) {
             if (btnManager.isSelected()) {
                 teamName = txtTeamName.getText();
                 Team managedTeam = new Team(teamName);
-
+                
                 ManagerAccount manager = new ManagerAccount(managedTeam, firstName, lastName, userName, contactNum, email, password);
                 AccountCreatedDialog dialog = new AccountCreatedDialog(this, true);
                 dialog.setVisible(true);
@@ -666,7 +693,7 @@ public class SignUp extends javax.swing.JFrame {
     private void btnManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManagerActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnManagerActionPerformed
-
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -723,12 +750,15 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblAccountTypeError;
     private javax.swing.JLabel lblContact;
+    private javax.swing.JLabel lblDetailsError;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblFirstName;
     private javax.swing.JLabel lblLastName;
     private javax.swing.JLabel lblPass;
     private javax.swing.JLabel lblSignUpError;
+    private javax.swing.JLabel lblTeamDetailsError;
     private javax.swing.JLabel lblTeamName;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JPanel left;
