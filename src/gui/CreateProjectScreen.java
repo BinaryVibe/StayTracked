@@ -106,13 +106,13 @@ public class CreateProjectScreen extends javax.swing.JDialog {
 
         startDateChooser.setBackground(new java.awt.Color(40, 40, 39));
         startDateChooser.setForeground(new java.awt.Color(221, 255, 255));
-        startDateChooser.setDateFormatString("dd-MM-yyyy");
+        startDateChooser.setDateFormatString("yyyy-MM-dd");
 
         endDateLbl.setForeground(new java.awt.Color(221, 255, 255));
         endDateLbl.setText("End Date:");
 
         endDateChooser.setBackground(new java.awt.Color(40, 40, 39));
-        endDateChooser.setDateFormatString("dd-MM-yyyy");
+        endDateChooser.setDateFormatString("yyyy-MM-dd");
 
         okButton.setBackground(new java.awt.Color(86, 86, 87));
         okButton.setForeground(new java.awt.Color(221, 255, 255));
