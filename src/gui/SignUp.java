@@ -82,30 +82,30 @@ public class SignUp extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         backSlide.setBackground(new java.awt.Color(45, 168, 216));
-        backSlide.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        backSlide.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         backSlide.setForeground(new java.awt.Color(255, 255, 255));
         backSlide.setText("Back");
-        backSlide.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        backSlide.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(45, 168, 216), 1, true));
         backSlide.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backSlideActionPerformed(evt);
             }
         });
         jPanel1.add(backSlide);
-        backSlide.setBounds(620, 460, 70, 20);
+        backSlide.setBounds(620, 460, 70, 22);
 
         nextSlide.setBackground(new java.awt.Color(45, 168, 216));
-        nextSlide.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        nextSlide.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         nextSlide.setForeground(new java.awt.Color(255, 255, 255));
         nextSlide.setText("Next");
-        nextSlide.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        nextSlide.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(45, 168, 216), 1, true));
         nextSlide.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nextSlideActionPerformed(evt);
             }
         });
         jPanel1.add(nextSlide);
-        nextSlide.setBounds(700, 460, 70, 20);
+        nextSlide.setBounds(700, 460, 70, 22);
 
         rightPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -461,10 +461,10 @@ public class SignUp extends javax.swing.JFrame {
         jLabel7.setText("i already have an account");
 
         btnGoToLogin.setBackground(new java.awt.Color(45, 168, 216));
-        btnGoToLogin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnGoToLogin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnGoToLogin.setForeground(new java.awt.Color(255, 255, 255));
         btnGoToLogin.setText("Loign");
-        btnGoToLogin.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnGoToLogin.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(45, 168, 216), 1, true));
         btnGoToLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGoToLoginActionPerformed(evt);
@@ -516,7 +516,7 @@ public class SignUp extends javax.swing.JFrame {
                     .addComponent(btnGoToLogin))
                 .addGap(18, 18, 18)
                 .addComponent(lblSignUpError)
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
 
         jPanel1.add(signupPanel);

@@ -65,15 +65,17 @@
               <Color blue="d8" green="a8" red="2d" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="12" style="1"/>
+              <Font name="Segoe UI" size="14" style="0"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Back"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
-                <BevelBorder/>
+              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder roundedCorners="true">
+                  <Color PropertyName="color" blue="d8" green="a8" red="2d" type="rgb"/>
+                </LineBorder>
               </Border>
             </Property>
           </Properties>
@@ -92,15 +94,17 @@
               <Color blue="d8" green="a8" red="2d" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="12" style="1"/>
+              <Font name="Segoe UI" size="14" style="0"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Next"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
-                <BevelBorder/>
+              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder roundedCorners="true">
+                  <Color PropertyName="color" blue="d8" green="a8" red="2d" type="rgb"/>
+                </LineBorder>
               </Border>
             </Property>
           </Properties>
@@ -800,7 +804,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="lblSignUpError" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="193" max="32767" attributes="0"/>
+                      <EmptySpace pref="191" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -874,15 +878,17 @@
                   <Color blue="d8" green="a8" red="2d" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="12" style="1"/>
+                  <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Loign"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
-                    <BevelBorder/>
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder roundedCorners="true">
+                      <Color PropertyName="color" blue="d8" green="a8" red="2d" type="rgb"/>
+                    </LineBorder>
                   </Border>
                 </Property>
               </Properties>
