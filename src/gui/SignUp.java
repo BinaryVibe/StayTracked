@@ -675,13 +675,22 @@ public class SignUp extends javax.swing.JFrame {
         //if it's last panel then save the values and make an object of manager account and pass that to database
         else if (currentPanelIndex == 3) {
             if (btnManager.isSelected()) {
+                try{
                 teamName = txtTeamName.getText();
                 Team managedTeam = new Team(teamName);
-                
                 ManagerAccount manager = new ManagerAccount(managedTeam, firstName, lastName, userName, contactNum, email, password);
+                //insert account
+                AccountsDb.addManagerAccount(manager);
+                
+                //show success
                 AccountCreatedDialog dialog = new AccountCreatedDialog(this, true);
                 dialog.setVisible(true);
                 this.dispose();
+                }
+                catch(FailureException e){
+                    String errMsg = e.getMessage();
+                    lblTeamDetailsError.setText(errMsg);
+                }
             }
         }
     }//GEN-LAST:event_nextSlideActionPerformed
