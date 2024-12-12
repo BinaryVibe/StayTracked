@@ -9,6 +9,7 @@ import java.sql.Types;
 import java.util.regex.*;
 import customexceptions.InvalidInputException;
 import model.Account;
+import model.ManagerAccount;
 import model.NormalAccount;
 
 public class AccountsDb {
@@ -40,7 +41,7 @@ public class AccountsDb {
         }
     }
 
-    //method to add a new account in database
+    //method to add a new Normal account in database
     public static void addNormalAccount(NormalAccount account) throws FailureException {
         if (con == null) {
             String error = "Database connection failed!";
@@ -85,6 +86,61 @@ public class AccountsDb {
                     con.rollback(); //rollback if insertion is unsuccessfull
                     throw new FailureException("Insertion into Database Failed");
                 }
+            } else {
+                con.rollback(); //Rollback if account_id couldn't be generated
+                throw new FailureException("AccountID could not be generated");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (con != null) {
+                    con.setAutoCommit(true);
+                }
+                
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+
+        }
+    }
+    
+    //method to add a new Normal account in database
+    public static void addManagerAccount(ManagerAccount account) throws FailureException {
+        if (con == null) {
+            String error = "Database connection failed!";
+        }
+
+        //add a logic to insert Account Details in database
+        String insertAccountQuery = "INSERT INTO accounts (first_name, last_name, username, contact_num, email, password, account_type) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement ps = con.prepareStatement(insertAccountQuery)) {
+            con.setAutoCommit(false);
+            ps.setString(1, account.getFirstName());
+            ps.setString(2, account.getLastName());
+            ps.setString(3, account.getUserName());
+            ps.setString(4, account.getContactNum());
+            ps.setString(5, account.getEmail());
+            ps.setString(6, account.getPassword());
+            ps.setString(7, "Manager");
+
+            int affectedRows = ps.executeUpdate();
+
+            if (affectedRows == 0) {
+                con.rollback(); // Rollback transaction in case of failure
+                throw new FailureException("Insertion into Database Failed");
+            }
+
+            //Get generated keys
+            ResultSet generatedKeys = ps.getGeneratedKeys();
+
+            if (generatedKeys.next()) {
+                int managerID = generatedKeys.getInt(1);
+
+                //Insert Team into Teams Table
+                String insertTeamQuery = "INSERT INTO teams (team_name, manager_id) VALUES (?,?)";
+                PreparedStatement ps2 = con.prepareStatement(insertTeamQuery);
+              
             } else {
                 con.rollback(); //Rollback if account_id couldn't be generated
                 throw new FailureException("AccountID could not be generated");
