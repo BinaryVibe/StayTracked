@@ -8,8 +8,7 @@ import java.sql.Statement;
 
 public class TestDB {
     public static void main(String[] args) {
-		
-		Connection c = DBConnectionManager.getConnection();
+		Connection c = DBConnectionManager.con;
 		
 		 if (c != null) {
             System.out.println("Connection Successful");

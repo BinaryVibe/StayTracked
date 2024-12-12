@@ -18,6 +18,34 @@ public class Team {
     public void viewDetails() {
      //View Details of Team Account.   
     }
+    //getters 
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public int getTeamID() {
+        return teamID;
+    }
+
+    public ArrayList<NormalAccount> getTeamMembers() {
+        return teamMembers;
+    }
+    
+    //setters
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
+    public void setTeamID(int teamID) {
+        this.teamID = teamID;
+    }
+
+    public void setTeamMembers(ArrayList<NormalAccount> teamMembers) {
+        this.teamMembers = teamMembers;
+    }
+    
     
     public void addTeamMember(NormalAccount member){
         //add a member

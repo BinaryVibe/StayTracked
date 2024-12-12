@@ -12,15 +12,7 @@ public class DBConnectionManager {
     static String passWord = "123Password";
     static Connection con;
     
-    static {
-        try {
-        Class.forName("org.mariadb.jdbc.Driver");
-        }
-        catch (ClassNotFoundException e){
-            System.out.println(e);
-        }
-        
-    }
+    
     public static void setConnection(){
         con = null;
         try{

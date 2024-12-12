@@ -2,6 +2,7 @@ package gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.UIManager;
+import db.DBConnectionManager;
 
 public class LoginAndSignUp {
 
@@ -12,9 +13,12 @@ public class LoginAndSignUp {
             System.err.println("Failed to initialize LaF");
         }
         Login LoginFrame = new Login();
-        LoginFrame.setVisible(true);
+        
         LoginFrame.pack();
         LoginFrame.setLocationRelativeTo(null);
+        LoginFrame.setVisible(true);
+        
+        DBConnectionManager.setConnection();
     }
 
 }
