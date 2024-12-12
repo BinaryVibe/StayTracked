@@ -1,7 +1,9 @@
 package gui;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import customexceptions.InvalidInputException;
 import db.AccountsDb;
+import javax.swing.UIManager;
 import model.ManagerAccount;
 import model.NormalAccount;
 import model.Team;
@@ -14,7 +16,7 @@ public class SignUp extends javax.swing.JFrame {
     private String teamName;
 
     //Object of AccountDB for connection b/w database and program
-    AccountsDb acc = new AccountsDb();
+    //AccountsDb acc = new AccountsDb();
 
     public SignUp() {
         initComponents();
@@ -542,6 +544,14 @@ public class SignUp extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGoToLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoToLoginActionPerformed
+        
+        //adding flatLife
+            try {
+                UIManager.setLookAndFeel(new FlatLightLaf());
+            } catch (Exception ex) {
+                System.err.println("Failed to initialize LaF");
+            }
+            
         Login LoginFrame = new Login();
         LoginFrame.setVisible(true);
         LoginFrame.pack();
@@ -566,9 +576,9 @@ public class SignUp extends javax.swing.JFrame {
         if (currentPanelIndex == 0) {
             try {
                 password = txtPass.getText();
-                acc.validatePassword(password);
+                AccountsDb.validatePassword(password);
                 userName = txtUsername.getText();
-                acc.validateUserName(userName);
+                AccountsDb.validateUserName(userName);
 
                 //Next slide
                 if (currentPanelIndex < totalPanels - 1) {
@@ -589,7 +599,7 @@ public class SignUp extends javax.swing.JFrame {
         if (currentPanelIndex == 1) {
             try {
                 email = txtEmail.getText();
-                acc.validateEmail(email);
+                AccountsDb.validateEmail(email);
 
                 firstName = txtFirstName.getText();
                 if (firstName.isEmpty()) {
