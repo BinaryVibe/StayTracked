@@ -1,7 +1,9 @@
 package gui;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import customexceptions.InvalidInputException;
 import db.AccountsDb;
+import javax.swing.UIManager;
 
 public class Login extends javax.swing.JFrame {
 
@@ -227,10 +229,16 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void signUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpBtnActionPerformed
-        SignUp SignUpFrame = new SignUp();
-        SignUpFrame.setVisible(true);
-        SignUpFrame.pack();
-        SignUpFrame.setLocationRelativeTo(null);
+        try {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize LaF");
+        }
+        SignUp signUpFrame = new SignUp();
+        signUpFrame.setVisible(true);
+        signUpFrame.pack();
+        signUpFrame.setLocationRelativeTo(null);
+    
         this.dispose();
     }//GEN-LAST:event_signUpBtnActionPerformed
 
