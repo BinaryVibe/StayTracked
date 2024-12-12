@@ -32,6 +32,21 @@ public class Team {
         return teamMembers;
     }
     
+    //setters
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
+    public void setTeamID(int teamID) {
+        this.teamID = teamID;
+    }
+
+    public void setTeamMembers(ArrayList<NormalAccount> teamMembers) {
+        this.teamMembers = teamMembers;
+    }
+    
+    
     public void addTeamMember(NormalAccount member){
         //add a member
     }
