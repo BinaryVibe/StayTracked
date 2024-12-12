@@ -110,7 +110,7 @@ public class Login extends javax.swing.JFrame {
         loginBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         loginBtn.setForeground(new java.awt.Color(255, 255, 255));
         loginBtn.setText("Login");
-        loginBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        loginBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(45, 168, 216), 1, true));
         loginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginBtnActionPerformed(evt);
@@ -124,14 +124,14 @@ public class Login extends javax.swing.JFrame {
         signUpBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         signUpBtn.setForeground(new java.awt.Color(255, 255, 255));
         signUpBtn.setText("Sign Up");
-        signUpBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        signUpBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(45, 168, 216), 1, true));
         signUpBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 signUpBtnActionPerformed(evt);
             }
         });
 
-        loginResult.setForeground(new java.awt.Color(45, 168, 216));
+        loginResult.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout LeftLayout = new javax.swing.GroupLayout(Left);
         Left.setLayout(LeftLayout);
@@ -175,13 +175,13 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(loginPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(loginBtn)
+                    .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(loginResult))
                 .addGap(65, 65, 65)
                 .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(signUpBtn))
-                .addContainerGap(104, Short.MAX_VALUE))
+                    .addComponent(signUpBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         jPanel1.add(Left);
@@ -213,14 +213,20 @@ public class Login extends javax.swing.JFrame {
         AccountsDb acc = new AccountsDb();
         try {
             acc.validateUser(email, password);
-            
+
+            //adding flatLife
+            try {
+                UIManager.setLookAndFeel(new FlatLightLaf());
+            } catch (Exception ex) {
+                System.err.println("Failed to initialize LaF");
+            }
             //Opening MainScreen
             MainScreen MainScreenFrame = new MainScreen();
             MainScreenFrame.setVisible(true);
             MainScreenFrame.pack();
             MainScreenFrame.setLocationRelativeTo(null);
             this.dispose();
-            
+
         } catch (InvalidInputException e) {
             String errMsg = e.getMessage();
             System.out.println("Error: " + errMsg);
@@ -238,7 +244,7 @@ public class Login extends javax.swing.JFrame {
         signUpFrame.setVisible(true);
         signUpFrame.pack();
         signUpFrame.setLocationRelativeTo(null);
-    
+
         this.dispose();
     }//GEN-LAST:event_signUpBtnActionPerformed
 
