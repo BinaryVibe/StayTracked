@@ -239,7 +239,7 @@ public class CreateProjectScreen extends javax.swing.JDialog {
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         String title = titleField.getText();
         if (title.isEmpty()) {
-            title = "Unknown";
+            title = "Untitled";
         }
         String desc = descTextArea.getText();
         Date startDate = startDateChooser.getDate();
