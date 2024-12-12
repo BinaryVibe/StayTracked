@@ -15,7 +15,7 @@ import model.NormalAccount;
 public class AccountsDb {
 
     //static Connection con = DBConnectionManager.getConnection();
-   static Connection con = DBConnectionManager.con;
+    static Connection con = DBConnectionManager.con;
 
     //method to validate Input
     public static void validateUser(String email, String password) throws InvalidInputException {
@@ -88,7 +88,7 @@ public class AccountsDb {
                 }
             } else {
                 con.rollback(); //Rollback if account_id couldn't be generated
-                throw new FailureException("AccountID could not be generated");
+                throw new FailureException("Account ID could not be generated");
             }
 
         } catch (SQLException e) {
@@ -98,20 +98,20 @@ public class AccountsDb {
                 if (con != null) {
                     con.setAutoCommit(true);
                 }
-                
+
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
 
         }
     }
-    
+
     //method to add a new Normal account in database
     public static void addManagerAccount(ManagerAccount account) throws FailureException {
         if (con == null) {
             String error = "Database connection failed!";
         }
-
+        
         //add a logic to insert Account Details in database
         String insertAccountQuery = "INSERT INTO accounts (first_name, last_name, username, contact_num, email, password, account_type) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = con.prepareStatement(insertAccountQuery)) {
@@ -142,18 +142,41 @@ public class AccountsDb {
                 PreparedStatement ps2 = con.prepareStatement(insertTeamQuery);
                 ps2.setString(1, account.getManagedTeam().getTeamName());
                 ps2.setInt(2, managerID);
-                
+
                 int rowsInserted = ps2.executeUpdate();
-                if(rowsInserted>0){
-                    
-                    
-                }else{
-                    
+                if (rowsInserted > 0) {
+                    ResultSet generatedKeys2 = ps2.getGeneratedKeys();
+                    if (generatedKeys2.next()) {
+                        int teamID = generatedKeys2.getInt(1);
+                        String insertManagerQuery = "INSERT INTO manager_accounts (account_id, team_id) VALUES (?,?)";
+                        PreparedStatement ps3 = con.prepareStatement(insertManagerQuery);
+                        ps3.setInt(1, managerID);
+                        ps3.setInt(2, teamID);
+
+                        int rowsInserted2 = ps3.executeUpdate();
+
+                        if (rowsInserted2 > 0) {
+                            con.commit();
+                        } else {
+                            con.rollback(); //incase of managerAccounts insertion failed
+                            throw new FailureException("Insertion into Database Failed");
+                        }
+
+                    } else {
+
+                        con.rollback(); //Rollback if account_id couldn't be generated
+                        throw new FailureException("Team ID could not be generated");
+
+                    }
+
+                } else {
+                    con.rollback(); //incase of managerAccounts insertion failed
+                    throw new FailureException("Insertion into Database Failed");
                 }
-              
+
             } else {
                 con.rollback(); //Rollback if account_id couldn't be generated
-                throw new FailureException("AccountID could not be generated");
+                throw new FailureException("Manager ID could not be generated");
             }
 
         } catch (SQLException e) {
@@ -163,7 +186,7 @@ public class AccountsDb {
                 if (con != null) {
                     con.setAutoCommit(true);
                 }
-                
+
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
