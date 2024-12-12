@@ -140,6 +140,16 @@ public class AccountsDb {
                 //Insert Team into Teams Table
                 String insertTeamQuery = "INSERT INTO teams (team_name, manager_id) VALUES (?,?)";
                 PreparedStatement ps2 = con.prepareStatement(insertTeamQuery);
+                ps2.setString(1, account.getManagedTeam().getTeamName());
+                ps2.setInt(2, managerID);
+                
+                int rowsInserted = ps2.executeUpdate();
+                if(rowsInserted>0){
+                    
+                    
+                }else{
+                    
+                }
               
             } else {
                 con.rollback(); //Rollback if account_id couldn't be generated
