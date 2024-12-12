@@ -18,6 +18,19 @@ public class Team {
     public void viewDetails() {
      //View Details of Team Account.   
     }
+    //getters 
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public int getTeamID() {
+        return teamID;
+    }
+
+    public ArrayList<NormalAccount> getTeamMembers() {
+        return teamMembers;
+    }
     
     public void addTeamMember(NormalAccount member){
         //add a member
