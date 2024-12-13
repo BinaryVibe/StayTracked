@@ -98,20 +98,20 @@ public class ProjectsScreen extends javax.swing.JPanel {
         jTable1.setForeground(new java.awt.Color(221, 255, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title ", "Deadline", "Status", "Priority", "Details"
+                "Title ", "Start Date", "Deadline", "Status", "Priority", "Tasks", "Details"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                true, true, true, true, false
+                true, true, true, true, true, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
