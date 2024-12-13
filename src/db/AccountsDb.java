@@ -46,7 +46,7 @@ public class AccountsDb {
     public static void setCurrentSession(String inputEmail) throws FailureException {
 
         int accountID = 0, teamID = 0;
-        String firstName = "", lastName = "", userName = "", contact = "", accountType = "", teamName = "";
+        String firstName = "", lastName = "", userName = "", contact = "", accountType = "", teamName = "Not Joined yet";
         Boolean isPartOfTeam = false;
         if (con == null) {
             throw new FailureException("Database connection failed!");
@@ -63,6 +63,8 @@ public class AccountsDb {
                     contact = rs.getString("contact_num");
                     accountType = rs.getString("account_type");
 
+                    
+                    //FOR MANAGER ACCOUNTS
                     if (accountType.equalsIgnoreCase("MANAGER")) {
                         isPartOfTeam = true;
 
@@ -75,9 +77,13 @@ public class AccountsDb {
                                 if (rs2.next()) {
                                     teamName = rs2.getString("team_name");
                                     teamID = rs2.getInt("team_id");
+                                    
                                 }
                             }
                         }
+                        
+                        
+                        //FOR NORMAL ACCOUNTS
                     } else if (accountType.equalsIgnoreCase("NORMAL")) {
                         //logic to get team name is account is a team member of any team.
                         String query2 = "SELECT * FROM team_members WHERE account_id = ?";
@@ -111,6 +117,17 @@ public class AccountsDb {
             }
 
             //Put values in currentSession
+            currentSession.setAccountID(accountID);
+            currentSession.setAccountType(accountType);
+            currentSession.setContact(contact);
+            currentSession.setEmail(inputEmail);
+            currentSession.setFirstName(firstName);
+            currentSession.setLastName(lastName);
+            currentSession.setUserName(userName);
+            currentSession.setTeamID(teamID);
+            currentSession.setTeamName(teamName);
+            currentSession.setIsPartOfTeam(isPartOfTeam);
+            
             
         } catch (SQLException e) {
             throw new FailureException(e.getMessage());
