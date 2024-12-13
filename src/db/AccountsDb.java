@@ -11,6 +11,7 @@ import customexceptions.InvalidInputException;
 import model.Account;
 import model.ManagerAccount;
 import model.NormalAccount;
+import org.mariadb.jdbc.Statement;
 
 public class AccountsDb {
 
@@ -44,12 +45,12 @@ public class AccountsDb {
     //method to add a new Normal account in database
     public static void addNormalAccount(NormalAccount account) throws FailureException {
         if (con == null) {
-            String error = "Database connection failed!";
+            throw new FailureException ("Database connection failed!");
         }
 
         //add a logic to insert Account Details in database
         String insertAccountQuery = "INSERT INTO accounts (first_name, last_name, username, contact_num, email, password, account_type) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement ps = con.prepareStatement(insertAccountQuery)) {
+        try (PreparedStatement ps = con.prepareStatement(insertAccountQuery, Statement.RETURN_GENERATED_KEYS)) {
             con.setAutoCommit(false);
             ps.setString(1, account.getFirstName());
             ps.setString(2, account.getLastName());
@@ -77,7 +78,7 @@ public class AccountsDb {
                 PreparedStatement ps2 = con.prepareStatement(insertNormalAccountQuery);
                 ps2.setInt(1, accountID);
                 ps2.setBoolean(2, account.isIsPartOfTeam());
-                ps2.setNull(1, Types.INTEGER); //No team assigned yet
+                ps2.setNull(3, Types.INTEGER); //No team assigned yet
                 int rowsInserted = ps2.executeUpdate();
 
                 if (rowsInserted > 0) {
@@ -92,7 +93,7 @@ public class AccountsDb {
             }
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new FailureException(e.getMessage());
         } finally {
             try {
                 if (con != null) {
@@ -100,7 +101,7 @@ public class AccountsDb {
                 }
 
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+               throw new FailureException(e.getMessage());
             }
 
         }
@@ -109,12 +110,12 @@ public class AccountsDb {
     //method to add a new Normal account in database
     public static void addManagerAccount(ManagerAccount account) throws FailureException {
         if (con == null) {
-            String error = "Database connection failed!";
+            throw new FailureException("Database connection failed!");
         }
         
         //add a logic to insert Account Details in database
         String insertAccountQuery = "INSERT INTO accounts (first_name, last_name, username, contact_num, email, password, account_type) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement ps = con.prepareStatement(insertAccountQuery)) {
+        try (PreparedStatement ps = con.prepareStatement(insertAccountQuery, Statement.RETURN_GENERATED_KEYS)) {
             con.setAutoCommit(false);
             ps.setString(1, account.getFirstName());
             ps.setString(2, account.getLastName());
@@ -139,12 +140,14 @@ public class AccountsDb {
 
                 //Insert Team into Teams Table
                 String insertTeamQuery = "INSERT INTO teams (team_name, manager_id) VALUES (?,?)";
-                PreparedStatement ps2 = con.prepareStatement(insertTeamQuery);
+                PreparedStatement ps2 = con.prepareStatement(insertTeamQuery, Statement.RETURN_GENERATED_KEYS);
                 ps2.setString(1, account.getManagedTeam().getTeamName());
                 ps2.setInt(2, managerID);
 
                 int rowsInserted = ps2.executeUpdate();
                 if (rowsInserted > 0) {
+                    
+                    //get generated key for teamID
                     ResultSet generatedKeys2 = ps2.getGeneratedKeys();
                     if (generatedKeys2.next()) {
                         int teamID = generatedKeys2.getInt(1);
@@ -180,7 +183,7 @@ public class AccountsDb {
             }
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new FailureException(e.getMessage());
         } finally {
             try {
                 if (con != null) {
@@ -188,7 +191,7 @@ public class AccountsDb {
                 }
 
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                throw new FailureException(e.getMessage());
             }
 
         }
