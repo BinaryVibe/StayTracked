@@ -40,7 +40,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         createProjectBtn = new javax.swing.JButton();
         scanBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        projectsTable = new javax.swing.JTable();
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
@@ -94,9 +94,9 @@ public class ProjectsScreen extends javax.swing.JPanel {
 
         add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
-        jTable1.setBackground(new java.awt.Color(40, 40, 39));
-        jTable1.setForeground(new java.awt.Color(221, 255, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        projectsTable.setBackground(new java.awt.Color(40, 40, 39));
+        projectsTable.setForeground(new java.awt.Color(221, 255, 255));
+        projectsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -108,7 +108,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 true, true, true, true, true, true, false
@@ -122,15 +122,15 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setFillsViewportHeight(true);
-        jTable1.setRowHeight(25);
-        jTable1.getTableHeader().setReorderingAllowed(false);
+        projectsTable.setFillsViewportHeight(true);
+        projectsTable.setRowHeight(25);
+        projectsTable.getTableHeader().setReorderingAllowed(false);
         // Set Enum columns' editor to be a JComboBox
-        jTable1.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(new JComboBox<>(Status.values())));
-        jTable1.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JComboBox<>(Priority.values())));
+        projectsTable.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(new JComboBox<>(Status.values())));
+        projectsTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JComboBox<>(Priority.values())));
         //jTable1.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));
-        jTable1.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));
-        jScrollPane1.setViewportView(jTable1);
+        projectsTable.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));
+        jScrollPane1.setViewportView(projectsTable);
 
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -157,7 +157,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable projectsTable;
     private javax.swing.JButton scanBtn;
     // End of variables declaration//GEN-END:variables
 }

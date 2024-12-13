@@ -114,7 +114,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="projectsTable">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="27" green="28" red="28" type="rgb"/>
@@ -129,8 +129,8 @@
                 <Column editable="true" title="Deadline" type="java.lang.Object"/>
                 <Column editable="true" title="Status" type="java.lang.Object"/>
                 <Column editable="true" title="Priority" type="java.lang.Object"/>
-                <Column editable="true" title="Tasks" type="java.lang.Object"/>
-                <Column editable="false" title="Details" type="java.lang.Object"/>
+                <Column editable="true" title="Tasks" type="java.lang.String"/>
+                <Column editable="false" title="Details" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -179,7 +179,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// Set Enum columns&apos; editor to be a JComboBox&#xa;jTable1.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(new JComboBox&lt;&gt;(Status.values())));&#xa;jTable1.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JComboBox&lt;&gt;(Priority.values())));&#xa;//jTable1.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));&#xa;jTable1.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// Set Enum columns&apos; editor to be a JComboBox&#xa;projectsTable.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(new JComboBox&lt;&gt;(Status.values())));&#xa;projectsTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JComboBox&lt;&gt;(Priority.values())));&#xa;//jTable1.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));&#xa;projectsTable.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));"/>
           </AuxValues>
         </Component>
       </SubComponents>
