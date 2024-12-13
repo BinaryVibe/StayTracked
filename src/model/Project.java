@@ -6,8 +6,6 @@ package model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-
 /**
  *
  * @author samtheradiant
@@ -58,6 +56,16 @@ public class Project {
         this.startDate = startDate;
         this.projectPriority = projectPriority;
     }
+
+    public Project(String title, LocalDate startDate, LocalDate endDate, Status projectStatus, Priority projectPriority) {
+        this.title = title;
+        this.projectStatus = projectStatus;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.projectPriority = projectPriority;
+    }
+    
+    
 
     public int getProjectID() {
         return projectID;
