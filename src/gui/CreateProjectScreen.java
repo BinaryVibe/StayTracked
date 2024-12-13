@@ -9,6 +9,8 @@ import customexceptions.InvalidDateException;
 import db.ProjectsDB;
 import java.awt.Color;
 import java.awt.Component;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
@@ -242,14 +244,14 @@ public class CreateProjectScreen extends javax.swing.JDialog {
             title = "Untitled";
         }
         String desc = descTextArea.getText();
-        Date startDate = startDateChooser.getDate();
+        LocalDate startDate = LocalDate.ofInstant(startDateChooser.getDate().toInstant(), ZoneId.systemDefault());
         // Set start date to current date if user leaves the field empty
         if (startDate == null) {
-            startDate = new Date();
+            startDate = LocalDate.now();
         }
-        Date endDate = null;
+        LocalDate endDate = null;
         try {
-            endDate = endDateChooser.getDate();
+            endDate = LocalDate.ofInstant(endDateChooser.getDate().toInstant(), ZoneId.systemDefault());
             if (!(startDate.compareTo(endDate) < 0)) {
                 throw new InvalidDateException("End Date cannot be before than Start Date.");
             }
