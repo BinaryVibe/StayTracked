@@ -31,7 +31,7 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
 
         txtTeamName = new javax.swing.JTextField();
         updateTeamNameBtn = new javax.swing.JButton();
-        editTeamNamebtn = new javax.swing.JButton();
+        addMemberBtn = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -41,6 +41,7 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
         jSeparator3 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        editTeamNamebtn1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(21, 25, 34));
         setMinimumSize(new java.awt.Dimension(1000, 720));
@@ -70,22 +71,22 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
             }
         });
         add(updateTeamNameBtn);
-        updateTeamNameBtn.setBounds(810, 180, 80, 23);
+        updateTeamNameBtn.setBounds(820, 180, 80, 23);
 
-        editTeamNamebtn.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        editTeamNamebtn.setForeground(new java.awt.Color(45, 168, 216));
-        editTeamNamebtn.setText("Edit");
-        editTeamNamebtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(45, 168, 216), 1, true));
-        editTeamNamebtn.setContentAreaFilled(false);
-        editTeamNamebtn.setMinimumSize(new java.awt.Dimension(60, 17));
-        editTeamNamebtn.setPreferredSize(new java.awt.Dimension(60, 17));
-        editTeamNamebtn.addActionListener(new java.awt.event.ActionListener() {
+        addMemberBtn.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        addMemberBtn.setForeground(new java.awt.Color(45, 168, 216));
+        addMemberBtn.setText("Add Member");
+        addMemberBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(45, 168, 216), 1, true));
+        addMemberBtn.setContentAreaFilled(false);
+        addMemberBtn.setMinimumSize(new java.awt.Dimension(60, 17));
+        addMemberBtn.setPreferredSize(new java.awt.Dimension(60, 17));
+        addMemberBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editTeamNamebtnActionPerformed(evt);
+                addMemberBtnActionPerformed(evt);
             }
         });
-        add(editTeamNamebtn);
-        editTeamNamebtn.setBounds(900, 180, 60, 23);
+        add(addMemberBtn);
+        addMemberBtn.setBounds(870, 690, 100, 23);
 
         jSeparator2.setMaximumSize(new java.awt.Dimension(32767, 2));
         jSeparator2.setMinimumSize(new java.awt.Dimension(50, 2));
@@ -120,11 +121,11 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(45, 168, 216));
         jLabel3.setText("TEAM MEMBERS");
         add(jLabel3);
-        jLabel3.setBounds(30, 220, 330, 48);
+        jLabel3.setBounds(30, 200, 330, 48);
 
         jSeparator3.setForeground(new java.awt.Color(45, 168, 216));
         add(jSeparator3);
-        jSeparator3.setBounds(30, 270, 939, 10);
+        jSeparator3.setBounds(30, 250, 939, 10);
 
         jTable1.setBackground(new java.awt.Color(21, 25, 34));
         jTable1.setForeground(new java.awt.Color(153, 153, 153));
@@ -141,7 +142,22 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(30, 290, 940, 402);
+        jScrollPane1.setBounds(30, 270, 940, 402);
+
+        editTeamNamebtn1.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        editTeamNamebtn1.setForeground(new java.awt.Color(45, 168, 216));
+        editTeamNamebtn1.setText("Edit");
+        editTeamNamebtn1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(45, 168, 216), 1, true));
+        editTeamNamebtn1.setContentAreaFilled(false);
+        editTeamNamebtn1.setMinimumSize(new java.awt.Dimension(60, 17));
+        editTeamNamebtn1.setPreferredSize(new java.awt.Dimension(60, 17));
+        editTeamNamebtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editTeamNamebtn1ActionPerformed(evt);
+            }
+        });
+        add(editTeamNamebtn1);
+        editTeamNamebtn1.setBounds(910, 180, 60, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateTeamNameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateTeamNameBtnActionPerformed
@@ -155,23 +171,28 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
 
         //again hide update button , txtField and show edit button, label
         lblCurrentUserName.setVisible(true);
-        editTeamNamebtn.setVisible(true);
+        addMemberBtn.setVisible(true);
         txtTeamName.setVisible(false);
         updateTeamNameBtn.setVisible(false);
 
     }//GEN-LAST:event_updateTeamNameBtnActionPerformed
 
-    private void editTeamNamebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTeamNamebtnActionPerformed
+    private void addMemberBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMemberBtnActionPerformed
         // TODO add your handling code here:
         lblCurrentUserName.setVisible(false);
-        editTeamNamebtn.setVisible(false);
+        addMemberBtn.setVisible(false);
         txtTeamName.setVisible(true);
         updateTeamNameBtn.setVisible(true);
-    }//GEN-LAST:event_editTeamNamebtnActionPerformed
+    }//GEN-LAST:event_addMemberBtnActionPerformed
+
+    private void editTeamNamebtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTeamNamebtn1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editTeamNamebtn1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton editTeamNamebtn;
+    private javax.swing.JButton addMemberBtn;
+    private javax.swing.JButton editTeamNamebtn1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
