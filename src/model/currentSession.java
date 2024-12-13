@@ -15,9 +15,25 @@ public class currentSession {
     private static String teamName = "Not joined ";
     
     private static Boolean isPartOfTeam = false;
-   
-    
 
+    
+    //getters
+    public static int getTeamID() {
+        return teamID;
+    }
+
+    public static String getAccountType() {
+        return accountType;
+    }
+
+    public static String getTeamName() {
+        return teamName;
+    }
+
+    public static Boolean getIsPartOfTeam() {
+        return isPartOfTeam;
+    }
+   
     public static int getAccountID() {
         return accountID;
     }
