@@ -58,6 +58,8 @@ public class currentSession {
         return contact;
     }
 
+    
+    //setters
     public static void setTeamID(int teamID) {
         currentSession.teamID = teamID;
     }
