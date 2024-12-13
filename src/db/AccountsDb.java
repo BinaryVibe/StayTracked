@@ -11,6 +11,7 @@ import customexceptions.InvalidInputException;
 import model.Account;
 import model.ManagerAccount;
 import model.NormalAccount;
+import model.currentSession;
 import org.mariadb.jdbc.Statement;
 
 public class AccountsDb {
@@ -42,10 +43,65 @@ public class AccountsDb {
         }
     }
 
+    public static void setCurrentSession(String inputEmail) throws FailureException {
+
+        int accountID=0, teamID=0;
+        String firstName="", lastName="", userName="", contact="", accountType="", teamName="";
+        Boolean isPartOfTeam = false;
+        if (con == null) {
+            throw new FailureException("Database connection failed!");
+        }
+        String query = "SELECT * FROM accounts WHERE email = ?";
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    accountID = rs.getInt("account_id");
+                    firstName = rs.getString("first_name");
+                    lastName = rs.getString("last_name");
+                    userName = rs.getString("username");
+                    contact = rs.getString("contact_num");
+                    accountType = rs.getString("account_type");
+                    
+                    if (accountType.equalsIgnoreCase("MANAGER")) {
+                        
+                        String query2 = "SELECT * FROM teams WHERE manager_id = ?";
+                        
+                        try (PreparedStatement ps2 = con.prepareStatement(query2)) {
+                            
+                            try (ResultSet rs2 = ps2.executeQuery()) {
+                                
+                                if (rs2.next()) {
+                                    teamName = rs.getString("team_name");
+                                    teamID = rs.getInt("team_id");
+                                }
+                            }
+                        }
+                    }
+                    
+                    else if (accountType.equalsIgnoreCase("NORMAL")){
+                        //write logic to get team name is account is a team member of any team.
+                    }
+                }
+            }
+
+            //Get Account ID
+            //Put values in currentSession
+            currentSession.setAccountID(accountID);
+                currentSession.setContact(contact);
+                currentSession.setEmail(inputEmail);
+                currentSession.setFirstName(firstName);
+                currentSession.setLastName(lastName);
+                currentSession.setUserName(userName);
+        } catch (SQLException e) {
+            throw new FailureException(e.getMessage());
+        }
+
+    }
     //method to add a new Normal account in database
+
     public static void addNormalAccount(NormalAccount account) throws FailureException {
         if (con == null) {
-            throw new FailureException ("Database connection failed!");
+            throw new FailureException("Database connection failed!");
         }
 
         //add a logic to insert Account Details in database
@@ -65,31 +121,8 @@ public class AccountsDb {
             if (affectedRows == 0) {
                 con.rollback(); // Rollback transaction in case of failure
                 throw new FailureException("Insertion into Database Failed");
-            }
-
-            //Get generated keys
-            ResultSet generatedKeys = ps.getGeneratedKeys();
-
-            if (generatedKeys.next()) {
-                int accountID = generatedKeys.getInt(1);
-
-                //Insert into Normal Accounts Table
-                String insertNormalAccountQuery = "INSERT INTO normal_accounts (account_id, is_part_of_team, team_id) VALUES (?, ?, ?)";
-                PreparedStatement ps2 = con.prepareStatement(insertNormalAccountQuery);
-                ps2.setInt(1, accountID);
-                ps2.setBoolean(2, account.isIsPartOfTeam());
-                ps2.setNull(3, Types.INTEGER); //No team assigned yet
-                int rowsInserted = ps2.executeUpdate();
-
-                if (rowsInserted > 0) {
-                    con.commit();// Commit transaction if both inserts are successful
-                } else {
-                    con.rollback(); //rollback if insertion is unsuccessfull
-                    throw new FailureException("Insertion into Database Failed");
-                }
-            } else {
-                con.rollback(); //Rollback if account_id couldn't be generated
-                throw new FailureException("Account ID could not be generated");
+            } else if (affectedRows > 0) {
+                con.commit();// Commit transaction if both inserts are successful
             }
 
         } catch (SQLException e) {
@@ -101,7 +134,7 @@ public class AccountsDb {
                 }
 
             } catch (SQLException e) {
-               throw new FailureException(e.getMessage());
+                throw new FailureException(e.getMessage());
             }
 
         }
@@ -112,7 +145,7 @@ public class AccountsDb {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
-        
+
         //add a logic to insert Account Details in database
         String insertAccountQuery = "INSERT INTO accounts (first_name, last_name, username, contact_num, email, password, account_type) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = con.prepareStatement(insertAccountQuery, Statement.RETURN_GENERATED_KEYS)) {
@@ -146,31 +179,7 @@ public class AccountsDb {
 
                 int rowsInserted = ps2.executeUpdate();
                 if (rowsInserted > 0) {
-                    
-                    //get generated key for teamID
-                    ResultSet generatedKeys2 = ps2.getGeneratedKeys();
-                    if (generatedKeys2.next()) {
-                        int teamID = generatedKeys2.getInt(1);
-                        String insertManagerQuery = "INSERT INTO manager_accounts (account_id, team_id) VALUES (?,?)";
-                        PreparedStatement ps3 = con.prepareStatement(insertManagerQuery);
-                        ps3.setInt(1, managerID);
-                        ps3.setInt(2, teamID);
-
-                        int rowsInserted2 = ps3.executeUpdate();
-
-                        if (rowsInserted2 > 0) {
-                            con.commit();
-                        } else {
-                            con.rollback(); //incase of managerAccounts insertion failed
-                            throw new FailureException("Insertion into Database Failed");
-                        }
-
-                    } else {
-
-                        con.rollback(); //Rollback if account_id couldn't be generated
-                        throw new FailureException("Team ID could not be generated");
-
-                    }
+                    con.commit();
 
                 } else {
                     con.rollback(); //incase of managerAccounts insertion failed
