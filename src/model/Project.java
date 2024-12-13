@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -19,7 +20,7 @@ public class Project {
     private String title, desc;
     private ArrayList<Task> tasks;
     private Status projectStatus;
-    private Date startDate, endDate;
+    private LocalDate startDate, endDate;
     private Priority projectPriority;
 
     // METHODS
@@ -27,11 +28,11 @@ public class Project {
         this.title = "Untitled";
         this.desc = "";
         this.projectStatus = Status.PENDING;
-        this.startDate = new Date();
+        this.startDate = LocalDate.now();
         this.projectPriority = Priority.NONE;
     }
 
-    public Project(String title, String description, ArrayList<Task> tasks, Status projectStatus, Date startDate, Date endDate, Priority projectPriority) {
+    public Project(String title, String description, ArrayList<Task> tasks, Status projectStatus, LocalDate startDate, LocalDate endDate, Priority projectPriority) {
         this.title = title;
         this.desc = description;
         this.tasks = tasks;
@@ -41,7 +42,7 @@ public class Project {
         this.projectPriority = projectPriority;
     }
 
-    public Project(String title, String desc, Status projectStatus, Date startDate, Date endDate, Priority projectPriority) {
+    public Project(String title, String desc, Status projectStatus, LocalDate startDate, LocalDate endDate, Priority projectPriority) {
         this.title = title;
         this.desc = desc;
         this.projectStatus = projectStatus;
@@ -50,15 +51,13 @@ public class Project {
         this.projectPriority = projectPriority;
     }
 
-    public Project(String title, String desc, Status projectStatus, Date startDate, Priority projectPriority) {
+    public Project(String title, String desc, Status projectStatus, LocalDate startDate, Priority projectPriority) {
         this.title = title;
         this.desc = desc;
         this.projectStatus = projectStatus;
         this.startDate = startDate;
         this.projectPriority = projectPriority;
     }
-    
-    
 
     public int getProjectID() {
         return projectID;
@@ -67,8 +66,6 @@ public class Project {
     public void setProjectID(int projectID) {
         this.projectID = projectID;
     }
-    
-    
 
     public String getTitle() {
         return title;
@@ -86,11 +83,11 @@ public class Project {
         return projectStatus;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
@@ -114,11 +111,11 @@ public class Project {
         this.projectStatus = projectStatus;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
@@ -126,4 +123,16 @@ public class Project {
         this.projectPriority = projectPriority;
     }
 
+    public void setStatus(Status projectStatus) {
+        this.projectStatus = projectStatus;
+    }
+    
+    public String getStatus() {
+        return projectStatus.name();
+    }
+    
+    public String getPriority() {
+        return projectPriority.name();
+    }
+    
 }
