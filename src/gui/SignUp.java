@@ -10,7 +10,7 @@ import model.NormalAccount;
 import model.Team;
 
 public class SignUp extends javax.swing.JFrame {
-    
+
     private int currentPanelIndex = 0;
     private int totalPanels = 4;
     private String firstName, lastName, userName, contactNum, email, password;
@@ -22,9 +22,9 @@ public class SignUp extends javax.swing.JFrame {
         initComponents();
         slider.init(signupPanel, personalDetailsPanel, accountTypePanel, teamDetails);
         slider.setAnimate(10);
-        
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -213,7 +213,7 @@ public class SignUp extends javax.swing.JFrame {
         teamDetailsLayout.setVerticalGroup(
             teamDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(teamDetailsLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel10)
                 .addGap(30, 30, 30)
                 .addComponent(lblTeamName)
@@ -221,7 +221,7 @@ public class SignUp extends javax.swing.JFrame {
                 .addComponent(txtTeamName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblTeamDetailsError, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(277, Short.MAX_VALUE))
+                .addContainerGap(304, Short.MAX_VALUE))
         );
 
         jPanel1.add(teamDetails);
@@ -290,7 +290,7 @@ public class SignUp extends javax.swing.JFrame {
         personalDetailsPanelLayout.setVerticalGroup(
             personalDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(personalDetailsPanelLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel9)
                 .addGap(31, 31, 31)
                 .addComponent(lblFirstName)
@@ -310,7 +310,7 @@ public class SignUp extends javax.swing.JFrame {
                 .addComponent(txtContact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblDetailsError, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         jPanel1.add(personalDetailsPanel);
@@ -424,7 +424,7 @@ public class SignUp extends javax.swing.JFrame {
         accountTypePanelLayout.setVerticalGroup(
             accountTypePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(accountTypePanelLayout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel14)
@@ -450,7 +450,7 @@ public class SignUp extends javax.swing.JFrame {
                 .addComponent(btnManager)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAccountTypeError, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         jPanel1.add(accountTypePanel);
@@ -569,7 +569,7 @@ public class SignUp extends javax.swing.JFrame {
         } catch (Exception ex) {
             System.err.println("Failed to initialize LaF");
         }
-        
+
         Login LoginFrame = new Login();
         LoginFrame.setVisible(true);
         LoginFrame.pack();
@@ -583,7 +583,7 @@ public class SignUp extends javax.swing.JFrame {
         if (currentPanelIndex > 0) {
             currentPanelIndex--; // Move to the previous panel
             slider.show(currentPanelIndex);
-            
+
         }
     }//GEN-LAST:event_backSlideActionPerformed
 
@@ -603,26 +603,24 @@ public class SignUp extends javax.swing.JFrame {
                     currentPanelIndex++; // Move to the next panel
                     slider.show(currentPanelIndex);
                 }
-                
+
             } catch (InvalidInputException e) {
                 String errMsg = e.getMessage();
                 lblSignUpError.setText("Error: " + errMsg);
-                
-            }
-            
-        }
 
-        //Validate inputs at slide 2 
+            }
+
+        } //Validate inputs at slide 2 
         else if (currentPanelIndex == 1) {
             try {
                 email = txtEmail.getText();
                 AccountsDb.validateEmail(email);
-                
+
                 firstName = txtFirstName.getText();
                 if (firstName.isEmpty()) {
                     throw new InvalidInputException("Enter first name!");
                 }
-                
+
                 lastName = txtLastName.getText();
                 if (lastName.isEmpty()) {
                     throw new InvalidInputException("Enter last name!");
@@ -637,19 +635,22 @@ public class SignUp extends javax.swing.JFrame {
                     currentPanelIndex++; // Move to the next panel
                     slider.show(currentPanelIndex);
                 }
-                
+
             } catch (InvalidInputException e) {
                 String errMsg = e.getMessage();
                 System.out.println("Error: " + errMsg);
                 lblDetailsError.setText("Error: " + errMsg);
-                
-            }
-            
-        }
 
-        //if it's 2nd last panel and personal is selected then save the values and make an object of account and pass that to database
+            }
+
+        } //if it's 2nd last panel and personal is selected then save the values and make an object of account and pass that to database
         else if (currentPanelIndex == 2) {
-            if (btnPersonal.isSelected()) {
+
+            if (accTypeBtnGrp.getSelection() == null) {
+                System.out.println("No button is selected!");
+                lblAccountTypeError.setText("Please select an option.");
+            }
+            else if (btnPersonal.isSelected()) {
                 try {
                     NormalAccount user = new NormalAccount(false, firstName, lastName, userName, contactNum, email, password);
 
@@ -659,9 +660,9 @@ public class SignUp extends javax.swing.JFrame {
                     AccountCreatedDialog dialog = new AccountCreatedDialog(this, true);
                     dialog.setVisible(true);
                     this.dispose();
-                    
+
                 } catch (FailureException e) {
-                    
+
                     String errMsg = e.getMessage();
                     lblSignUpError.setText(errMsg);
                 }
@@ -670,24 +671,22 @@ public class SignUp extends javax.swing.JFrame {
                 currentPanelIndex++; // Move to the next panel
                 slider.show(currentPanelIndex);
             }
-            
-        }
-        //if it's last panel then save the values and make an object of manager account and pass that to database
+
+        } //if it's last panel then save the values and make an object of manager account and pass that to database
         else if (currentPanelIndex == 3) {
             if (btnManager.isSelected()) {
-                try{
-                teamName = txtTeamName.getText();
-                Team managedTeam = new Team(teamName);
-                ManagerAccount manager = new ManagerAccount(managedTeam, firstName, lastName, userName, contactNum, email, password);
-                //insert account
-                AccountsDb.addManagerAccount(manager);
-                
-                //show success
-                AccountCreatedDialog dialog = new AccountCreatedDialog(this, true);
-                dialog.setVisible(true);
-                this.dispose();
-                }
-                catch(FailureException e){
+                try {
+                    teamName = txtTeamName.getText();
+                    Team managedTeam = new Team(teamName);
+                    ManagerAccount manager = new ManagerAccount(managedTeam, firstName, lastName, userName, contactNum, email, password);
+                    //insert account
+                    AccountsDb.addManagerAccount(manager);
+
+                    //show success
+                    AccountCreatedDialog dialog = new AccountCreatedDialog(this, true);
+                    dialog.setVisible(true);
+                    this.dispose();
+                } catch (FailureException e) {
                     String errMsg = e.getMessage();
                     lblTeamDetailsError.setText(errMsg);
                 }
@@ -702,7 +701,7 @@ public class SignUp extends javax.swing.JFrame {
     private void btnManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManagerActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnManagerActionPerformed
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

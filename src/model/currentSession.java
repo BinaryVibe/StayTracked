@@ -2,14 +2,38 @@
 package model;
 
 public class currentSession {
-    private static int accountID = 0;
-    private static String userName = "Ayaan123";
-    private static String firstName = "Ayaan";
-    private static String lastName = "Ahmed";
-    private static String email = "ayaanahmed@gmail.com";
-    private static String contact = "03002455678";
     
+    private static int accountID = 0;
+    private static int teamID = 0;
+    
+    private static String userName = "";
+    private static String firstName = "";
+    private static String lastName = "";
+    private static String email = "";
+    private static String contact = "";
+    private static String accountType = ""; 
+    private static String teamName = "Not joined ";
+    
+    private static Boolean isPartOfTeam = false;
 
+    
+    //getters
+    public static int getTeamID() {
+        return teamID;
+    }
+
+    public static String getAccountType() {
+        return accountType;
+    }
+
+    public static String getTeamName() {
+        return teamName;
+    }
+
+    public static Boolean getIsPartOfTeam() {
+        return isPartOfTeam;
+    }
+   
     public static int getAccountID() {
         return accountID;
     }
@@ -33,8 +57,25 @@ public class currentSession {
     public static String getContact() {
         return contact;
     }
-    
 
+    
+    //setters
+    public static void setTeamID(int teamID) {
+        currentSession.teamID = teamID;
+    }
+
+    public static void setAccountType(String accountType) {
+        currentSession.accountType = accountType;
+    }
+
+    public static void setTeamName(String teamName) {
+        currentSession.teamName = teamName;
+    }
+
+    public static void setIsPartOfTeam(Boolean isPartOfTeam) {
+        currentSession.isPartOfTeam = isPartOfTeam;
+    }
+    
     public static void setAccountID(int accountID) {
         currentSession.accountID = accountID;
     }

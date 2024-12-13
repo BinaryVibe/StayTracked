@@ -1,6 +1,7 @@
 package gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import customexceptions.FailureException;
 import customexceptions.InvalidInputException;
 import db.AccountsDb;
 import javax.swing.UIManager;
@@ -210,9 +211,11 @@ public class Login extends javax.swing.JFrame {
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         String email = loginEmail.getText();
         String password = loginPass.getText();
-        AccountsDb acc = new AccountsDb();
+        
         try {
-            acc.validateUser(email, password);
+            AccountsDb.validateUser(email, password);
+            AccountsDb.setCurrentSession(email);
+            
 
             //adding flatLife
             try {
@@ -229,6 +232,11 @@ public class Login extends javax.swing.JFrame {
 
         } catch (InvalidInputException e) {
             String errMsg = e.getMessage();
+            System.out.println("Error: " + errMsg);
+            loginResult.setText(errMsg);
+            
+        } catch(FailureException fe){
+            String errMsg = fe.getMessage();
             System.out.println("Error: " + errMsg);
             loginResult.setText(errMsg);
         }
