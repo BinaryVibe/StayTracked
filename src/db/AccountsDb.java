@@ -45,14 +45,15 @@ public class AccountsDb {
 
     public static void setCurrentSession(String inputEmail) throws FailureException {
 
-        int accountID=0, teamID=0;
-        String firstName="", lastName="", userName="", contact="", accountType="", teamName="";
+        int accountID = 0, teamID = 0;
+        String firstName = "", lastName = "", userName = "", contact = "", accountType = "", teamName = "";
         Boolean isPartOfTeam = false;
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
         String query = "SELECT * FROM accounts WHERE email = ?";
         try (PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, inputEmail);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     accountID = rs.getInt("account_id");
@@ -61,37 +62,56 @@ public class AccountsDb {
                     userName = rs.getString("username");
                     contact = rs.getString("contact_num");
                     accountType = rs.getString("account_type");
-                    
+
                     if (accountType.equalsIgnoreCase("MANAGER")) {
-                        
+                        isPartOfTeam = true;
+
                         String query2 = "SELECT * FROM teams WHERE manager_id = ?";
-                        
+
                         try (PreparedStatement ps2 = con.prepareStatement(query2)) {
-                            
+                            ps2.setInt(1, accountID);
                             try (ResultSet rs2 = ps2.executeQuery()) {
-                                
+
                                 if (rs2.next()) {
-                                    teamName = rs.getString("team_name");
-                                    teamID = rs.getInt("team_id");
+                                    teamName = rs2.getString("team_name");
+                                    teamID = rs2.getInt("team_id");
+                                }
+                            }
+                        }
+                    } else if (accountType.equalsIgnoreCase("NORMAL")) {
+                        //logic to get team name is account is a team member of any team.
+                        String query2 = "SELECT * FROM team_members WHERE account_id = ?";
+
+                        try (PreparedStatement ps2 = con.prepareStatement(query2)) {
+                            ps2.setInt(1, accountID);
+                            try (ResultSet rs2 = ps2.executeQuery()) {
+
+                                if (rs2.next()) {
+                                    teamID = rs2.getInt("team_id");
+                                    isPartOfTeam = true;
+
+                                    //get name of team 
+                                    String query3 = "SELECT * FROM teams WHERE team_id = ?";
+                                    try (PreparedStatement ps3 = con.prepareStatement(query3)) {
+                                        ps3.setInt(1, teamID);
+                                        try (ResultSet rs3 = ps3.executeQuery()) {
+
+                                            if (rs3.next()) {
+                                                teamName = rs3.getString("team_name");
+                                            }
+                                        }
+
+                                    }
+
                                 }
                             }
                         }
                     }
-                    
-                    else if (accountType.equalsIgnoreCase("NORMAL")){
-                        //write logic to get team name is account is a team member of any team.
-                    }
                 }
             }
 
-            //Get Account ID
             //Put values in currentSession
-            currentSession.setAccountID(accountID);
-                currentSession.setContact(contact);
-                currentSession.setEmail(inputEmail);
-                currentSession.setFirstName(firstName);
-                currentSession.setLastName(lastName);
-                currentSession.setUserName(userName);
+            
         } catch (SQLException e) {
             throw new FailureException(e.getMessage());
         }
