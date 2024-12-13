@@ -5,11 +5,16 @@
 package gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import customexceptions.FailureException;
 import customexceptions.InvalidDateException;
 import db.ProjectsDB;
 import java.awt.Color;
 import java.awt.Component;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -106,13 +111,13 @@ public class CreateProjectScreen extends javax.swing.JDialog {
 
         startDateChooser.setBackground(new java.awt.Color(40, 40, 39));
         startDateChooser.setForeground(new java.awt.Color(221, 255, 255));
-        startDateChooser.setDateFormatString("dd-MM-yyyy");
+        startDateChooser.setDateFormatString("yyyy-MM-dd");
 
         endDateLbl.setForeground(new java.awt.Color(221, 255, 255));
         endDateLbl.setText("End Date:");
 
         endDateChooser.setBackground(new java.awt.Color(40, 40, 39));
-        endDateChooser.setDateFormatString("dd-MM-yyyy");
+        endDateChooser.setDateFormatString("yyyy-MM-dd");
 
         okButton.setBackground(new java.awt.Color(86, 86, 87));
         okButton.setForeground(new java.awt.Color(221, 255, 255));
@@ -239,17 +244,17 @@ public class CreateProjectScreen extends javax.swing.JDialog {
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         String title = titleField.getText();
         if (title.isEmpty()) {
-            title = "Unknown";
+            title = "Untitled";
         }
         String desc = descTextArea.getText();
-        Date startDate = startDateChooser.getDate();
+        LocalDate startDate = LocalDate.ofInstant(startDateChooser.getDate().toInstant(), ZoneId.systemDefault());
         // Set start date to current date if user leaves the field empty
         if (startDate == null) {
-            startDate = new Date();
+            startDate = LocalDate.now();
         }
-        Date endDate = null;
+        LocalDate endDate = null;
         try {
-            endDate = endDateChooser.getDate();
+            endDate = LocalDate.ofInstant(endDateChooser.getDate().toInstant(), ZoneId.systemDefault());
             if (!(startDate.compareTo(endDate) < 0)) {
                 throw new InvalidDateException("End Date cannot be before than Start Date.");
             }
@@ -264,7 +269,12 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         } else {
             project = new Project(title, desc, projectStatus, startDate, projectPriority);
         }
-        ProjectsDB.save(project);
+        try {
+            ProjectsDB.save(project);
+        } catch (FailureException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Error: Could not save to database.", JOptionPane.ERROR_MESSAGE);
+        }
+        this.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
 
     /**

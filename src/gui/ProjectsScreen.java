@@ -38,7 +38,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jPanel1 = new javax.swing.JPanel();
         createProjectBtn = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        scanBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -61,13 +61,13 @@ public class ProjectsScreen extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(40, 40, 39));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/reload.png"))); // NOI18N
-        jButton2.setToolTipText("Scan for projects");
-        jButton2.setContentAreaFilled(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        scanBtn.setBackground(new java.awt.Color(40, 40, 39));
+        scanBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/reload.png"))); // NOI18N
+        scanBtn.setToolTipText("Scan for projects");
+        scanBtn.setContentAreaFilled(false);
+        scanBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                scanBtnActionPerformed(evt);
             }
         });
 
@@ -79,7 +79,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 .addContainerGap(1080, Short.MAX_VALUE)
                 .addComponent(createProjectBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(scanBtn)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -87,7 +87,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(scanBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(createProjectBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -122,6 +122,8 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setFillsViewportHeight(true);
+        jTable1.setRowHeight(25);
         jTable1.getTableHeader().setReorderingAllowed(false);
         // Set Enum columns' editor to be a JComboBox
         jTable1.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(new JComboBox<>(Status.values())));
@@ -133,9 +135,9 @@ public class ProjectsScreen extends javax.swing.JPanel {
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void scanBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scanBtnActionPerformed
+        
+    }//GEN-LAST:event_scanBtnActionPerformed
 
     private void createProjectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createProjectBtnActionPerformed
         Window parentWindow = SwingUtilities.windowForComponent(this);
@@ -152,10 +154,10 @@ public class ProjectsScreen extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createProjectBtn;
-    private javax.swing.JButton jButton2;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton scanBtn;
     // End of variables declaration//GEN-END:variables
 }
