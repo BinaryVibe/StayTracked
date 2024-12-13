@@ -12,6 +12,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Date;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import model.Priority;
+import model.Status;
 import model.currentSession;
 
 /**
@@ -24,6 +29,7 @@ public class ProjectsDB {
     static Connection conn = DBConnectionManager.con;
     private static final String insertProject = "INSERT INTO projects (title, description, status, priority, start_date, end_date) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String assignUserID = "INSERT INTO assigned_to VALUES (?, ?)";
+    private static final String getProjectList = "SELECT title, start_date, end_date, status, priority FROM projects";
 
     public static void save(Project project) throws FailureException {
         try (PreparedStatement saveStmnt = conn.prepareStatement(insertProject, Statement.RETURN_GENERATED_KEYS); 
@@ -74,9 +80,41 @@ public class ProjectsDB {
         }
     }
 
-    public static Project getProjects() {
-        // Add code
-        return new Project();
+    public static ArrayList<Project> getProjects() throws FailureException {
+        ArrayList<Project> projects = new ArrayList<>();
+        try (PreparedStatement listProjectsStmnt = conn.prepareStatement(getProjectList)) {
+            //conn.setAutoCommit(false);
+            try (ResultSet list = listProjectsStmnt.executeQuery()) {
+                if (!list.isBeforeFirst()) {
+                    throw new FailureException("Error: No data");
+                }
+                while (list.next()) {
+                    String title = list.getString(1);
+                    LocalDate startDate = list.getDate(2).toLocalDate();
+                    LocalDate endDate = list.getDate(3).toLocalDate();
+                    Status projectStatus = Status.getEnum(list.getString(4));
+                    Priority projectPriority = Priority.getEnum(list.getString(5));
+                    
+                    projects.add(new Project(title, startDate, endDate, projectStatus, projectPriority));
+                }
+            }
+            catch (SQLException sqle) {
+                //conn.rollback();
+                System.err.print(sqle.getMessage());
+            }
+            
+        } catch (SQLException ex) {
+            System.err.print(ex.getMessage());
+            if (conn != null) {
+                try {
+                    System.err.print("Transaction is being rolled back");
+                    conn.rollback();
+                } catch (SQLException sqlexcep) {
+                    System.err.print(sqlexcep.getMessage());
+                }
+            }
+        }
+        return projects;
     }
 
     public static int getTotalProjects() {
