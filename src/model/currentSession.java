@@ -2,12 +2,20 @@
 package model;
 
 public class currentSession {
+    
     private static int accountID = 0;
-    private static String userName = "Ayaan123";
-    private static String firstName = "Ayaan";
-    private static String lastName = "Ahmed";
-    private static String email = "ayaanahmed@gmail.com";
-    private static String contact = "03002455678";
+    private static int teamID = 0;
+    
+    private static String userName = "";
+    private static String firstName = "";
+    private static String lastName = "";
+    private static String email = "";
+    private static String contact = "";
+    private static String accountType = ""; 
+    private static String teamName = "Not joined ";
+    
+    private static Boolean isPartOfTeam = false;
+   
     
 
     public static int getAccountID() {
