@@ -146,6 +146,9 @@ public class AddTeamMemberDialog extends javax.swing.JDialog {
 
     private void doneBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneBtnActionPerformed
         // TODO add your handling code here:
+        String membersEmail = txtMembersEmail.getText();
+        //add a logic to check if email exist
+        //add account into Team by getting account ID and update normal_accounts table, teams table and team_members table
         backToTeamsBtn.setVisible(true);
         doneBtn.setVisible(false);
 
