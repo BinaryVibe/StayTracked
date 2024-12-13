@@ -5,6 +5,7 @@
 package gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import customexceptions.FailureException;
 import customexceptions.InvalidDateException;
 import db.ProjectsDB;
 import java.awt.Color;
@@ -12,6 +13,8 @@ import java.awt.Component;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -266,7 +269,12 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         } else {
             project = new Project(title, desc, projectStatus, startDate, projectPriority);
         }
-        ProjectsDB.save(project);
+        try {
+            ProjectsDB.save(project);
+        } catch (FailureException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Error: Could not save to database.", JOptionPane.ERROR_MESSAGE);
+        }
+        this.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
 
     /**
