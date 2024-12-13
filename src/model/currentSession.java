@@ -57,8 +57,23 @@ public class currentSession {
     public static String getContact() {
         return contact;
     }
-    
 
+    public static void setTeamID(int teamID) {
+        currentSession.teamID = teamID;
+    }
+
+    public static void setAccountType(String accountType) {
+        currentSession.accountType = accountType;
+    }
+
+    public static void setTeamName(String teamName) {
+        currentSession.teamName = teamName;
+    }
+
+    public static void setIsPartOfTeam(Boolean isPartOfTeam) {
+        currentSession.isPartOfTeam = isPartOfTeam;
+    }
+    
     public static void setAccountID(int accountID) {
         currentSession.accountID = accountID;
     }
