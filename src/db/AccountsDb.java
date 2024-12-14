@@ -291,7 +291,7 @@ public class AccountsDb {
     }
 
     //Metohd to update Last name
-    public static void updateLastName(int accountID, String newLastName) throws FailureException, InvalidInputException {
+    public static void updateLastName(int accountID, String newLastName) throws FailureException{
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
