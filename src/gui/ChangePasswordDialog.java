@@ -181,14 +181,17 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
 
     private void updatePassBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePassBtnActionPerformed
         // TODO add your handling code here:
-        
+        String confirmPass = new String(txtConfirmPass.getPassword());;
+        String newPass = new String(txtNewPass.getPassword());
+        String currentPass = new String(txtCurrentPassword.getPassword());
         //add method to check currentPassword from database
+        
         //through exceptions if needed
         
         boolean confirmPassMatched = false; //flag which tells us if new pass is equals to confirm pass text field
         boolean currentPassMatched = false; //flag which tells us if current pass from text field is equals to pass in database
         
-        if(txtConfirmPass.getText().equals(txtNewPass.getText())){
+        if(confirmPass.equals(newPass)){
             lblError.setText("");
             lblSucces.setText("Password successfuly updates! \n Go back to profile...");
             updatePassBtn.setVisible(false);
