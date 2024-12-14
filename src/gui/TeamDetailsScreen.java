@@ -4,6 +4,8 @@
  */
 package gui;
 
+import customexceptions.FailureException;
+import db.AccountsDb;
 import helper.CurrentSession;
 
 /**
@@ -18,9 +20,9 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
     public TeamDetailsScreen() {
         initComponents();
         //initially hide these 
-       txtTeamName.setVisible(false);
+        txtTeamName.setVisible(false);
         updateTeamNameBtn.setVisible(false);
-        
+
         //set text according to current session
         txtTeamName.setText(CurrentSession.getTeamName());
         lblTeamrName.setText(CurrentSession.getTeamName());
@@ -48,6 +50,7 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableTeamMembers = new javax.swing.JTable();
         addTeamMemberBtn = new javax.swing.JButton();
+        lblTeamNameError = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(21, 25, 34));
         setMinimumSize(new java.awt.Dimension(1000, 720));
@@ -165,16 +168,26 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
         });
         add(addTeamMemberBtn);
         addTeamMemberBtn.setBounds(860, 690, 110, 23);
+
+        lblTeamNameError.setForeground(new java.awt.Color(237, 60, 63));
+        add(lblTeamNameError);
+        lblTeamNameError.setBounds(30, 180, 770, 20);
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateTeamNameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateTeamNameBtnActionPerformed
         // TODO add your handling code here:
-
-        //add a function to modify username of current logined user
         String newTeamName = txtTeamName.getText();
-        //incomplete
-        //set text of label again
-        lblTeamrName.setText(newTeamName);
+        lblTeamNameError.setText("");
+        //add a function to modify username of current logined user
+        try {
+            AccountsDb.updateTeamName(CurrentSession.getTeamID(), newTeamName);
+
+            //set text of label again
+            lblTeamrName.setText(CurrentSession.getTeamName());
+
+        } catch (FailureException fe) {
+            lblTeamNameError.setText(fe.getMessage());
+        }
 
         //again hide update button , txtField and show edit button, label
         lblTeamrName.setVisible(true);
@@ -209,6 +222,7 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JLabel lblTeamNameError;
     private javax.swing.JLabel lblTeamrName;
     private javax.swing.JTable tableTeamMembers;
     private javax.swing.JTextField txtTeamName;
