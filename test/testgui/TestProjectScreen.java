@@ -4,10 +4,12 @@
  */
 package testgui;
 
-import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.FlatDarculaLaf;
+import db.DBConnectionManager;
 import gui.ProjectsScreen;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+import helper.CurrentSession;
 
 /**
  *
@@ -19,9 +21,11 @@ public class TestProjectScreen {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        CurrentSession.setAccountID(1);
+        DBConnectionManager.setConnection();
         try {
-            UIManager.setLookAndFeel(new FlatLightLaf());
-        } catch (Exception ex) {
+            UIManager.setLookAndFeel(new FlatDarculaLaf());
+        } catch (Exception ex) { // TODO: Find all exceptions thrown
             System.err.println("Failed to initialize LaF");
         }
         JFrame frame1 = new JFrame("TestProjects");
