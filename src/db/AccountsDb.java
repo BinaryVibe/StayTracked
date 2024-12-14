@@ -270,6 +270,34 @@ public class AccountsDb {
              throw new FailureException(e.getMessage());
         }
     }
+    
+    //Metohd to update first name
+    public static void updateFirstName(int accountID, String newFirstName) throws FailureException {
+        if (con == null) {
+            throw new FailureException("Database connection failed!");
+        }
+        
+        //logic to update username in database
+        String query= "UPDATE accounts SET first_name = ? WHERE account_id = ?";
+        try(PreparedStatement ps = con.prepareStatement(query)){
+            ps.setString(1, newFirstName);
+            ps.setInt(2, accountID);
+            int rowsUpdated = ps.executeUpdate();
+                
+                if(rowsUpdated > 0){
+                    CurrentSession.setUserName(newFirstName);
+                }
+                else{
+                    throw new FailureException("Failed to update username");
+                    
+                }
+                
+            
+            
+        }catch(SQLException e){
+             throw new FailureException(e.getMessage());
+        }
+    }
 
     public static void validateUserName(String userName) throws InvalidInputException {
 
