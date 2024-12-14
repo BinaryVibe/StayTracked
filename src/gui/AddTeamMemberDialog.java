@@ -4,6 +4,9 @@
  */
 package gui;
 
+import customexceptions.FailureException;
+import db.AccountsDb;
+
 /**
  *
  * @author i c
@@ -32,12 +35,11 @@ public class AddTeamMemberDialog extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         lblMembersEmail = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        lblError = new javax.swing.JLabel();
-        lblSucces = new javax.swing.JLabel();
         doneBtn = new javax.swing.JButton();
         backToTeamsBtn = new javax.swing.JButton();
         lblMemberAdditionError = new javax.swing.JLabel();
         txtMembersEmail = new javax.swing.JTextField();
+        lblSuccess = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(400, 300));
@@ -53,10 +55,6 @@ public class AddTeamMemberDialog extends javax.swing.JDialog {
         lblMembersEmail.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         lblMembersEmail.setForeground(new java.awt.Color(204, 204, 204));
         lblMembersEmail.setText("Email");
-
-        lblError.setForeground(new java.awt.Color(255, 51, 51));
-
-        lblSucces.setForeground(new java.awt.Color(45, 168, 216));
 
         doneBtn.setBackground(new java.awt.Color(45, 168, 216));
         doneBtn.setForeground(new java.awt.Color(21, 25, 34));
@@ -78,6 +76,8 @@ public class AddTeamMemberDialog extends javax.swing.JDialog {
 
         lblMemberAdditionError.setForeground(new java.awt.Color(237, 60, 63));
 
+        lblSuccess.setForeground(new java.awt.Color(45, 168, 216));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -93,15 +93,11 @@ public class AddTeamMemberDialog extends javax.swing.JDialog {
                     .addComponent(jSeparator1)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                     .addComponent(lblMemberAdditionError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtMembersEmail))
+                    .addComponent(txtMembersEmail)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lblSuccess, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(55, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(47, 47, 47)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(lblError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblSucces, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(47, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,18 +112,13 @@ public class AddTeamMemberDialog extends javax.swing.JDialog {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblMemberAdditionError, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblSuccess, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(doneBtn)
                     .addComponent(backToTeamsBtn))
-                .addContainerGap(131, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(394, 394, 394)
-                    .addComponent(lblError)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(lblSucces)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -146,9 +137,21 @@ public class AddTeamMemberDialog extends javax.swing.JDialog {
 
     private void doneBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneBtnActionPerformed
         // TODO add your handling code here:
+        lblSuccess.setText("");
+        lblMemberAdditionError.setText("");
         String membersEmail = txtMembersEmail.getText();
+        
+        
         //add a logic to check if email exist
+        //and
         //add account into Team by getting account ID and update normal_accounts table, teams table and team_members table
+        try {
+            AccountsDb.addTeamMember(membersEmail);
+            lblSuccess.setText("Team member added successfuly");
+        } catch (FailureException fe) {
+            lblMemberAdditionError.setText(fe.getMessage());
+        }
+        
         backToTeamsBtn.setVisible(true);
         doneBtn.setVisible(false);
 
@@ -208,10 +211,9 @@ public class AddTeamMemberDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblError;
     private javax.swing.JLabel lblMemberAdditionError;
     private javax.swing.JLabel lblMembersEmail;
-    private javax.swing.JLabel lblSucces;
+    private javax.swing.JLabel lblSuccess;
     private javax.swing.JTextField txtMembersEmail;
     // End of variables declaration//GEN-END:variables
 }
