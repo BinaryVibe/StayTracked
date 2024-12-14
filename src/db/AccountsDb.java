@@ -291,7 +291,7 @@ public class AccountsDb {
     }
 
     //Metohd to update Last name
-    public static void updateLastName(int accountID, String newLastName) throws FailureException{
+    public static void updateLastName(int accountID, String newLastName) throws FailureException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
@@ -339,8 +339,7 @@ public class AccountsDb {
             throw new FailureException(e.getMessage());
         }
     }
-    
-   
+
     //Method to update contact
     public static void updateContact(int accountID, String newContact) throws FailureException {
         if (con == null) {
@@ -363,6 +362,39 @@ public class AccountsDb {
 
         } catch (SQLException e) {
             throw new FailureException(e.getMessage());
+        }
+    }
+
+    //Method to update password
+    public static void updatePass(int accountID, String currentPass, String newPass) throws FailureException {
+        if (con == null) {
+            throw new FailureException("Database connection failed!");
+        }
+
+        //logic to update password in database
+        String query = "SELECT password FROM accounts WHERE account_id = ?";
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setInt(1, accountID);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    String passDb = rs.getString("password");
+                    if (passDb.equals(currentPass)) {
+                        String query2 = "UPDATE accounts SET password = ? WHERE account_id = ?";
+                        try (PreparedStatement ps2 = con.prepareStatement(query2)) {
+                            ps2.setString(1, newPass);
+                            ps2.setInt(2, accountID);
+                            int rowsUpdated = ps2.executeUpdate();
+                            if(rowsUpdated == 0){
+                                throw new FailureException("Failed to change password");
+                            }
+                        }
+                    } else {
+                        throw new FailureException("incorrect current password");
+                    }
+                }
+            }
+        } catch (SQLException se) {
+            throw new FailureException(se.getMessage());
         }
     }
 
