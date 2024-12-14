@@ -28,7 +28,7 @@ public class ProjectsDB {
     static Connection conn = DBConnectionManager.con;
     private static final String insertProject = "INSERT INTO projects (title, description, status, priority, start_date, end_date) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String assignUserID = "INSERT INTO assigned_to VALUES (?, ?)";
-    private static final String getProjectList = "SELECT title, start_date, end_date, status, priority FROM projects";
+    private static final String getProjectList = "SELECT title, start_date, end_date, status, priority FROM projects WHERE project_id IN (SELECT project_id FROM assigned_to WHERE account_id = ?);";
 
     public static void save(Project project) throws FailureException {
         try (PreparedStatement saveStmnt = conn.prepareStatement(insertProject, Statement.RETURN_GENERATED_KEYS); 
@@ -83,6 +83,7 @@ public class ProjectsDB {
         ArrayList<Project> projects = new ArrayList<>();
         try (PreparedStatement listProjectsStmnt = conn.prepareStatement(getProjectList)) {
             //conn.setAutoCommit(false);
+            listProjectsStmnt.setInt(1, CurrentSession.getAccountID());
             try (ResultSet list = listProjectsStmnt.executeQuery()) {
                 if (!list.isBeforeFirst()) {
                     throw new FailureException("Error: No data");
