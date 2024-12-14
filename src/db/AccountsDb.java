@@ -397,6 +397,33 @@ public class AccountsDb {
             throw new FailureException(se.getMessage());
         }
     }
+    
+    //Method to add team members
+    public static void addTeamMember (String email) throws FailureException {
+        //first check if email exist and get it's account_id
+        String query = "SELECT account_id FROM accounts WHERE email = ?";
+        try(PreparedStatement ps = con.prepareStatement(query)){
+            ps.setString(1, email);
+            
+            try(ResultSet rs = ps.executeQuery()){
+                
+                if(rs.next()){
+                    //if email exist then get account ID
+                    int accountID = rs.getInt("account_id");
+                    
+                    //check if the account is already in some team
+                    
+                }
+                else{
+                    throw new FailureException("Email doesn't exist");
+                }
+            }
+        }catch(SQLException se){
+            throw new FailureException(se.getMessage());
+                    
+        }
+                
+    }
 
     public static void validateUserName(String userName) throws InvalidInputException {
 
