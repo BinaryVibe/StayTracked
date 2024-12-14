@@ -11,7 +11,7 @@ import customexceptions.InvalidInputException;
 import model.Account;
 import model.ManagerAccount;
 import model.NormalAccount;
-import model.currentSession;
+import helper.CurrentSession;
 import org.mariadb.jdbc.Statement;
 
 public class AccountsDb {
@@ -116,17 +116,17 @@ public class AccountsDb {
                 }
             }
 
-            //Put values in currentSession
-            currentSession.setAccountID(accountID);
-            currentSession.setAccountType(accountType);
-            currentSession.setContact(contact);
-            currentSession.setEmail(inputEmail);
-            currentSession.setFirstName(firstName);
-            currentSession.setLastName(lastName);
-            currentSession.setUserName(userName);
-            currentSession.setTeamID(teamID);
-            currentSession.setTeamName(teamName);
-            currentSession.setIsPartOfTeam(isPartOfTeam);
+            //Put values in CurrentSession
+            CurrentSession.setAccountID(accountID);
+            CurrentSession.setAccountType(accountType);
+            CurrentSession.setContact(contact);
+            CurrentSession.setEmail(inputEmail);
+            CurrentSession.setFirstName(firstName);
+            CurrentSession.setLastName(lastName);
+            CurrentSession.setUserName(userName);
+            CurrentSession.setTeamID(teamID);
+            CurrentSession.setTeamName(teamName);
+            CurrentSession.setIsPartOfTeam(isPartOfTeam);
             
             
         } catch (SQLException e) {
@@ -240,6 +240,34 @@ public class AccountsDb {
                 throw new FailureException(e.getMessage());
             }
 
+        }
+    }
+    
+    //Method to update userName
+    public static void updateUserName(int accountID, String newUserName) throws FailureException {
+        if (con == null) {
+            throw new FailureException("Database connection failed!");
+        }
+        
+        //logic to update username in database
+        String query= "UPDATE accounts SET username = ? WHERE account_id = ?";
+        try(PreparedStatement ps = con.prepareStatement(query)){
+            ps.setString(1, newUserName);
+            ps.setInt(2, accountID);
+            int rowsUpdated = ps.executeUpdate();
+                
+                if(rowsUpdated > 0){
+                    CurrentSession.setUserName(newUserName);
+                }
+                else{
+                    throw new FailureException("Failed to update username");
+                    
+                }
+                
+            
+            
+        }catch(SQLException e){
+             throw new FailureException(e.getMessage());
         }
     }
 
