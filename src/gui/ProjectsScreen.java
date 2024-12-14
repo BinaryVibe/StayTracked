@@ -185,7 +185,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         try {
             projects = ProjectsDB.getProjects();
         } catch (FailureException ex) {
-            JOptionPane.showMessageDialog(createProjectBtn, ex.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
         }
 
         for (Project project : projects) {
