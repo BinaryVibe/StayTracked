@@ -132,10 +132,11 @@ public class ProjectsScreen extends javax.swing.JPanel {
         projectsTable.setRowHeight(25);
         projectsTable.getTableHeader().setReorderingAllowed(false);
         // Set Enum columns' editor to be a JComboBox
-        projectsTable.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(new JComboBox<>(Status.values())));
-        projectsTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JComboBox<>(Priority.values())));
+        projectsTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JComboBox<>(Status.values())));
+        projectsTable.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(new JComboBox<>(Priority.values())));
         //jTable1.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));
         projectsTable.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));
+        projectsTable.getColumnModel().getColumn(2).setCellEditor(new JDateChooserEditor(new JTextField()));
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         jScrollPane1.setViewportView(projectsTable);
@@ -153,8 +154,6 @@ public class ProjectsScreen extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void scanBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scanBtnActionPerformed
-        
-        
     }//GEN-LAST:event_scanBtnActionPerformed
 
     private void createProjectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createProjectBtnActionPerformed

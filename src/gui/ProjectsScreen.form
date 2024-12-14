@@ -194,7 +194,7 @@
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePre" type="java.lang.String" value="DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();&#xa;        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// Set Enum columns&apos; editor to be a JComboBox&#xa;projectsTable.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(new JComboBox&lt;&gt;(Status.values())));&#xa;projectsTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JComboBox&lt;&gt;(Priority.values())));&#xa;//jTable1.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));&#xa;projectsTable.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// Set Enum columns&apos; editor to be a JComboBox&#xa;projectsTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JComboBox&lt;&gt;(Status.values())));&#xa;projectsTable.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(new JComboBox&lt;&gt;(Priority.values())));&#xa;//jTable1.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));&#xa;projectsTable.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));&#xa;projectsTable.getColumnModel().getColumn(2).setCellEditor(new JDateChooserEditor(new JTextField()));"/>
           </AuxValues>
         </Component>
       </SubComponents>
