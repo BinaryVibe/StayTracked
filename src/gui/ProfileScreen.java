@@ -580,10 +580,18 @@ public class ProfileScreen extends javax.swing.JPanel {
     private void updatecontactBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatecontactBtn1ActionPerformed
         // TODO add your handling code here:
         String newContact = txtContact.getText();
+        lblContactError.setText("");
        
 
-        //add a function to modify username of current logined user
-        
+        //add a function to modify contact of current logined user
+        try {
+            AccountsDb.updateContact(CurrentSession.getAccountID(), newContact);
+
+            //set text of label again
+            lblCurrentContact.setText(CurrentSession.getContact());
+        } catch (FailureException fe) {
+            lblContactError.setText(fe.getMessage());
+        }
        
 
         //again hide update button , txtField and show edit button, label
