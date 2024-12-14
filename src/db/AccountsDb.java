@@ -252,11 +252,11 @@ public class AccountsDb {
         //logic to update username in database
         String query= "UPDATE accounts SET username = ? WHERE account_id = ?";
         try(PreparedStatement ps = con.prepareStatement(query)){
-            ps.setInt(1, accountID);
-            ps.setString(2, newUserName);
-            try(ResultSet rs = ps.executeQuery()){
+            ps.setString(1, newUserName);
+            ps.setInt(2, accountID);
+            int rowsUpdated = ps.executeUpdate();
                 
-                if(rs.next()){
+                if(rowsUpdated > 0){
                     CurrentSession.setUserName(newUserName);
                 }
                 else{
@@ -264,7 +264,7 @@ public class AccountsDb {
                     
                 }
                 
-            }
+            
             
         }catch(SQLException e){
              throw new FailureException(e.getMessage());
