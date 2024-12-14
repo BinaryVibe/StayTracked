@@ -154,6 +154,17 @@ public class ProjectsScreen extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void scanBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scanBtnActionPerformed
+        DefaultTableModel model = (DefaultTableModel) projectsTable.getModel();
+        ArrayList<Project> projects = null;
+        try {
+            projects = ProjectsDB.getNewProjects();
+            for (Project project : projects) {
+                model.addRow(new Object[]{project.getTitle(), project.getStartDate(), project.getEndDate(), project.getStatus(), project.getPriority(), "View", "View"});
+            }
+        } catch (FailureException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+
     }//GEN-LAST:event_scanBtnActionPerformed
 
     private void createProjectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createProjectBtnActionPerformed
