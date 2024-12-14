@@ -7,7 +7,7 @@ package testDB;
 import db.DBConnectionManager;
 import gui.CreateProjectScreen;
 import javax.swing.JFrame;
-import model.currentSession;
+import helper.CurrentSession;
 
 /**
  *
@@ -16,7 +16,7 @@ import model.currentSession;
 public class TestProjectsDB {
     
     public static void main(String[] args) {
-        currentSession.setAccountID(1);
+        CurrentSession.setAccountID(1);
         DBConnectionManager.setConnection();
         JFrame testFrame = new JFrame();
         CreateProjectScreen test = new CreateProjectScreen(testFrame, true);
