@@ -384,7 +384,7 @@ public class AccountsDb {
                             ps2.setString(1, newPass);
                             ps2.setInt(2, accountID);
                             int rowsUpdated = ps2.executeUpdate();
-                            if(rowsUpdated == 0){
+                            if (rowsUpdated == 0) {
                                 throw new FailureException("Failed to change password");
                             }
                         }
@@ -397,32 +397,53 @@ public class AccountsDb {
             throw new FailureException(se.getMessage());
         }
     }
-    
+
     //Method to add team members
-    public static void addTeamMember (String email) throws FailureException {
+    public static void addTeamMember(String email) throws FailureException {
         //first check if email exist and get it's account_id
         String query = "SELECT account_id FROM accounts WHERE email = ?";
-        try(PreparedStatement ps = con.prepareStatement(query)){
+        try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, email);
-            
-            try(ResultSet rs = ps.executeQuery()){
-                
-                if(rs.next()){
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                if (rs.next()) {
                     //if email exist then get account ID
                     int accountID = rs.getInt("account_id");
-                    
+
                     //check if the account is already in some team
-                    
-                }
-                else{
+                    String query2 = "SELECT * FROM team_members where account_id = ?";
+                    try (PreparedStatement ps2 = con.prepareStatement(query2)) {
+                        ps2.setInt(1, accountID);
+
+                        try (ResultSet rs2 = ps2.executeQuery()) {
+                            if (rs2.next()) {
+                                throw new FailureException("This account is already a part of some team");
+                            } else {
+                                //add account into current team
+                                String query3 = "INSERT INTO team_members (teams_id, account_id, role) VALUES (?, ?, ?)";
+                                try (PreparedStatement ps3 = con.prepareStatement(query3)) {
+                                    ps3.setInt(1, CurrentSession.getTeamID());
+                                    ps3.setInt(2, accountID);
+                                    ps3.setString(3, "Member");
+
+                                    int rowsInserted = ps3.executeUpdate();
+                                    if (rowsInserted == 0) {
+                                        throw new FailureException("Failed to add team member");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
                     throw new FailureException("Email doesn't exist");
                 }
             }
-        }catch(SQLException se){
+        } catch (SQLException se) {
             throw new FailureException(se.getMessage());
-                    
+
         }
-                
+
     }
 
     public static void validateUserName(String userName) throws InvalidInputException {
