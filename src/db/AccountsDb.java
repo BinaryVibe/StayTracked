@@ -271,7 +271,7 @@ public class AccountsDb {
             throw new FailureException("Database connection failed!");
         }
 
-        //logic to update username in database
+        //logic to update first name in database
         String query = "UPDATE accounts SET first_name = ? WHERE account_id = ?";
         try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, newFirstName);
@@ -281,7 +281,7 @@ public class AccountsDb {
             if (rowsUpdated > 0) {
                 CurrentSession.setFirstName(newFirstName);
             } else {
-                throw new FailureException("Failed to update username");
+                throw new FailureException("Failed to update first name");
 
             }
 
@@ -296,7 +296,7 @@ public class AccountsDb {
             throw new FailureException("Database connection failed!");
         }
 
-        //logic to update username in database
+        //logic to update last name in database
         String query = "UPDATE accounts SET last_name = ? WHERE account_id = ?";
         try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, newLastName);
@@ -306,7 +306,7 @@ public class AccountsDb {
             if (rowsUpdated > 0) {
                 CurrentSession.setLastName(newLastName);
             } else {
-                throw new FailureException("Failed to update username");
+                throw new FailureException("Failed to update last name");
 
             }
 
@@ -321,7 +321,7 @@ public class AccountsDb {
             throw new FailureException("Database connection failed!");
         }
 
-        //logic to update username in database
+        //logic to update email in database
         String query = "UPDATE accounts SET email = ? WHERE account_id = ?";
         try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, newEmail);
@@ -331,7 +331,7 @@ public class AccountsDb {
             if (rowsUpdated > 0) {
                 CurrentSession.setEmail(newEmail);
             } else {
-                throw new FailureException("Failed to update username");
+                throw new FailureException("Failed to update email");
 
             }
 
@@ -341,7 +341,30 @@ public class AccountsDb {
     }
     
    
-    
+    //Method to update contact
+    public static void updateContact(int accountID, String newContact) throws FailureException {
+        if (con == null) {
+            throw new FailureException("Database connection failed!");
+        }
+
+        //logic to update contact in database
+        String query = "UPDATE accounts SET contact_num = ? WHERE account_id = ?";
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, newContact);
+            ps.setInt(2, accountID);
+            int rowsUpdated = ps.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                CurrentSession.setContact(newContact);
+            } else {
+                throw new FailureException("Failed to update contact");
+
+            }
+
+        } catch (SQLException e) {
+            throw new FailureException(e.getMessage());
+        }
+    }
 
     public static void validateUserName(String userName) throws InvalidInputException {
 
