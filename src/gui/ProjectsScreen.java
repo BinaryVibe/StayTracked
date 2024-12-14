@@ -4,12 +4,16 @@
  */
 package gui;
 
+import customexceptions.FailureException;
+import db.ProjectsDB;
 import helper.JDateChooserEditor;
 import java.awt.Frame;
 import java.awt.Window;
+import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -17,6 +21,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import model.Status;
 import model.Priority;
+import model.Project;
 
 /**
  *
@@ -29,6 +34,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
      */
     public ProjectsScreen() {
         initComponents();
+        populateTable();
     }
 
     /**
@@ -163,6 +169,19 @@ public class ProjectsScreen extends javax.swing.JPanel {
         screen1.setVisible(true);
     }//GEN-LAST:event_createProjectBtnActionPerformed
 
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) projectsTable.getModel();
+        ArrayList<Project> projects = null;
+        try {
+            projects = ProjectsDB.getProjects();
+        } catch (FailureException ex) {
+            JOptionPane.showMessageDialog(createProjectBtn, ex.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
+        }
+
+        for (Project project : projects) {
+            model.addRow(new Object[]{project.getTitle(), project.getStartDate(), project.getEndDate(), project.getStatus(), project.getPriority(), "View", "View"});
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createProjectBtn;
