@@ -11,7 +11,10 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import model.Status;
 import model.Priority;
 
@@ -98,10 +101,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         projectsTable.setForeground(new java.awt.Color(221, 255, 255));
         projectsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Title ", "Start Date", "Deadline", "Status", "Priority", "Tasks", "Details"
@@ -130,12 +130,24 @@ public class ProjectsScreen extends javax.swing.JPanel {
         projectsTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JComboBox<>(Priority.values())));
         //jTable1.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));
         projectsTable.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         jScrollPane1.setViewportView(projectsTable);
+        if (projectsTable.getColumnModel().getColumnCount() > 0) {
+            projectsTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+            projectsTable.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+            projectsTable.getColumnModel().getColumn(2).setCellRenderer(centerRenderer );
+            projectsTable.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+            projectsTable.getColumnModel().getColumn(4).setCellRenderer(centerRenderer );
+            projectsTable.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
+            projectsTable.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
+        }
 
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void scanBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scanBtnActionPerformed
+        
         
     }//GEN-LAST:event_scanBtnActionPerformed
 
