@@ -4,7 +4,7 @@
  */
 package gui;
 
-import model.currentSession;
+import helper.CurrentSession;
 
 /**
  *
@@ -22,8 +22,8 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
         updateTeamNameBtn.setVisible(false);
         
         //set text according to current session
-        txtTeamName.setText(currentSession.getTeamName());
-        lblTeamrName.setText(currentSession.getTeamName());
+        txtTeamName.setText(CurrentSession.getTeamName());
+        lblTeamrName.setText(CurrentSession.getTeamName());
     }
 
     /**

@@ -63,7 +63,6 @@ public class AccountsDb {
                     contact = rs.getString("contact_num");
                     accountType = rs.getString("account_type");
 
-                    
                     //FOR MANAGER ACCOUNTS
                     if (accountType.equalsIgnoreCase("MANAGER")) {
                         isPartOfTeam = true;
@@ -77,12 +76,11 @@ public class AccountsDb {
                                 if (rs2.next()) {
                                     teamName = rs2.getString("team_name");
                                     teamID = rs2.getInt("team_id");
-                                    
+
                                 }
                             }
                         }
-                        
-                        
+
                         //FOR NORMAL ACCOUNTS
                     } else if (accountType.equalsIgnoreCase("NORMAL")) {
                         //logic to get team name is account is a team member of any team.
@@ -127,8 +125,7 @@ public class AccountsDb {
             CurrentSession.setTeamID(teamID);
             CurrentSession.setTeamName(teamName);
             CurrentSession.setIsPartOfTeam(isPartOfTeam);
-            
-            
+
         } catch (SQLException e) {
             throw new FailureException(e.getMessage());
         }
@@ -242,88 +239,162 @@ public class AccountsDb {
 
         }
     }
-    
+
     //Method to update userName
     public static void updateUserName(int accountID, String newUserName) throws FailureException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
-        
+
         //logic to update username in database
-        String query= "UPDATE accounts SET username = ? WHERE account_id = ?";
-        try(PreparedStatement ps = con.prepareStatement(query)){
+        String query = "UPDATE accounts SET username = ? WHERE account_id = ?";
+        try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, newUserName);
             ps.setInt(2, accountID);
             int rowsUpdated = ps.executeUpdate();
-                
-                if(rowsUpdated > 0){
-                    CurrentSession.setUserName(newUserName);
-                }
-                else{
-                    throw new FailureException("Failed to update username");
-                    
-                }
-                
-            
-            
-        }catch(SQLException e){
-             throw new FailureException(e.getMessage());
+
+            if (rowsUpdated > 0) {
+                CurrentSession.setUserName(newUserName);
+            } else {
+                throw new FailureException("Failed to update username");
+
+            }
+
+        } catch (SQLException e) {
+            throw new FailureException(e.getMessage());
         }
     }
-    
+
     //Metohd to update first name
     public static void updateFirstName(int accountID, String newFirstName) throws FailureException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
-        
-        //logic to update username in database
-        String query= "UPDATE accounts SET first_name = ? WHERE account_id = ?";
-        try(PreparedStatement ps = con.prepareStatement(query)){
+
+        //logic to update first name in database
+        String query = "UPDATE accounts SET first_name = ? WHERE account_id = ?";
+        try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, newFirstName);
             ps.setInt(2, accountID);
             int rowsUpdated = ps.executeUpdate();
-                
-                if(rowsUpdated > 0){
-                    CurrentSession.setUserName(newFirstName);
-                }
-                else{
-                    throw new FailureException("Failed to update username");
-                    
-                }
-                
-            
-            
-        }catch(SQLException e){
-             throw new FailureException(e.getMessage());
+
+            if (rowsUpdated > 0) {
+                CurrentSession.setFirstName(newFirstName);
+            } else {
+                throw new FailureException("Failed to update first name");
+
+            }
+
+        } catch (SQLException e) {
+            throw new FailureException(e.getMessage());
         }
     }
-    
+
     //Metohd to update Last name
     public static void updateLastName(int accountID, String newLastName) throws FailureException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
-        
-        //logic to update username in database
-        String query= "UPDATE accounts SET last_name = ? WHERE account_id = ?";
-        try(PreparedStatement ps = con.prepareStatement(query)){
+
+        //logic to update last name in database
+        String query = "UPDATE accounts SET last_name = ? WHERE account_id = ?";
+        try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, newLastName);
             ps.setInt(2, accountID);
             int rowsUpdated = ps.executeUpdate();
-                
-                if(rowsUpdated > 0){
-                    CurrentSession.setUserName(newLastName);
+
+            if (rowsUpdated > 0) {
+                CurrentSession.setLastName(newLastName);
+            } else {
+                throw new FailureException("Failed to update last name");
+
+            }
+
+        } catch (SQLException e) {
+            throw new FailureException(e.getMessage());
+        }
+    }
+
+    //mMethod to update email
+    public static void updateEmail(int accountID, String newEmail) throws FailureException {
+        if (con == null) {
+            throw new FailureException("Database connection failed!");
+        }
+
+        //logic to update email in database
+        String query = "UPDATE accounts SET email = ? WHERE account_id = ?";
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, newEmail);
+            ps.setInt(2, accountID);
+            int rowsUpdated = ps.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                CurrentSession.setEmail(newEmail);
+            } else {
+                throw new FailureException("Failed to update email");
+
+            }
+
+        } catch (SQLException e) {
+            throw new FailureException(e.getMessage());
+        }
+    }
+
+    //Method to update contact
+    public static void updateContact(int accountID, String newContact) throws FailureException {
+        if (con == null) {
+            throw new FailureException("Database connection failed!");
+        }
+
+        //logic to update contact in database
+        String query = "UPDATE accounts SET contact_num = ? WHERE account_id = ?";
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, newContact);
+            ps.setInt(2, accountID);
+            int rowsUpdated = ps.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                CurrentSession.setContact(newContact);
+            } else {
+                throw new FailureException("Failed to update contact");
+
+            }
+
+        } catch (SQLException e) {
+            throw new FailureException(e.getMessage());
+        }
+    }
+
+    //Method to update password
+    public static void updatePass(int accountID, String currentPass, String newPass) throws FailureException {
+        if (con == null) {
+            throw new FailureException("Database connection failed!");
+        }
+
+        //logic to update password in database
+        String query = "SELECT password FROM accounts WHERE account_id = ?";
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setInt(1, accountID);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    String passDb = rs.getString("password");
+                    if (passDb.equals(currentPass)) {
+                        String query2 = "UPDATE accounts SET password = ? WHERE account_id = ?";
+                        try (PreparedStatement ps2 = con.prepareStatement(query2)) {
+                            ps2.setString(1, newPass);
+                            ps2.setInt(2, accountID);
+                            int rowsUpdated = ps2.executeUpdate();
+                            if(rowsUpdated == 0){
+                                throw new FailureException("Failed to change password");
+                            }
+                        }
+                    } else {
+                        throw new FailureException("incorrect current password");
+                    }
                 }
-                else{
-                    throw new FailureException("Failed to update username");
-                    
-                }
-                
-            
-            
-        }catch(SQLException e){
-             throw new FailureException(e.getMessage());
+            }
+        } catch (SQLException se) {
+            throw new FailureException(se.getMessage());
         }
     }
 
