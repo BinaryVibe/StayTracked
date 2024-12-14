@@ -5,6 +5,7 @@
 package gui;
 
 import customexceptions.FailureException;
+import customexceptions.InvalidInputException;
 import db.AccountsDb;
 import helper.CurrentSession;
 
@@ -561,12 +562,15 @@ public class ProfileScreen extends javax.swing.JPanel {
         lblEmailError1.setText("");
         //add a function to modify email of current logined user
          try {
+             AccountsDb.validateEmail(newEmail);
             AccountsDb.updateEmail(CurrentSession.getAccountID(), newEmail);
 
             //set text of label again
             lblCurrentEmail.setText(CurrentSession.getEmail());
         } catch (FailureException fe) {
             lblEmailError1.setText(fe.getMessage());
+        } catch (InvalidInputException ie){
+            lblEmailError1.setText(ie.getMessage());
         }
         
 
