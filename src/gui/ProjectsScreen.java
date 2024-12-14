@@ -4,16 +4,24 @@
  */
 package gui;
 
+import customexceptions.FailureException;
+import db.ProjectsDB;
 import helper.JDateChooserEditor;
 import java.awt.Frame;
 import java.awt.Window;
+import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import model.Status;
 import model.Priority;
+import model.Project;
 
 /**
  *
@@ -26,6 +34,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
      */
     public ProjectsScreen() {
         initComponents();
+        populateTable();
     }
 
     /**
@@ -98,10 +107,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         projectsTable.setForeground(new java.awt.Color(221, 255, 255));
         projectsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Title ", "Start Date", "Deadline", "Status", "Priority", "Tasks", "Details"
@@ -126,17 +132,39 @@ public class ProjectsScreen extends javax.swing.JPanel {
         projectsTable.setRowHeight(25);
         projectsTable.getTableHeader().setReorderingAllowed(false);
         // Set Enum columns' editor to be a JComboBox
-        projectsTable.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(new JComboBox<>(Status.values())));
-        projectsTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JComboBox<>(Priority.values())));
+        projectsTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JComboBox<>(Status.values())));
+        projectsTable.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(new JComboBox<>(Priority.values())));
         //jTable1.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));
         projectsTable.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));
+        projectsTable.getColumnModel().getColumn(2).setCellEditor(new JDateChooserEditor(new JTextField()));
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         jScrollPane1.setViewportView(projectsTable);
+        if (projectsTable.getColumnModel().getColumnCount() > 0) {
+            projectsTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+            projectsTable.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+            projectsTable.getColumnModel().getColumn(2).setCellRenderer(centerRenderer );
+            projectsTable.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+            projectsTable.getColumnModel().getColumn(4).setCellRenderer(centerRenderer );
+            projectsTable.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
+            projectsTable.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
+        }
 
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void scanBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scanBtnActionPerformed
-        
+        DefaultTableModel model = (DefaultTableModel) projectsTable.getModel();
+        ArrayList<Project> projects = null;
+        try {
+            projects = ProjectsDB.getNewProjects();
+            for (Project project : projects) {
+                model.addRow(new Object[]{project.getTitle(), project.getStartDate(), project.getEndDate(), project.getStatus(), project.getPriority(), "View", "View"});
+            }
+        } catch (FailureException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+
     }//GEN-LAST:event_scanBtnActionPerformed
 
     private void createProjectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createProjectBtnActionPerformed
@@ -151,6 +179,19 @@ public class ProjectsScreen extends javax.swing.JPanel {
         screen1.setVisible(true);
     }//GEN-LAST:event_createProjectBtnActionPerformed
 
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) projectsTable.getModel();
+        ArrayList<Project> projects = null;
+        try {
+            projects = ProjectsDB.getProjects();
+        } catch (FailureException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
+        }
+
+        for (Project project : projects) {
+            model.addRow(new Object[]{project.getTitle(), project.getStartDate(), project.getEndDate(), project.getStatus(), project.getPriority(), "View", "View"});
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createProjectBtn;

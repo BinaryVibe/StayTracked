@@ -19,7 +19,7 @@ import javax.swing.JTextField;
  */
 public class JDateChooserEditor extends DefaultCellEditor {
     private JDateChooser dateChooser;
-    private final String dateFormat = "dd-MM-yyyy";
+    private final String dateFormat = "yyyy-MM-dd";
     
     public JDateChooserEditor(JTextField textField) {
         super(textField);
