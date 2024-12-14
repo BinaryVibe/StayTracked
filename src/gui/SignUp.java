@@ -593,7 +593,7 @@ public class SignUp extends javax.swing.JFrame {
         //Validate inputs at slide 1 
         if (currentPanelIndex == 0) {
             try {
-                password = txtPass.getText();
+                password = new String (txtPass.getPassword());
                 AccountsDb.validatePassword(password);
                 userName = txtUsername.getText();
                 AccountsDb.validateUserName(userName);
