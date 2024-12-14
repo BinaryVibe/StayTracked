@@ -397,6 +397,31 @@ public class AccountsDb {
             throw new FailureException(se.getMessage());
         }
     }
+    
+      //Method to update contact
+    public static void updateTeamName(int teamID, String newTeamName) throws FailureException {
+        if (con == null) {
+            throw new FailureException("Database connection failed!");
+        }
+
+        //logic to update contact in database
+        String query = "UPDATE teams SET team_name = ? WHERE team_id = ?";
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, newTeamName);
+            ps.setInt(2, teamID);
+            int rowsUpdated = ps.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                CurrentSession.setTeamName(newTeamName);
+            } else {
+                throw new FailureException("Failed to update team name");
+
+            }
+
+        } catch (SQLException e) {
+            throw new FailureException(e.getMessage());
+        }
+    }
 
     //Method to add team members
     public static void addTeamMember(String email) throws FailureException {
@@ -421,7 +446,7 @@ public class AccountsDb {
                                 throw new FailureException("This account is already a part of some team");
                             } else {
                                 //add account into current team
-                                String query3 = "INSERT INTO team_members (teams_id, account_id, role) VALUES (?, ?, ?)";
+                                String query3 = "INSERT INTO team_members (team_id, account_id, role) VALUES (?, ?, ?)";
                                 try (PreparedStatement ps3 = con.prepareStatement(query3)) {
                                     ps3.setInt(1, CurrentSession.getTeamID());
                                     ps3.setInt(2, accountID);
