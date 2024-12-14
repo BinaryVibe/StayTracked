@@ -17,7 +17,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import model.Priority;
 import model.Status;
-import model.currentSession;
+import helper.CurrentSession;
 
 /**
  *
@@ -58,7 +58,7 @@ public class ProjectsDB {
                 throw new FailureException("Insert did not work in projects table!");
             }
             
-            assignStmnt.setInt(1, currentSession.getAccountID());
+            assignStmnt.setInt(1, CurrentSession.getAccountID());
             assignStmnt.setInt(2, projectId);
              
             // FK: Foriegn Keys
