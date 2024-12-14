@@ -4,7 +4,9 @@
  */
 package gui;
 
-import model.currentSession;
+import customexceptions.FailureException;
+import db.AccountsDb;
+import helper.CurrentSession;
 
 /**
  *
@@ -17,38 +19,35 @@ public class ProfileScreen extends javax.swing.JPanel {
      */
     public ProfileScreen() {
         initComponents();
-        
+
         //Initially hide textFields
         txtContact.setVisible(false);
         txtUserName.setVisible(false);
         txtLastName1.setVisible(false);
         txtFirstName1.setVisible(false);
         txtEmail1.setVisible(false);
-        
+
         //Initially hide update buttons
         updateEmailBtn.setVisible(false);
         updateFirstNameBtn.setVisible(false);
         updateLastNameBtn.setVisible(false);
         updateUserNameBtn.setVisible(false);
         updatecontactBtn1.setVisible(false);
-        
-        
-        
+
         //Set labels according to current User
-        lblCurrentUserName.setText(currentSession.getUserName());
-        lblCurrentFirstName.setText(currentSession.getFirstName());
-        lblCurrentLastName.setText(currentSession.getLastName());
-        lblCurrentEmail.setText(currentSession.getEmail());
-        lblCurrentContact.setText(currentSession.getContact());
-        
+        lblCurrentUserName.setText(CurrentSession.getUserName());
+        lblCurrentFirstName.setText(CurrentSession.getFirstName());
+        lblCurrentLastName.setText(CurrentSession.getLastName());
+        lblCurrentEmail.setText(CurrentSession.getEmail());
+        lblCurrentContact.setText(CurrentSession.getContact());
+
         //Set text of textFields according to current User
-        txtUserName.setText(currentSession.getUserName());
-        txtFirstName1.setText(currentSession.getFirstName());
-        txtLastName1.setText(currentSession.getLastName());
-        txtEmail1.setText(currentSession.getEmail());
-        txtContact.setText(currentSession.getContact());
-        
-        
+        txtUserName.setText(CurrentSession.getUserName());
+        txtFirstName1.setText(CurrentSession.getFirstName());
+        txtLastName1.setText(CurrentSession.getLastName());
+        txtEmail1.setText(CurrentSession.getEmail());
+        txtContact.setText(CurrentSession.getContact());
+
     }
 
     /**
@@ -467,34 +466,35 @@ public class ProfileScreen extends javax.swing.JPanel {
     private void updateUserNameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateUserNameBtnActionPerformed
         // TODO add your handling code here:
         String newUserName = txtUserName.getText();
-        currentSession.setUserName(newUserName);
-        
+
         //add a function to modify username of current logined user
-        
-        
-        //set text of label again
-        lblCurrentUserName.setText(newUserName);
-        
+        try {
+            AccountsDb.updateUserName(CurrentSession.getAccountID(), newUserName);
+            
+            //set text of label again
+            lblCurrentUserName.setText(CurrentSession.getUserName());
+        } catch (FailureException fe) {
+            System.out.println(fe.getMessage());
+        }
+
         //again hide update button , txtField and show edit button, label
         lblCurrentUserName.setVisible(true);
         editUserNamebtn.setVisible(true);
         txtUserName.setVisible(false);
         updateUserNameBtn.setVisible(false);
-        
-        
+
+
     }//GEN-LAST:event_updateUserNameBtnActionPerformed
 
     private void updateFirstNameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateFirstNameBtnActionPerformed
         // TODO add your handling code here:
         String newFirstName = txtFirstName1.getText();
-        currentSession.setFirstName(newFirstName);
-        
+        CurrentSession.setFirstName(newFirstName);
+
         //add a function to modify username of current logined user
-        
-        
         //set text of label again
         lblCurrentFirstName.setText(newFirstName);
-        
+
         //again hide update button , txtField and show edit button, label
         lblCurrentFirstName.setVisible(true);
         editFirstNamebtn.setVisible(true);
@@ -505,14 +505,12 @@ public class ProfileScreen extends javax.swing.JPanel {
     private void updateLastNameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateLastNameBtnActionPerformed
         // TODO add your handling code here:
         String newLastName = txtLastName1.getText();
-        currentSession.setFirstName(newLastName);
-        
+        CurrentSession.setFirstName(newLastName);
+
         //add a function to modify username of current logined user
-        
-        
         //set text of label again
         lblCurrentLastName.setText(newLastName);
-        
+
         //again hide update button , txtField and show edit button, label
         lblCurrentLastName.setVisible(true);
         editLastNamebtn.setVisible(true);
@@ -523,14 +521,12 @@ public class ProfileScreen extends javax.swing.JPanel {
     private void updateEmailBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateEmailBtnActionPerformed
         // TODO add your handling code here:
         String newEmail = txtEmail1.getText();
-        currentSession.setEmail(newEmail);
-        
+        CurrentSession.setEmail(newEmail);
+
         //add a function to modify username of current logined user
-        
-        
         //set text of label again
         lblCurrentEmail.setText(newEmail);
-        
+
         //again hide update button , txtField and show edit button, label
         lblCurrentEmail.setVisible(true);
         editEmailbtn.setVisible(true);
@@ -541,14 +537,12 @@ public class ProfileScreen extends javax.swing.JPanel {
     private void updatecontactBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatecontactBtn1ActionPerformed
         // TODO add your handling code here:
         String newContact = txtContact.getText();
-        currentSession.setContact(newContact);
-        
+        CurrentSession.setContact(newContact);
+
         //add a function to modify username of current logined user
-        
-        
         //set text of label again
         lblCurrentContact.setText(newContact);
-        
+
         //again hide update button , txtField and show edit button, label
         lblCurrentContact.setVisible(true);
         editContactbtn.setVisible(true);
