@@ -12,6 +12,7 @@ import model.Account;
 import model.ManagerAccount;
 import model.NormalAccount;
 import helper.CurrentSession;
+import java.util.ArrayList;
 import org.mariadb.jdbc.Statement;
 
 public class AccountsDb {
@@ -469,6 +470,16 @@ public class AccountsDb {
 
         }
 
+    }
+    
+    //Method to add team members
+    public static ArrayList<NormalAccount> getTeamMembers(int teamID){
+        ArrayList<NormalAccount> members = new ArrayList<>();
+        
+        
+        //queru to get members
+        
+        return members;
     }
 
     public static void validateUserName(String userName) throws InvalidInputException {
