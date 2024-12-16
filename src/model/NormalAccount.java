@@ -9,6 +9,16 @@ public class NormalAccount extends Account {
         this.isPartOfTeam = isPartOfTeam;
     }
 
+        //This constructor will be used when we need to get or pass account without password
+
+    public NormalAccount(boolean isPartOfTeam, String firstName, String lastName, String userName, String contactNum, String email) {
+        super(firstName, lastName, userName, contactNum, email);
+        this.isPartOfTeam = isPartOfTeam;
+    }
+    
+    
+    
+
     public void setIsPartOfTeam(boolean isPartOfTeam) {
         this.isPartOfTeam = isPartOfTeam;
     }
