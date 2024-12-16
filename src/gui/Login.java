@@ -210,7 +210,7 @@ public class Login extends javax.swing.JFrame {
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         String email = loginEmail.getText();
-        String password = loginPass.getText();
+        String password = new String (loginPass.getPassword());
         
         try {
             AccountsDb.validateUser(email, password);
