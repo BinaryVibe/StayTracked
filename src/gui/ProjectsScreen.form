@@ -117,7 +117,7 @@
         <Component class="javax.swing.JTable" name="projectsTable">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="27" green="28" red="28" type="rgb"/>
+              <Color blue="22" green="19" red="15" type="rgb"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="dd" type="rgb"/>

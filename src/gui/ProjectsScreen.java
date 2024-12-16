@@ -103,7 +103,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
 
         add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
-        projectsTable.setBackground(new java.awt.Color(40, 40, 39));
+        projectsTable.setBackground(new java.awt.Color(21, 25, 34));
         projectsTable.setForeground(new java.awt.Color(221, 255, 255));
         projectsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -164,7 +164,6 @@ public class ProjectsScreen extends javax.swing.JPanel {
         } catch (FailureException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
-
     }//GEN-LAST:event_scanBtnActionPerformed
 
     private void createProjectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createProjectBtnActionPerformed
