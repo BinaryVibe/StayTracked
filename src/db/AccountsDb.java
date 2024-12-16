@@ -398,8 +398,8 @@ public class AccountsDb {
             throw new FailureException(se.getMessage());
         }
     }
-    
-      //Method to update contact
+
+    //Method to update contact
     public static void updateTeamName(int teamID, String newTeamName) throws FailureException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
@@ -471,16 +471,38 @@ public class AccountsDb {
         }
 
     }
-    
+
     //Method to add team members
-    public static ArrayList<NormalAccount> getTeamMembers(int teamID){
-        ArrayList<NormalAccount> members = new ArrayList<>();
-        
-        
-        //queru to get members
-        
-        return members;
+    public static ArrayList<NormalAccount> getTeamMembers(int teamID) throws FailureException {
+    ArrayList<NormalAccount> members = new ArrayList<>();
+
+    // Query to get team members and their account details using JOIN
+    String query = "SELECT a.first_name, a.last_name, a.username, a.contact_num, a.email FROM team_members tm " +
+                   "JOIN accounts a ON tm.account_id = a.account_id WHERE tm.team_id = ?";
+
+    try (PreparedStatement ps = con.prepareStatement(query)) {
+        ps.setInt(1, teamID);
+
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                // Extract member details from the ResultSet
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                String userName = rs.getString("username");
+                String contact = rs.getString("contact_num");
+                String email = rs.getString("email");
+
+                // Add member to the ArrayList
+                members.add(new NormalAccount(true, firstName, lastName, userName, contact, email));
+            }
+        }
+
+    } catch (SQLException se) {
+        throw new FailureException(se.getMessage());
     }
+
+    return members;
+}
 
     public static void validateUserName(String userName) throws InvalidInputException {
 
