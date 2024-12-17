@@ -7,6 +7,9 @@ package gui;
 import customexceptions.FailureException;
 import db.AccountsDb;
 import helper.CurrentSession;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import model.NormalAccount;
 
 /**
  *
@@ -26,6 +29,9 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
         //set text according to current session
         txtTeamName.setText(CurrentSession.getTeamName());
         lblTeamrName.setText(CurrentSession.getTeamName());
+        
+        //populate table 
+        populateTable();
     }
 
     /**
@@ -51,6 +57,8 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
         tableTeamMembers = new javax.swing.JTable();
         addTeamMemberBtn = new javax.swing.JButton();
         lblTeamNameError = new javax.swing.JLabel();
+        refreshBtn = new javax.swing.JButton();
+        lblTeamMembersError = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(21, 25, 34));
         setMinimumSize(new java.awt.Dimension(1000, 720));
@@ -137,7 +145,7 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
         jSeparator3.setBounds(30, 250, 939, 10);
 
         tableTeamMembers.setBackground(new java.awt.Color(21, 25, 34));
-        tableTeamMembers.setForeground(new java.awt.Color(21, 25, 34));
+        tableTeamMembers.setForeground(new java.awt.Color(255, 255, 255));
         tableTeamMembers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -171,7 +179,26 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
 
         lblTeamNameError.setForeground(new java.awt.Color(237, 60, 63));
         add(lblTeamNameError);
-        lblTeamNameError.setBounds(30, 180, 770, 20);
+        lblTeamNameError.setBounds(30, 180, 780, 20);
+
+        refreshBtn.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        refreshBtn.setForeground(new java.awt.Color(45, 168, 216));
+        refreshBtn.setText("Refresh");
+        refreshBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(45, 168, 216), 1, true));
+        refreshBtn.setContentAreaFilled(false);
+        refreshBtn.setMinimumSize(new java.awt.Dimension(60, 17));
+        refreshBtn.setPreferredSize(new java.awt.Dimension(60, 17));
+        refreshBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshBtnActionPerformed(evt);
+            }
+        });
+        add(refreshBtn);
+        refreshBtn.setBounds(740, 690, 110, 23);
+
+        lblTeamMembersError.setForeground(new java.awt.Color(237, 60, 63));
+        add(lblTeamMembersError);
+        lblTeamMembersError.setBounds(320, 220, 650, 20);
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateTeamNameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateTeamNameBtnActionPerformed
@@ -211,6 +238,29 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
         dialog.setVisible(true);
     }//GEN-LAST:event_addTeamMemberBtnActionPerformed
 
+    private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnActionPerformed
+        // TODO add your handling code here:
+        populateTable(); //user might need to refresh screen to see updated table
+    }//GEN-LAST:event_refreshBtnActionPerformed
+
+    
+    //Method to populate table
+    private void populateTable(){
+        lblTeamMembersError.setText("");
+        DefaultTableModel model = (DefaultTableModel)tableTeamMembers.getModel();
+        //delete all existing rows
+        model.setRowCount(0);
+
+        ArrayList<NormalAccount> members = null;
+        try{
+            members = AccountsDb.getTeamMembers(CurrentSession.getTeamID());
+            for (NormalAccount member : members){
+                model.addRow(new Object[]{member.getFirstName()+" "+member.getLastName(), member.getUserName(), member.getContactNum(), member.getEmail()});
+            }
+        }catch (FailureException fe){
+            lblTeamMembersError.setText(fe.getMessage());
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addTeamMemberBtn;
@@ -222,8 +272,10 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JLabel lblTeamMembersError;
     private javax.swing.JLabel lblTeamNameError;
     private javax.swing.JLabel lblTeamrName;
+    private javax.swing.JButton refreshBtn;
     private javax.swing.JTable tableTeamMembers;
     private javax.swing.JTextField txtTeamName;
     private javax.swing.JButton updateTeamNameBtn;
