@@ -2,8 +2,13 @@ package model;
 
 public class NormalAccount extends Account {
 
-    private boolean isPartOfTeam;
+    private boolean isPartOfTeam; //Delete this.
+    private String role = "No team joined yet"; //Refractor Code according to  this as soon as possible
 
+    
+        //refractor BOTH constructors and other function which use this constructors 
+    
+    
     public NormalAccount(boolean isPartOfTeam, String firstName, String lastName, String userName, String contactNum, String email, String password) {
         super(firstName, lastName, userName, contactNum, email, password);
         this.isPartOfTeam = isPartOfTeam;
