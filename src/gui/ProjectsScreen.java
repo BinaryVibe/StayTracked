@@ -84,6 +84,13 @@ public class ProjectsScreen extends javax.swing.JPanel {
         deleteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash.png"))); // NOI18N
         deleteBtn.setToolTipText("Delete selected row(s)");
         deleteBtn.setContentAreaFilled(false);
+        deleteBtn.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash-can-disabled.png"))); // NOI18N
+        deleteBtn.setEnabled(false);
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -186,6 +193,10 @@ public class ProjectsScreen extends javax.swing.JPanel {
         screen1.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         screen1.setVisible(true);
     }//GEN-LAST:event_createProjectBtnActionPerformed
+
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) projectsTable.getModel();
