@@ -1,4 +1,4 @@
-package customExceptions;
+package customexceptions;
 
 public class InvalidInputException extends Exception {
 
