@@ -6,8 +6,7 @@ public abstract class Account {
     protected String firstName, lastName, userName;
     protected String contactNum, email, password;
     protected int accountID;
-    // Array List to store projects assigned to user/account
-    protected ArrayList<Project> projects = new ArrayList<>();
+   
 
     public Account(String firstName, String lastName, String userName, String contactNum, String email, String password) {
         this.firstName = firstName;
@@ -17,6 +16,20 @@ public abstract class Account {
         this.email = email;
         this.password = password;
     }
+
+    
+    //This constructor will be used when we need to get or pass account without password
+
+    public Account(String firstName, String lastName, String userName, String contactNum, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.contactNum = contactNum;
+        this.email = email;
+    }
+    
+    
+    
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;

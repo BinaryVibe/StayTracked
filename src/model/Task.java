@@ -4,7 +4,7 @@
  */
 package model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -12,21 +12,19 @@ import java.util.Date;
  */
 public class Task {
 
-    private String title, description;
+    private String description;
     private Status taskStatus;
-    private Date startDate, endDate;
+    private LocalDate startDate, endDate;
     private Priority taskPriority;
 
     public Task() {
-        this.title = "Untitled";
         this.description = "";
-        this.startDate = new Date();
+        this.startDate = LocalDate.now();
         this.taskStatus = Status.PENDING;
         this.taskPriority = Priority.NONE;
     }
 
-    public Task(String title, String description, Status taskStatus, Date startDate, Date endDate, Priority taskPriority) {
-        this.title = title;
+    public Task(String description, Status taskStatus, LocalDate startDate, LocalDate endDate, Priority taskPriority) {
         this.description = description;
         this.taskStatus = taskStatus;
         this.startDate = startDate;
@@ -34,9 +32,14 @@ public class Task {
         this.taskPriority = taskPriority;
     }
 
-    public String getTitle() {
-        return title;
+    public Task(String description, Status taskStatus, LocalDate startDate, Priority taskPriority) {
+        this.description = description;
+        this.taskStatus = taskStatus;
+        this.startDate = startDate;
+        this.taskPriority = taskPriority;
     }
+    
+    
 
     public String getDescription() {
         return description;
@@ -46,20 +49,16 @@ public class Task {
         return taskStatus;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
     public Priority getTaskPriority() {
         return taskPriority;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public void setDescription(String description) {
@@ -70,11 +69,11 @@ public class Task {
         this.taskStatus = taskStatus;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

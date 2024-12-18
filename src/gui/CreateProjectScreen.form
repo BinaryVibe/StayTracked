@@ -183,9 +183,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="dd" type="rgb"/>
             </Property>
+            <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="startDateChooser.setDateFormatString(&quot;dd-mm-yyyy&quot;);&#xa;&#xa;for (Component c : startDateChooser.getComponents()) {&#xa;    ((JComponent) c).setBackground(new Color(40, 40, 39));&#xa;}&#xa;&#xa;// JComponent editorUI = startDateChooser.getDateEditor().getUiComponent();&#xa;// editorUI.setForeground(new Color(221, 255, 255));&#xa;"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="//startDateChooser.setDateFormatString(&quot;dd-MM-yyyy&quot;);&#xa;&#xa;for (Component c : startDateChooser.getComponents()) {&#xa;    ((JComponent) c).setBackground(new Color(40, 40, 39));&#xa;}&#xa;&#xa;// JComponent editorUI = startDateChooser.getDateEditor().getUiComponent();&#xa;// editorUI.setForeground(new Color(221, 255, 255));&#xa;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="endDateLbl">
@@ -201,9 +202,10 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="27" green="28" red="28" type="rgb"/>
             </Property>
+            <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="endDateChooser.setDateFormatString(&quot;dd-mm-yyyy&quot;);&#xa;&#xa;&#xa;for (Component c : endDateChooser.getComponents()) {&#xa;    ((JComponent) c).setBackground(new Color(40, 40, 39));&#xa;}&#xa;"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="// endDateChooser.setDateFormatString(&quot;dd-mm-yyyy&quot;);&#xa;&#xa;&#xa;for (Component c : endDateChooser.getComponents()) {&#xa;    ((JComponent) c).setBackground(new Color(40, 40, 39));&#xa;}&#xa;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="okButton">

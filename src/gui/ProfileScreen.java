@@ -4,7 +4,10 @@
  */
 package gui;
 
-import model.currentSession;
+import customexceptions.FailureException;
+import customexceptions.InvalidInputException;
+import db.AccountsDb;
+import helper.CurrentSession;
 
 /**
  *
@@ -17,38 +20,35 @@ public class ProfileScreen extends javax.swing.JPanel {
      */
     public ProfileScreen() {
         initComponents();
-        
+
         //Initially hide textFields
         txtContact.setVisible(false);
         txtUserName.setVisible(false);
         txtLastName1.setVisible(false);
         txtFirstName1.setVisible(false);
         txtEmail1.setVisible(false);
-        
+
         //Initially hide update buttons
         updateEmailBtn.setVisible(false);
         updateFirstNameBtn.setVisible(false);
         updateLastNameBtn.setVisible(false);
         updateUserNameBtn.setVisible(false);
         updatecontactBtn1.setVisible(false);
-        
-        
-        
+
         //Set labels according to current User
-        lblCurrentUserName.setText(currentSession.getUserName());
-        lblCurrentFirstName.setText(currentSession.getFirstName());
-        lblCurrentLastName.setText(currentSession.getLastName());
-        lblCurrentEmail.setText(currentSession.getEmail());
-        lblCurrentContact.setText(currentSession.getContact());
-        
+        lblCurrentUserName.setText(CurrentSession.getUserName());
+        lblCurrentFirstName.setText(CurrentSession.getFirstName());
+        lblCurrentLastName.setText(CurrentSession.getLastName());
+        lblCurrentEmail.setText(CurrentSession.getEmail());
+        lblCurrentContact.setText(CurrentSession.getContact());
+
         //Set text of textFields according to current User
-        txtUserName.setText(currentSession.getUserName());
-        txtFirstName1.setText(currentSession.getFirstName());
-        txtLastName1.setText(currentSession.getLastName());
-        txtEmail1.setText(currentSession.getEmail());
-        txtContact.setText(currentSession.getContact());
-        
-        
+        txtUserName.setText(CurrentSession.getUserName());
+        txtFirstName1.setText(CurrentSession.getFirstName());
+        txtLastName1.setText(CurrentSession.getLastName());
+        txtEmail1.setText(CurrentSession.getEmail());
+        txtContact.setText(CurrentSession.getContact());
+
     }
 
     /**
@@ -96,6 +96,11 @@ public class ProfileScreen extends javax.swing.JPanel {
         txtFirstName1 = new javax.swing.JTextField();
         txtLastName1 = new javax.swing.JTextField();
         txtEmail1 = new javax.swing.JTextField();
+        lblContactError = new javax.swing.JLabel();
+        lblUserNameError1 = new javax.swing.JLabel();
+        lblFirstNameError1 = new javax.swing.JLabel();
+        lblLastNameError1 = new javax.swing.JLabel();
+        lblEmailError1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(21, 25, 34));
         setForeground(new java.awt.Color(204, 204, 204));
@@ -283,6 +288,11 @@ public class ProfileScreen extends javax.swing.JPanel {
         changePassBtn.setBorder(null);
         changePassBtn.setMinimumSize(new java.awt.Dimension(80, 17));
         changePassBtn.setPreferredSize(new java.awt.Dimension(80, 17));
+        changePassBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changePassBtnActionPerformed(evt);
+            }
+        });
         add(changePassBtn);
         changePassBtn.setBounds(810, 610, 150, 23);
 
@@ -368,6 +378,7 @@ public class ProfileScreen extends javax.swing.JPanel {
         txtUserName.setForeground(new java.awt.Color(204, 204, 204));
         txtUserName.setText("Username");
         txtUserName.setBorder(null);
+        txtUserName.setCaretColor(new java.awt.Color(255, 255, 255));
         txtUserName.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         txtUserName.setOpaque(true);
         add(txtUserName);
@@ -378,6 +389,7 @@ public class ProfileScreen extends javax.swing.JPanel {
         txtContact.setForeground(new java.awt.Color(204, 204, 204));
         txtContact.setText("contact");
         txtContact.setBorder(null);
+        txtContact.setCaretColor(new java.awt.Color(255, 255, 255));
         txtContact.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         txtContact.setOpaque(true);
         add(txtContact);
@@ -388,6 +400,7 @@ public class ProfileScreen extends javax.swing.JPanel {
         txtFirstName1.setForeground(new java.awt.Color(204, 204, 204));
         txtFirstName1.setText("Firstname");
         txtFirstName1.setBorder(null);
+        txtFirstName1.setCaretColor(new java.awt.Color(255, 255, 255));
         txtFirstName1.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         txtFirstName1.setOpaque(true);
         add(txtFirstName1);
@@ -398,6 +411,7 @@ public class ProfileScreen extends javax.swing.JPanel {
         txtLastName1.setForeground(new java.awt.Color(204, 204, 204));
         txtLastName1.setText("lastname");
         txtLastName1.setBorder(null);
+        txtLastName1.setCaretColor(new java.awt.Color(255, 255, 255));
         txtLastName1.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         txtLastName1.setOpaque(true);
         add(txtLastName1);
@@ -408,10 +422,31 @@ public class ProfileScreen extends javax.swing.JPanel {
         txtEmail1.setForeground(new java.awt.Color(204, 204, 204));
         txtEmail1.setText("email");
         txtEmail1.setBorder(null);
+        txtEmail1.setCaretColor(new java.awt.Color(255, 255, 255));
         txtEmail1.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         txtEmail1.setOpaque(true);
         add(txtEmail1);
         txtEmail1.setBounds(630, 380, 330, 30);
+
+        lblContactError.setForeground(new java.awt.Color(237, 60, 63));
+        add(lblContactError);
+        lblContactError.setBounds(30, 510, 750, 20);
+
+        lblUserNameError1.setForeground(new java.awt.Color(237, 60, 63));
+        add(lblUserNameError1);
+        lblUserNameError1.setBounds(30, 180, 770, 20);
+
+        lblFirstNameError1.setForeground(new java.awt.Color(237, 60, 63));
+        add(lblFirstNameError1);
+        lblFirstNameError1.setBounds(30, 260, 760, 20);
+
+        lblLastNameError1.setForeground(new java.awt.Color(237, 60, 63));
+        add(lblLastNameError1);
+        lblLastNameError1.setBounds(30, 340, 750, 20);
+
+        lblEmailError1.setForeground(new java.awt.Color(237, 60, 63));
+        add(lblEmailError1);
+        lblEmailError1.setBounds(30, 420, 760, 20);
     }// </editor-fold>//GEN-END:initComponents
 
     private void editUserNamebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserNamebtnActionPerformed
@@ -456,35 +491,42 @@ public class ProfileScreen extends javax.swing.JPanel {
 
     private void updateUserNameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateUserNameBtnActionPerformed
         // TODO add your handling code here:
+        lblUserNameError1.setText("");
         String newUserName = txtUserName.getText();
-        currentSession.setUserName(newUserName);
-        
+
         //add a function to modify username of current logined user
-        
-        
-        //set text of label again
-        lblCurrentUserName.setText(newUserName);
-        
+        try {
+            AccountsDb.updateUserName(CurrentSession.getAccountID(), newUserName);
+
+            //set text of label again
+            lblCurrentUserName.setText(CurrentSession.getUserName());
+        } catch (FailureException fe) {
+            lblUserNameError1.setText(fe.getMessage());
+        }
+
         //again hide update button , txtField and show edit button, label
         lblCurrentUserName.setVisible(true);
         editUserNamebtn.setVisible(true);
         txtUserName.setVisible(false);
         updateUserNameBtn.setVisible(false);
-        
-        
+
+
     }//GEN-LAST:event_updateUserNameBtnActionPerformed
 
     private void updateFirstNameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateFirstNameBtnActionPerformed
         // TODO add your handling code here:
         String newFirstName = txtFirstName1.getText();
-        currentSession.setFirstName(newFirstName);
-        
-        //add a function to modify username of current logined user
-        
-        
-        //set text of label again
-        lblCurrentFirstName.setText(newFirstName);
-        
+        lblFirstNameError1.setText("");
+        //add a function to modify first name of current logined user
+        try {
+            AccountsDb.updateFirstName(CurrentSession.getAccountID(), newFirstName);
+
+            //set text of label again
+            lblCurrentFirstName.setText(CurrentSession.getFirstName());
+        } catch (FailureException fe) {
+            lblFirstNameError1.setText(fe.getMessage());
+        }
+
         //again hide update button , txtField and show edit button, label
         lblCurrentFirstName.setVisible(true);
         editFirstNamebtn.setVisible(true);
@@ -495,14 +537,18 @@ public class ProfileScreen extends javax.swing.JPanel {
     private void updateLastNameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateLastNameBtnActionPerformed
         // TODO add your handling code here:
         String newLastName = txtLastName1.getText();
-        currentSession.setFirstName(newLastName);
-        
-        //add a function to modify username of current logined user
-        
-        
-        //set text of label again
-        lblCurrentLastName.setText(newLastName);
-        
+        lblLastNameError1.setText("");
+
+        //add a function to modify last name of current logined user
+        try {
+            AccountsDb.updateLastName(CurrentSession.getAccountID(), newLastName);
+
+            //set text of label again
+            lblCurrentLastName.setText(CurrentSession.getLastName());
+        } catch (FailureException fe) {
+            lblLastNameError1.setText(fe.getMessage());
+        }
+
         //again hide update button , txtField and show edit button, label
         lblCurrentLastName.setVisible(true);
         editLastNamebtn.setVisible(true);
@@ -513,14 +559,21 @@ public class ProfileScreen extends javax.swing.JPanel {
     private void updateEmailBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateEmailBtnActionPerformed
         // TODO add your handling code here:
         String newEmail = txtEmail1.getText();
-        currentSession.setEmail(newEmail);
+        lblEmailError1.setText("");
+        //add a function to modify email of current logined user
+         try {
+             AccountsDb.validateEmail(newEmail);
+            AccountsDb.updateEmail(CurrentSession.getAccountID(), newEmail);
+
+            //set text of label again
+            lblCurrentEmail.setText(CurrentSession.getEmail());
+        } catch (FailureException fe) {
+            lblEmailError1.setText(fe.getMessage());
+        } catch (InvalidInputException ie){
+            lblEmailError1.setText(ie.getMessage());
+        }
         
-        //add a function to modify username of current logined user
-        
-        
-        //set text of label again
-        lblCurrentEmail.setText(newEmail);
-        
+
         //again hide update button , txtField and show edit button, label
         lblCurrentEmail.setVisible(true);
         editEmailbtn.setVisible(true);
@@ -531,20 +584,32 @@ public class ProfileScreen extends javax.swing.JPanel {
     private void updatecontactBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatecontactBtn1ActionPerformed
         // TODO add your handling code here:
         String newContact = txtContact.getText();
-        currentSession.setContact(newContact);
-        
-        //add a function to modify username of current logined user
-        
-        
-        //set text of label again
-        lblCurrentContact.setText(newContact);
-        
+        lblContactError.setText("");
+       
+
+        //add a function to modify contact of current logined user
+        try {
+            AccountsDb.updateContact(CurrentSession.getAccountID(), newContact);
+
+            //set text of label again
+            lblCurrentContact.setText(CurrentSession.getContact());
+        } catch (FailureException fe) {
+            lblContactError.setText(fe.getMessage());
+        }
+       
+
         //again hide update button , txtField and show edit button, label
         lblCurrentContact.setVisible(true);
         editContactbtn.setVisible(true);
         txtContact.setVisible(false);
         updatecontactBtn1.setVisible(false);
     }//GEN-LAST:event_updatecontactBtn1ActionPerformed
+
+    private void changePassBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changePassBtnActionPerformed
+        // TODO add your handling code here:
+        ChangePasswordDialog dialog = new ChangePasswordDialog(null, true); //When you add it to mainScreen , change null to this
+        dialog.setVisible(true);
+    }//GEN-LAST:event_changePassBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -569,11 +634,16 @@ public class ProfileScreen extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JLabel lblContactError;
     private javax.swing.JLabel lblCurrentContact;
     private javax.swing.JLabel lblCurrentEmail;
     private javax.swing.JLabel lblCurrentFirstName;
     private javax.swing.JLabel lblCurrentLastName;
     private javax.swing.JLabel lblCurrentUserName;
+    private javax.swing.JLabel lblEmailError1;
+    private javax.swing.JLabel lblFirstNameError1;
+    private javax.swing.JLabel lblLastNameError1;
+    private javax.swing.JLabel lblUserNameError1;
     private javax.swing.JTextField txtContact;
     private javax.swing.JTextField txtEmail1;
     private javax.swing.JTextField txtFirstName1;
