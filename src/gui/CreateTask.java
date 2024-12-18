@@ -6,9 +6,12 @@ package gui;
 
 import customexceptions.FailureException;
 import customexceptions.InvalidDateException;
+import java.awt.Color;
+import java.awt.Component;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import model.Priority;
 import model.Status;
