@@ -8,7 +8,6 @@ import com.toedter.calendar.JDateChooser;
 import java.awt.Component;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -23,7 +22,7 @@ public class JDateChooserEditor extends DefaultCellEditor {
     
     public JDateChooserEditor(JTextField textField) {
         super(textField);
-        setClickCountToStart(2);
+        //setClickCountToStart(2);
         dateChooser = new JDateChooser();
         dateChooser.setDateFormatString(dateFormat);
     }
