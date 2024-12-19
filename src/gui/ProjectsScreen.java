@@ -163,6 +163,16 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 deleteBtn.setEnabled(true);
             }
         });
+        // Set click to start editing
+        for (int i = 0; i <= 4; i++) {
+            DefaultCellEditor cellEditor = (DefaultCellEditor) projectsTable.getColumnModel().getColumn(i).getCellEditor();
+            try {
+                cellEditor.setClickCountToStart(2);
+            }
+            catch (NullPointerException ex) {
+                System.out.println(i + "- " + ex.getMessage());
+            }
+        }
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         jScrollPane1.setViewportView(projectsTable);

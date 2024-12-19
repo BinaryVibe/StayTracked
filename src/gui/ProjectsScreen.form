@@ -209,13 +209,14 @@
             </Property>
             <Property name="fillsViewportHeight" type="boolean" value="true"/>
             <Property name="rowHeight" type="int" value="25"/>
+            <Property name="showGrid" type="boolean" value="false"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
             </Property>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePre" type="java.lang.String" value="DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();&#xa;        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// Set Enum columns&apos; editor to be a JComboBox&#xa;&#xa;projectsTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JComboBox&lt;&gt;(Status.values())));&#xa;projectsTable.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(new JComboBox&lt;&gt;(Priority.values())));&#xa;projectsTable.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));&#xa;projectsTable.getColumnModel().getColumn(2).setCellEditor(new JDateChooserEditor(new JTextField()));&#xa;&#xa;// Listener for list selection&#xa;projectsTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {&#xa;    @Override&#xa;    public void valueChanged(ListSelectionEvent ev) {&#xa;        deleteBtn.setEnabled(true);&#xa;    }&#xa;});&#xa;"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// Set Enum columns&apos; editor to be a JComboBox&#xa;&#xa;&#xa;projectsTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JComboBox&lt;&gt;(Status.values())));&#xa;projectsTable.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(new JComboBox&lt;&gt;(Priority.values())));&#xa;projectsTable.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));&#xa;projectsTable.getColumnModel().getColumn(2).setCellEditor(new JDateChooserEditor(new JTextField()));&#xa;&#xa;// Listener for list selection&#xa;projectsTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {&#xa;    @Override&#xa;    public void valueChanged(ListSelectionEvent ev) {&#xa;        deleteBtn.setEnabled(true);&#xa;    }&#xa;});&#xa;&#xa;// Set click to start editing&#xa;for (int i = 0; i &lt;= 4; i++) {&#xa;    DefaultCellEditor cellEditor = (DefaultCellEditor) projectsTable.getColumnModel().getColumn(i).getCellEditor();&#xa;    try {&#xa;        cellEditor.setClickCountToStart(2);&#xa;    }&#xa;    catch (NullPointerException ex) {&#xa;        System.out.println(i + &quot;- &quot; + ex.getMessage());&#xa;    }&#xa;}&#xa;"/>
           </AuxValues>
         </Component>
       </SubComponents>
