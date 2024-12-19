@@ -25,15 +25,19 @@ import model.Status;
  * @author samtheradiant
  */
 public class CreateProjectScreen extends javax.swing.JDialog {
+    
+    ProjectsScreen obj;
 
     /**
      * Creates new form CreateProjectScreen
      *
      * @param parent
      * @param modal
+     * @param obj
      */
-    public CreateProjectScreen(java.awt.Frame parent, boolean modal) {
+    public CreateProjectScreen(java.awt.Frame parent, boolean modal, ProjectsScreen obj) {
         super(parent, modal);
+        this.obj = obj;
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -272,39 +276,40 @@ public class CreateProjectScreen extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Error: Could not save to database.", JOptionPane.ERROR_MESSAGE);
         }
         this.dispose();
+        obj.refreshTable();
     }//GEN-LAST:event_okButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            UIManager.setLookAndFeel(new FlatLightLaf());
-        } catch (Exception ex) {
-            System.err.println("Failed to initialize LaF");
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                CreateProjectScreen dialog = new CreateProjectScreen(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setLocationRelativeTo(null);
-                dialog.setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            UIManager.setLookAndFeel(new FlatLightLaf());
+//        } catch (Exception ex) {
+//            System.err.println("Failed to initialize LaF");
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the dialog */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                CreateProjectScreen dialog = new CreateProjectScreen(new javax.swing.JFrame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setLocationRelativeTo(null);
+//                dialog.setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelBtn;

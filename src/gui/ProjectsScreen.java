@@ -21,6 +21,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 import model.Status;
 import model.Priority;
 import model.Project;
@@ -148,6 +149,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         });
         projectsTable.setFillsViewportHeight(true);
         projectsTable.setRowHeight(25);
+        projectsTable.setShowGrid(false);
         projectsTable.getTableHeader().setReorderingAllowed(false);
         // Set Enum columns' editor to be a JComboBox
 
@@ -163,6 +165,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 deleteBtn.setEnabled(true);
             }
         });
+
         // Set click to start editing
         for (int i = 0; i <= 4; i++) {
             DefaultCellEditor cellEditor = (DefaultCellEditor) projectsTable.getColumnModel().getColumn(i).getCellEditor();
@@ -188,8 +191,12 @@ public class ProjectsScreen extends javax.swing.JPanel {
 
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void scanBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scanBtnActionPerformed
+        refreshTable();
+    }//GEN-LAST:event_scanBtnActionPerformed
+
+    public void refreshTable() {
         DefaultTableModel model = (DefaultTableModel) projectsTable.getModel();
         ArrayList<Project> projects = null;
         try {
@@ -200,22 +207,22 @@ public class ProjectsScreen extends javax.swing.JPanel {
         } catch (FailureException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
-    }//GEN-LAST:event_scanBtnActionPerformed
-
+    }
+    
     private void createProjectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createProjectBtnActionPerformed
         Window parentWindow = SwingUtilities.windowForComponent(this);
         Frame parentFrame = null;
         if (parentWindow instanceof Frame frame) {
             parentFrame = frame;
         }
-        CreateProjectScreen screen1 = new CreateProjectScreen(parentFrame, true);
+        CreateProjectScreen screen1 = new CreateProjectScreen(parentFrame, true, this);
         screen1.pack();
         screen1.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         screen1.setVisible(true);
     }//GEN-LAST:event_createProjectBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        // TODO add your handling code here:
+        projectsTable.getSelectedRows();
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void populateTable() {
