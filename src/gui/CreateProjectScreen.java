@@ -275,8 +275,9 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         } catch (FailureException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Error: Could not save to database.", JOptionPane.ERROR_MESSAGE);
         }
-        this.dispose();
+        
         obj.refreshTable();
+        this.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
 
     /**
