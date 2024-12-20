@@ -4,9 +4,12 @@
  */
 package gui;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
 import javax.swing.plaf.basic.BasicButtonUI;
 
 /**
@@ -24,6 +27,7 @@ public class MainScreen extends javax.swing.JFrame {
         initComponents();
         cardPanel.add(teams, "Teams");
         cardPanel.add(profile, "Profile");
+        cardPanel.add(dashboard, "Dashbord");
 
         /* 
         //we will use this incase to use basic button look and feel
@@ -35,7 +39,13 @@ public class MainScreen extends javax.swing.JFrame {
            }
        }
          */
+        
         cardLayout = (CardLayout) cardPanel.getLayout();
+        
+        //initially show dashboard when open mainscreen, Duhh!
+        cardLayout.show(cardPanel, "Dashbord");
+        setButtonsNotSelected();
+        btnDashboard.setSelected(true);
     }
 
     /**
@@ -55,11 +65,13 @@ public class MainScreen extends javax.swing.JFrame {
         btnProfile = new javax.swing.JButton();
         btnTeams = new javax.swing.JButton();
         cardPanel = new javax.swing.JPanel();
-        teams = new gui.TeamDetailsScreen();
         profile = new gui.ProfileScreen();
+        teams = new gui.TeamDetailsScreen();
+        dashboard = new gui.DashboardScreen();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        aboutMenuBtn = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1280, 743));
@@ -184,8 +196,9 @@ public class MainScreen extends javax.swing.JFrame {
 
         cardPanel.setBackground(new java.awt.Color(21, 25, 34));
         cardPanel.setLayout(new java.awt.CardLayout());
-        cardPanel.add(teams, "card2");
         cardPanel.add(profile, "card3");
+        cardPanel.add(teams, "card3");
+        cardPanel.add(dashboard, "card4");
 
         mainPanel.add(cardPanel, java.awt.BorderLayout.CENTER);
 
@@ -194,6 +207,14 @@ public class MainScreen extends javax.swing.JFrame {
 
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
+
+        aboutMenuBtn.setText("About");
+        aboutMenuBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutMenuBtnActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(aboutMenuBtn);
 
         setJMenuBar(jMenuBar1);
 
@@ -213,6 +234,9 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void btnDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboardActionPerformed
         // TODO add your handling code here:
+        cardLayout.show(cardPanel, "Dashbord");
+        setButtonsNotSelected();
+        btnDashboard.setSelected(true);
     }//GEN-LAST:event_btnDashboardActionPerformed
 
     private void btnProjectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProjectsActionPerformed
@@ -232,6 +256,22 @@ public class MainScreen extends javax.swing.JFrame {
         setButtonsNotSelected();
         btnTeams.setSelected(true);
     }//GEN-LAST:event_btnTeamsActionPerformed
+
+    private void aboutMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuBtnActionPerformed
+        // TODO add your handling code here:
+        try {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize LaF");
+        }
+        AboutScreen AboutUsFrame = new AboutScreen();
+        
+        AboutUsFrame.pack();
+        AboutUsFrame.setLocationRelativeTo(null);
+        AboutUsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        AboutUsFrame.setVisible(true);
+        
+    }//GEN-LAST:event_aboutMenuBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,11 +317,13 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu aboutMenuBtn;
     private javax.swing.JButton btnDashboard;
     private javax.swing.JButton btnProfile;
     private javax.swing.JButton btnProjects;
     private javax.swing.JButton btnTeams;
     private javax.swing.JPanel cardPanel;
+    private gui.DashboardScreen dashboard;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
