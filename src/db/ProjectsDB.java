@@ -87,6 +87,9 @@ public class ProjectsDB {
     }
 
     public static ArrayList<Project> getProjects() throws FailureException {
+        if (conn == null) {
+            throw new FailureException("Database connection is null");
+        }
         ArrayList<Project> projects = new ArrayList<>();
         try (PreparedStatement listProjectsStmnt = conn.prepareStatement(getProjectList)) {
             //conn.setAutoCommit(false);
