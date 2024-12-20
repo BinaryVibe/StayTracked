@@ -426,6 +426,10 @@ public class AccountsDb {
 
     //Method to add team members
     public static void addTeamMember(String email) throws FailureException {
+
+        if (con == null) {
+            throw new FailureException("Database connection failed!");
+        }
         //first check if email exist and get it's account_id
         String query = "SELECT account_id FROM accounts WHERE email = ?";
         try (PreparedStatement ps = con.prepareStatement(query)) {
@@ -474,35 +478,39 @@ public class AccountsDb {
 
     //Method to add team members
     public static ArrayList<NormalAccount> getTeamMembers(int teamID) throws FailureException {
-    ArrayList<NormalAccount> members = new ArrayList<>();
 
-    // Query to get team members and their account details using JOIN
-    String query = "SELECT a.first_name, a.last_name, a.username, a.contact_num, a.email FROM team_members tm " +
-                   "JOIN accounts a ON tm.account_id = a.account_id WHERE tm.team_id = ?";
+        if (con == null) {
+            throw new FailureException("Database connection failed!");
+        }
+        ArrayList<NormalAccount> members = new ArrayList<>();
 
-    try (PreparedStatement ps = con.prepareStatement(query)) {
-        ps.setInt(1, teamID);
+        // Query to get team members and their account details using JOIN
+        String query = "SELECT a.first_name, a.last_name, a.username, a.contact_num, a.email FROM team_members tm "
+                + "JOIN accounts a ON tm.account_id = a.account_id WHERE tm.team_id = ?";
 
-        try (ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) {
-                // Extract member details from the ResultSet
-                String firstName = rs.getString("first_name");
-                String lastName = rs.getString("last_name");
-                String userName = rs.getString("username");
-                String contact = rs.getString("contact_num");
-                String email = rs.getString("email");
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setInt(1, teamID);
 
-                // Add member to the ArrayList
-                members.add(new NormalAccount(true, firstName, lastName, userName, contact, email));
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    // Extract member details from the ResultSet
+                    String firstName = rs.getString("first_name");
+                    String lastName = rs.getString("last_name");
+                    String userName = rs.getString("username");
+                    String contact = rs.getString("contact_num");
+                    String email = rs.getString("email");
+
+                    // Add member to the ArrayList
+                    members.add(new NormalAccount(true, firstName, lastName, userName, contact, email));
+                }
             }
+
+        } catch (SQLException se) {
+            throw new FailureException(se.getMessage());
         }
 
-    } catch (SQLException se) {
-        throw new FailureException(se.getMessage());
+        return members;
     }
-
-    return members;
-}
 
     public static void validateUserName(String userName) throws InvalidInputException {
 
