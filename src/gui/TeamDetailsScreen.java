@@ -231,7 +231,7 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
 
     private void addTeamMemberBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTeamMemberBtnActionPerformed
         // TODO add your handling code here:
-        AddTeamMemberDialog dialog = new AddTeamMemberDialog(null, true); //When you add it to mainScreen , change null to this
+        AddTeamMemberDialog dialog = new AddTeamMemberDialog(null, true, this); //When you add it to mainScreen , change null to this
         dialog.setVisible(true);
     }//GEN-LAST:event_addTeamMemberBtnActionPerformed
 
@@ -242,7 +242,7 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
 
     
     //Method to populate table
-    private void populateTable(){
+    public void populateTable(){
         lblTeamMembersError.setText("");
         DefaultTableModel model = (DefaultTableModel)tableTeamMembers.getModel();
         //delete all existing rows
