@@ -25,6 +25,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     public MainScreen() {
         initComponents();
+        ProfileScreen profile = new ProfileScreen(this);
         cardPanel.add(teams, "Teams");
         cardPanel.add(profile, "Profile");
         cardPanel.add(dashboard, "Dashbord");
@@ -67,7 +68,6 @@ public class MainScreen extends javax.swing.JFrame {
         btnTeams = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
         cardPanel = new javax.swing.JPanel();
-        profile = new gui.ProfileScreen();
         teams = new gui.TeamDetailsScreen();
         dashboard = new gui.DashboardScreen();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -234,7 +234,6 @@ public class MainScreen extends javax.swing.JFrame {
 
         cardPanel.setBackground(new java.awt.Color(21, 25, 34));
         cardPanel.setLayout(new java.awt.CardLayout());
-        cardPanel.add(profile, "card3");
         cardPanel.add(teams, "card3");
         cardPanel.add(dashboard, "card4");
 
@@ -402,7 +401,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel mainPanel;
-    private gui.ProfileScreen profile;
     private javax.swing.JLabel profileIcon;
     private javax.swing.JPanel tabsButtonPanel;
     private gui.TeamDetailsScreen teams;
