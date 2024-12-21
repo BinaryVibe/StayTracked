@@ -4,9 +4,10 @@
  */
 package testgui;
 
+import db.DBConnectionManager;
 import gui.DashboardScreen;
+import helper.CurrentSession;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 /**
  *
@@ -18,6 +19,8 @@ public class TestDashboard {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        DBConnectionManager.setConnection();
+        CurrentSession.setAccountID(1);
         JFrame frame1 = new JFrame();
         DashboardScreen screen1 = new DashboardScreen();
         frame1.add(screen1);
