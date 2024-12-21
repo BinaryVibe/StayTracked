@@ -54,8 +54,8 @@ public class Task {
         return description;
     }
 
-    public Status getTaskStatus() {
-        return taskStatus;
+    public String getTaskStatus() {
+        return taskStatus.name();
     }
 
     public LocalDate getStartDate() {
@@ -66,8 +66,8 @@ public class Task {
         return endDate;
     }
 
-    public Priority getTaskPriority() {
-        return taskPriority;
+    public String getTaskPriority() {
+        return taskPriority.name();
     }
 
     public void setDescription(String description) {
