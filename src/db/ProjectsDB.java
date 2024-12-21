@@ -36,7 +36,7 @@ public class ProjectsDB {
 
     // For newly created projects at runtime  
     private static ArrayList<Integer> newProjectIDs = new ArrayList<>();
-    // For projects extracted at runtime
+    // For projects extracted from database at runtime
     private static ArrayList<Integer> projectIDs = new ArrayList<>();
 
     // METHODS
