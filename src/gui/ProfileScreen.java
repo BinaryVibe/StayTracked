@@ -8,6 +8,7 @@ import customexceptions.FailureException;
 import customexceptions.InvalidInputException;
 import db.AccountsDb;
 import helper.CurrentSession;
+import javax.swing.JFrame;
 
 /**
  *
@@ -18,8 +19,10 @@ public class ProfileScreen extends javax.swing.JPanel {
     /**
      * Creates new form ProfileScreen
      */
-    public ProfileScreen() {
+    JFrame parentFrame;
+    public ProfileScreen(JFrame parent) {
         initComponents();
+        this.parentFrame = parent;
 
         //Initially hide textFields
         txtContact.setVisible(false);
@@ -103,7 +106,7 @@ public class ProfileScreen extends javax.swing.JPanel {
         lblEmailError1 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
-        changePassBtn1 = new javax.swing.JButton();
+        deleteAccountBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(21, 25, 34));
         setForeground(new java.awt.Color(204, 204, 204));
@@ -459,21 +462,21 @@ public class ProfileScreen extends javax.swing.JPanel {
         add(jSeparator8);
         jSeparator8.setBounds(30, 495, 939, 10);
 
-        changePassBtn1.setBackground(new java.awt.Color(45, 168, 216));
-        changePassBtn1.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        changePassBtn1.setForeground(new java.awt.Color(255, 0, 0));
-        changePassBtn1.setText("Delete Account");
-        changePassBtn1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 1, true));
-        changePassBtn1.setContentAreaFilled(false);
-        changePassBtn1.setMinimumSize(new java.awt.Dimension(80, 17));
-        changePassBtn1.setPreferredSize(new java.awt.Dimension(80, 17));
-        changePassBtn1.addActionListener(new java.awt.event.ActionListener() {
+        deleteAccountBtn.setBackground(new java.awt.Color(45, 168, 216));
+        deleteAccountBtn.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        deleteAccountBtn.setForeground(new java.awt.Color(255, 0, 0));
+        deleteAccountBtn.setText("Delete Account");
+        deleteAccountBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 1, true));
+        deleteAccountBtn.setContentAreaFilled(false);
+        deleteAccountBtn.setMinimumSize(new java.awt.Dimension(80, 17));
+        deleteAccountBtn.setPreferredSize(new java.awt.Dimension(80, 17));
+        deleteAccountBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                changePassBtn1ActionPerformed(evt);
+                deleteAccountBtnActionPerformed(evt);
             }
         });
-        add(changePassBtn1);
-        changePassBtn1.setBounds(810, 670, 150, 23);
+        add(deleteAccountBtn);
+        deleteAccountBtn.setBounds(810, 670, 150, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void editUserNamebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserNamebtnActionPerformed
@@ -638,15 +641,19 @@ public class ProfileScreen extends javax.swing.JPanel {
         dialog.setVisible(true);
     }//GEN-LAST:event_changePassBtnActionPerformed
 
-    private void changePassBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changePassBtn1ActionPerformed
+    private void deleteAccountBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAccountBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_changePassBtn1ActionPerformed
+        
+        DeleteAccountCD dialog = new DeleteAccountCD(parentFrame, true);
+        dialog.setVisible(true);
+        
+    }//GEN-LAST:event_deleteAccountBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLabel10;
     private javax.swing.JButton changePassBtn;
-    private javax.swing.JButton changePassBtn1;
+    private javax.swing.JButton deleteAccountBtn;
     private javax.swing.JButton editContactbtn;
     private javax.swing.JButton editEmailbtn;
     private javax.swing.JButton editFirstNamebtn;
