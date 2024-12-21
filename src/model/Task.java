@@ -11,7 +11,8 @@ import java.time.LocalDate;
  * @author samtheradiant
  */
 public class Task {
-
+    
+    private int projectID;
     private String description;
     private Status taskStatus;
     private LocalDate startDate, endDate;
@@ -37,6 +38,14 @@ public class Task {
         this.taskStatus = taskStatus;
         this.startDate = startDate;
         this.taskPriority = taskPriority;
+    }
+
+    public int getProjectID() {
+        return projectID;
+    }
+
+    public void setProjectID(int projectID) {
+        this.projectID = projectID;
     }
     
     
