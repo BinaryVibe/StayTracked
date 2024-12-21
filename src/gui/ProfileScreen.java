@@ -101,6 +101,9 @@ public class ProfileScreen extends javax.swing.JPanel {
         lblFirstNameError1 = new javax.swing.JLabel();
         lblLastNameError1 = new javax.swing.JLabel();
         lblEmailError1 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jSeparator8 = new javax.swing.JSeparator();
+        changePassBtn1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(21, 25, 34));
         setForeground(new java.awt.Color(204, 204, 204));
@@ -149,11 +152,11 @@ public class ProfileScreen extends javax.swing.JPanel {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel7.setText("Password");
+        jLabel7.setText("Permanently Delete Your Account");
         add(jLabel7);
-        jLabel7.setBounds(30, 610, 80, 25);
+        jLabel7.setBounds(30, 670, 330, 25);
         add(jSeparator6);
-        jSeparator6.setBounds(30, 495, 939, 10);
+        jSeparator6.setBounds(30, 650, 930, 10);
 
         JLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         JLabel10.setForeground(new java.awt.Color(204, 204, 204));
@@ -294,7 +297,7 @@ public class ProfileScreen extends javax.swing.JPanel {
             }
         });
         add(changePassBtn);
-        changePassBtn.setBounds(810, 610, 150, 23);
+        changePassBtn.setBounds(810, 620, 150, 23);
 
         editContactbtn.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         editContactbtn.setForeground(new java.awt.Color(45, 168, 216));
@@ -348,7 +351,7 @@ public class ProfileScreen extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(45, 168, 216));
-        jLabel3.setText("PASSWORD & SECURITY");
+        jLabel3.setText("SETTINGS & SECURITY");
         add(jLabel3);
         jLabel3.setBounds(30, 550, 470, 48);
 
@@ -447,6 +450,30 @@ public class ProfileScreen extends javax.swing.JPanel {
         lblEmailError1.setForeground(new java.awt.Color(237, 60, 63));
         add(lblEmailError1);
         lblEmailError1.setBounds(30, 420, 760, 20);
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel9.setText("Password");
+        add(jLabel9);
+        jLabel9.setBounds(30, 620, 80, 25);
+        add(jSeparator8);
+        jSeparator8.setBounds(30, 495, 939, 10);
+
+        changePassBtn1.setBackground(new java.awt.Color(45, 168, 216));
+        changePassBtn1.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        changePassBtn1.setForeground(new java.awt.Color(255, 0, 0));
+        changePassBtn1.setText("Delete Account");
+        changePassBtn1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 1, true));
+        changePassBtn1.setContentAreaFilled(false);
+        changePassBtn1.setMinimumSize(new java.awt.Dimension(80, 17));
+        changePassBtn1.setPreferredSize(new java.awt.Dimension(80, 17));
+        changePassBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changePassBtn1ActionPerformed(evt);
+            }
+        });
+        add(changePassBtn1);
+        changePassBtn1.setBounds(810, 670, 150, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void editUserNamebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserNamebtnActionPerformed
@@ -611,10 +638,15 @@ public class ProfileScreen extends javax.swing.JPanel {
         dialog.setVisible(true);
     }//GEN-LAST:event_changePassBtnActionPerformed
 
+    private void changePassBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changePassBtn1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_changePassBtn1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLabel10;
     private javax.swing.JButton changePassBtn;
+    private javax.swing.JButton changePassBtn1;
     private javax.swing.JButton editContactbtn;
     private javax.swing.JButton editEmailbtn;
     private javax.swing.JButton editFirstNamebtn;
@@ -627,6 +659,7 @@ public class ProfileScreen extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -634,6 +667,7 @@ public class ProfileScreen extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
     private javax.swing.JLabel lblContactError;
     private javax.swing.JLabel lblCurrentContact;
     private javax.swing.JLabel lblCurrentEmail;
