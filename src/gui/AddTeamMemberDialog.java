@@ -16,8 +16,11 @@ public class AddTeamMemberDialog extends javax.swing.JDialog {
     /**
      * Creates new form AddTeamMember
      */
-    public AddTeamMemberDialog(java.awt.Frame parent, boolean modal) {
+    TeamDetailsScreen tds; //we need tds object to refresh table automatically
+
+    public AddTeamMemberDialog(java.awt.Frame parent, boolean modal, TeamDetailsScreen parentPanel) {
         super(parent, modal);
+        tds = parentPanel;
         setResizable(false);
         initComponents();
         setLocationRelativeTo(parent);
@@ -142,70 +145,72 @@ public class AddTeamMemberDialog extends javax.swing.JDialog {
         lblSuccess.setText("");
         lblMemberAdditionError.setText("");
         String membersEmail = txtMembersEmail.getText();
-        
-        
+
         //add a logic to check if email exist
         //and
         //add account into Team by getting account ID and update normal_accounts table, teams table and team_members table
         try {
             AccountsDb.addTeamMember(membersEmail);
             lblSuccess.setText("Team member added successfuly");
+            tds.populateTable(); //it'll refresssh table with new member
+            backToTeamsBtn.setVisible(true);
+            doneBtn.setVisible(false);
         } catch (FailureException fe) {
             lblMemberAdditionError.setText(fe.getMessage());
         }
-        
-        backToTeamsBtn.setVisible(true);
-        doneBtn.setVisible(false);
+
 
     }//GEN-LAST:event_doneBtnActionPerformed
 
     private void backToTeamsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToTeamsBtnActionPerformed
         // TODO add your handling code here:
+        //we will refresh table with doneBTn
+        tds.populateTable(); //it'll refresssh table with new member
         this.dispose();
     }//GEN-LAST:event_backToTeamsBtnActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddTeamMemberDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddTeamMemberDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddTeamMemberDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddTeamMemberDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                AddTeamMemberDialog dialog = new AddTeamMemberDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(AddTeamMemberDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(AddTeamMemberDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(AddTeamMemberDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(AddTeamMemberDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the dialog */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                AddTeamMemberDialog dialog = new AddTeamMemberDialog(new javax.swing.JFrame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backToTeamsBtn;
