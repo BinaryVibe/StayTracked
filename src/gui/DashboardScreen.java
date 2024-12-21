@@ -4,6 +4,9 @@
  */
 package gui;
 
+import customexceptions.FailureException;
+import db.ProjectsDB;
+import javax.swing.JOptionPane;
 import model.Account;
 
 /**
@@ -17,6 +20,11 @@ public class DashboardScreen extends javax.swing.JPanel {
      */
     public DashboardScreen() {
         initComponents();
+        try {
+            spinnerProgress1.setValue(ProjectsDB.getProjectCompletion());
+        } catch (FailureException ex) {
+            JOptionPane.showConfirmDialog(this, ex.getMessage());
+        }
     }
 
     /**
