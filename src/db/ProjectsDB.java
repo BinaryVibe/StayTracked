@@ -24,8 +24,8 @@ import helper.CurrentSession;
  */
 public class ProjectsDB {
 
-    // TODO: Decide whether to add static initialization blocks or not
-    static Connection conn = DBConnectionManager.con;
+    // Attributes
+    private static Connection conn = DBConnectionManager.con;
 
     // Queries
     private static final String insertProject = "INSERT INTO projects (title, description, status, priority, start_date, end_date) VALUES (?, ?, ?, ?, ?, ?)";
