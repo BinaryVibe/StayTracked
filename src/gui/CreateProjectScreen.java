@@ -4,7 +4,6 @@
  */
 package gui;
 
-import com.formdev.flatlaf.FlatLightLaf;
 import customexceptions.FailureException;
 import customexceptions.InvalidDateException;
 import db.ProjectsDB;
@@ -15,7 +14,6 @@ import java.time.ZoneId;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 import model.Priority;
 import model.Project;
 import model.Status;

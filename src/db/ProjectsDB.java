@@ -39,6 +39,9 @@ public class ProjectsDB {
     // For projects extracted at runtime
     private static ArrayList<Integer> projectIDs = new ArrayList<>();
 
+//    static {
+//        
+//    }
     public static void save(Project project) throws FailureException {
         try (PreparedStatement saveStmnt = conn.prepareStatement(insertProject, Statement.RETURN_GENERATED_KEYS); PreparedStatement assignStmnt = conn.prepareStatement(assignUserID)) {
             conn.setAutoCommit(false);

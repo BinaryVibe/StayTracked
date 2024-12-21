@@ -9,6 +9,6 @@ package db;
  * @author samtheradiant
  */
 public class TasksDB {
-    
+
     
 }
