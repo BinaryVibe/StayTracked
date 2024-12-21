@@ -4,6 +4,14 @@
  */
 package gui;
 
+import com.formdev.flatlaf.FlatLightLaf;
+import com.sun.source.tree.ParenthesizedTree;
+import customexceptions.FailureException;
+import db.AccountsDb;
+import helper.CurrentSession;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
+
 /**
  *
  * @author i c
@@ -13,12 +21,14 @@ public class DeleteAccountCD extends javax.swing.JDialog {
     /**
      * Creates new form DeleteAccountCD
      */
-    public DeleteAccountCD(java.awt.Frame parent, boolean modal) {
+    JFrame parentFrame;
+    public DeleteAccountCD(JFrame parent, boolean modal) {
         super(parent, modal);
         setResizable(false);
         initComponents();
         setLocationRelativeTo(parent);
-        
+        parentFrame = parent;
+
     }
 
     /**
@@ -37,8 +47,8 @@ public class DeleteAccountCD extends javax.swing.JDialog {
         doneBtn = new javax.swing.JButton();
         backToProfile = new javax.swing.JButton();
         lblAccountDeleteError = new javax.swing.JLabel();
-        txtAccountPassword = new javax.swing.JTextField();
         lblSuccess = new javax.swing.JLabel();
+        txtAccountPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -89,11 +99,11 @@ public class DeleteAccountCD extends javax.swing.JDialog {
                     .addComponent(jSeparator1)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblAccountDeleteError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtAccountPassword)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(lblSuccess, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(lblAccountPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblAccountPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAccountPassword))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -136,10 +146,31 @@ public class DeleteAccountCD extends javax.swing.JDialog {
         // TODO add your handling code here:
         lblSuccess.setText("");
         lblAccountDeleteError.setText("");
-        
 
-        backToProfile.setVisible(true);
-        doneBtn.setVisible(false);
+        String AccPassword = new String(txtAccountPassword.getPassword());
+        try {
+            AccountsDb.deleteAccount(AccPassword, CurrentSession.getAccountID());
+            //redirect to login page
+            try {
+                UIManager.setLookAndFeel(new FlatLightLaf());
+            } catch (Exception ex) {
+                System.err.println("Failed to initialize LaF");
+            }
+            Login LoginFrame = new Login();
+
+            LoginFrame.pack();
+            LoginFrame.setLocationRelativeTo(null);
+            LoginFrame.setVisible(true);
+            
+            //close this screen
+            parentFrame.dispose();
+            this.dispose();
+
+        } catch (FailureException fe) {
+            lblAccountDeleteError.setText(fe.getMessage());
+        }
+
+
     }//GEN-LAST:event_doneBtnActionPerformed
 
     private void backToProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToProfileActionPerformed
@@ -198,6 +229,6 @@ public class DeleteAccountCD extends javax.swing.JDialog {
     private javax.swing.JLabel lblAccountDeleteError;
     private javax.swing.JLabel lblAccountPassword;
     private javax.swing.JLabel lblSuccess;
-    private javax.swing.JTextField txtAccountPassword;
+    private javax.swing.JPasswordField txtAccountPassword;
     // End of variables declaration//GEN-END:variables
 }
