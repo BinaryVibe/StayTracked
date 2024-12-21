@@ -18,7 +18,9 @@ public class AddTeamMemberDialog extends javax.swing.JDialog {
      */
     public AddTeamMemberDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setResizable(false);
         initComponents();
+        setLocationRelativeTo(parent);
         backToTeamsBtn.setVisible(false);
     }
 
