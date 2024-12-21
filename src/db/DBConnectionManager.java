@@ -7,12 +7,12 @@ import java.sql.SQLException;
 
 public class DBConnectionManager {
     
-    //Connection for hostel internet host:haris
-    /*
+    /*//Connection for hostel internet host:haris
     static String url = "jdbc:mariadb://192.168.1.9:3306/StayTracked";
     static String userName = "Ayaan";
     static String passWord = "123Password";
     static Connection con; */
+    
     
     //Connection details for Talal
     static String url = "jdbc:mysql://localhost:3306/StayTracked";
@@ -29,6 +29,10 @@ public class DBConnectionManager {
             System.out.println(e);
         }
         //return con;
+    }
+    
+    public static Connection getConnection(){
+        return con;
     }
     
 }
