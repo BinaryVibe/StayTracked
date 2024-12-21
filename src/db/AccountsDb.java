@@ -424,15 +424,15 @@ public class AccountsDb {
             throw new FailureException(e.getMessage());
         }
     }
-    
+
     //Method to delete account
-    public static void deleteAccount(String pass, int accountID) throws FailureException{
+    public static void deleteAccount(String pass, int accountID) throws FailureException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
-        
+
         //logic to delete account after confirming password
-         String query = "SELECT password FROM accounts WHERE account_id = ?";
+        String query = "SELECT password FROM accounts WHERE account_id = ?";
         try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setInt(1, accountID);
             try (ResultSet rs = ps.executeQuery()) {
@@ -440,14 +440,14 @@ public class AccountsDb {
                     String passDb = rs.getString("password");
                     if (passDb.equals(pass)) {
                         String query2 = "DELETE FROM accounts WHERE account_id = ?";
-                        try(PreparedStatement ps2 = con.prepareStatement(query2)){
+                        try (PreparedStatement ps2 = con.prepareStatement(query2)) {
                             ps2.setInt(1, accountID);
                             int rowsDeleted = ps2.executeUpdate();
-                            if(rowsDeleted == 0){
+                            if (rowsDeleted == 0) {
                                 throw new FailureException("Failed to delete account!");
                             }
                         }
-                        
+
                     } else {
                         throw new FailureException("incorrect current password");
                     }
@@ -456,7 +456,7 @@ public class AccountsDb {
         } catch (SQLException se) {
             throw new FailureException(se.getMessage());
         }
-        
+
     }
 
     //Method to add team members
@@ -511,7 +511,47 @@ public class AccountsDb {
 
     }
 
-    //Method to add team members
+    //Method to remove team members
+    public static void removeTeamMember(String email) throws FailureException {
+
+        if (con == null) {
+            throw new FailureException("Database connection failed!");
+        }
+
+        //first get it's account_id
+        String query = "SELECT account_id FROM accounts WHERE email = ?";
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, email);
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                if (rs.next()) {
+                    //if email exist then get account ID
+                    int accountID = rs.getInt("account_id");
+
+                    //remove account from current team
+                    String query2 = "DELETE FROM team_members where account_id = ?";
+                    try (PreparedStatement ps2 = con.prepareStatement(query2)) {
+                        ps2.setInt(1, accountID);
+
+                        int rowsDeleted = ps2.executeUpdate();
+                        if (rowsDeleted == 0) {
+                            throw new FailureException("Failed to remove team member");
+                        }
+                    }
+
+                } else {
+                    throw new FailureException("Email doesn't exist");
+                }
+            }
+        } catch (SQLException se) {
+            throw new FailureException(se.getMessage());
+
+        }
+
+    }
+
+    //Method to get team members list
     public static ArrayList<NormalAccount> getTeamMembers(int teamID) throws FailureException {
 
         if (con == null) {
