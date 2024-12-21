@@ -32,7 +32,7 @@ public class ProjectsDB {
     private static final String assignUserID = "INSERT INTO assigned_to VALUES (?, ?)";
     private static final String getProjectList = "SELECT project_id, title, start_date, end_date, status, priority FROM projects WHERE project_id IN (SELECT project_id FROM assigned_to WHERE account_id = ?);";
     private static final String getNewProject = "SELECT title, start_date, end_date, status, priority FROM projects WHERE project_id = ?";
-    private static String countProjects = "SELECT t.total, d.done FROM (SELECT COUNT(project_id) AS total FROM projects WHERE project_id IN (SELECT project_id FROM assigned_to WHERE account_id =  ?)) AS t, (SELECT COUNT(project_id) AS done FROM projects WHERE status = 'DONE' AND project_id IN (SELECT project_id FROM assigned_to WHERE account_id = ?)) AS d";
+    private static final String countProjects = "SELECT t.total, d.done FROM (SELECT COUNT(project_id) AS total FROM projects WHERE project_id IN (SELECT project_id FROM assigned_to WHERE account_id =  ?)) AS t, (SELECT COUNT(project_id) AS done FROM projects WHERE status = 'DONE' AND project_id IN (SELECT project_id FROM assigned_to WHERE account_id = ?)) AS d";
 
     // For newly created projects at runtime  
     private static ArrayList<Integer> newProjectIDs = new ArrayList<>();
