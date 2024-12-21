@@ -35,8 +35,19 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
         txtTeamName.setText(CurrentSession.getTeamName());
         lblTeamrName.setText(CurrentSession.getTeamName());
         
+        if(CurrentSession.getAccountType().equalsIgnoreCase("manager")){
+            removeBtn.setVisible(true);
+            addTeamMemberBtn.setVisible(true);
+            editTeamNameBtn.setVisible(true);
+        }
+        else{
+            removeBtn.setVisible(false);
+            addTeamMemberBtn.setVisible(false);
+            editTeamNameBtn.setVisible(false);
+        }
         //populate table 
         populateTable();
+        
     }
 
     /**
