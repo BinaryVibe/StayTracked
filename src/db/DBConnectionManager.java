@@ -15,8 +15,8 @@ public class DBConnectionManager {
     
     
     //Connection details for Talal
-    static String url = "jdbc:mysql://localhost:3306/StayTracked";
-    static String userName = "root";;
+    static String url = "jdbc:mysql://localhost:3306/staytracked";
+    static String userName = "root";
     static String passWord = "bythebandit@028";
     static Connection con;
     
@@ -26,7 +26,7 @@ public class DBConnectionManager {
             con = DriverManager.getConnection(url, userName, passWord);
         }
         catch (SQLException e){
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
         //return con;
     }
@@ -34,5 +34,17 @@ public class DBConnectionManager {
     public static Connection getConnection(){
         return con;
     }
+    
+    public static void closeConnection() {
+    try {
+        if (con != null && !con.isClosed()) {
+            con.close();
+            System.out.println("Connection closed successfully.");
+        }
+    } catch (SQLException e) {
+        System.out.println("Failed to close connection: " + e.getMessage());
+    }
+}
+
     
 }
