@@ -32,6 +32,7 @@ public class ProjectsDB {
     private static final String assignUserID = "INSERT INTO assigned_to VALUES (?, ?)";
     private static final String getProjectList = "SELECT project_id, title, start_date, end_date, status, priority FROM projects WHERE project_id IN (SELECT project_id FROM assigned_to WHERE account_id = ?);";
     private static final String getNewProject = "SELECT title, start_date, end_date, status, priority FROM projects WHERE project_id = ?";
+    private static String countProjects = "SELECT t.total, d.done FROM (SELECT COUNT(project_id) AS total FROM projects WHERE project_id IN (SELECT project_id FROM assigned_to WHERE account_id =  ?)) AS t, (SELECT COUNT(project_id) AS done FROM projects WHERE status = 'DONE' AND project_id IN (SELECT project_id FROM assigned_to WHERE account_id = ?)) AS d";
 
     // For newly created projects at runtime  
     private static ArrayList<Integer> newProjectIDs = new ArrayList<>();
@@ -105,8 +106,7 @@ public class ProjectsDB {
                     LocalDate endDate = list.getDate(4).toLocalDate();
                     Status projectStatus = Status.getEnum(list.getString(5));
                     Priority projectPriority = Priority.getEnum(list.getString(6));
-                    
-                    
+
                     projects.add(new Project(title, startDate, endDate, projectStatus, projectPriority));
                     projectIDs.add(project_id);
                 }
@@ -162,11 +162,27 @@ public class ProjectsDB {
         return projects;
     }
 
-    public static int getTotalProjects() {
-        return 10;
-    }
+    public static int getProjectCompletion() throws FailureException {
 
-    public static int getDoneProjects() {
-        return 7;
+        double percentage = 0, done = 0, total = 0;
+        try (PreparedStatement completionStmnt = conn.prepareStatement(countProjects)) {
+            completionStmnt.setInt(1, CurrentSession.getAccountID());
+            completionStmnt.setInt(2, CurrentSession.getAccountID());
+            try (ResultSet projectsData = completionStmnt.executeQuery()) {
+                projectsData.next();
+                total = projectsData.getInt(1);
+                done = projectsData.getInt(2);
+            } catch (SQLException ex) {
+                throw new FailureException(ex.getMessage());
+            }
+
+        } catch (SQLException ex) {
+            throw new FailureException(ex.getMessage());
+        }
+        percentage = (done / total) * 100;
+        System.out.println(total);
+        System.out.println(done);
+        System.out.println(percentage);
+        return (int) percentage;
     }
 }
