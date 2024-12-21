@@ -8,6 +8,7 @@ import customexceptions.FailureException;
 import db.DBConnectionManager;
 import db.ProjectsDB;
 import helper.JDateChooserEditor;
+import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Window;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import model.Status;
 import model.Priority;
 import model.Project;
@@ -46,12 +48,18 @@ public class ProjectsScreen extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         jPanel1 = new javax.swing.JPanel();
+        centerPanel = new javax.swing.JPanel();
+        hintLbl = new javax.swing.JLabel();
+        showTasksBtn = new javax.swing.JButton();
+        rightPanel = new javax.swing.JPanel();
+        deleteBtn = new javax.swing.JButton();
         createProjectBtn = new javax.swing.JButton();
         scanBtn = new javax.swing.JButton();
-        deleteBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         projectsTable = new javax.swing.JTable();
 
@@ -62,6 +70,45 @@ public class ProjectsScreen extends javax.swing.JPanel {
         setLayout(new java.awt.BorderLayout());
 
         jPanel1.setBackground(new java.awt.Color(21, 25, 34));
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        centerPanel.setBackground(new java.awt.Color(21, 25, 34));
+        centerPanel.setLayout(new java.awt.BorderLayout());
+
+        hintLbl.setFont(new java.awt.Font("sansserif", 2, 13)); // NOI18N
+        hintLbl.setForeground(new java.awt.Color(45, 168, 216));
+        hintLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        hintLbl.setLabelFor(jPanel1);
+        hintLbl.setText("Double click to edit!");
+        hintLbl.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        hintLbl.setVisible(false);
+        centerPanel.add(hintLbl, java.awt.BorderLayout.CENTER);
+
+        showTasksBtn.setBackground(new java.awt.Color(45, 168, 216));
+        showTasksBtn.setForeground(new java.awt.Color(21, 25, 34));
+        showTasksBtn.setText("Show Tasks");
+        showTasksBtn.setVisible(false);
+        showTasksBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showTasksBtnActionPerformed(evt);
+            }
+        });
+        centerPanel.add(showTasksBtn, java.awt.BorderLayout.WEST);
+
+        jPanel1.add(centerPanel, java.awt.BorderLayout.CENTER);
+
+        rightPanel.setBackground(new java.awt.Color(21, 25, 34));
+
+        deleteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash.png"))); // NOI18N
+        deleteBtn.setToolTipText("Delete selected row(s)");
+        deleteBtn.setContentAreaFilled(false);
+        deleteBtn.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash-can-disabled.png"))); // NOI18N
+        deleteBtn.setEnabled(false);
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
 
         createProjectBtn.setBackground(new java.awt.Color(40, 40, 39));
         createProjectBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/plus.png"))); // NOI18N
@@ -84,41 +131,30 @@ public class ProjectsScreen extends javax.swing.JPanel {
             }
         });
 
-        deleteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash.png"))); // NOI18N
-        deleteBtn.setToolTipText("Delete selected row(s)");
-        deleteBtn.setContentAreaFilled(false);
-        deleteBtn.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash-can-disabled.png"))); // NOI18N
-        deleteBtn.setEnabled(false);
-        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteBtnActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(1048, Short.MAX_VALUE)
+        javax.swing.GroupLayout rightPanelLayout = new javax.swing.GroupLayout(rightPanel);
+        rightPanel.setLayout(rightPanelLayout);
+        rightPanelLayout.setHorizontalGroup(
+            rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rightPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(deleteBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(createProjectBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(scanBtn)
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(deleteBtn)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(scanBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(createProjectBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        rightPanelLayout.setVerticalGroup(
+            rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rightPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(deleteBtn, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(createProjectBtn, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(scanBtn, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
+
+        jPanel1.add(rightPanel, java.awt.BorderLayout.EAST);
 
         add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
@@ -129,22 +165,15 @@ public class ProjectsScreen extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Title ", "Start Date", "Deadline", "Status", "Priority", "Tasks", "Details"
+                "Title ", "Start Date", "Deadline", "Status", "Priority"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                true, true, true, true, true, true, false
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
         projectsTable.setFillsViewportHeight(true);
@@ -162,7 +191,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         projectsTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent ev) {
-                deleteBtn.setEnabled(true);
+                handleButtonsVisiblity();
             }
         });
 
@@ -176,6 +205,15 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 System.out.println(i + "- " + ex.getMessage());
             }
         }
+
+        JTableHeader tableHeader = projectsTable.getTableHeader();
+        tableHeader.setBackground(new Color(45, 168, 216));
+        tableHeader.setForeground(new Color(21, 25, 34));
+        projectsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickHandler(evt);
+            }
+        });
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         jScrollPane1.setViewportView(projectsTable);
@@ -185,12 +223,20 @@ public class ProjectsScreen extends javax.swing.JPanel {
             projectsTable.getColumnModel().getColumn(2).setCellRenderer(centerRenderer );
             projectsTable.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
             projectsTable.getColumnModel().getColumn(4).setCellRenderer(centerRenderer );
-            projectsTable.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
-            projectsTable.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
         }
 
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void handleButtonsVisiblity() {
+        deleteBtn.setEnabled(true);
+        if (projectsTable.getSelectedRows().length > 1) {
+            showTasksBtn.setVisible(false);
+        }
+        else if (projectsTable.getSelectedRows().length == 1) {
+            showTasksBtn.setVisible(true);
+        }
+    }
     
     private void scanBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scanBtnActionPerformed
         refreshTable();
@@ -208,7 +254,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }
-    
+
     private void createProjectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createProjectBtnActionPerformed
         Window parentWindow = SwingUtilities.windowForComponent(this);
         Frame parentFrame = null;
@@ -225,6 +271,21 @@ public class ProjectsScreen extends javax.swing.JPanel {
         projectsTable.getSelectedRows();
     }//GEN-LAST:event_deleteBtnActionPerformed
 
+    private void clickHandler(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickHandler
+        int rowIndex = projectsTable.rowAtPoint(evt.getPoint());
+        if (rowIndex < 0) {
+            projectsTable.clearSelection();
+            hintLbl.setVisible(false);
+            showTasksBtn.setVisible(false);
+        } else {
+            hintLbl.setVisible(true);
+        }
+    }//GEN-LAST:event_clickHandler
+
+    private void showTasksBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showTasksBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_showTasksBtnActionPerformed
+
     private void populateTable() {
         if (DBConnectionManager.getConnection() == null) {
             System.err.println("Database connection is null");
@@ -239,17 +300,22 @@ public class ProjectsScreen extends javax.swing.JPanel {
         }
 
         for (Project project : projects) {
-            model.addRow(new Object[]{project.getTitle(), project.getStartDate(), project.getEndDate(), project.getStatus(), project.getPriority(), "View", "View"});
+            model.addRow(new Object[]{project.getTitle(), project.getStartDate(), project.getEndDate(), project.getStatus(), project.getPriority()});
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel centerPanel;
     private javax.swing.JButton createProjectBtn;
     private javax.swing.JButton deleteBtn;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.JLabel hintLbl;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable projectsTable;
+    private javax.swing.JPanel rightPanel;
     private javax.swing.JButton scanBtn;
+    private javax.swing.JButton showTasksBtn;
     // End of variables declaration//GEN-END:variables
 }
