@@ -24,24 +24,23 @@ import helper.CurrentSession;
  */
 public class ProjectsDB {
 
-    // TODO: Decide whether to add static initialization blocks or not
-    static Connection conn = DBConnectionManager.con;
+    // Attributes
+    private static Connection conn = DBConnectionManager.con;
 
     // Queries
     private static final String insertProject = "INSERT INTO projects (title, description, status, priority, start_date, end_date) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String assignUserID = "INSERT INTO assigned_to VALUES (?, ?)";
     private static final String getProjectList = "SELECT project_id, title, start_date, end_date, status, priority FROM projects WHERE project_id IN (SELECT project_id FROM assigned_to WHERE account_id = ?);";
     private static final String getNewProject = "SELECT title, start_date, end_date, status, priority FROM projects WHERE project_id = ?";
-    private static String countProjects = "SELECT t.total, d.done FROM (SELECT COUNT(project_id) AS total FROM projects WHERE project_id IN (SELECT project_id FROM assigned_to WHERE account_id =  ?)) AS t, (SELECT COUNT(project_id) AS done FROM projects WHERE status = 'DONE' AND project_id IN (SELECT project_id FROM assigned_to WHERE account_id = ?)) AS d";
+    private static final String countProjects = "SELECT t.total, d.done FROM (SELECT COUNT(project_id) AS total FROM projects WHERE project_id IN (SELECT project_id FROM assigned_to WHERE account_id =  ?)) AS t, (SELECT COUNT(project_id) AS done FROM projects WHERE status = 'DONE' AND project_id IN (SELECT project_id FROM assigned_to WHERE account_id = ?)) AS d";
 
     // For newly created projects at runtime  
     private static ArrayList<Integer> newProjectIDs = new ArrayList<>();
     // For projects extracted at runtime
     private static ArrayList<Integer> projectIDs = new ArrayList<>();
 
-//    static {
-//        
-//    }
+    // METHODS
+    
     public static void save(Project project) throws FailureException {
         try (PreparedStatement saveStmnt = conn.prepareStatement(insertProject, Statement.RETURN_GENERATED_KEYS); PreparedStatement assignStmnt = conn.prepareStatement(assignUserID)) {
             conn.setAutoCommit(false);
@@ -166,8 +165,9 @@ public class ProjectsDB {
     }
 
     public static int getProjectCompletion() throws FailureException {
-
-        double percentage = 0, done = 0, total = 0;
+        double percentage;
+        percentage = 0;
+        double done = 0, total = 0;
         try (PreparedStatement completionStmnt = conn.prepareStatement(countProjects)) {
             completionStmnt.setInt(1, CurrentSession.getAccountID());
             completionStmnt.setInt(2, CurrentSession.getAccountID());
@@ -183,9 +183,9 @@ public class ProjectsDB {
             throw new FailureException(ex.getMessage());
         }
         percentage = (done / total) * 100;
-        System.out.println(total);
-        System.out.println(done);
-        System.out.println(percentage);
+//        System.out.println(total);
+//        System.out.println(done);
+//        System.out.println(percentage);
         return (int) percentage;
     }
 }
