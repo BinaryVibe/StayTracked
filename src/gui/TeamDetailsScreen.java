@@ -4,8 +4,10 @@ package gui;
 import customexceptions.FailureException;
 import db.AccountsDb;
 import helper.CurrentSession;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import model.NormalAccount;
 
 /**
@@ -19,6 +21,12 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
      */
     public TeamDetailsScreen() {
         initComponents();
+        //Table header color
+        JTableHeader tableHeader = tableTeamMembers.getTableHeader();
+        tableHeader.setBackground(new Color(45,168,216));
+        tableHeader.setForeground(new Color(21,25,34));
+        
+     
         //initially hide these 
         txtTeamName.setVisible(false);
         updateTeamNameBtn.setVisible(false);
@@ -142,7 +150,7 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
         jSeparator3.setBounds(30, 250, 939, 10);
 
         tableTeamMembers.setBackground(new java.awt.Color(21, 25, 34));
-        tableTeamMembers.setForeground(new java.awt.Color(255, 255, 255));
+        tableTeamMembers.setForeground(new java.awt.Color(221, 255, 255));
         tableTeamMembers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
