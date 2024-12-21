@@ -72,7 +72,8 @@ public class MainScreen extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        aboutMenuBtn = new javax.swing.JMenu();
+        helpMenu = new javax.swing.JMenu();
+        aboutUs = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1280, 743));
@@ -213,13 +214,24 @@ public class MainScreen extends javax.swing.JFrame {
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
 
-        aboutMenuBtn.setText("About");
-        aboutMenuBtn.addActionListener(new java.awt.event.ActionListener() {
+        helpMenu.setText("Help");
+        helpMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aboutMenuBtnActionPerformed(evt);
+                helpMenuActionPerformed(evt);
             }
         });
-        jMenuBar1.add(aboutMenuBtn);
+
+        aboutUs.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        aboutUs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/information.png"))); // NOI18N
+        aboutUs.setText("About");
+        aboutUs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutUsActionPerformed(evt);
+            }
+        });
+        helpMenu.add(aboutUs);
+
+        jMenuBar1.add(helpMenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -262,7 +274,12 @@ public class MainScreen extends javax.swing.JFrame {
         btnTeams.setSelected(true);
     }//GEN-LAST:event_btnTeamsActionPerformed
 
-    private void aboutMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuBtnActionPerformed
+    private void helpMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpMenuActionPerformed
+        // TODO add your handling code here:
+        // not using it //not doing what i expectedS
+    }//GEN-LAST:event_helpMenuActionPerformed
+
+    private void aboutUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutUsActionPerformed
         // TODO add your handling code here:
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
@@ -276,7 +293,7 @@ public class MainScreen extends javax.swing.JFrame {
         AboutUsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         AboutUsFrame.setVisible(true);
         
-    }//GEN-LAST:event_aboutMenuBtnActionPerformed
+    }//GEN-LAST:event_aboutUsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -322,13 +339,14 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu aboutMenuBtn;
+    private javax.swing.JMenuItem aboutUs;
     private javax.swing.JButton btnDashboard;
     private javax.swing.JButton btnProfile;
     private javax.swing.JButton btnProjects;
     private javax.swing.JButton btnTeams;
     private javax.swing.JPanel cardPanel;
     private gui.DashboardScreen dashboard;
+    private javax.swing.JMenu helpMenu;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

@@ -33,7 +33,7 @@ public class AboutScreen extends JFrame {
         //frame properties
         setLayout(new BorderLayout(5, 5));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(680, 800);
+        setSize(680, 700);
         setResizable(false);
         setTitle("About Us");
 
@@ -50,7 +50,7 @@ public class AboutScreen extends JFrame {
         //Setting Lower Panel
         JPanel lowerPanel = new JPanel(new BorderLayout());
         lowerPanel.setBackground(new Color(21, 25, 34));
-        lowerPanel.setPreferredSize(new Dimension(680, 400));
+        lowerPanel.setPreferredSize(new Dimension(680, 350));
         JLabel lblAboutUs = new JLabel("ABOUT US");
         lblAboutUs.setFont(new Font("Segoe UI", 1, 34));
         lblAboutUs.setForeground(new Color(45, 168, 216));
