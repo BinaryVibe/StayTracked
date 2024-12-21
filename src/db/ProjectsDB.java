@@ -165,8 +165,9 @@ public class ProjectsDB {
     }
 
     public static int getProjectCompletion() throws FailureException {
-
-        double percentage = 0, done = 0, total = 0;
+        double percentage;
+        percentage = 0;
+        double done = 0, total = 0;
         try (PreparedStatement completionStmnt = conn.prepareStatement(countProjects)) {
             completionStmnt.setInt(1, CurrentSession.getAccountID());
             completionStmnt.setInt(2, CurrentSession.getAccountID());
