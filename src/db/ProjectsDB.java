@@ -183,9 +183,9 @@ public class ProjectsDB {
             throw new FailureException(ex.getMessage());
         }
         percentage = (done / total) * 100;
-        System.out.println(total);
-        System.out.println(done);
-        System.out.println(percentage);
+//        System.out.println(total);
+//        System.out.println(done);
+//        System.out.println(percentage);
         return (int) percentage;
     }
 }
