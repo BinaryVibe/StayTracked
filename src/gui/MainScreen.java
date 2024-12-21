@@ -4,9 +4,12 @@
  */
 package gui;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
 import javax.swing.plaf.basic.BasicButtonUI;
 
 /**
@@ -24,6 +27,7 @@ public class MainScreen extends javax.swing.JFrame {
         initComponents();
         cardPanel.add(teams, "Teams");
         cardPanel.add(profile, "Profile");
+        cardPanel.add(dashboard, "Dashbord");
 
         /* 
         //we will use this incase to use basic button look and feel
@@ -35,7 +39,13 @@ public class MainScreen extends javax.swing.JFrame {
            }
        }
          */
+        
         cardLayout = (CardLayout) cardPanel.getLayout();
+        
+        //initially show dashboard when open mainscreen, Duhh!
+        cardLayout.show(cardPanel, "Dashbord");
+        setButtonsNotSelected();
+        btnDashboard.setSelected(true);
     }
 
     /**
@@ -50,16 +60,19 @@ public class MainScreen extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
         tabsButtonPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        profileIcon = new javax.swing.JLabel();
         btnDashboard = new javax.swing.JButton();
         btnProjects = new javax.swing.JButton();
         btnProfile = new javax.swing.JButton();
         btnTeams = new javax.swing.JButton();
         cardPanel = new javax.swing.JPanel();
-        teams = new gui.TeamDetailsScreen();
         profile = new gui.ProfileScreen();
+        teams = new gui.TeamDetailsScreen();
+        dashboard = new gui.DashboardScreen();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        aboutMenuBtn = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1280, 743));
@@ -75,15 +88,23 @@ public class MainScreen extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(45, 168, 216));
 
+        profileIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/boy.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(50, Short.MAX_VALUE)
+                .addComponent(profileIcon)
+                .addGap(51, 51, 51))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 196, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(44, Short.MAX_VALUE)
+                .addComponent(profileIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51))
         );
 
         btnDashboard.setBackground(new java.awt.Color(45, 168, 216));
@@ -151,17 +172,13 @@ public class MainScreen extends javax.swing.JFrame {
         tabsButtonPanelLayout.setHorizontalGroup(
             tabsButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabsButtonPanelLayout.createSequentialGroup()
-                .addGroup(tabsButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tabsButtonPanelLayout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(tabsButtonPanelLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(tabsButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnProjects, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnTeams, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(30, 30, 30)
+                .addGroup(tabsButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnProjects, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnProfile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnTeams, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(30, 30, 30))
         );
         tabsButtonPanelLayout.setVerticalGroup(
@@ -169,7 +186,7 @@ public class MainScreen extends javax.swing.JFrame {
             .addGroup(tabsButtonPanelLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnProjects, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,8 +201,9 @@ public class MainScreen extends javax.swing.JFrame {
 
         cardPanel.setBackground(new java.awt.Color(21, 25, 34));
         cardPanel.setLayout(new java.awt.CardLayout());
-        cardPanel.add(teams, "card2");
         cardPanel.add(profile, "card3");
+        cardPanel.add(teams, "card3");
+        cardPanel.add(dashboard, "card4");
 
         mainPanel.add(cardPanel, java.awt.BorderLayout.CENTER);
 
@@ -194,6 +212,14 @@ public class MainScreen extends javax.swing.JFrame {
 
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
+
+        aboutMenuBtn.setText("About");
+        aboutMenuBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutMenuBtnActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(aboutMenuBtn);
 
         setJMenuBar(jMenuBar1);
 
@@ -213,6 +239,9 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void btnDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboardActionPerformed
         // TODO add your handling code here:
+        cardLayout.show(cardPanel, "Dashbord");
+        setButtonsNotSelected();
+        btnDashboard.setSelected(true);
     }//GEN-LAST:event_btnDashboardActionPerformed
 
     private void btnProjectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProjectsActionPerformed
@@ -232,6 +261,22 @@ public class MainScreen extends javax.swing.JFrame {
         setButtonsNotSelected();
         btnTeams.setSelected(true);
     }//GEN-LAST:event_btnTeamsActionPerformed
+
+    private void aboutMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuBtnActionPerformed
+        // TODO add your handling code here:
+        try {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize LaF");
+        }
+        AboutScreen AboutUsFrame = new AboutScreen();
+        
+        AboutUsFrame.pack();
+        AboutUsFrame.setLocationRelativeTo(null);
+        AboutUsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        AboutUsFrame.setVisible(true);
+        
+    }//GEN-LAST:event_aboutMenuBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,17 +322,20 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu aboutMenuBtn;
     private javax.swing.JButton btnDashboard;
     private javax.swing.JButton btnProfile;
     private javax.swing.JButton btnProjects;
     private javax.swing.JButton btnTeams;
     private javax.swing.JPanel cardPanel;
+    private gui.DashboardScreen dashboard;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel mainPanel;
     private gui.ProfileScreen profile;
+    private javax.swing.JLabel profileIcon;
     private javax.swing.JPanel tabsButtonPanel;
     private gui.TeamDetailsScreen teams;
     // End of variables declaration//GEN-END:variables
