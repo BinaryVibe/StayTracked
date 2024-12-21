@@ -5,6 +5,7 @@
 package gui;
 
 import customexceptions.FailureException;
+import db.DBConnectionManager;
 import db.ProjectsDB;
 import helper.JDateChooserEditor;
 import java.awt.Frame;
@@ -225,6 +226,10 @@ public class ProjectsScreen extends javax.swing.JPanel {
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void populateTable() {
+        if (DBConnectionManager.getConnection() == null) {
+            System.err.println("Database connection is null");
+            return;
+        }
         DefaultTableModel model = (DefaultTableModel) projectsTable.getModel();
         ArrayList<Project> projects = null;
         try {
