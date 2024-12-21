@@ -25,6 +25,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     public MainScreen() {
         initComponents();
+        ProfileScreen profile = new ProfileScreen(this);
         cardPanel.add(teams, "Teams");
         cardPanel.add(profile, "Profile");
         cardPanel.add(dashboard, "Dashbord");
@@ -65,8 +66,8 @@ public class MainScreen extends javax.swing.JFrame {
         btnProjects = new javax.swing.JButton();
         btnProfile = new javax.swing.JButton();
         btnTeams = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
         cardPanel = new javax.swing.JPanel();
-        profile = new gui.ProfileScreen();
         teams = new gui.TeamDetailsScreen();
         dashboard = new gui.DashboardScreen();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -115,6 +116,9 @@ public class MainScreen extends javax.swing.JFrame {
         btnDashboard.setText("Dashboard");
         btnDashboard.setBorder(null);
         btnDashboard.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnDashboard.setMaximumSize(new java.awt.Dimension(200, 50));
+        btnDashboard.setMinimumSize(new java.awt.Dimension(200, 50));
+        btnDashboard.setPreferredSize(new java.awt.Dimension(200, 50));
         btnDashboard.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/buttonicons/HooverButton.png"))); // NOI18N
         btnDashboard.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttonicons/SelectedButton.png"))); // NOI18N
         btnDashboard.addActionListener(new java.awt.event.ActionListener() {
@@ -130,6 +134,9 @@ public class MainScreen extends javax.swing.JFrame {
         btnProjects.setText("Projects");
         btnProjects.setBorder(null);
         btnProjects.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProjects.setMaximumSize(new java.awt.Dimension(200, 50));
+        btnProjects.setMinimumSize(new java.awt.Dimension(200, 50));
+        btnProjects.setPreferredSize(new java.awt.Dimension(200, 50));
         btnProjects.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/buttonicons/HooverButton.png"))); // NOI18N
         btnProjects.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttonicons/SelectedButton.png"))); // NOI18N
         btnProjects.addActionListener(new java.awt.event.ActionListener() {
@@ -145,6 +152,9 @@ public class MainScreen extends javax.swing.JFrame {
         btnProfile.setText("Profile");
         btnProfile.setBorder(null);
         btnProfile.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProfile.setMaximumSize(new java.awt.Dimension(200, 50));
+        btnProfile.setMinimumSize(new java.awt.Dimension(200, 50));
+        btnProfile.setPreferredSize(new java.awt.Dimension(200, 50));
         btnProfile.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/buttonicons/HooverButton.png"))); // NOI18N
         btnProfile.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttonicons/SelectedButton.png"))); // NOI18N
         btnProfile.addActionListener(new java.awt.event.ActionListener() {
@@ -160,11 +170,29 @@ public class MainScreen extends javax.swing.JFrame {
         btnTeams.setText("Teams");
         btnTeams.setBorder(null);
         btnTeams.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTeams.setMaximumSize(new java.awt.Dimension(200, 50));
+        btnTeams.setMinimumSize(new java.awt.Dimension(200, 50));
+        btnTeams.setPreferredSize(new java.awt.Dimension(200, 50));
         btnTeams.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/buttonicons/HooverButton.png"))); // NOI18N
         btnTeams.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttonicons/SelectedButton.png"))); // NOI18N
         btnTeams.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTeamsActionPerformed(evt);
+            }
+        });
+
+        btnLogout.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        btnLogout.setForeground(new java.awt.Color(255, 0, 0));
+        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logout.png"))); // NOI18N
+        btnLogout.setText(" Logout");
+        btnLogout.setBorder(null);
+        btnLogout.setContentAreaFilled(false);
+        btnLogout.setMaximumSize(new java.awt.Dimension(200, 50));
+        btnLogout.setMinimumSize(new java.awt.Dimension(200, 50));
+        btnLogout.setPreferredSize(new java.awt.Dimension(200, 50));
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
             }
         });
 
@@ -174,13 +202,15 @@ public class MainScreen extends javax.swing.JFrame {
             tabsButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabsButtonPanelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(tabsButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnProjects, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnProfile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTeams, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(30, 30, 30))
+                .addGroup(tabsButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(tabsButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnLogout, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDashboard, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnProjects, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnProfile, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnTeams, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         tabsButtonPanelLayout.setVerticalGroup(
             tabsButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,6 +225,8 @@ public class MainScreen extends javax.swing.JFrame {
                 .addComponent(btnProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnTeams, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -202,7 +234,6 @@ public class MainScreen extends javax.swing.JFrame {
 
         cardPanel.setBackground(new java.awt.Color(21, 25, 34));
         cardPanel.setLayout(new java.awt.CardLayout());
-        cardPanel.add(profile, "card3");
         cardPanel.add(teams, "card3");
         cardPanel.add(dashboard, "card4");
 
@@ -295,6 +326,23 @@ public class MainScreen extends javax.swing.JFrame {
         
     }//GEN-LAST:event_aboutUsActionPerformed
 
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
+        //open login screen
+        try {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize LaF");
+        }
+        Login LoginFrame = new Login();
+        
+        LoginFrame.pack();
+        LoginFrame.setLocationRelativeTo(null);
+        LoginFrame.setVisible(true);
+        //close this screen
+        this.dispose();
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -341,6 +389,7 @@ public class MainScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutUs;
     private javax.swing.JButton btnDashboard;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnProfile;
     private javax.swing.JButton btnProjects;
     private javax.swing.JButton btnTeams;
@@ -352,7 +401,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel mainPanel;
-    private gui.ProfileScreen profile;
     private javax.swing.JLabel profileIcon;
     private javax.swing.JPanel tabsButtonPanel;
     private gui.TeamDetailsScreen teams;

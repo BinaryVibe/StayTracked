@@ -423,6 +423,40 @@ public class AccountsDb {
             throw new FailureException(e.getMessage());
         }
     }
+    
+    //Method to delete account
+    public static void deleteAccount(String pass, int accountID) throws FailureException{
+        if (con == null) {
+            throw new FailureException("Database connection failed!");
+        }
+        
+        //logic to delete account after confirming password
+         String query = "SELECT password FROM accounts WHERE account_id = ?";
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setInt(1, accountID);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    String passDb = rs.getString("password");
+                    if (passDb.equals(pass)) {
+                        String query2 = "DELETE FROM accounts WHERE account_id = ?";
+                        try(PreparedStatement ps2 = con.prepareStatement(query2)){
+                            ps2.setInt(1, accountID);
+                            int rowsDeleted = ps2.executeUpdate();
+                            if(rowsDeleted == 0){
+                                throw new FailureException("Failed to delete account!");
+                            }
+                        }
+                        
+                    } else {
+                        throw new FailureException("incorrect current password");
+                    }
+                }
+            }
+        } catch (SQLException se) {
+            throw new FailureException(se.getMessage());
+        }
+        
+    }
 
     //Method to add team members
     public static void addTeamMember(String email) throws FailureException {

@@ -4,24 +4,31 @@
  */
 package gui;
 
+import com.formdev.flatlaf.FlatLightLaf;
+import com.sun.source.tree.ParenthesizedTree;
 import customexceptions.FailureException;
 import db.AccountsDb;
+import helper.CurrentSession;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
 
 /**
  *
  * @author i c
  */
-public class AddTeamMemberDialog extends javax.swing.JDialog {
+public class DeleteAccountCD extends javax.swing.JDialog {
 
     /**
-     * Creates new form AddTeamMember
+     * Creates new form DeleteAccountCD
      */
-    public AddTeamMemberDialog(java.awt.Frame parent, boolean modal) {
+    JFrame parentFrame;
+    public DeleteAccountCD(JFrame parent, boolean modal) {
         super(parent, modal);
         setResizable(false);
         initComponents();
         setLocationRelativeTo(parent);
-        backToTeamsBtn.setVisible(false);
+        parentFrame = parent;
+
     }
 
     /**
@@ -35,28 +42,26 @@ public class AddTeamMemberDialog extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        lblMembersEmail = new javax.swing.JLabel();
+        lblAccountPassword = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         doneBtn = new javax.swing.JButton();
-        backToTeamsBtn = new javax.swing.JButton();
-        lblMemberAdditionError = new javax.swing.JLabel();
-        txtMembersEmail = new javax.swing.JTextField();
+        backToProfile = new javax.swing.JButton();
+        lblAccountDeleteError = new javax.swing.JLabel();
         lblSuccess = new javax.swing.JLabel();
+        txtAccountPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(400, 300));
 
         jPanel1.setBackground(new java.awt.Color(21, 25, 34));
         jPanel1.setMinimumSize(new java.awt.Dimension(400, 300));
-        jPanel1.setPreferredSize(new java.awt.Dimension(400, 300));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(45, 168, 216));
-        jLabel1.setText("  ENTER DETAILS");
+        jLabel1.setText("DELETE ACCOUNT");
 
-        lblMembersEmail.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        lblMembersEmail.setForeground(new java.awt.Color(204, 204, 204));
-        lblMembersEmail.setText("Email");
+        lblAccountPassword.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        lblAccountPassword.setForeground(new java.awt.Color(204, 204, 204));
+        lblAccountPassword.setText("Password");
 
         doneBtn.setBackground(new java.awt.Color(45, 168, 216));
         doneBtn.setForeground(new java.awt.Color(21, 25, 34));
@@ -67,16 +72,16 @@ public class AddTeamMemberDialog extends javax.swing.JDialog {
             }
         });
 
-        backToTeamsBtn.setBackground(new java.awt.Color(45, 168, 216));
-        backToTeamsBtn.setForeground(new java.awt.Color(21, 25, 34));
-        backToTeamsBtn.setText("Back To Teams");
-        backToTeamsBtn.addActionListener(new java.awt.event.ActionListener() {
+        backToProfile.setBackground(new java.awt.Color(45, 168, 216));
+        backToProfile.setForeground(new java.awt.Color(21, 25, 34));
+        backToProfile.setText("Back To Profile");
+        backToProfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backToTeamsBtnActionPerformed(evt);
+                backToProfileActionPerformed(evt);
             }
         });
 
-        lblMemberAdditionError.setForeground(new java.awt.Color(237, 60, 63));
+        lblAccountDeleteError.setForeground(new java.awt.Color(237, 60, 63));
 
         lblSuccess.setForeground(new java.awt.Color(45, 168, 216));
 
@@ -87,19 +92,19 @@ public class AddTeamMemberDialog extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblMembersEmail)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(doneBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(backToTeamsBtn))
+                        .addComponent(backToProfile))
                     .addComponent(jSeparator1)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(lblMemberAdditionError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtMembersEmail)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblAccountDeleteError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(lblSuccess, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(55, Short.MAX_VALUE))
+                        .addComponent(lblSuccess, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblAccountPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAccountPassword))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,19 +112,19 @@ public class AddTeamMemberDialog extends javax.swing.JDialog {
                 .addGap(40, 40, 40)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(lblMembersEmail)
+                .addComponent(lblAccountPassword)
                 .addGap(4, 4, 4)
-                .addComponent(txtMembersEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtAccountPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblMemberAdditionError, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblAccountDeleteError, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblSuccess, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(doneBtn)
-                    .addComponent(backToTeamsBtn))
+                    .addComponent(backToProfile))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
@@ -140,29 +145,38 @@ public class AddTeamMemberDialog extends javax.swing.JDialog {
     private void doneBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneBtnActionPerformed
         // TODO add your handling code here:
         lblSuccess.setText("");
-        lblMemberAdditionError.setText("");
-        String membersEmail = txtMembersEmail.getText();
-        
-        
-        //add a logic to check if email exist
-        //and
-        //add account into Team by getting account ID and update normal_accounts table, teams table and team_members table
+        lblAccountDeleteError.setText("");
+
+        String AccPassword = new String(txtAccountPassword.getPassword());
         try {
-            AccountsDb.addTeamMember(membersEmail);
-            lblSuccess.setText("Team member added successfuly");
+            AccountsDb.deleteAccount(AccPassword, CurrentSession.getAccountID());
+            //redirect to login page
+            try {
+                UIManager.setLookAndFeel(new FlatLightLaf());
+            } catch (Exception ex) {
+                System.err.println("Failed to initialize LaF");
+            }
+            Login LoginFrame = new Login();
+
+            LoginFrame.pack();
+            LoginFrame.setLocationRelativeTo(null);
+            LoginFrame.setVisible(true);
+            
+            //close this screen
+            parentFrame.dispose();
+            this.dispose();
+
         } catch (FailureException fe) {
-            lblMemberAdditionError.setText(fe.getMessage());
+            lblAccountDeleteError.setText(fe.getMessage());
         }
-        
-        backToTeamsBtn.setVisible(true);
-        doneBtn.setVisible(false);
+
 
     }//GEN-LAST:event_doneBtnActionPerformed
 
-    private void backToTeamsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToTeamsBtnActionPerformed
+    private void backToProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToProfileActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_backToTeamsBtnActionPerformed
+    }//GEN-LAST:event_backToProfileActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,21 +195,20 @@ public class AddTeamMemberDialog extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddTeamMemberDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteAccountCD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddTeamMemberDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteAccountCD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddTeamMemberDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteAccountCD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddTeamMemberDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteAccountCD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                AddTeamMemberDialog dialog = new AddTeamMemberDialog(new javax.swing.JFrame(), true);
+                DeleteAccountCD dialog = new DeleteAccountCD(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -208,14 +221,14 @@ public class AddTeamMemberDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backToTeamsBtn;
+    private javax.swing.JButton backToProfile;
     private javax.swing.JButton doneBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblMemberAdditionError;
-    private javax.swing.JLabel lblMembersEmail;
+    private javax.swing.JLabel lblAccountDeleteError;
+    private javax.swing.JLabel lblAccountPassword;
     private javax.swing.JLabel lblSuccess;
-    private javax.swing.JTextField txtMembersEmail;
+    private javax.swing.JPasswordField txtAccountPassword;
     // End of variables declaration//GEN-END:variables
 }
