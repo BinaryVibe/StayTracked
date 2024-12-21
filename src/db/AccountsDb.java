@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 import java.util.regex.*;
 import customexceptions.InvalidInputException;
@@ -13,7 +14,7 @@ import model.ManagerAccount;
 import model.NormalAccount;
 import helper.CurrentSession;
 import java.util.ArrayList;
-import org.mariadb.jdbc.Statement;
+//import org.mariadb.jdbc.Statement;
 
 public class AccountsDb {
 
