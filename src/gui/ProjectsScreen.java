@@ -296,7 +296,9 @@ public class ProjectsScreen extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) projectsTable.getModel();
         ArrayList<Project> projects = null;
         try {
-            projects = ProjectsDB.getProjects();
+            if ((projects = ProjectsDB.getProjects()) == null) {
+                return;
+            }
             for (Project project : projects) {
             model.addRow(new Object[]{project.getTitle(), project.getStartDate(), project.getEndDate(), project.getStatus(), project.getPriority()});
         }
