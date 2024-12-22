@@ -33,7 +33,8 @@ public class ProjectsDB {
     private static final String getProjectList = "SELECT project_id, title, start_date, end_date, status, priority FROM projects WHERE project_id IN (SELECT project_id FROM assigned_to WHERE account_id = ?);";
     private static final String getNewProject = "SELECT title, start_date, end_date, status, priority FROM projects WHERE project_id = ?";
     private static final String countProjects = "SELECT t.total, d.done FROM (SELECT COUNT(project_id) AS total FROM projects WHERE project_id IN (SELECT project_id FROM assigned_to WHERE account_id =  ?)) AS t, (SELECT COUNT(project_id) AS done FROM projects WHERE status = 'DONE' AND project_id IN (SELECT project_id FROM assigned_to WHERE account_id = ?)) AS d";
-
+    private static final String searchTitles = "SELECT title FROM projects WHERE project_id IN (?)";
+    
     // For newly created projects at runtime  
     private static ArrayList<Integer> newProjectIDs = new ArrayList<>();
     // For projects extracted from database at runtime
@@ -188,4 +189,27 @@ public class ProjectsDB {
 //        System.out.println(percentage);
         return (int) percentage;
     }
+    
+//    public static boolean searchDuplicateTitle(String title) throws FailureException {
+//        boolean found = false;
+//        try (PreparedStatement searchStmnt = conn.prepareStatement(searchTitles)) {
+//            for (int id : projectIDs) {
+//                searchStmnt.setInt(1, id);
+//                try (ResultSet result = searchStmnt.executeQuery()) {
+//                    result.next();
+//                    if (title.equalsIgnoreCase(result.getString(1))) {
+//                        found = true;
+//                    }
+//                }
+//                catch (SQLException ex) {
+//                    throw new FailureException(ex.getMessage());
+//                }
+//            }
+//            
+//        } catch (SQLException ex) {
+//            throw new FailureException(ex.getMessage());
+//        }
+//        return found;
+//    }
+    
 }
