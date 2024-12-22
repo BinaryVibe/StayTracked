@@ -165,6 +165,9 @@ public class ProjectsDB {
     }
 
     public static int getProjectCompletion() throws FailureException {
+        if (conn == null) {
+            throw new FailureException("Database connection is null");
+        }
         double percentage;
         percentage = 0;
         double done = 0, total = 0;
