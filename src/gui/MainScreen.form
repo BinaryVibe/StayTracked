@@ -396,6 +396,13 @@
                 </Constraint>
               </Constraints>
             </Component>
+            <Component class="gui.ProjectsScreen" name="projectsScreen1">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                  <CardConstraints cardName="card3"/>
+                </Constraint>
+              </Constraints>
+            </Component>
             <Component class="gui.DashboardScreen" name="dashboard">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
