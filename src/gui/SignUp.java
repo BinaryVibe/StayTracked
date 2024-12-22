@@ -664,7 +664,7 @@ public class SignUp extends javax.swing.JFrame {
             }
             else if (btnPersonal.isSelected()) {
                 try {
-                    NormalAccount user = new NormalAccount(false, firstName, lastName, userName, contactNum, email, password);
+                    NormalAccount user = new NormalAccount("Member", firstName, lastName, userName, contactNum, email, password);
 
                     //add account into databse 
                     AccountsDb.addNormalAccount(user);
