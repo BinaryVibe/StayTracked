@@ -193,7 +193,31 @@ public class ProjectsDB {
 //        System.out.println(percentage);
         return (int) percentage;
     }
-    
+
+    public static void deleteProjects(ArrayList<Integer> trashProjectIDs) throws FailureException {
+        for (int id : trashProjectIDs) {
+            try (PreparedStatement deleteStmnt = conn.prepareStatement(deleteProjectsQuery)) {
+                conn.setAutoCommit(false);
+                deleteStmnt.setInt(1, id);
+                int affectedRows = deleteStmnt.executeUpdate();
+                if (!(affectedRows > 0)) {
+                    conn.rollback();
+                    throw new FailureException("Could not delete project. (ID: " + id + ")");
+                }
+            } catch (SQLException ex) {
+                throw new FailureException(ex.getMessage());
+            } finally {
+                try {
+                    if (conn != null) {
+                        conn.setAutoCommit(true);
+                    }
+                } catch (SQLException e) {
+                    throw new FailureException(e.getMessage());
+                }
+            }
+        }
+    }
+
 //    public static boolean searchDuplicateTitle(String title) throws FailureException {
 //        boolean found = false;
 //        try (PreparedStatement searchStmnt = conn.prepareStatement(searchTitles)) {
@@ -215,5 +239,4 @@ public class ProjectsDB {
 //        }
 //        return found;
 //    }
-    
 }
