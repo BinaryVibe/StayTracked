@@ -42,7 +42,6 @@ public class ProjectsDB {
     private static ArrayList<Integer> projectIDs = new ArrayList<>();
 
     // METHODS
-    
     public static void save(Project project) throws FailureException {
         try (PreparedStatement saveStmnt = conn.prepareStatement(insertProjectQuery, Statement.RETURN_GENERATED_KEYS); PreparedStatement assignStmnt = conn.prepareStatement(assignUserIDQuery)) {
             conn.setAutoCommit(false);
@@ -75,6 +74,7 @@ public class ProjectsDB {
             // FK: Foriegn Keys
             int affectedFKRows = assignStmnt.executeUpdate();
             if (!(affectedFKRows > 0)) {
+                conn.rollback();
                 throw new FailureException("Insert did not work in assigned_to table");
             }
             conn.commit();
