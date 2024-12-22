@@ -4,8 +4,10 @@ package gui;
 import customexceptions.FailureException;
 import db.AccountsDb;
 import helper.CurrentSession;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import model.NormalAccount;
 
 /**
@@ -19,6 +21,12 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
      */
     public TeamDetailsScreen() {
         initComponents();
+        //Table header color
+        JTableHeader tableHeader = tableTeamMembers.getTableHeader();
+        tableHeader.setBackground(new Color(45,168,216));
+        tableHeader.setForeground(new Color(21,25,34));
+        
+     
         //initially hide these 
         txtTeamName.setVisible(false);
         updateTeamNameBtn.setVisible(false);
@@ -27,8 +35,19 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
         txtTeamName.setText(CurrentSession.getTeamName());
         lblTeamrName.setText(CurrentSession.getTeamName());
         
+        if(CurrentSession.getAccountType().equalsIgnoreCase("manager")){
+            removeBtn.setVisible(true);
+            addTeamMemberBtn.setVisible(true);
+            editTeamNameBtn.setVisible(true);
+        }
+        else{
+            removeBtn.setVisible(false);
+            addTeamMemberBtn.setVisible(false);
+            editTeamNameBtn.setVisible(false);
+        }
         //populate table 
         populateTable();
+        
     }
 
     /**
@@ -54,7 +73,7 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
         tableTeamMembers = new javax.swing.JTable();
         addTeamMemberBtn = new javax.swing.JButton();
         lblTeamNameError = new javax.swing.JLabel();
-        refreshBtn = new javax.swing.JButton();
+        removeBtn = new javax.swing.JButton();
         lblTeamMembersError = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(21, 25, 34));
@@ -142,7 +161,7 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
         jSeparator3.setBounds(30, 250, 939, 10);
 
         tableTeamMembers.setBackground(new java.awt.Color(21, 25, 34));
-        tableTeamMembers.setForeground(new java.awt.Color(255, 255, 255));
+        tableTeamMembers.setForeground(new java.awt.Color(221, 255, 255));
         tableTeamMembers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -178,20 +197,20 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
         add(lblTeamNameError);
         lblTeamNameError.setBounds(30, 180, 780, 20);
 
-        refreshBtn.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        refreshBtn.setForeground(new java.awt.Color(45, 168, 216));
-        refreshBtn.setText("Refresh");
-        refreshBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(45, 168, 216), 1, true));
-        refreshBtn.setContentAreaFilled(false);
-        refreshBtn.setMinimumSize(new java.awt.Dimension(60, 17));
-        refreshBtn.setPreferredSize(new java.awt.Dimension(60, 17));
-        refreshBtn.addActionListener(new java.awt.event.ActionListener() {
+        removeBtn.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        removeBtn.setForeground(new java.awt.Color(255, 0, 0));
+        removeBtn.setText("Remove Member");
+        removeBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 1, true));
+        removeBtn.setContentAreaFilled(false);
+        removeBtn.setMinimumSize(new java.awt.Dimension(60, 17));
+        removeBtn.setPreferredSize(new java.awt.Dimension(60, 17));
+        removeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshBtnActionPerformed(evt);
+                removeBtnActionPerformed(evt);
             }
         });
-        add(refreshBtn);
-        refreshBtn.setBounds(740, 690, 110, 23);
+        add(removeBtn);
+        removeBtn.setBounds(730, 690, 120, 23);
 
         lblTeamMembersError.setForeground(new java.awt.Color(237, 60, 63));
         add(lblTeamMembersError);
@@ -231,18 +250,30 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
 
     private void addTeamMemberBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTeamMemberBtnActionPerformed
         // TODO add your handling code here:
-        AddTeamMemberDialog dialog = new AddTeamMemberDialog(null, true); //When you add it to mainScreen , change null to this
+        AddTeamMemberDialog dialog = new AddTeamMemberDialog(null, true, this); //When you add it to mainScreen , change null to this
         dialog.setVisible(true);
     }//GEN-LAST:event_addTeamMemberBtnActionPerformed
 
-    private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnActionPerformed
+    private void removeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeBtnActionPerformed
         // TODO add your handling code here:
-        populateTable(); //user might need to refresh screen to see updated table
-    }//GEN-LAST:event_refreshBtnActionPerformed
+        String memberEmail = (String)tableTeamMembers.getValueAt(tableTeamMembers.getSelectedRow(), 3);
+        try{
+            AccountsDb.removeTeamMember(memberEmail);
+            lblTeamMembersError.setText(""); //empty label if it was not empty before
+        }
+        catch(FailureException fe){
+            lblTeamMembersError.setText(fe.getMessage());
+            
+        }
+        
+        
+        
+       populateTable(); //refresh table
+    }//GEN-LAST:event_removeBtnActionPerformed
 
     
     //Method to populate table
-    private void populateTable(){
+    public void populateTable(){
         lblTeamMembersError.setText("");
         DefaultTableModel model = (DefaultTableModel)tableTeamMembers.getModel();
         //delete all existing rows
@@ -272,7 +303,7 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
     private javax.swing.JLabel lblTeamMembersError;
     private javax.swing.JLabel lblTeamNameError;
     private javax.swing.JLabel lblTeamrName;
-    private javax.swing.JButton refreshBtn;
+    private javax.swing.JButton removeBtn;
     private javax.swing.JTable tableTeamMembers;
     private javax.swing.JTextField txtTeamName;
     private javax.swing.JButton updateTeamNameBtn;

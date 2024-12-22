@@ -25,7 +25,7 @@ import helper.CurrentSession;
 public class ProjectsDB {
 
     // Attributes
-    private static Connection conn = DBConnectionManager.con;
+    private static Connection conn = DBConnectionManager.getConnection();
 
     // Queries
     private static final String insertProject = "INSERT INTO projects (title, description, status, priority, start_date, end_date) VALUES (?, ?, ?, ?, ?, ?)";
@@ -166,6 +166,9 @@ public class ProjectsDB {
     }
 
     public static int getProjectCompletion() throws FailureException {
+        if (conn == null) {
+            throw new FailureException("Database connection is null");
+        }
         double percentage;
         percentage = 0;
         double done = 0, total = 0;

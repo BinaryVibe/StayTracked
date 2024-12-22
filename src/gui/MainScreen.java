@@ -5,6 +5,7 @@
 package gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import db.DBConnectionManager;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JButton;
@@ -29,6 +30,7 @@ public class MainScreen extends javax.swing.JFrame {
         cardPanel.add(teams, "Teams");
         cardPanel.add(profile, "Profile");
         cardPanel.add(dashboard, "Dashbord");
+        cardPanel.add(projectsScreen1, "Projects");
 
         /* 
         //we will use this incase to use basic button look and feel
@@ -69,6 +71,7 @@ public class MainScreen extends javax.swing.JFrame {
         btnLogout = new javax.swing.JButton();
         cardPanel = new javax.swing.JPanel();
         teams = new gui.TeamDetailsScreen();
+        projectsScreen1 = new gui.ProjectsScreen();
         dashboard = new gui.DashboardScreen();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -235,6 +238,7 @@ public class MainScreen extends javax.swing.JFrame {
         cardPanel.setBackground(new java.awt.Color(21, 25, 34));
         cardPanel.setLayout(new java.awt.CardLayout());
         cardPanel.add(teams, "card3");
+        cardPanel.add(projectsScreen1, "card3");
         cardPanel.add(dashboard, "card4");
 
         mainPanel.add(cardPanel, java.awt.BorderLayout.CENTER);
@@ -289,6 +293,9 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void btnProjectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProjectsActionPerformed
         // TODO add your handling code here:
+        cardLayout.show(cardPanel, "Projects");
+        setButtonsNotSelected();
+        btnProjects.setSelected(true);
     }//GEN-LAST:event_btnProjectsActionPerformed
 
     private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
@@ -339,6 +346,10 @@ public class MainScreen extends javax.swing.JFrame {
         LoginFrame.pack();
         LoginFrame.setLocationRelativeTo(null);
         LoginFrame.setVisible(true);
+        
+        //close database connection
+        DBConnectionManager.closeConnection();
+        
         //close this screen
         this.dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
@@ -402,6 +413,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JLabel profileIcon;
+    private gui.ProjectsScreen projectsScreen1;
     private javax.swing.JPanel tabsButtonPanel;
     private gui.TeamDetailsScreen teams;
     // End of variables declaration//GEN-END:variables

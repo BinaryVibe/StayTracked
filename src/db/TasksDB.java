@@ -22,7 +22,7 @@ public class TasksDB {
 
     // ATTRIBUTES
     
-    private static final Connection conn = DBConnectionManager.con;
+    private static final Connection conn = DBConnectionManager.getConnection();
     
     // Queries
     private static final String insertTask = "INSERT INTO tasks (description, start_date, end_date, status, priority, project_id) VALUES (?, ?, ?, ?, ?, ?)";

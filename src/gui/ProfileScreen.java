@@ -117,7 +117,7 @@ public class ProfileScreen extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(45, 168, 216));
         jLabel2.setText("PERSONAL DETAILS");
         add(jLabel2);
-        jLabel2.setBounds(30, 50, 334, 48);
+        jLabel2.setBounds(30, 50, 360, 48);
 
         jSeparator1.setForeground(new java.awt.Color(45, 168, 216));
         add(jSeparator1);
@@ -139,7 +139,7 @@ public class ProfileScreen extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(204, 204, 204));
         jLabel4.setText("First Name");
         add(jLabel4);
-        jLabel4.setBounds(30, 220, 91, 25);
+        jLabel4.setBounds(30, 220, 130, 25);
         add(jSeparator3);
         jSeparator3.setBounds(30, 246, 939, 10);
         add(jSeparator4);
@@ -149,7 +149,7 @@ public class ProfileScreen extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(204, 204, 204));
         jLabel6.setText("Email");
         add(jLabel6);
-        jLabel6.setBounds(30, 380, 46, 20);
+        jLabel6.setBounds(30, 380, 90, 20);
         add(jSeparator5);
         jSeparator5.setBounds(30, 410, 939, 10);
 
@@ -165,7 +165,7 @@ public class ProfileScreen extends javax.swing.JPanel {
         JLabel10.setForeground(new java.awt.Color(204, 204, 204));
         JLabel10.setText("Last Name");
         add(JLabel10);
-        JLabel10.setBounds(30, 300, 89, 25);
+        JLabel10.setBounds(30, 300, 120, 25);
 
         editUserNamebtn.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         editUserNamebtn.setForeground(new java.awt.Color(45, 168, 216));
@@ -321,7 +321,7 @@ public class ProfileScreen extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(204, 204, 204));
         jLabel5.setText("Username");
         add(jLabel5);
-        jLabel5.setBounds(30, 140, 85, 25);
+        jLabel5.setBounds(30, 140, 110, 25);
 
         lblCurrentUserName.setBackground(new java.awt.Color(21, 25, 34));
         lblCurrentUserName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -377,7 +377,7 @@ public class ProfileScreen extends javax.swing.JPanel {
         jLabel8.setForeground(new java.awt.Color(204, 204, 204));
         jLabel8.setText("Contact Number");
         add(jLabel8);
-        jLabel8.setBounds(30, 470, 140, 25);
+        jLabel8.setBounds(30, 470, 160, 25);
 
         txtUserName.setBackground(new java.awt.Color(21, 25, 34));
         txtUserName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -458,7 +458,7 @@ public class ProfileScreen extends javax.swing.JPanel {
         jLabel9.setForeground(new java.awt.Color(204, 204, 204));
         jLabel9.setText("Password");
         add(jLabel9);
-        jLabel9.setBounds(30, 620, 80, 25);
+        jLabel9.setBounds(30, 620, 110, 25);
         add(jSeparator8);
         jSeparator8.setBounds(30, 495, 939, 10);
 
