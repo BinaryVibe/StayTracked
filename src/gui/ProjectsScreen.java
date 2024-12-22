@@ -25,6 +25,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumnModel;
 import model.Status;
 import model.Priority;
 import model.Project;
@@ -279,7 +280,21 @@ public class ProjectsScreen extends javax.swing.JPanel {
     }//GEN-LAST:event_createProjectBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        projectsTable.getSelectedRows();
+        ArrayList<Integer> projectIDs = new ArrayList<>();
+        int[] rowIndices = projectsTable.getSelectedRows();
+        for (int rowIndex : rowIndices) {
+            int projectID = (int) projectsTable.getModel().getValueAt(rowIndex, 5);
+            projectIDs.add(projectID);
+        }
+        try {
+            ProjectsDB.deleteProjects(projectIDs);
+            DefaultTableModel model = (DefaultTableModel) projectsTable.getModel();
+            for (int rowIndex : rowIndices) {
+                model.removeRow(rowIndex);
+            }
+        } catch (FailureException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void clickHandler(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickHandler
