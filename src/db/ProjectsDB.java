@@ -110,7 +110,7 @@ public class ProjectsDB {
                     Status projectStatus = Status.getEnum(list.getString(5));
                     Priority projectPriority = Priority.getEnum(list.getString(6));
 
-                    projects.add(new Project(title, startDate, endDate, projectStatus, projectPriority));
+                    projects.add(new Project(project_id, title, startDate, endDate, projectStatus, projectPriority));
                     projectIDs.add(project_id);
                 }
             } catch (SQLException sqle) {
@@ -143,13 +143,14 @@ public class ProjectsDB {
                 newProjectStmnt.setInt(1, id);
                 try (ResultSet list = newProjectStmnt.executeQuery()) {
                     while (list.next()) {
-                        String title = list.getString(1);
-                        LocalDate startDate = list.getDate(2).toLocalDate();
-                        LocalDate endDate = list.getDate(3).toLocalDate();
-                        Status projectStatus = Status.getEnum(list.getString(4));
-                        Priority projectPriority = Priority.getEnum(list.getString(5));
+                        int projectID = list.getInt(1);
+                        String title = list.getString(2);
+                        LocalDate startDate = list.getDate(3).toLocalDate();
+                        LocalDate endDate = list.getDate(4).toLocalDate();
+                        Status projectStatus = Status.getEnum(list.getString(5));
+                        Priority projectPriority = Priority.getEnum(list.getString(6));
 
-                        projects.add(new Project(title, startDate, endDate, projectStatus, projectPriority));
+                        projects.add(new Project(projectID, title, startDate, endDate, projectStatus, projectPriority));
                         tempIDs.add(id);
                     }
                 } catch (SQLException ex) {
