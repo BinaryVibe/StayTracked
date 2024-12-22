@@ -288,6 +288,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
             projectsTable.clearSelection();
             hintLbl.setVisible(false);
             showTasksBtn.setVisible(false);
+            deleteBtn.setEnabled(false);
         } else {
             hintLbl.setVisible(true);
         }
