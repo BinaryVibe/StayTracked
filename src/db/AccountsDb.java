@@ -48,7 +48,7 @@ public class AccountsDb {
 
         int accountID = 0, teamID = 0;
         String firstName = "", lastName = "", userName = "", contact = "", accountType = "", teamName = "Not Joined yet";
-        Boolean isPartOfTeam = false;
+        String role = "";
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
@@ -66,7 +66,7 @@ public class AccountsDb {
 
                     //FOR MANAGER ACCOUNTS
                     if (accountType.equalsIgnoreCase("MANAGER")) {
-                        isPartOfTeam = true;
+                        role = "Manager";
 
                         String query2 = "SELECT * FROM teams WHERE manager_id = ?";
 
@@ -93,7 +93,7 @@ public class AccountsDb {
 
                                 if (rs2.next()) {
                                     teamID = rs2.getInt("team_id");
-                                    isPartOfTeam = true;
+                                    role = rs2.getString("role");
 
                                     //get name of team 
                                     String query3 = "SELECT * FROM teams WHERE team_id = ?";
@@ -125,7 +125,8 @@ public class AccountsDb {
             CurrentSession.setUserName(userName);
             CurrentSession.setTeamID(teamID);
             CurrentSession.setTeamName(teamName);
-            CurrentSession.setIsPartOfTeam(isPartOfTeam);
+            CurrentSession.setRole(role);
+            
 
         } catch (SQLException e) {
             throw new FailureException(e.getMessage());
@@ -573,9 +574,11 @@ public class AccountsDb {
                     String userName = rs.getString("username");
                     String contact = rs.getString("contact_num");
                     String email = rs.getString("email");
+                    String role = rs.getString("role");
+                     
 
                     // Add member to the ArrayList
-                    members.add(new NormalAccount(true, firstName, lastName, userName, contact, email));
+                    members.add(new NormalAccount( role, firstName, lastName, userName, contact, email));
                 }
             }
 

@@ -14,7 +14,7 @@ public class CurrentSession {
     private static String accountType = ""; 
     private static String teamName = "Not joined ";
     
-    private static Boolean isPartOfTeam = false;
+    private static String role;
 
     
     //getters
@@ -30,8 +30,8 @@ public class CurrentSession {
         return teamName;
     }
 
-    public static Boolean getIsPartOfTeam() {
-        return isPartOfTeam;
+    public static String getRole() {
+        return role;
     }
    
     public static int getAccountID() {
@@ -72,8 +72,8 @@ public class CurrentSession {
         CurrentSession.teamName = teamName;
     }
 
-    public static void setIsPartOfTeam(Boolean isPartOfTeam) {
-        CurrentSession.isPartOfTeam = isPartOfTeam;
+    public static void setRole(String role) {
+        CurrentSession.role = role;
     }
     
     public static void setAccountID(int accountID) {

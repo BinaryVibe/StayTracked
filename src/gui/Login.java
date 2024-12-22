@@ -4,12 +4,26 @@ import com.formdev.flatlaf.FlatLightLaf;
 import customexceptions.FailureException;
 import customexceptions.InvalidInputException;
 import db.AccountsDb;
+import db.DBConnectionManager;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.UIManager;
 
 public class Login extends javax.swing.JFrame {
 
     public Login() {
         initComponents();
+        
+        
+        //Close data base connection when user closes the window
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                DBConnectionManager.closeConnection(); // Close the database connection
+                
+            }
+        });
+        
     }
 
     @SuppressWarnings("unchecked")

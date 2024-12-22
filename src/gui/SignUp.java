@@ -4,6 +4,9 @@ import com.formdev.flatlaf.FlatLightLaf;
 import customexceptions.FailureException;
 import customexceptions.InvalidInputException;
 import db.AccountsDb;
+import db.DBConnectionManager;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.UIManager;
 import model.ManagerAccount;
 import model.NormalAccount;
@@ -22,6 +25,15 @@ public class SignUp extends javax.swing.JFrame {
         initComponents();
         slider.init(signupPanel, personalDetailsPanel, accountTypePanel, teamDetails);
         slider.setAnimate(10);
+        
+        //Close data base connection when user closes the window
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                DBConnectionManager.closeConnection(); // Close the database connection
+                
+            }
+        });
 
     }
 
@@ -652,7 +664,7 @@ public class SignUp extends javax.swing.JFrame {
             }
             else if (btnPersonal.isSelected()) {
                 try {
-                    NormalAccount user = new NormalAccount(false, firstName, lastName, userName, contactNum, email, password);
+                    NormalAccount user = new NormalAccount("Member", firstName, lastName, userName, contactNum, email, password);
 
                     //add account into databse 
                     AccountsDb.addNormalAccount(user);

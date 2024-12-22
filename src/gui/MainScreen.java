@@ -8,6 +8,8 @@ import com.formdev.flatlaf.FlatLightLaf;
 import db.DBConnectionManager;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -42,13 +44,21 @@ public class MainScreen extends javax.swing.JFrame {
            }
        }
          */
-        
         cardLayout = (CardLayout) cardPanel.getLayout();
-        
         //initially show dashboard when open mainscreen, Duhh!
         cardLayout.show(cardPanel, "Dashbord");
         setButtonsNotSelected();
         btnDashboard.setSelected(true);
+
+        //Close data base connection when user closes the window
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                DBConnectionManager.closeConnection(); // Close the database connection
+                
+            }
+        });
+        
     }
 
     /**
@@ -325,16 +335,17 @@ public class MainScreen extends javax.swing.JFrame {
             System.err.println("Failed to initialize LaF");
         }
         AboutScreen AboutUsFrame = new AboutScreen();
-        
+
         AboutUsFrame.pack();
         AboutUsFrame.setLocationRelativeTo(null);
         AboutUsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         AboutUsFrame.setVisible(true);
-        
+
     }//GEN-LAST:event_aboutUsActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         // TODO add your handling code here:
+
         //open login screen
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
@@ -342,14 +353,11 @@ public class MainScreen extends javax.swing.JFrame {
             System.err.println("Failed to initialize LaF");
         }
         Login LoginFrame = new Login();
-        
+
         LoginFrame.pack();
         LoginFrame.setLocationRelativeTo(null);
         LoginFrame.setVisible(true);
-        
-        //close database connection
-        DBConnectionManager.closeConnection();
-        
+
         //close this screen
         this.dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
@@ -388,7 +396,6 @@ public class MainScreen extends javax.swing.JFrame {
 //            }
 //        });
 //    }
-    
     //set All Buttons False
     private void setButtonsNotSelected() {
         btnDashboard.setSelected(false);
