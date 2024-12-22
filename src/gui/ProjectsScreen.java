@@ -220,7 +220,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         JTableHeader tableHeader = projectsTable.getTableHeader();
         tableHeader.setBackground(new Color(45, 168, 216));
         tableHeader.setForeground(new Color(21, 25, 34));
-        tableHeader.setFont(new Font(projectsTable.getFont().getFontName(), Font.BOLD, projectsTable.getFont().getSize()));
+        // tableHeader.setFont(new Font(projectsTable.getFont().getFontName(), Font.BOLD, projectsTable.getFont().getSize()));
         projectsTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 clickHandler(evt);
