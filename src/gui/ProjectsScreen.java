@@ -259,7 +259,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         try {
             projects = ProjectsDB.getNewProjects();
             for (Project project : projects) {
-                model.addRow(new Object[]{project.getTitle(), project.getStartDate(), project.getEndDate(), project.getStatus(), project.getPriority(), "View", "View"});
+                model.addRow(new Object[]{project.getTitle(), project.getStartDate(), project.getEndDate(), project.getStatus(), project.getPriority(), project.getProjectID()});
             }
         } catch (FailureException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -309,7 +309,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 return;
             }
             for (Project project : projects) {
-            model.addRow(new Object[]{project.getTitle(), project.getStartDate(), project.getEndDate(), project.getStatus(), project.getPriority()});
+            model.addRow(new Object[]{project.getTitle(), project.getStartDate(), project.getEndDate(), project.getStatus(), project.getPriority(), project.getProjectID()});
         }
         } catch (FailureException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
