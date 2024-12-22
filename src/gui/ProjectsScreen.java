@@ -213,6 +213,9 @@ public class ProjectsScreen extends javax.swing.JPanel {
             }
         }
 
+        TableColumnModel columnModel = projectsTable.getColumnModel();
+        columnModel.removeColumn(projectsTable.getColumnModel().getColumn(5));
+
         JTableHeader tableHeader = projectsTable.getTableHeader();
         tableHeader.setBackground(new Color(45, 168, 216));
         tableHeader.setForeground(new Color(21, 25, 34));
