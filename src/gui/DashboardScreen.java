@@ -22,8 +22,11 @@ public class DashboardScreen extends javax.swing.JPanel {
         initComponents();
         try {
             completdProjctsSpinner.setValue(ProjectsDB.getProjectCompletion());
+            lblError.setText(""); //this will empty the error label if something was written in it previously
+            
         } catch (FailureException ex) {
-            JOptionPane.showConfirmDialog(this, ex.getMessage());
+            //JOptionPane.showConfirmDialog(this, ex.getMessage());
+            lblError.setText(ex.getMessage()); //this will show error
         }
     }
 
@@ -35,15 +38,16 @@ public class DashboardScreen extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
+        lblError = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        upperPanel = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         spinnerPanel = new javax.swing.JPanel();
         completdProjctsSpinner = new raven.spinner.SpinnerProgress();
         completedTaskSpinner = new raven.spinner.SpinnerProgress();
         spinnerProgress1 = new raven.spinner.SpinnerProgress();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -53,15 +57,23 @@ public class DashboardScreen extends javax.swing.JPanel {
         jPanel3.setBackground(new java.awt.Color(21, 25, 34));
         jPanel3.setPreferredSize(new java.awt.Dimension(1000, 50));
 
+        lblError.setForeground(new java.awt.Color(237, 60, 63));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(97, 97, 97)
+                .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 806, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         add(jPanel3, java.awt.BorderLayout.SOUTH);
@@ -93,76 +105,68 @@ public class DashboardScreen extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
+            .addGap(0, 427, Short.MAX_VALUE)
         );
 
         add(jPanel1, java.awt.BorderLayout.EAST);
 
+        upperPanel.setLayout(new java.awt.BorderLayout());
+
+        jPanel5.setBackground(new java.awt.Color(21, 25, 34));
+        jPanel5.setPreferredSize(new java.awt.Dimension(100, 320));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        upperPanel.add(jPanel5, java.awt.BorderLayout.WEST);
+
+        jPanel4.setBackground(new java.awt.Color(21, 25, 34));
+        jPanel4.setPreferredSize(new java.awt.Dimension(100, 320));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 320, Short.MAX_VALUE)
+        );
+
+        upperPanel.add(jPanel4, java.awt.BorderLayout.EAST);
+
         spinnerPanel.setBackground(new java.awt.Color(21, 25, 34));
         spinnerPanel.setPreferredSize(new java.awt.Dimension(742, 320));
+        spinnerPanel.setLayout(new java.awt.BorderLayout());
 
         completdProjctsSpinner.setValue(25);
+        completdProjctsSpinner.setPreferredSize(new java.awt.Dimension(200, 200));
         completdProjctsSpinner.setStringPainted(true);
+        spinnerPanel.add(completdProjctsSpinner, java.awt.BorderLayout.EAST);
 
         completedTaskSpinner.setValue(50);
+        completedTaskSpinner.setMaximumSize(new java.awt.Dimension(200, 200));
+        completedTaskSpinner.setMinimumSize(new java.awt.Dimension(200, 200));
+        completedTaskSpinner.setPreferredSize(new java.awt.Dimension(200, 200));
         completedTaskSpinner.setStringPainted(true);
+        spinnerPanel.add(completedTaskSpinner, java.awt.BorderLayout.CENTER);
 
+        spinnerProgress1.setPreferredSize(new java.awt.Dimension(200, 200));
         spinnerProgress1.setStringPainted(true);
+        spinnerPanel.add(spinnerProgress1, java.awt.BorderLayout.LINE_START);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(76, 135, 200));
-        jLabel1.setText("Completed Projects");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        upperPanel.add(spinnerPanel, java.awt.BorderLayout.CENTER);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(76, 135, 200));
-        jLabel2.setText("Completed Tasks");
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(76, 135, 200));
-        jLabel3.setText("Extra Spinner");
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout spinnerPanelLayout = new javax.swing.GroupLayout(spinnerPanel);
-        spinnerPanel.setLayout(spinnerPanelLayout);
-        spinnerPanelLayout.setHorizontalGroup(
-            spinnerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(spinnerPanelLayout.createSequentialGroup()
-                .addGroup(spinnerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(spinnerPanelLayout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addComponent(completdProjctsSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(completedTaskSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(spinnerProgress1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(spinnerPanelLayout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(jLabel1)
-                        .addGap(147, 147, 147)
-                        .addComponent(jLabel2)
-                        .addGap(178, 178, 178)
-                        .addComponent(jLabel3)))
-                .addContainerGap(109, Short.MAX_VALUE))
-        );
-        spinnerPanelLayout.setVerticalGroup(
-            spinnerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(spinnerPanelLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(spinnerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(spinnerProgress1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(completedTaskSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(completdProjctsSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(spinnerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addContainerGap(34, Short.MAX_VALUE))
-        );
-
-        add(spinnerPanel, java.awt.BorderLayout.PAGE_START);
+        add(upperPanel, java.awt.BorderLayout.NORTH);
 
         jTable1.setBackground(new java.awt.Color(21, 25, 34));
         jTable1.setForeground(new java.awt.Color(255, 255, 255));
@@ -184,15 +188,16 @@ public class DashboardScreen extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private raven.spinner.SpinnerProgress completdProjctsSpinner;
     private raven.spinner.SpinnerProgress completedTaskSpinner;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblError;
     private javax.swing.JPanel spinnerPanel;
     private raven.spinner.SpinnerProgress spinnerProgress1;
+    private javax.swing.JPanel upperPanel;
     // End of variables declaration//GEN-END:variables
 }
