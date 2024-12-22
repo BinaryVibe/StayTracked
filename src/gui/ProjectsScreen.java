@@ -279,6 +279,11 @@ public class ProjectsScreen extends javax.swing.JPanel {
     }//GEN-LAST:event_createProjectBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        int option = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete the project(s)?", "Confirm Action", JOptionPane.YES_NO_OPTION);
+        switch (option) {
+            case JOptionPane.NO_OPTION:
+                return;
+        }
         ArrayList<Integer> projectIDs = new ArrayList<>();
         int[] rowIndices = projectsTable.getSelectedRows();
         for (int rowIndex : rowIndices) {
