@@ -138,7 +138,7 @@ public class ProjectsDB {
         if (newProjectIDs.isEmpty()) {
             throw new FailureException("Already updated to latest project");
         }
-        try (PreparedStatement newProjectStmnt = conn.prepareStatement(getNewProject)) {
+        try (PreparedStatement newProjectStmnt = conn.prepareStatement(getNewProjectQuery)) {
             for (int id : newProjectIDs) {
                 newProjectStmnt.setInt(1, id);
                 try (ResultSet list = newProjectStmnt.executeQuery()) {
@@ -172,7 +172,7 @@ public class ProjectsDB {
         double percentage;
         percentage = 0;
         double done = 0, total = 0;
-        try (PreparedStatement completionStmnt = conn.prepareStatement(countProjects)) {
+        try (PreparedStatement completionStmnt = conn.prepareStatement(countProjectsQuery)) {
             completionStmnt.setInt(1, CurrentSession.getAccountID());
             completionStmnt.setInt(2, CurrentSession.getAccountID());
             try (ResultSet projectsData = completionStmnt.executeQuery()) {
