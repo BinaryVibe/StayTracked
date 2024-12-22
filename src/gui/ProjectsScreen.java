@@ -244,12 +244,11 @@ public class ProjectsScreen extends javax.swing.JPanel {
         deleteBtn.setEnabled(true);
         if (projectsTable.getSelectedRows().length > 1) {
             showTasksBtn.setVisible(false);
-        }
-        else if (projectsTable.getSelectedRows().length == 1) {
+        } else if (projectsTable.getSelectedRows().length == 1) {
             showTasksBtn.setVisible(true);
         }
     }
-    
+
     private void scanBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scanBtnActionPerformed
         refreshTable();
     }//GEN-LAST:event_scanBtnActionPerformed
