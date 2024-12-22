@@ -25,7 +25,7 @@ import helper.CurrentSession;
 public class ProjectsDB {
 
     // Attributes
-    private static Connection conn = DBConnectionManager.con;
+    private static Connection conn = DBConnectionManager.getConnection();
 
     // Queries
     private static final String insertProject = "INSERT INTO projects (title, description, status, priority, start_date, end_date) VALUES (?, ?, ?, ?, ?, ?)";
