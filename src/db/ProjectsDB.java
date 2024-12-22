@@ -44,7 +44,7 @@ public class ProjectsDB {
     // METHODS
     
     public static void save(Project project) throws FailureException {
-        try (PreparedStatement saveStmnt = conn.prepareStatement(insertProject, Statement.RETURN_GENERATED_KEYS); PreparedStatement assignStmnt = conn.prepareStatement(assignUserID)) {
+        try (PreparedStatement saveStmnt = conn.prepareStatement(insertProjectQuery, Statement.RETURN_GENERATED_KEYS); PreparedStatement assignStmnt = conn.prepareStatement(assignUserIDQuery)) {
             conn.setAutoCommit(false);
             saveStmnt.setString(1, project.getTitle());
             saveStmnt.setString(2, project.getDesc());
@@ -96,8 +96,7 @@ public class ProjectsDB {
             throw new FailureException("Database connection is null");
         }
         ArrayList<Project> projects = new ArrayList<>();
-        try (PreparedStatement listProjectsStmnt = conn.prepareStatement(getProjectList)) {
-            //conn.setAutoCommit(false);
+        try (PreparedStatement listProjectsStmnt = conn.prepareStatement(getProjectsQuery)) {
             listProjectsStmnt.setInt(1, CurrentSession.getAccountID());
             try (ResultSet list = listProjectsStmnt.executeQuery()) {
                 if (!list.isBeforeFirst()) {
