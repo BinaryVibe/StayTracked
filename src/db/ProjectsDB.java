@@ -100,7 +100,7 @@ public class ProjectsDB {
             listProjectsStmnt.setInt(1, CurrentSession.getAccountID());
             try (ResultSet list = listProjectsStmnt.executeQuery()) {
                 if (!list.isBeforeFirst()) {
-                    throw new FailureException("Error: No data");
+                    return null;
                 }
                 while (list.next()) {
                     int project_id = list.getInt(1);
