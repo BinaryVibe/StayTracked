@@ -297,13 +297,14 @@ public class ProjectsScreen extends javax.swing.JPanel {
         ArrayList<Project> projects = null;
         try {
             projects = ProjectsDB.getProjects();
+            for (Project project : projects) {
+            model.addRow(new Object[]{project.getTitle(), project.getStartDate(), project.getEndDate(), project.getStatus(), project.getPriority()});
+        }
         } catch (FailureException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
         }
 
-        for (Project project : projects) {
-            model.addRow(new Object[]{project.getTitle(), project.getStartDate(), project.getEndDate(), project.getStatus(), project.getPriority()});
-        }
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
