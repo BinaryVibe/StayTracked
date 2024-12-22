@@ -79,14 +79,14 @@ public class ProjectsDB {
             }
             conn.commit();
         } catch (SQLException sqle) {
-            System.err.print(sqle.getMessage());
-            if (conn != null) {
-                try {
-                    System.err.print("Transaction is being rolled back");
-                    conn.rollback();
-                } catch (SQLException sqlexcep) {
-                    System.err.print(sqlexcep.getMessage());
+            throw new FailureException(sqle.getMessage());
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.setAutoCommit(true);
                 }
+            } catch (SQLException e) {
+                throw new FailureException(e.getMessage());
             }
         }
     }
