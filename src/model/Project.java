@@ -57,7 +57,8 @@ public class Project {
         this.projectPriority = projectPriority;
     }
 
-    public Project(String title, LocalDate startDate, LocalDate endDate, Status projectStatus, Priority projectPriority) {
+    public Project(int projectID, String title, LocalDate startDate, LocalDate endDate, Status projectStatus, Priority projectPriority) {
+        this.projectID = projectID;
         this.title = title;
         this.projectStatus = projectStatus;
         this.startDate = startDate;
