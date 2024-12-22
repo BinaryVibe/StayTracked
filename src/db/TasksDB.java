@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Connection;
+import java.util.ArrayList;
+import model.DashboardData;
 import model.Task;
 
 /**
@@ -21,11 +23,11 @@ import model.Task;
 public class TasksDB {
 
     // ATTRIBUTES
-    
     private static final Connection conn = DBConnectionManager.getConnection();
-    
+
     // Queries
     private static final String insertTask = "INSERT INTO tasks (description, start_date, end_date, status, priority, project_id) VALUES (?, ?, ?, ?, ?, ?)";
+    private static final String dashboardDataQuery = "SELECT p.title AS 'project_title', COUNT(task_id) AS 'total_tasks', COUNT(CASE WHEN t.status = 'DONE' THEN 1 END) AS 'done_tasks' FROM projects p JOIN tasks t ON p.project_id = t.project_id WHERE p.project_id IN (SELECT project_id FROM assigned_to WHERE account_id = ?) GROUP BY t.project_id";
 
     // METHODS
     public static void save(Task task) throws FailureException {
@@ -46,7 +48,7 @@ public class TasksDB {
                 conn.rollback();
                 throw new FailureException("Insert did not work in projects table!");
             }
-            
+
             conn.commit();
         } catch (SQLException sqle) {
             System.err.print(sqle.getMessage());
@@ -59,5 +61,28 @@ public class TasksDB {
                 }
             }
         }
+    }
+
+    public static ArrayList<DashboardData> getData() throws FailureException {
+        ArrayList<DashboardData> data = new ArrayList<>();
+        try (PreparedStatement dataStmnt = conn.prepareStatement(dashboardDataQuery)) {
+            dataStmnt.setInt(1, CurrentSession.getAccountID());
+            try (ResultSet result = dataStmnt.executeQuery()) {
+                while (result.next()) {
+                    String title = result.getString(1);
+                    int totalTasks = result.getInt(2);
+                    int doneTasks = result.getInt(3);
+                    double percentage = 0.0;
+                    if (totalTasks > 0) {
+                        percentage = (doneTasks / totalTasks) * 100;
+                    }
+                    data.add(new DashboardData(title, totalTasks, doneTasks, (int) percentage));
+                }
+            }
+
+        } catch (SQLException ex) {
+            throw new FailureException(ex.getMessage());
+        }
+        return data;
     }
 }
