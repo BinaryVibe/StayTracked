@@ -49,7 +49,6 @@ public class ProjectsScreen extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
@@ -148,7 +147,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         rightPanelLayout.setVerticalGroup(
             rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(rightPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 3, Short.MAX_VALUE)
                 .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(deleteBtn, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(createProjectBtn, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -166,15 +165,22 @@ public class ProjectsScreen extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Title ", "Start Date", "Deadline", "Status", "Priority"
+                "Title ", "Start Date", "Deadline", "Status", "Priority", "ID"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         projectsTable.setFillsViewportHeight(true);
