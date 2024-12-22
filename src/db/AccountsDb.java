@@ -18,8 +18,7 @@ import java.util.ArrayList;
 
 public class AccountsDb {
 
-    //static Connection con = DBConnectionManager.getConnection();
-    static Connection con = DBConnectionManager.con;
+    static Connection con = DBConnectionManager.getConnection();
 
     //method to validate Input
     public static void validateUser(String email, String password) throws InvalidInputException {
