@@ -170,7 +170,7 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
                 "Name", "Username", "Contact", "Email"
             }
         ));
-        tableTeamMembers.setGridColor(new java.awt.Color(45, 168, 216));
+        tableTeamMembers.setGridColor(new java.awt.Color(221, 255, 255));
         tableTeamMembers.setInheritsPopupMenu(true);
         tableTeamMembers.setShowGrid(true);
         jScrollPane1.setViewportView(tableTeamMembers);

@@ -560,7 +560,7 @@ public class AccountsDb {
         ArrayList<NormalAccount> members = new ArrayList<>();
 
         // Query to get team members and their account details using JOIN
-        String query = "SELECT a.first_name, a.last_name, a.username, a.contact_num, a.email FROM team_members tm "
+        String query = "SELECT a.first_name, a.last_name, a.username, a.contact_num, a.email, tm.role FROM team_members tm "
                 + "JOIN accounts a ON tm.account_id = a.account_id WHERE tm.team_id = ?";
 
         try (PreparedStatement ps = con.prepareStatement(query)) {

@@ -6,10 +6,15 @@ package gui;
 
 import customexceptions.FailureException;
 import db.ProjectsDB;
+import db.TasksDB;
+import helper.CurrentSession;
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import model.Account;
+import model.DashboardData;
 
 /**
  *
@@ -34,6 +39,26 @@ public class DashboardScreen extends javax.swing.JPanel {
         } catch (FailureException ex) {
             //JOptionPane.showConfirmDialog(this, ex.getMessage());
             lblError.setText(ex.getMessage()); //this will show error
+        }
+        
+        populateTable();
+    }
+    
+    //Method to populate table
+    public void populateTable(){
+        lblError.setText("");
+        DefaultTableModel model = (DefaultTableModel)tableMain.getModel();
+        //delete all existing rows
+        model.setRowCount(0);
+
+        ArrayList<DashboardData> projects = null;
+        try{
+            projects = TasksDB.getData();
+            for (DashboardData project : projects){
+                model.addRow(new Object[]{project.getTitle(), project.getTotalTasks(), project.getDoneTasks(),project.getPercentage()});
+            }
+        }catch (FailureException fe){
+            lblError.setText(fe.getMessage());
         }
     }
 
@@ -253,7 +278,8 @@ public class DashboardScreen extends javax.swing.JPanel {
                 "Title Of Project", "Number Of Task", "Completed Tasks", "Completion Percentage"
             }
         ));
-        tableMain.setGridColor(new java.awt.Color(45, 168, 216));
+        tableMain.setGridColor(new java.awt.Color(221, 255, 255));
+        tableMain.setShowGrid(true);
         jScrollPane1.setViewportView(tableMain);
 
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
