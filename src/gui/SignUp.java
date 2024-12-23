@@ -494,9 +494,10 @@ public class SignUp extends javax.swing.JFrame {
 
         btnGoToLogin.setBackground(new java.awt.Color(45, 168, 216));
         btnGoToLogin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnGoToLogin.setForeground(new java.awt.Color(255, 255, 255));
-        btnGoToLogin.setText("Loign");
+        btnGoToLogin.setForeground(new java.awt.Color(45, 168, 216));
+        btnGoToLogin.setText("Login");
         btnGoToLogin.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(45, 168, 216), 1, true));
+        btnGoToLogin.setContentAreaFilled(false);
         btnGoToLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGoToLoginActionPerformed(evt);
@@ -545,10 +546,10 @@ public class SignUp extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(signupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(btnGoToLogin))
+                    .addComponent(btnGoToLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(lblSignUpError)
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
 
         jPanel1.add(signupPanel);
