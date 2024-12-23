@@ -281,7 +281,7 @@
               </TableColumnModel>
             </Property>
             <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="d8" green="a8" red="2d" type="rgb"/>
+              <Color blue="ff" green="ff" red="dd" type="rgb"/>
             </Property>
             <Property name="inheritsPopupMenu" type="boolean" value="true"/>
             <Property name="showGrid" type="boolean" value="true"/>
