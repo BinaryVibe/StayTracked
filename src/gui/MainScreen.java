@@ -6,7 +6,9 @@ package gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import db.DBConnectionManager;
+import java.awt.Button;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -129,11 +131,9 @@ public class MainScreen extends javax.swing.JFrame {
         btnDashboard.setText("Dashboard");
         btnDashboard.setBorder(null);
         btnDashboard.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnDashboard.setMaximumSize(new java.awt.Dimension(200, 50));
-        btnDashboard.setMinimumSize(new java.awt.Dimension(200, 50));
-        btnDashboard.setPreferredSize(new java.awt.Dimension(200, 50));
         btnDashboard.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/buttonicons/HooverButton.png"))); // NOI18N
         btnDashboard.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttonicons/SelectedButton.png"))); // NOI18N
+        btnDashboard.putClientProperty("JButton.selectedBorderColor", new Color(45,168,216));
         btnDashboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDashboardActionPerformed(evt);
@@ -147,9 +147,6 @@ public class MainScreen extends javax.swing.JFrame {
         btnProjects.setText("Projects");
         btnProjects.setBorder(null);
         btnProjects.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnProjects.setMaximumSize(new java.awt.Dimension(200, 50));
-        btnProjects.setMinimumSize(new java.awt.Dimension(200, 50));
-        btnProjects.setPreferredSize(new java.awt.Dimension(200, 50));
         btnProjects.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/buttonicons/HooverButton.png"))); // NOI18N
         btnProjects.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttonicons/SelectedButton.png"))); // NOI18N
         btnProjects.addActionListener(new java.awt.event.ActionListener() {
@@ -165,9 +162,6 @@ public class MainScreen extends javax.swing.JFrame {
         btnProfile.setText("Profile");
         btnProfile.setBorder(null);
         btnProfile.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnProfile.setMaximumSize(new java.awt.Dimension(200, 50));
-        btnProfile.setMinimumSize(new java.awt.Dimension(200, 50));
-        btnProfile.setPreferredSize(new java.awt.Dimension(200, 50));
         btnProfile.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/buttonicons/HooverButton.png"))); // NOI18N
         btnProfile.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttonicons/SelectedButton.png"))); // NOI18N
         btnProfile.addActionListener(new java.awt.event.ActionListener() {
@@ -183,9 +177,6 @@ public class MainScreen extends javax.swing.JFrame {
         btnTeams.setText("Teams");
         btnTeams.setBorder(null);
         btnTeams.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnTeams.setMaximumSize(new java.awt.Dimension(200, 50));
-        btnTeams.setMinimumSize(new java.awt.Dimension(200, 50));
-        btnTeams.setPreferredSize(new java.awt.Dimension(200, 50));
         btnTeams.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/buttonicons/HooverButton.png"))); // NOI18N
         btnTeams.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttonicons/SelectedButton.png"))); // NOI18N
         btnTeams.addActionListener(new java.awt.event.ActionListener() {
