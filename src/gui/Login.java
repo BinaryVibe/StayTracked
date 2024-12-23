@@ -137,9 +137,10 @@ public class Login extends javax.swing.JFrame {
 
         signUpBtn.setBackground(new java.awt.Color(45, 168, 216));
         signUpBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        signUpBtn.setForeground(new java.awt.Color(255, 255, 255));
+        signUpBtn.setForeground(new java.awt.Color(45, 168, 216));
         signUpBtn.setText("Sign Up");
         signUpBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(45, 168, 216), 1, true));
+        signUpBtn.setContentAreaFilled(false);
         signUpBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 signUpBtnActionPerformed(evt);
