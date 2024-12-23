@@ -107,7 +107,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showTasksBtnActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="showTasksBtn.setVisible(false);&#xa;"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="showTasksBtn.putClientProperty(&quot;JButton.buttonType&quot;, &quot;roundRect&quot;);&#xa;showTasksBtn.setVisible(false);&#xa;"/>
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -159,50 +159,65 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="deleteBtn">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="22" green="19" red="15" type="rgb"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/trash.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Delete selected row(s)"/>
-                <Property name="contentAreaFilled" type="boolean" value="false"/>
+                <Property name="defaultCapable" type="boolean" value="false"/>
                 <Property name="disabledIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/trash-can-disabled.png"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteBtnActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="deleteBtn.putClientProperty(&quot;JButton.buttonType&quot;, &quot;roundRect&quot;);&#xa;//deleteBtn.putClientProperty(&quot;Button.borderWidth&quot;, 2);&#xa;//deleteBtn.putClientProperty(&quot;Button.hoverBorderColor&quot;, new Color(45, 168, 216));&#xa;//deleteBtn.putClientProperty(&quot;Button.borderColor&quot;, new Color(21, 25, 34));&#xa;"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="createProjectBtn">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="27" green="28" red="28" type="rgb"/>
+                  <Color blue="22" green="19" red="15" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/plus.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Create project"/>
-                <Property name="contentAreaFilled" type="boolean" value="false"/>
+                <Property name="defaultCapable" type="boolean" value="false"/>
+                <Property name="focusable" type="boolean" value="false"/>
                 <Property name="verticalAlignment" type="int" value="1"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createProjectBtnActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="createProjectBtn.putClientProperty(&quot;JButton.buttonType&quot;, &quot;roundRect&quot;);"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="scanBtn">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="27" green="28" red="28" type="rgb"/>
+                  <Color blue="22" green="19" red="15" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/rotate-right.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Scan for projects"/>
-                <Property name="contentAreaFilled" type="boolean" value="false"/>
+                <Property name="defaultCapable" type="boolean" value="false"/>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="scanBtnActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="scanBtn.putClientProperty(&quot;JButton.buttonType&quot;, &quot;roundRect&quot;);"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

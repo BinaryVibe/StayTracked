@@ -14,12 +14,14 @@ import java.awt.Frame;
 import java.awt.Window;
 import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -40,6 +42,9 @@ public class ProjectsScreen extends javax.swing.JPanel {
      * Creates new form ProjectsScreen
      */
     public ProjectsScreen() {
+        UIManager.put("Button.borderColor", new Color(21, 25, 34));
+        UIManager.put("Button.hoverBorderColor", new Color(45, 168, 216));
+        UIManager.put("Button.borderWidth", 2);
         initComponents();
         populateTable();
     }
@@ -88,6 +93,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         showTasksBtn.setBackground(new java.awt.Color(45, 168, 216));
         showTasksBtn.setForeground(new java.awt.Color(21, 25, 34));
         showTasksBtn.setText("Show Tasks");
+        showTasksBtn.putClientProperty("JButton.buttonType", "roundRect");
         showTasksBtn.setVisible(false);
         showTasksBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,32 +106,42 @@ public class ProjectsScreen extends javax.swing.JPanel {
 
         rightPanel.setBackground(new java.awt.Color(21, 25, 34));
 
+        deleteBtn.setBackground(new java.awt.Color(21, 25, 34));
         deleteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash.png"))); // NOI18N
         deleteBtn.setToolTipText("Delete selected row(s)");
-        deleteBtn.setContentAreaFilled(false);
+        deleteBtn.setDefaultCapable(false);
         deleteBtn.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash-can-disabled.png"))); // NOI18N
         deleteBtn.setEnabled(false);
+        deleteBtn.setFocusable(false);
+        deleteBtn.putClientProperty("JButton.buttonType", "roundRect");
+        //deleteBtn.putClientProperty("Button.borderWidth", 2);
+        //deleteBtn.putClientProperty("Button.hoverBorderColor", new Color(45, 168, 216));
+        //deleteBtn.putClientProperty("Button.borderColor", new Color(21, 25, 34));
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteBtnActionPerformed(evt);
             }
         });
 
-        createProjectBtn.setBackground(new java.awt.Color(40, 40, 39));
+        createProjectBtn.setBackground(new java.awt.Color(21, 25, 34));
         createProjectBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/plus.png"))); // NOI18N
         createProjectBtn.setToolTipText("Create project");
-        createProjectBtn.setContentAreaFilled(false);
+        createProjectBtn.setDefaultCapable(false);
+        createProjectBtn.setFocusable(false);
         createProjectBtn.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        createProjectBtn.putClientProperty("JButton.buttonType", "roundRect");
         createProjectBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createProjectBtnActionPerformed(evt);
             }
         });
 
-        scanBtn.setBackground(new java.awt.Color(40, 40, 39));
+        scanBtn.setBackground(new java.awt.Color(21, 25, 34));
         scanBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rotate-right.png"))); // NOI18N
         scanBtn.setToolTipText("Scan for projects");
-        scanBtn.setContentAreaFilled(false);
+        scanBtn.setDefaultCapable(false);
+        scanBtn.setFocusable(false);
+        scanBtn.putClientProperty("JButton.buttonType", "roundRect");
         scanBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 scanBtnActionPerformed(evt);
