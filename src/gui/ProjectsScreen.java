@@ -8,11 +8,15 @@ import customexceptions.FailureException;
 import db.DBConnectionManager;
 import db.ProjectsDB;
 import helper.JDateChooserEditor;
+import helper.TableCellListener;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Window;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -31,6 +35,10 @@ import javax.swing.table.TableColumnModel;
 import model.Status;
 import model.Priority;
 import model.Project;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 /**
  *
@@ -42,9 +50,9 @@ public class ProjectsScreen extends javax.swing.JPanel {
      * Creates new form ProjectsScreen
      */
     public ProjectsScreen() {
-        UIManager.put("Button.borderColor", new Color(21, 25, 34));
-        UIManager.put("Button.hoverBorderColor", new Color(45, 168, 216));
-        UIManager.put("Button.borderWidth", 2);
+//        UIManager.put("Button.borderColor", new Color(21, 25, 34));
+//        UIManager.put("Button.hoverBorderColor", new Color(45, 168, 216));
+//        UIManager.put("Button.borderWidth", 2);
         initComponents();
         populateTable();
     }
@@ -109,11 +117,10 @@ public class ProjectsScreen extends javax.swing.JPanel {
         deleteBtn.setBackground(new java.awt.Color(21, 25, 34));
         deleteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash.png"))); // NOI18N
         deleteBtn.setToolTipText("Delete selected row(s)");
-        deleteBtn.setDefaultCapable(false);
+        deleteBtn.setBorderPainted(false);
         deleteBtn.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash-can-disabled.png"))); // NOI18N
         deleteBtn.setEnabled(false);
-        deleteBtn.setFocusable(false);
-        deleteBtn.putClientProperty("JButton.buttonType", "roundRect");
+        // deleteBtn.putClientProperty("JButton.buttonType", "roundRect");
         //deleteBtn.putClientProperty("Button.borderWidth", 2);
         //deleteBtn.putClientProperty("Button.hoverBorderColor", new Color(45, 168, 216));
         //deleteBtn.putClientProperty("Button.borderColor", new Color(21, 25, 34));
@@ -126,10 +133,9 @@ public class ProjectsScreen extends javax.swing.JPanel {
         createProjectBtn.setBackground(new java.awt.Color(21, 25, 34));
         createProjectBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/plus.png"))); // NOI18N
         createProjectBtn.setToolTipText("Create project");
-        createProjectBtn.setDefaultCapable(false);
-        createProjectBtn.setFocusable(false);
+        createProjectBtn.setBorderPainted(false);
         createProjectBtn.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        createProjectBtn.putClientProperty("JButton.buttonType", "roundRect");
+        // createProjectBtn.putClientProperty("JButton.buttonType", "roundRect");
         createProjectBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createProjectBtnActionPerformed(evt);
@@ -139,9 +145,8 @@ public class ProjectsScreen extends javax.swing.JPanel {
         scanBtn.setBackground(new java.awt.Color(21, 25, 34));
         scanBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rotate-right.png"))); // NOI18N
         scanBtn.setToolTipText("Scan for projects");
-        scanBtn.setDefaultCapable(false);
-        scanBtn.setFocusable(false);
-        scanBtn.putClientProperty("JButton.buttonType", "roundRect");
+        scanBtn.setBorderPainted(false);
+        // scanBtn.putClientProperty("JButton.buttonType", "roundRect");
         scanBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 scanBtnActionPerformed(evt);
@@ -237,6 +242,21 @@ public class ProjectsScreen extends javax.swing.JPanel {
         tableHeader.setBackground(new Color(45, 168, 216));
         tableHeader.setForeground(new Color(21, 25, 34));
         // tableHeader.setFont(new Font(projectsTable.getFont().getFontName(), Font.BOLD, projectsTable.getFont().getSize()));
+
+        Action action = new AbstractAction()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                TableCellListener tcl = (TableCellListener)e.getSource();
+                updateCell(tcl);
+                //        System.out.println("Row   : " + tcl.getRow());
+                //        System.out.println("Column: " + tcl.getColumn());
+                //        System.out.println("Old   : " + tcl.getOldValue());
+                //        System.out.println("New   : " + tcl.getNewValue());
+            }
+        };
+
+        TableCellListener tcl = new TableCellListener(projectsTable, action);
         projectsTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 clickHandler(evt);
@@ -255,6 +275,53 @@ public class ProjectsScreen extends javax.swing.JPanel {
 
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void updateCell(TableCellListener tcl) {
+        if (tcl.getOldValue().equals(tcl.getNewValue())) {
+            return;
+        }
+        int row = tcl.getRow();
+        int column = tcl.getColumn();
+        int projectID = (int) projectsTable.getModel().getValueAt(row, 5);
+        System.out.println(projectsTable.getColumnName(column));
+        switch (column) {
+            // For "Title" Column
+            case 0:
+                String oldTitle = (String) tcl.getOldValue();
+                String newTitle = (String) tcl.getNewValue();
+                try {
+                    ProjectsDB.updateTitle(projectID, newTitle);
+                    System.out.println("New Title Set");
+                } catch (SQLException ex) {
+                    projectsTable.setValueAt(oldTitle, row, column);
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+                }
+                break;
+            // For "Start Date" Column
+            case 1:
+                // This works but I don't know how
+                // The old value's origin is LocalDate so maybe that's why
+                LocalDate oldStartDate = (LocalDate) tcl.getOldValue();
+                
+                // Type-casting to LocalDate wierdly gets us a String first from getNewValue() which 
+                // cannot be type-casted to LocalDate
+                LocalDate newStartDate = LocalDate.parse((String) tcl.getNewValue()); 
+                try {
+                    ProjectsDB.updateStartDate(projectID, newStartDate);
+                    System.out.println("New Start Date Set");
+                } catch (SQLException ex) {
+                    projectsTable.setValueAt(oldStartDate, row, column);
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+                }
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+        }
+    }
 
     private void handleButtonsVisiblity() {
         deleteBtn.setEnabled(true);

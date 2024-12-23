@@ -166,18 +166,20 @@
                   <Image iconType="3" name="/icons/trash.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Delete selected row(s)"/>
-                <Property name="defaultCapable" type="boolean" value="false"/>
+                <Property name="borderPainted" type="boolean" value="false"/>
                 <Property name="disabledIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/trash-can-disabled.png"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
-                <Property name="focusable" type="boolean" value="false"/>
+                <Property name="pressedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/trash-pressed.png"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteBtnActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="deleteBtn.putClientProperty(&quot;JButton.buttonType&quot;, &quot;roundRect&quot;);&#xa;//deleteBtn.putClientProperty(&quot;Button.borderWidth&quot;, 2);&#xa;//deleteBtn.putClientProperty(&quot;Button.hoverBorderColor&quot;, new Color(45, 168, 216));&#xa;//deleteBtn.putClientProperty(&quot;Button.borderColor&quot;, new Color(21, 25, 34));&#xa;"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// deleteBtn.putClientProperty(&quot;JButton.buttonType&quot;, &quot;roundRect&quot;);&#xa;//deleteBtn.putClientProperty(&quot;Button.borderWidth&quot;, 2);&#xa;//deleteBtn.putClientProperty(&quot;Button.hoverBorderColor&quot;, new Color(45, 168, 216));&#xa;//deleteBtn.putClientProperty(&quot;Button.borderColor&quot;, new Color(21, 25, 34));&#xa;"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="createProjectBtn">
@@ -189,15 +191,17 @@
                   <Image iconType="3" name="/icons/plus.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Create project"/>
-                <Property name="defaultCapable" type="boolean" value="false"/>
-                <Property name="focusable" type="boolean" value="false"/>
+                <Property name="borderPainted" type="boolean" value="false"/>
+                <Property name="pressedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/plus-pressed.png"/>
+                </Property>
                 <Property name="verticalAlignment" type="int" value="1"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createProjectBtnActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="createProjectBtn.putClientProperty(&quot;JButton.buttonType&quot;, &quot;roundRect&quot;);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// createProjectBtn.putClientProperty(&quot;JButton.buttonType&quot;, &quot;roundRect&quot;);"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="scanBtn">
@@ -209,14 +213,16 @@
                   <Image iconType="3" name="/icons/rotate-right.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Scan for projects"/>
-                <Property name="defaultCapable" type="boolean" value="false"/>
-                <Property name="focusable" type="boolean" value="false"/>
+                <Property name="borderPainted" type="boolean" value="false"/>
+                <Property name="pressedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/rotate-right-pressed.png"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="scanBtnActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="scanBtn.putClientProperty(&quot;JButton.buttonType&quot;, &quot;roundRect&quot;);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// scanBtn.putClientProperty(&quot;JButton.buttonType&quot;, &quot;roundRect&quot;);"/>
               </AuxValues>
             </Component>
           </SubComponents>
@@ -309,7 +315,7 @@
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePre" type="java.lang.String" value="DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();&#xa;        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// Set Enum columns&apos; editor to be a JComboBox&#xa;&#xa;&#xa;projectsTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JComboBox&lt;&gt;(Status.values())));&#xa;projectsTable.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(new JComboBox&lt;&gt;(Priority.values())));&#xa;projectsTable.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));&#xa;projectsTable.getColumnModel().getColumn(2).setCellEditor(new JDateChooserEditor(new JTextField()));&#xa;&#xa;// Listener for list selection&#xa;projectsTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {&#xa;    @Override&#xa;    public void valueChanged(ListSelectionEvent ev) {&#xa;        handleButtonsVisiblity();&#xa;    }&#xa;});&#xa;&#xa;// Set click to start editing&#xa;for (int i = 0; i &lt;= 4; i++) {&#xa;    DefaultCellEditor cellEditor = (DefaultCellEditor) projectsTable.getColumnModel().getColumn(i).getCellEditor();&#xa;    try {&#xa;        cellEditor.setClickCountToStart(2);&#xa;    }&#xa;    catch (NullPointerException ex) {&#xa;        System.out.println(i + &quot;- &quot; + ex.getMessage());&#xa;    }&#xa;}&#xa;&#xa;TableColumnModel columnModel = projectsTable.getColumnModel();&#xa;columnModel.removeColumn(projectsTable.getColumnModel().getColumn(5));&#xa;&#xa;JTableHeader tableHeader = projectsTable.getTableHeader();&#xa;tableHeader.setBackground(new Color(45, 168, 216));&#xa;tableHeader.setForeground(new Color(21, 25, 34));&#xa;// tableHeader.setFont(new Font(projectsTable.getFont().getFontName(), Font.BOLD, projectsTable.getFont().getSize()));&#xa;"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// Set Enum columns&apos; editor to be a JComboBox&#xa;&#xa;&#xa;projectsTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JComboBox&lt;&gt;(Status.values())));&#xa;projectsTable.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(new JComboBox&lt;&gt;(Priority.values())));&#xa;projectsTable.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));&#xa;projectsTable.getColumnModel().getColumn(2).setCellEditor(new JDateChooserEditor(new JTextField()));&#xa;&#xa;// Listener for list selection&#xa;projectsTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {&#xa;    @Override&#xa;    public void valueChanged(ListSelectionEvent ev) {&#xa;        handleButtonsVisiblity();&#xa;    }&#xa;});&#xa;&#xa;// Set click to start editing&#xa;for (int i = 0; i &lt;= 4; i++) {&#xa;    DefaultCellEditor cellEditor = (DefaultCellEditor) projectsTable.getColumnModel().getColumn(i).getCellEditor();&#xa;    try {&#xa;        cellEditor.setClickCountToStart(2);&#xa;    }&#xa;    catch (NullPointerException ex) {&#xa;        System.out.println(i + &quot;- &quot; + ex.getMessage());&#xa;    }&#xa;}&#xa;&#xa;TableColumnModel columnModel = projectsTable.getColumnModel();&#xa;columnModel.removeColumn(projectsTable.getColumnModel().getColumn(5));&#xa;&#xa;JTableHeader tableHeader = projectsTable.getTableHeader();&#xa;tableHeader.setBackground(new Color(45, 168, 216));&#xa;tableHeader.setForeground(new Color(21, 25, 34));&#xa;// tableHeader.setFont(new Font(projectsTable.getFont().getFontName(), Font.BOLD, projectsTable.getFont().getSize()));&#xa;&#xa;Action action = new AbstractAction()&#xa;{&#xa;    public void actionPerformed(ActionEvent e)&#xa;    {&#xa;        TableCellListener tcl = (TableCellListener)e.getSource();&#xa;        updateCell(tcl);&#xa;//        System.out.println(&quot;Row   : &quot; + tcl.getRow());&#xa;//        System.out.println(&quot;Column: &quot; + tcl.getColumn());&#xa;//        System.out.println(&quot;Old   : &quot; + tcl.getOldValue());&#xa;//        System.out.println(&quot;New   : &quot; + tcl.getNewValue());&#xa;    }&#xa;};&#xa;&#xa;&#xa;TableCellListener tcl = new TableCellListener(projectsTable, action);&#xa;"/>
           </AuxValues>
         </Component>
       </SubComponents>
