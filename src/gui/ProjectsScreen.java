@@ -120,6 +120,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         deleteBtn.setBorderPainted(false);
         deleteBtn.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash-can-disabled.png"))); // NOI18N
         deleteBtn.setEnabled(false);
+        deleteBtn.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash-pressed.png"))); // NOI18N
         // deleteBtn.putClientProperty("JButton.buttonType", "roundRect");
         //deleteBtn.putClientProperty("Button.borderWidth", 2);
         //deleteBtn.putClientProperty("Button.hoverBorderColor", new Color(45, 168, 216));
@@ -134,6 +135,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         createProjectBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/plus.png"))); // NOI18N
         createProjectBtn.setToolTipText("Create project");
         createProjectBtn.setBorderPainted(false);
+        createProjectBtn.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/plus-pressed.png"))); // NOI18N
         createProjectBtn.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         // createProjectBtn.putClientProperty("JButton.buttonType", "roundRect");
         createProjectBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -146,6 +148,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         scanBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rotate-right.png"))); // NOI18N
         scanBtn.setToolTipText("Scan for projects");
         scanBtn.setBorderPainted(false);
+        scanBtn.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rotate-right-pressed.png"))); // NOI18N
         // scanBtn.putClientProperty("JButton.buttonType", "roundRect");
         scanBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
