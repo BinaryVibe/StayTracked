@@ -57,7 +57,7 @@
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" max="32767" attributes="0"/>
                           <Component id="statusComBox" alignment="0" max="32767" attributes="0"/>
-                          <Component id="priorityComBox" alignment="0" pref="152" max="32767" attributes="0"/>
+                          <Component id="priorityComBox" alignment="0" pref="326" max="32767" attributes="0"/>
                           <Component id="startDateChooser" alignment="0" min="-2" pref="152" max="-2" attributes="0"/>
                           <Component id="endDateChooser1" alignment="0" min="-2" pref="152" max="-2" attributes="0"/>
                           <Component id="jScrollPane2" alignment="0" pref="326" max="32767" attributes="0"/>
@@ -203,10 +203,10 @@
     <Component class="javax.swing.JButton" name="okButton">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="57" green="56" red="56" type="rgb"/>
+          <Color blue="d8" green="a8" red="2d" type="rgb"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="dd" type="rgb"/>
+          <Color blue="22" green="19" red="15" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="OK"/>
       </Properties>
@@ -217,10 +217,10 @@
     <Component class="javax.swing.JButton" name="cancelBtn">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="57" green="56" red="56" type="rgb"/>
+          <Color blue="d8" green="a8" red="2d" type="rgb"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="dd" type="rgb"/>
+          <Color blue="22" green="19" red="15" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Cancel"/>
       </Properties>

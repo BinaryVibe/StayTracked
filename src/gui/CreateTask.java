@@ -108,8 +108,8 @@ public class CreateTask extends javax.swing.JDialog {
         endDateChooser1.setBackground(new java.awt.Color(40, 40, 39));
         endDateChooser1.setDateFormatString("yyyy-MM-dd");
 
-        okButton.setBackground(new java.awt.Color(86, 86, 87));
-        okButton.setForeground(new java.awt.Color(221, 255, 255));
+        okButton.setBackground(new java.awt.Color(45, 168, 216));
+        okButton.setForeground(new java.awt.Color(21, 25, 34));
         okButton.setText("OK");
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,8 +117,8 @@ public class CreateTask extends javax.swing.JDialog {
             }
         });
 
-        cancelBtn.setBackground(new java.awt.Color(86, 86, 87));
-        cancelBtn.setForeground(new java.awt.Color(221, 255, 255));
+        cancelBtn.setBackground(new java.awt.Color(45, 168, 216));
+        cancelBtn.setForeground(new java.awt.Color(21, 25, 34));
         cancelBtn.setText("Cancel");
         cancelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,9 +153,8 @@ public class CreateTask extends javax.swing.JDialog {
                             .addComponent(jLabel3)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(statusComBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(priorityComBox, javax.swing.GroupLayout.Alignment.LEADING, 0, 152, Short.MAX_VALUE))
+                            .addComponent(statusComBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(priorityComBox, 0, 326, Short.MAX_VALUE)
                             .addComponent(startDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(endDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE))
