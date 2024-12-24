@@ -281,7 +281,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         int row = tcl.getRow();
         int column = tcl.getColumn();
         int projectID = (int) projectsTable.getModel().getValueAt(row, 5);
-        System.out.println(projectsTable.getColumnName(column));
+        //System.out.println(projectsTable.getColumnName(column));
         switch (column) {
             // For "Title" Column
             case 0:
@@ -289,7 +289,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 String newTitle = (String) tcl.getNewValue();
                 try {
                     ProjectsDB.updateTitle(projectID, newTitle);
-                    System.out.println("New Title Set");
+                    //System.out.println("New Title Set");
                 } catch (SQLException ex) {
                     projectsTable.setValueAt(oldTitle, row, column);
                     JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -306,7 +306,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 LocalDate newStartDate = LocalDate.parse((String) tcl.getNewValue()); 
                 try {
                     ProjectsDB.updateStartDate(projectID, newStartDate);
-                    System.out.println("New Start Date Set");
+                   // System.out.println("New Start Date Set");
                 } catch (SQLException ex) {
                     projectsTable.setValueAt(oldStartDate, row, column);
                     JOptionPane.showMessageDialog(this, ex.getMessage());
