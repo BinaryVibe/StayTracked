@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <Properties>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="22" green="19" red="15" type="rgb"/>
+    </Property>
+  </Properties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,38,0,0,4,69"/>
+  </AuxValues>
+
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="topPanel">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="22" green="19" red="15" type="rgb"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[20, 0]"/>
+        </Property>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+          <BorderConstraints direction="First"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <Component id="leftBtnsPanel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="centerPanel" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="rightBtnsPanel" min="-2" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="rightBtnsPanel" alignment="0" max="32767" attributes="0"/>
+                      <Component id="leftBtnsPanel" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+              <Component id="centerPanel" pref="35" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="rightBtnsPanel">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="22" green="19" red="15" type="rgb"/>
+            </Property>
+          </Properties>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="165" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+        </Container>
+        <Container class="javax.swing.JPanel" name="centerPanel">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="22" green="19" red="15" type="rgb"/>
+            </Property>
+          </Properties>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLabel1">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="sansserif" size="13" style="2"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="d8" green="a8" red="2d" type="rgb"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="Double click to edit!"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                  <BorderConstraints direction="Center"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="leftBtnsPanel">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="22" green="19" red="15" type="rgb"/>
+            </Property>
+          </Properties>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="249" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+        </Container>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+          <BorderConstraints direction="Center"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="projectsTable">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="22" green="19" red="15" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="dd" type="rgb"/>
+            </Property>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="6" rowCount="0">
+                <Column editable="true" title="Title " type="java.lang.String"/>
+                <Column editable="true" title="Start Date" type="java.lang.Object"/>
+                <Column editable="true" title="Deadline" type="java.lang.Object"/>
+                <Column editable="true" title="Status" type="java.lang.Object"/>
+                <Column editable="true" title="Priority" type="java.lang.Object"/>
+                <Column editable="false" title="ID" type="java.lang.Integer"/>
+              </Table>
+            </Property>
+            <Property name="fillsViewportHeight" type="boolean" value="true"/>
+            <Property name="rowHeight" type="int" value="25"/>
+            <Property name="showGrid" type="boolean" value="false"/>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="projectsTableclickHandler"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePre" type="java.lang.String" value="DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();&#xa;        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// Set Enum columns&apos; editor to be a JComboBox&#xa;&#xa;&#xa;projectsTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JComboBox&lt;&gt;(Status.values())));&#xa;projectsTable.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(new JComboBox&lt;&gt;(Priority.values())));&#xa;projectsTable.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));&#xa;projectsTable.getColumnModel().getColumn(2).setCellEditor(new JDateChooserEditor(new JTextField()));&#xa;&#xa;// Listener for list selection&#xa;projectsTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {&#xa;    @Override&#xa;    public void valueChanged(ListSelectionEvent ev) {&#xa;        handleButtonsVisiblity();&#xa;    }&#xa;});&#xa;&#xa;// Set click to start editing&#xa;for (int i = 0; i &lt;= 4; i++) {&#xa;    DefaultCellEditor cellEditor = (DefaultCellEditor) projectsTable.getColumnModel().getColumn(i).getCellEditor();&#xa;    try {&#xa;        cellEditor.setClickCountToStart(2);&#xa;    }&#xa;    catch (NullPointerException ex) {&#xa;        System.out.println(i + &quot;- &quot; + ex.getMessage());&#xa;    }&#xa;}&#xa;&#xa;TableColumnModel columnModel = projectsTable.getColumnModel();&#xa;columnModel.removeColumn(projectsTable.getColumnModel().getColumn(5));&#xa;&#xa;JTableHeader tableHeader = projectsTable.getTableHeader();&#xa;tableHeader.setBackground(new Color(45, 168, 216));&#xa;tableHeader.setForeground(new Color(21, 25, 34));&#xa;// tableHeader.setFont(new Font(projectsTable.getFont().getFontName(), Font.BOLD, projectsTable.getFont().getSize()));&#xa;&#xa;Action action = new AbstractAction()&#xa;{&#xa;    public void actionPerformed(ActionEvent e)&#xa;    {&#xa;        TableCellListener tcl = (TableCellListener)e.getSource();&#xa;        updateCell(tcl);&#xa;//        System.out.println(&quot;Row   : &quot; + tcl.getRow());&#xa;//        System.out.println(&quot;Column: &quot; + tcl.getColumn());&#xa;//        System.out.println(&quot;Old   : &quot; + tcl.getOldValue());&#xa;//        System.out.println(&quot;New   : &quot; + tcl.getNewValue());&#xa;    }&#xa;};&#xa;&#xa;&#xa;TableCellListener tcl = new TableCellListener(projectsTable, action);&#xa;"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>
