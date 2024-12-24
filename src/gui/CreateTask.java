@@ -6,6 +6,7 @@ package gui;
 
 import customexceptions.FailureException;
 import customexceptions.InvalidDateException;
+import db.TasksDB;
 import java.awt.Color;
 import java.awt.Component;
 import java.time.LocalDate;
@@ -223,7 +224,7 @@ public class CreateTask extends javax.swing.JDialog {
             task = new Task(desc, taskStatus, startDate, taskPriority);
         }
         try {
-            ProjectsDB.save(project);
+            TasksDB.save(task);
         } catch (FailureException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Error: Could not save to database.", JOptionPane.ERROR_MESSAGE);
         }

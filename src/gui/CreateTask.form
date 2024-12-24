@@ -56,10 +56,8 @@
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" max="32767" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="statusComBox" alignment="0" max="32767" attributes="0"/>
-                              <Component id="priorityComBox" alignment="0" pref="152" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="statusComBox" alignment="0" max="32767" attributes="0"/>
+                          <Component id="priorityComBox" alignment="0" pref="152" max="32767" attributes="0"/>
                           <Component id="startDateChooser" alignment="0" min="-2" pref="152" max="-2" attributes="0"/>
                           <Component id="endDateChooser1" alignment="0" min="-2" pref="152" max="-2" attributes="0"/>
                           <Component id="jScrollPane2" alignment="0" pref="326" max="32767" attributes="0"/>
