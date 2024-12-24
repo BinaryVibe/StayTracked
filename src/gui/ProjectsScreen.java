@@ -69,8 +69,15 @@ public class ProjectsScreen extends javax.swing.JPanel {
         deleteBtn = new javax.swing.JButton();
         createProjectBtn = new javax.swing.JButton();
         scanBtn = new javax.swing.JButton();
+        infoBtn = new javax.swing.JButton();
+        jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         projectsTable = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        infoPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel2 = new javax.swing.JLabel();
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
@@ -130,6 +137,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         createProjectBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/plus.png"))); // NOI18N
         createProjectBtn.setToolTipText("Create project");
         createProjectBtn.setBorderPainted(false);
+        createProjectBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.WAIT_CURSOR));
         createProjectBtn.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/plus-pressed.png"))); // NOI18N
         createProjectBtn.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         // createProjectBtn.putClientProperty("JButton.buttonType", "roundRect");
@@ -151,6 +159,12 @@ public class ProjectsScreen extends javax.swing.JPanel {
             }
         });
 
+        infoBtn.setBackground(new java.awt.Color(21, 25, 34));
+        infoBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/info.png"))); // NOI18N
+        infoBtn.setBorderPainted(false);
+        infoBtn.setEnabled(false);
+        infoBtn.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/info-pressed.png"))); // NOI18N
+
         javax.swing.GroupLayout rightPanelLayout = new javax.swing.GroupLayout(rightPanel);
         rightPanel.setLayout(rightPanelLayout);
         rightPanelLayout.setHorizontalGroup(
@@ -162,21 +176,29 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 .addComponent(createProjectBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(scanBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(infoBtn)
                 .addContainerGap())
         );
         rightPanelLayout.setVerticalGroup(
             rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(rightPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rightPanelLayout.createSequentialGroup()
                 .addGap(0, 3, Short.MAX_VALUE)
                 .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(deleteBtn, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(createProjectBtn, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(scanBtn, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addComponent(infoBtn)
+                    .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(deleteBtn, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(createProjectBtn, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(scanBtn, javax.swing.GroupLayout.Alignment.TRAILING))))
         );
 
         jPanel1.add(rightPanel, java.awt.BorderLayout.EAST);
 
         add(jPanel1, java.awt.BorderLayout.PAGE_START);
+
+        jSplitPane1.setDividerLocation(450);
+        jSplitPane1.setDividerSize(1);
+        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
         projectsTable.setBackground(new java.awt.Color(21, 25, 34));
         projectsTable.setForeground(new java.awt.Color(221, 255, 255));
@@ -271,7 +293,48 @@ public class ProjectsScreen extends javax.swing.JPanel {
             projectsTable.getColumnModel().getColumn(4).setCellRenderer(centerRenderer );
         }
 
-        add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        jSplitPane1.setLeftComponent(jScrollPane1);
+
+        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        infoPanel.setBackground(new java.awt.Color(21, 25, 34));
+        infoPanel.setFont(new java.awt.Font("Myriad Pro", 0, 13)); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Myriad Pro", 3, 18)); // NOI18N
+        jLabel1.setText("jLabel1");
+
+        jLabel2.setFont(new java.awt.Font("Myriad Pro", 1, 16)); // NOI18N
+        jLabel2.setText("Description:");
+
+        javax.swing.GroupLayout infoPanelLayout = new javax.swing.GroupLayout(infoPanel);
+        infoPanel.setLayout(infoPanelLayout);
+        infoPanelLayout.setHorizontalGroup(
+            infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(infoPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 728, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(513, Short.MAX_VALUE))
+        );
+        infoPanelLayout.setVerticalGroup(
+            infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(infoPanelLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(447, Short.MAX_VALUE))
+        );
+
+        jScrollPane2.setViewportView(infoPanel);
+
+        jSplitPane1.setRightComponent(jScrollPane2);
+
+        add(jSplitPane1, java.awt.BorderLayout.LINE_END);
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateCell(TableCellListener tcl) {
@@ -368,6 +431,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
     }
 
     private void handleButtonsVisiblity() {
+        infoBtn.setEnabled(true);
         deleteBtn.setEnabled(true);
         if (projectsTable.getSelectedRows().length > 1) {
             showTasksBtn.setVisible(false);
@@ -435,6 +499,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
             hintLbl.setVisible(false);
             showTasksBtn.setVisible(false);
             deleteBtn.setEnabled(false);
+            infoBtn.setEnabled(false);
         } else {
             hintLbl.setVisible(true);
         }
@@ -470,9 +535,16 @@ public class ProjectsScreen extends javax.swing.JPanel {
     private javax.swing.JButton deleteBtn;
     private javax.swing.Box.Filler filler1;
     private javax.swing.JLabel hintLbl;
+    private javax.swing.JButton infoBtn;
+    private javax.swing.JPanel infoPanel;
     private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTable projectsTable;
     private javax.swing.JPanel rightPanel;
     private javax.swing.JButton scanBtn;
