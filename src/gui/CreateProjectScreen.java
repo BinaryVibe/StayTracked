@@ -23,7 +23,7 @@ import model.Status;
  * @author samtheradiant
  */
 public class CreateProjectScreen extends javax.swing.JDialog {
-    
+
     ProjectsScreen obj;
 
     /**
@@ -118,8 +118,8 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         endDateChooser.setBackground(new java.awt.Color(40, 40, 39));
         endDateChooser.setDateFormatString("yyyy-MM-dd");
 
-        okButton.setBackground(new java.awt.Color(86, 86, 87));
-        okButton.setForeground(new java.awt.Color(221, 255, 255));
+        okButton.setBackground(new java.awt.Color(45, 168, 216));
+        okButton.setForeground(new java.awt.Color(21, 25, 34));
         okButton.setText("OK");
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,8 +127,8 @@ public class CreateProjectScreen extends javax.swing.JDialog {
             }
         });
 
-        cancelBtn.setBackground(new java.awt.Color(86, 86, 87));
-        cancelBtn.setForeground(new java.awt.Color(221, 255, 255));
+        cancelBtn.setBackground(new java.awt.Color(45, 168, 216));
+        cancelBtn.setForeground(new java.awt.Color(21, 25, 34));
         cancelBtn.setText("Cancel");
         cancelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -233,7 +233,7 @@ public class CreateProjectScreen extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void titleFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleFieldActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_titleFieldActionPerformed
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
@@ -272,12 +272,24 @@ public class CreateProjectScreen extends javax.swing.JDialog {
             ProjectsDB.save(project);
         } catch (FailureException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Error: Could not save to database.", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        
+
         obj.refreshTable();
         this.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
 
+//    private boolean checkDuplicate(String title) {
+//        try {
+//            if (!(ProjectsDB.searchDuplicateTitle(title))) {
+//                JOptionPane.showMessageDialog(rootPane, "Project with same title already created.", "Duplication Error", JOptionPane.ERROR_MESSAGE);
+//            }
+//        } catch (FailureException ex) {
+//            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+//            return false;
+//        }
+//        return true;
+//    }
     /**
      * @param args the command line arguments
      */

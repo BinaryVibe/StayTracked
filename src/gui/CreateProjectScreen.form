@@ -211,10 +211,10 @@
         <Component class="javax.swing.JButton" name="okButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="57" green="56" red="56" type="rgb"/>
+              <Color blue="d8" green="a8" red="2d" type="rgb"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="dd" type="rgb"/>
+              <Color blue="22" green="19" red="15" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="OK"/>
           </Properties>
@@ -225,10 +225,10 @@
         <Component class="javax.swing.JButton" name="cancelBtn">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="57" green="56" red="56" type="rgb"/>
+              <Color blue="d8" green="a8" red="2d" type="rgb"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="dd" type="rgb"/>
+              <Color blue="22" green="19" red="15" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Cancel"/>
           </Properties>
