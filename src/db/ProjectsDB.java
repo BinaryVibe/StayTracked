@@ -35,10 +35,12 @@ public class ProjectsDB {
     private static final String countProjectsQuery = "SELECT t.total, d.done FROM (SELECT COUNT(project_id) AS total FROM projects WHERE project_id IN (SELECT project_id FROM assigned_to WHERE account_id =  ?)) AS t, (SELECT COUNT(project_id) AS done FROM projects WHERE status = 'DONE' AND project_id IN (SELECT project_id FROM assigned_to WHERE account_id = ?)) AS d";
     private static final String deleteProjectsQuery = "DELETE FROM projects WHERE project_id = ?";
     private static final String updateTitleQuery = "UPDATE projects SET title = ? WHERE project_id = ?";
+    private static final String updateDescQuery = "UPDATE projects SET description = ? WHERE project_id = ?";
     private static final String updateStartDateQuery = "UPDATE projects SET start_date = ? WHERE project_id = ?";
     private static final String updateEndDateQuery = "UPDATE projects SET end_date = ? WHERE project_id = ?";
     private static final String updateStatusQuery = "UPDATE projects SET status = ? WHERE project_id = ?";
     private static final String updatePriorityQuery = "UPDATE projects SET priority = ? WHERE project_id = ?";
+    private static final String getDescQuery = "SELECT description FROM projects WHERE project_id = ?";
 
     // For newly created projects at runtime  
     private static ArrayList<Integer> newProjectIDs = new ArrayList<>();
@@ -212,9 +214,7 @@ public class ProjectsDB {
                 throw new FailureException(ex.getMessage());
             } finally {
                 try {
-
                     conn.setAutoCommit(true);
-
                 } catch (SQLException e) {
                     throw new FailureException(e.getMessage());
                 }
@@ -237,7 +237,29 @@ public class ProjectsDB {
             throw new SQLException(ex.getMessage());
         } finally {
             try {
-                conn.setAutoCommit(false);
+                conn.setAutoCommit(true);
+            } catch (SQLException ex) {
+                throw new SQLException(ex.getMessage());
+            }
+        }
+    }
+
+    public static void updateDesc(int targetProjectID, String desc) throws SQLException {
+        try (PreparedStatement updateStmnt = conn.prepareStatement(updateDescQuery)) {
+            conn.setAutoCommit(false);
+            updateStmnt.setString(1, desc);
+            updateStmnt.setInt(2, targetProjectID);
+            int affectedRows = updateStmnt.executeUpdate();
+            if (affectedRows == 0) {
+                conn.rollback();
+                throw new SQLException("Updating description failed, no rows affected.");
+            }
+            conn.commit();
+        } catch (SQLException ex) {
+            throw new SQLException(ex.getMessage());
+        } finally {
+            try {
+                conn.setAutoCommit(true);
             } catch (SQLException ex) {
                 throw new SQLException(ex.getMessage());
             }
@@ -259,7 +281,7 @@ public class ProjectsDB {
             throw new SQLException(ex.getMessage());
         } finally {
             try {
-                conn.setAutoCommit(false);
+                conn.setAutoCommit(true);
             } catch (SQLException ex) {
                 throw new SQLException(ex.getMessage());
             }
@@ -281,7 +303,7 @@ public class ProjectsDB {
             throw new SQLException(ex.getMessage());
         } finally {
             try {
-                conn.setAutoCommit(false);
+                conn.setAutoCommit(true);
             } catch (SQLException ex) {
                 throw new SQLException(ex.getMessage());
             }
@@ -303,13 +325,13 @@ public class ProjectsDB {
             throw new SQLException(ex.getMessage());
         } finally {
             try {
-                conn.setAutoCommit(false);
+                conn.setAutoCommit(true);
             } catch (SQLException ex) {
                 throw new SQLException(ex.getMessage());
             }
         }
     }
-    
+
     public static void updatePriority(int targetProjectID, Priority newPriority) throws SQLException {
         try (PreparedStatement pstmt = conn.prepareStatement(updatePriorityQuery)) {
             conn.setAutoCommit(false);
@@ -325,10 +347,27 @@ public class ProjectsDB {
             throw new SQLException(ex.getMessage());
         } finally {
             try {
-                conn.setAutoCommit(false);
+                conn.setAutoCommit(true);
             } catch (SQLException ex) {
                 throw new SQLException(ex.getMessage());
             }
         }
+    }
+
+    public static String getDesc(int projectId) throws SQLException {
+        String desc = "";
+        try (PreparedStatement pstmt = conn.prepareStatement(getDescQuery)) {
+            pstmt.setInt(1, projectId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    desc = rs.getString(1);
+                } else {
+                    throw new SQLException("No project found with project_id: " + projectId);
+                }
+            }
+        } catch (SQLException ex) {
+            throw new SQLException(ex.getMessage());
+        }
+        return desc;
     }
 }
