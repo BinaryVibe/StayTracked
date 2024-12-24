@@ -26,6 +26,7 @@ public class TasksScreen extends javax.swing.JPanel {
 
         topPanel = new javax.swing.JPanel();
         rightBtnsPanel = new javax.swing.JPanel();
+        createTaskBtn = new javax.swing.JButton();
         centerPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         leftBtnsPanel = new javax.swing.JPanel();
@@ -40,15 +41,34 @@ public class TasksScreen extends javax.swing.JPanel {
 
         rightBtnsPanel.setBackground(new java.awt.Color(21, 25, 34));
 
+        createTaskBtn.setBackground(new java.awt.Color(21, 25, 34));
+        createTaskBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/plus.png"))); // NOI18N
+        createTaskBtn.setToolTipText("Create project");
+        createTaskBtn.setBorderPainted(false);
+        createTaskBtn.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/plus-pressed.png"))); // NOI18N
+        createTaskBtn.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        // createTaskBtn.putClientProperty("JButton.buttonType", "roundRect");
+        createTaskBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createTaskBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout rightBtnsPanelLayout = new javax.swing.GroupLayout(rightBtnsPanel);
         rightBtnsPanel.setLayout(rightBtnsPanelLayout);
         rightBtnsPanelLayout.setHorizontalGroup(
             rightBtnsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 165, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rightBtnsPanelLayout.createSequentialGroup()
+                .addContainerGap(133, Short.MAX_VALUE)
+                .addComponent(createTaskBtn)
+                .addContainerGap())
         );
         rightBtnsPanelLayout.setVerticalGroup(
             rightBtnsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rightBtnsPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(createTaskBtn)
+                .addContainerGap())
         );
 
         centerPanel.setBackground(new java.awt.Color(21, 25, 34));
@@ -80,7 +100,7 @@ public class TasksScreen extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createSequentialGroup()
                 .addComponent(leftBtnsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(centerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(centerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rightBtnsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -91,7 +111,7 @@ public class TasksScreen extends javax.swing.JPanel {
                     .addComponent(rightBtnsPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(leftBtnsPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(centerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+            .addComponent(centerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         add(topPanel, java.awt.BorderLayout.PAGE_START);
@@ -198,9 +218,22 @@ public class TasksScreen extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_projectsTableclickHandler
 
+    private void createTaskBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createTaskBtnActionPerformed
+        Window parentWindow = SwingUtilities.windowForComponent(this);
+        Frame parentFrame = null;
+        if (parentWindow instanceof Frame frame) {
+            parentFrame = frame;
+        }
+        CreateProjectScreen screen1 = new CreateProjectScreen(parentFrame, true, this);
+        screen1.pack();
+        screen1.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        screen1.setVisible(true);
+    }//GEN-LAST:event_createTaskBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel centerPanel;
+    private javax.swing.JButton createTaskBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel leftBtnsPanel;
