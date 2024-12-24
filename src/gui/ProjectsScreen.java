@@ -300,10 +300,16 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 // This works but I don't know how
                 // The old value's origin is LocalDate so maybe that's why
                 LocalDate oldStartDate = (LocalDate) tcl.getOldValue();
-                
+
                 // Type-casting to LocalDate wierdly gets us a String first from getNewValue() which 
                 // cannot be type-casted to LocalDate
-                LocalDate newStartDate = LocalDate.parse((String) tcl.getNewValue()); 
+                LocalDate newStartDate = LocalDate.parse((String) tcl.getNewValue());
+                LocalDate currentEndDate = (LocalDate) projectsTable.getValueAt(row, 2);
+                if (newStartDate.compareTo(currentEndDate) > 0) {
+                    JOptionPane.showMessageDialog(this, "Start Date cannot be greater than deadline date", "Date Error", JOptionPane.ERROR_MESSAGE);
+                    projectsTable.setValueAt(oldStartDate, row, column);
+                    break;
+                }
                 try {
                     ProjectsDB.updateStartDate(projectID, newStartDate);
                    // System.out.println("New Start Date Set");
@@ -312,11 +318,51 @@ public class ProjectsScreen extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(this, ex.getMessage());
                 }
                 break;
+            // For "Deadline" Column
             case 2:
+                // This works but I don't know how
+                // The old value's origin is LocalDate so maybe that's why
+                LocalDate oldEndDate = (LocalDate) tcl.getOldValue();
+
+                // Type-casting to LocalDate wierdly gets us a String first from getNewValue() which 
+                // cannot be type-casted to LocalDate
+                LocalDate newEndDate = LocalDate.parse(tcl.getNewValue().toString());
+                LocalDate currentStartDate = LocalDate.parse(projectsTable.getValueAt(row, 1).toString());
+                if (newEndDate.compareTo(currentStartDate) < 0) {
+                    JOptionPane.showMessageDialog(this, "Deadline Date cannot be less than start date", "Date Error", JOptionPane.ERROR_MESSAGE);
+                    projectsTable.setValueAt(oldEndDate, row, column);
+                    break;
+                }
+                try {
+                    ProjectsDB.updateEndDate(projectID, newEndDate);
+                    //System.out.println("New End Date Set");
+                } catch (SQLException ex) {
+                    projectsTable.setValueAt(oldEndDate, row, column);
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+                }
                 break;
+            // For "Status" Column
             case 3:
+                Status oldStatus = Status.getEnum(tcl.getOldValue().toString());
+                Status newStatus = Status.getEnum(tcl.getNewValue().toString());
+                try {
+                    ProjectsDB.updateStatus(projectID, newStatus);
+                    //System.out.println("New Status Set");
+                } catch (SQLException ex) {
+                    projectsTable.setValueAt(oldStatus, row, column);
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+                }
                 break;
             case 4:
+                Priority oldPriority = Priority.getEnum(tcl.getOldValue().toString());
+                Priority newPriority = Priority.getEnum(tcl.getNewValue().toString());
+                try {
+                    ProjectsDB.updatePriority(projectID, newPriority);
+                    //System.out.println("New Status Set");
+                } catch (SQLException ex) {
+                    projectsTable.setValueAt(oldPriority, row, column);
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+                }
                 break;
         }
     }
