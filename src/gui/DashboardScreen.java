@@ -53,7 +53,7 @@ public class DashboardScreen extends javax.swing.JPanel {
 
         ArrayList<DashboardData> projects = null;
         try{
-            projects = TasksDB.getData();
+            projects = TasksDB.getDashboardData();
             for (DashboardData project : projects){
                 model.addRow(new Object[]{project.getTitle(), project.getTotalTasks(), project.getDoneTasks(),project.getPercentage()});
             }
