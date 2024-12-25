@@ -4,7 +4,7 @@
  */
 package gui;
 
-import customexceptions.FailureException;
+import java.sql.SQLException;
 import customexceptions.InvalidDateException;
 import db.TasksDB;
 import java.awt.Color;
@@ -24,11 +24,14 @@ import model.Task;
  */
 public class CreateTask extends javax.swing.JDialog {
 
+    TasksScreen obj;
+    
     /**
      * Creates new form CreateTask
      */
-    public CreateTask(java.awt.Frame parent, boolean modal) {
+    public CreateTask(java.awt.Frame parent, boolean modal, TasksScreen obj) {
         super(parent, modal);
+        this.obj = obj;
         initComponents();
     }
 
@@ -39,12 +42,7 @@ public class CreateTask extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        endDateChooser = new com.toedter.calendar.JDateChooser();
-        // endDateChooser.setDateFormatString("dd-mm-yyyy");
-
-        for (Component c : endDateChooser.getComponents()) {
-            ((JComponent) c).setBackground(new Color(40, 40, 39));
-        }
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         priorityComBox = new javax.swing.JComboBox<>();
@@ -60,23 +58,22 @@ public class CreateTask extends javax.swing.JDialog {
 
         // JComponent editorUI = startDateChooser.getDateEditor().getUiComponent();
         // editorUI.setForeground(new Color(221, 255, 255));
-        endDateLbl = new javax.swing.JLabel();
-        endDateChooser1 = new com.toedter.calendar.JDateChooser();
+        endDateChooser = new com.toedter.calendar.JDateChooser();
         // endDateChooser.setDateFormatString("dd-mm-yyyy");
 
         for (Component c : endDateChooser.getComponents()) {
             ((JComponent) c).setBackground(new Color(40, 40, 39));
         }
+        endDateLbl = new javax.swing.JLabel();
         okButton = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        descTextArea = new javax.swing.JTextArea();
-
-        endDateChooser.setBackground(new java.awt.Color(40, 40, 39));
-        endDateChooser.setDateFormatString("yyyy-MM-dd");
+        descTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(21, 25, 34));
+        setResizable(false);
+
+        jPanel1.setBackground(new java.awt.Color(21, 25, 34));
 
         jLabel1.setForeground(new java.awt.Color(221, 255, 255));
         jLabel1.setText("Description:");
@@ -102,11 +99,11 @@ public class CreateTask extends javax.swing.JDialog {
         startDateChooser.setForeground(new java.awt.Color(221, 255, 255));
         startDateChooser.setDateFormatString("yyyy-MM-dd");
 
+        endDateChooser.setBackground(new java.awt.Color(40, 40, 39));
+        endDateChooser.setDateFormatString("yyyy-MM-dd");
+
         endDateLbl.setForeground(new java.awt.Color(221, 255, 255));
         endDateLbl.setText("End Date:");
-
-        endDateChooser1.setBackground(new java.awt.Color(40, 40, 39));
-        endDateChooser1.setDateFormatString("yyyy-MM-dd");
 
         okButton.setBackground(new java.awt.Color(45, 168, 216));
         okButton.setForeground(new java.awt.Color(21, 25, 34));
@@ -126,49 +123,47 @@ public class CreateTask extends javax.swing.JDialog {
             }
         });
 
-        descTextArea.setBackground(new java.awt.Color(40, 40, 39));
-        descTextArea.setColumns(20);
-        descTextArea.setForeground(new java.awt.Color(221, 255, 255));
-        descTextArea.setRows(5);
-        descTextArea.setCaretColor(new java.awt.Color(221, 255, 255));
-        jScrollPane2.setViewportView(descTextArea);
+        descTextField.setBackground(new java.awt.Color(40, 40, 39));
+        descTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descTextFieldActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(113, 113, 113)
-                .addComponent(okButton)
-                .addGap(18, 18, 18)
-                .addComponent(cancelBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(endDateLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(startDateLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(statusComBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(priorityComBox, 0, 326, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(okButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(cancelBtn))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(descTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(priorityComBox, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(statusComBox, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(startDateLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(startDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(endDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE))
-                        .addGap(0, 31, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(endDateLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(endDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel1)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(descTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(priorityComBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -183,13 +178,15 @@ public class CreateTask extends javax.swing.JDialog {
                 .addGap(27, 27, 27)
                 .addComponent(endDateLbl)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(endDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(endDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(okButton)
                     .addComponent(cancelBtn))
                 .addContainerGap())
         );
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -199,7 +196,7 @@ public class CreateTask extends javax.swing.JDialog {
 //        if (title.isEmpty()) {
 //            title = "Untitled";
 //        }
-        String desc = descTextArea.getText();
+        String desc = descTextField.getText();
         LocalDate startDate = LocalDate.ofInstant(startDateChooser.getDate().toInstant(), ZoneId.systemDefault());
         // Set start date to current date if user leaves the field empty
         if (startDate == null) {
@@ -213,20 +210,23 @@ public class CreateTask extends javax.swing.JDialog {
             }
         } catch (InvalidDateException invD) {
             JOptionPane.showMessageDialog(rootPane, invD.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         Status taskStatus = Status.getEnum(statusComBox.getSelectedItem().toString());
         Priority taskPriority = Priority.getEnum(priorityComBox.getSelectedItem().toString());
         Task task;
         if (endDate != null) {
-            task = new Task(desc, taskStatus, startDate, endDate, taskPriority);
+            task = new Task(desc, taskStatus, startDate, endDate, taskPriority, obj.getProjectID());
         } else {
-            task = new Task(desc, taskStatus, startDate, taskPriority);
+            task = new Task(desc, taskStatus, startDate, taskPriority, obj.getProjectID());
         }
         try {
             TasksDB.save(task);
-        } catch (FailureException ex) {
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Error: Could not save to database.", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+        obj.refreshTable();
         this.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
 
@@ -234,58 +234,61 @@ public class CreateTask extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_cancelBtnActionPerformed
 
+    private void descTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_descTextFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CreateTask.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CreateTask.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CreateTask.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CreateTask.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                CreateTask dialog = new CreateTask(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(CreateTask.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(CreateTask.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(CreateTask.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(CreateTask.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the dialog */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                CreateTask dialog = new CreateTask(new javax.swing.JFrame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelBtn;
-    private javax.swing.JTextArea descTextArea;
+    private javax.swing.JTextField descTextField;
     private com.toedter.calendar.JDateChooser endDateChooser;
-    private com.toedter.calendar.JDateChooser endDateChooser1;
     private javax.swing.JLabel endDateLbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton okButton;
     private javax.swing.JComboBox<Priority> priorityComBox;
     private com.toedter.calendar.JDateChooser startDateChooser;
