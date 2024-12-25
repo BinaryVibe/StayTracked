@@ -400,7 +400,7 @@ public class AccountsDb {
         }
     }
 
-    //Method to update contact
+    //Method to update team name
     public static void updateTeamName(int teamID, String newTeamName) throws FailureException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
