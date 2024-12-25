@@ -39,6 +39,7 @@ public class TasksDB {
     private static final String updateEndDateQuery = "UPDATE tasks SET end_date = ? WHERE task_id = ?";
     private static final String updateStatusQuery = "UPDATE tasks SET status = ? WHERE task_id = ?";
     private static final String updatePriorityQuery = "UPDATE tasks SET priority = ? WHERE task_id = ?";
+    private static final String countTasksQuery = "SELECT t.total, d.done FROM (SELECT COUNT(task_id) AS done FROM tasks WHERE status = 'DONE' AND project_id IN (SELECT project_id FROM assigned_to WHERE account_id = ?)) AS d, (SELECT COUNT(task_id) AS total FROM tasks WHERE project_id IN (SELECT project_id FROM assigned_to WHERE account_id = ?)) AS t";
 
     // For newly created tasks at runtime  
     private static ArrayList<Integer> newTaskIDs = new ArrayList<>();
@@ -306,5 +307,30 @@ public class TasksDB {
                 throw new SQLException(ex.getMessage());
             }
         }
+    }
+
+    public static int getTasksCompletion() throws SQLException {
+        if (conn == null) {
+            throw new SQLException("Database connection is null");
+        }
+        double percentage;
+        percentage = 0;
+        double done = 0, total = 0;
+        try (PreparedStatement completionStmnt = conn.prepareStatement(countTasksQuery)) {
+            completionStmnt.setInt(1, CurrentSession.getAccountID());
+            completionStmnt.setInt(2, CurrentSession.getAccountID());
+            try (ResultSet projectsData = completionStmnt.executeQuery()) {
+                projectsData.next();
+                total = projectsData.getInt(1);
+                done = projectsData.getInt(2);
+            } catch (SQLException ex) {
+                throw new SQLException(ex.getMessage());
+            }
+
+        } catch (SQLException ex) {
+            throw new SQLException(ex.getMessage());
+        }
+        percentage = (done / total) * 100;
+        return (int) percentage;
     }
 }
