@@ -9,6 +9,7 @@ import db.DBConnectionManager;
 import db.ProjectsDB;
 import helper.JDateChooserEditor;
 import helper.TableCellListener;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Window;
@@ -34,6 +35,7 @@ import model.Priority;
 import model.Project;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import javax.swing.JPanel;
 
 /**
  *
@@ -448,7 +450,12 @@ public class ProjectsScreen extends javax.swing.JPanel {
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void showTasksBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showTasksBtnActionPerformed
-        // TODO add your handling code here:
+        ProjectAndTasks parentPanel = (ProjectAndTasks) this.getParent();
+        CardLayout cards = (CardLayout) parentPanel.getLayout();
+        int projectID = (int) projectsTable.getModel().getValueAt(projectsTable.getSelectedRow(), 5);
+        parentPanel.getTasksScreen().setProjectID(projectID);
+        parentPanel.getTasksScreen().populateTable();
+        cards.next(parentPanel);
     }//GEN-LAST:event_showTasksBtnActionPerformed
 
     private void clickHandler(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickHandler
