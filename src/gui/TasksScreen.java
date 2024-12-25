@@ -4,17 +4,53 @@
  */
 package gui;
 
+import customexceptions.FailureException;
+import db.DBConnectionManager;
+import db.ProjectsDB;
+import db.TasksDB;
+import helper.JDateChooserEditor;
+import helper.TableCellListener;
+import java.awt.Color;
+import java.awt.Frame;
+import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumnModel;
+import model.Priority;
+import model.Status;
+import model.Task;
+
 /**
  *
  * @author samtheradiant
  */
 public class TasksScreen extends javax.swing.JPanel {
 
+    int projectID;
+
     /**
      * Creates new form TasksScreen
      */
-    public TasksScreen() {
+    public TasksScreen(int projectID) {
+        this.projectID = projectID;
         initComponents();
+        populateTable();
     }
 
     /**
@@ -27,11 +63,13 @@ public class TasksScreen extends javax.swing.JPanel {
         topPanel = new javax.swing.JPanel();
         rightBtnsPanel = new javax.swing.JPanel();
         createTaskBtn = new javax.swing.JButton();
+        scanBtn = new javax.swing.JButton();
+        deleteBtn = new javax.swing.JButton();
         centerPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        hintLbl = new javax.swing.JLabel();
         leftBtnsPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        projectsTable = new javax.swing.JTable();
+        tasksTable = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(21, 25, 34));
         setLayout(new java.awt.BorderLayout());
@@ -54,12 +92,45 @@ public class TasksScreen extends javax.swing.JPanel {
             }
         });
 
+        scanBtn.setBackground(new java.awt.Color(21, 25, 34));
+        scanBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rotate-right.png"))); // NOI18N
+        scanBtn.setToolTipText("Scan for projects");
+        scanBtn.setBorderPainted(false);
+        scanBtn.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rotate-right-pressed.png"))); // NOI18N
+        // scanBtn.putClientProperty("JButton.buttonType", "roundRect");
+        scanBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                scanBtnActionPerformed(evt);
+            }
+        });
+
+        deleteBtn.setBackground(new java.awt.Color(21, 25, 34));
+        deleteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash.png"))); // NOI18N
+        deleteBtn.setToolTipText("Delete selected row(s)");
+        deleteBtn.setBorderPainted(false);
+        deleteBtn.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash-can-disabled.png"))); // NOI18N
+        deleteBtn.setEnabled(false);
+        deleteBtn.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash-pressed.png"))); // NOI18N
+        // deleteBtn.putClientProperty("JButton.buttonType", "roundRect");
+        //deleteBtn.putClientProperty("Button.borderWidth", 2);
+        //deleteBtn.putClientProperty("Button.hoverBorderColor", new Color(45, 168, 216));
+        //deleteBtn.putClientProperty("Button.borderColor", new Color(21, 25, 34));
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout rightBtnsPanelLayout = new javax.swing.GroupLayout(rightBtnsPanel);
         rightBtnsPanel.setLayout(rightBtnsPanelLayout);
         rightBtnsPanelLayout.setHorizontalGroup(
             rightBtnsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rightBtnsPanelLayout.createSequentialGroup()
-                .addContainerGap(133, Short.MAX_VALUE)
+                .addContainerGap(69, Short.MAX_VALUE)
+                .addComponent(deleteBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scanBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(createTaskBtn)
                 .addContainerGap())
         );
@@ -67,18 +138,22 @@ public class TasksScreen extends javax.swing.JPanel {
             rightBtnsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rightBtnsPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(createTaskBtn)
+                .addGroup(rightBtnsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(deleteBtn)
+                    .addComponent(scanBtn)
+                    .addComponent(createTaskBtn))
                 .addContainerGap())
         );
 
         centerPanel.setBackground(new java.awt.Color(21, 25, 34));
         centerPanel.setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setFont(new java.awt.Font("sansserif", 2, 13)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(45, 168, 216));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Double click to edit!");
-        centerPanel.add(jLabel1, java.awt.BorderLayout.CENTER);
+        hintLbl.setFont(new java.awt.Font("sansserif", 2, 13)); // NOI18N
+        hintLbl.setForeground(new java.awt.Color(45, 168, 216));
+        hintLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        hintLbl.setText("Double click to edit!");
+        hintLbl.setVisible(false);
+        centerPanel.add(hintLbl, java.awt.BorderLayout.CENTER);
 
         leftBtnsPanel.setBackground(new java.awt.Color(21, 25, 34));
 
@@ -116,14 +191,14 @@ public class TasksScreen extends javax.swing.JPanel {
 
         add(topPanel, java.awt.BorderLayout.PAGE_START);
 
-        projectsTable.setBackground(new java.awt.Color(21, 25, 34));
-        projectsTable.setForeground(new java.awt.Color(221, 255, 255));
-        projectsTable.setModel(new javax.swing.table.DefaultTableModel(
+        tasksTable.setBackground(new java.awt.Color(21, 25, 34));
+        tasksTable.setForeground(new java.awt.Color(221, 255, 255));
+        tasksTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Title ", "Start Date", "Deadline", "Status", "Priority", "ID"
+                "Description", "Start Date", "Deadline", "Status", "Priority", "ID"
             }
         ) {
             Class[] types = new Class [] {
@@ -141,19 +216,19 @@ public class TasksScreen extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        projectsTable.setFillsViewportHeight(true);
-        projectsTable.setRowHeight(25);
-        projectsTable.setShowGrid(false);
-        projectsTable.getTableHeader().setReorderingAllowed(false);
+        tasksTable.setFillsViewportHeight(true);
+        tasksTable.setRowHeight(25);
+        tasksTable.setShowGrid(false);
+        tasksTable.getTableHeader().setReorderingAllowed(false);
         // Set Enum columns' editor to be a JComboBox
 
-        projectsTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JComboBox<>(Status.values())));
-        projectsTable.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(new JComboBox<>(Priority.values())));
-        projectsTable.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));
-        projectsTable.getColumnModel().getColumn(2).setCellEditor(new JDateChooserEditor(new JTextField()));
+        tasksTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JComboBox<>(Status.values())));
+        tasksTable.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(new JComboBox<>(Priority.values())));
+        tasksTable.getColumnModel().getColumn(1).setCellEditor(new JDateChooserEditor(new JTextField()));
+        tasksTable.getColumnModel().getColumn(2).setCellEditor(new JDateChooserEditor(new JTextField()));
 
         // Listener for list selection
-        projectsTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        tasksTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent ev) {
                 handleButtonsVisiblity();
@@ -162,7 +237,7 @@ public class TasksScreen extends javax.swing.JPanel {
 
         // Set click to start editing
         for (int i = 0; i <= 4; i++) {
-            DefaultCellEditor cellEditor = (DefaultCellEditor) projectsTable.getColumnModel().getColumn(i).getCellEditor();
+            DefaultCellEditor cellEditor = (DefaultCellEditor) tasksTable.getColumnModel().getColumn(i).getCellEditor();
             try {
                 cellEditor.setClickCountToStart(2);
             }
@@ -171,13 +246,13 @@ public class TasksScreen extends javax.swing.JPanel {
             }
         }
 
-        TableColumnModel columnModel = projectsTable.getColumnModel();
-        columnModel.removeColumn(projectsTable.getColumnModel().getColumn(5));
+        TableColumnModel columnModel = tasksTable.getColumnModel();
+        columnModel.removeColumn(tasksTable.getColumnModel().getColumn(5));
 
-        JTableHeader tableHeader = projectsTable.getTableHeader();
+        JTableHeader tableHeader = tasksTable.getTableHeader();
         tableHeader.setBackground(new Color(45, 168, 216));
         tableHeader.setForeground(new Color(21, 25, 34));
-        // tableHeader.setFont(new Font(projectsTable.getFont().getFontName(), Font.BOLD, projectsTable.getFont().getSize()));
+        // tableHeader.setFont(new Font(tasksTable.getFont().getFontName(), Font.BOLD, tasksTable.getFont().getSize()));
 
         Action action = new AbstractAction()
         {
@@ -192,31 +267,137 @@ public class TasksScreen extends javax.swing.JPanel {
             }
         };
 
-        TableCellListener tcl = new TableCellListener(projectsTable, action);
-        projectsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        TableCellListener tcl = new TableCellListener(tasksTable, action);
+        tasksTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                projectsTableclickHandler(evt);
+                tasksTableclickHandler(evt);
             }
         });
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        jScrollPane1.setViewportView(projectsTable);
+        jScrollPane1.setViewportView(tasksTable);
+        if (tasksTable.getColumnModel().getColumnCount() > 0) {
+            tasksTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+            tasksTable.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+            tasksTable.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+            tasksTable.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+            tasksTable.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+        }
 
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void projectsTableclickHandler(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_projectsTableclickHandler
-        int rowIndex = projectsTable.rowAtPoint(evt.getPoint());
+    private void updateCell(TableCellListener tcl) {
+        if (tcl.getOldValue().equals(tcl.getNewValue())) {
+            return;
+        }
+        int row = tcl.getRow();
+        int column = tcl.getColumn();
+        int taskID = (int) tasksTable.getModel().getValueAt(row, 5);
+        System.out.println("Task Id: " + taskID);
+        System.out.println(tasksTable.getColumnName(column));
+        switch (column) {
+            // For "Description" Column
+            case 0:
+                String oldDesc = (String) tcl.getOldValue();
+                String newDesc = (String) tcl.getNewValue();
+                try {
+                    TasksDB.updateDesc(taskID, newDesc);
+                    System.out.println("New Description Set");
+                } catch (SQLException ex) {
+                    tasksTable.setValueAt(oldDesc, row, column);
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+                }
+                break;
+            // For "Start Date" Column
+            case 1:
+                // This works but I don't know how
+                // The old value's origin is LocalDate so maybe that's why
+                LocalDate oldStartDate = (LocalDate) tcl.getOldValue();
+
+                // Type-casting to LocalDate wierdly gets us a String first from getNewValue() which 
+                // cannot be type-casted to LocalDate
+                LocalDate newStartDate = LocalDate.parse((String) tcl.getNewValue());
+                LocalDate currentEndDate = (LocalDate) tasksTable.getValueAt(row, 2);
+                if (newStartDate.compareTo(currentEndDate) > 0) {
+                    JOptionPane.showMessageDialog(this, "Start Date cannot be greater than deadline date", "Date Error", JOptionPane.ERROR_MESSAGE);
+                    tasksTable.setValueAt(oldStartDate, row, column);
+                    break;
+                }
+                try {
+                    TasksDB.updateStartDate(taskID, newStartDate);
+                    System.out.println("New Start Date Set");
+                } catch (SQLException ex) {
+                    tasksTable.setValueAt(oldStartDate, row, column);
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+                }
+                break;
+            // For "Deadline" Column
+            case 2:
+                // This works but I don't know how
+                // The old value's origin is LocalDate so maybe that's why
+                LocalDate oldEndDate = (LocalDate) tcl.getOldValue();
+
+                // Type-casting to LocalDate wierdly gets us a String first from getNewValue() which 
+                // cannot be type-casted to LocalDate
+                LocalDate newEndDate = LocalDate.parse(tcl.getNewValue().toString());
+                LocalDate currentStartDate = LocalDate.parse(tasksTable.getValueAt(row, 1).toString());
+                if (newEndDate.compareTo(currentStartDate) < 0) {
+                    JOptionPane.showMessageDialog(this, "Deadline Date cannot be less than start date", "Date Error", JOptionPane.ERROR_MESSAGE);
+                    tasksTable.setValueAt(oldEndDate, row, column);
+                    break;
+                }
+                try {
+                    TasksDB.updateEndDate(taskID, newEndDate);
+                    System.out.println("New End Date Set");
+                } catch (SQLException ex) {
+                    tasksTable.setValueAt(oldEndDate, row, column);
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+                }
+                break;
+            // For "Status" Column
+            case 3:
+                Status oldStatus = Status.getEnum(tcl.getOldValue().toString());
+                Status newStatus = Status.getEnum(tcl.getNewValue().toString());
+                try {
+                    TasksDB.updateStatus(taskID, newStatus);
+                    System.out.println("New Status Set");
+                } catch (SQLException ex) {
+                    tasksTable.setValueAt(oldStatus, row, column);
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+                }
+                break;
+            case 4:
+                Priority oldPriority = Priority.getEnum(tcl.getOldValue().toString());
+                Priority newPriority = Priority.getEnum(tcl.getNewValue().toString());
+                try {
+                    TasksDB.updatePriority(taskID, newPriority);
+                    System.out.println("New Status Set");
+                } catch (SQLException ex) {
+                    tasksTable.setValueAt(oldPriority, row, column);
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+                }
+                break;
+        }
+    }
+
+    private void handleButtonsVisiblity() {
+        deleteBtn.setEnabled(true);
+
+    }
+
+    private void tasksTableclickHandler(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tasksTableclickHandler
+        int rowIndex = tasksTable.rowAtPoint(evt.getPoint());
         if (rowIndex < 0) {
-            projectsTable.clearSelection();
+            tasksTable.clearSelection();
             hintLbl.setVisible(false);
-            showTasksBtn.setVisible(false);
+//            showTasksBtn.setVisible(false);
             deleteBtn.setEnabled(false);
-            infoBtn.setEnabled(false);
+//            infoBtn.setEnabled(false);
         } else {
             hintLbl.setVisible(true);
         }
-    }//GEN-LAST:event_projectsTableclickHandler
+    }//GEN-LAST:event_tasksTableclickHandler
 
     private void createTaskBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createTaskBtnActionPerformed
         Window parentWindow = SwingUtilities.windowForComponent(this);
@@ -224,21 +405,87 @@ public class TasksScreen extends javax.swing.JPanel {
         if (parentWindow instanceof Frame frame) {
             parentFrame = frame;
         }
-        CreateProjectScreen screen1 = new CreateProjectScreen(parentFrame, true, this);
-        screen1.pack();
+        CreateTask screen1 = new CreateTask(parentFrame, true, this);
+        //screen1.pack();
         screen1.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         screen1.setVisible(true);
     }//GEN-LAST:event_createTaskBtnActionPerformed
+
+    private void scanBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scanBtnActionPerformed
+        refreshTable();
+    }//GEN-LAST:event_scanBtnActionPerformed
+
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        int option = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete the task(s)?", "Confirm Action", JOptionPane.YES_NO_OPTION);
+        switch (option) {
+            case JOptionPane.NO_OPTION:
+                return;
+        }
+        ArrayList<Integer> taskIDs = new ArrayList<>();
+        int[] rowIndices = tasksTable.getSelectedRows();
+        for (int rowIndex : rowIndices) {
+            int targetProjectID = (int) tasksTable.getModel().getValueAt(rowIndex, 5);
+            taskIDs.add(targetProjectID);
+        }
+        try {
+            TasksDB.deleteTasks(taskIDs);
+            DefaultTableModel model = (DefaultTableModel) tasksTable.getModel();
+            for (int rowIndex : rowIndices) {
+                model.removeRow(rowIndex);
+            }
+        } catch (FailureException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_deleteBtnActionPerformed
+
+    public void refreshTable() {
+        DefaultTableModel model = (DefaultTableModel) tasksTable.getModel();
+        ArrayList<Task> tasks = null;
+        try {
+            tasks = TasksDB.getNewTasks();
+            for (Task task : tasks) {
+                model.addRow(new Object[]{task.getDescription(), task.getStartDate(), task.getEndDate(), task.getStatus(), task.getPriority(), task.getTaskID()});
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
+
+    private void populateTable() {
+        if (DBConnectionManager.getConnection() == null) {
+            System.err.println("Database connection is null");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) tasksTable.getModel();
+        ArrayList<Task> tasks = null;
+        try {
+            if ((tasks = TasksDB.getTasks(getProjectID())) == null) {
+                return;
+            }
+            for (Task task : tasks) {
+                model.addRow(new Object[]{task.getDescription(), task.getStartDate(), task.getEndDate(), task.getStatus(), task.getPriority(), task.getProjectID()});
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    public int getProjectID() {
+        return projectID;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel centerPanel;
     private javax.swing.JButton createTaskBtn;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton deleteBtn;
+    private javax.swing.JLabel hintLbl;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel leftBtnsPanel;
-    private javax.swing.JTable projectsTable;
     private javax.swing.JPanel rightBtnsPanel;
+    private javax.swing.JButton scanBtn;
+    private javax.swing.JTable tasksTable;
     private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables
 }
