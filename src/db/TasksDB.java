@@ -85,6 +85,9 @@ public class TasksDB {
     }
 
     public static ArrayList<DashboardData> getDashboardData() throws FailureException {
+        if (conn == null) {
+            throw new FailureException("Database connection is null");
+        }
         ArrayList<DashboardData> data = new ArrayList<>();
         try (PreparedStatement dataStmnt = conn.prepareStatement(dashboardDataQuery)) {
             dataStmnt.setInt(1, CurrentSession.getAccountID());
