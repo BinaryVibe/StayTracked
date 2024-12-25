@@ -88,9 +88,9 @@ public class ProjectsDB {
             throw new FailureException(sqle.getMessage());
         } finally {
             try {
-                if (conn != null) {
-                    conn.setAutoCommit(true);
-                }
+
+                conn.setAutoCommit(true);
+
             } catch (SQLException e) {
                 throw new FailureException(e.getMessage());
             }
