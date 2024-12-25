@@ -12,33 +12,58 @@ import java.time.LocalDate;
  */
 public class Task {
     
+    private int taskID;
     private int projectID;
     private String description;
-    private Status taskStatus;
+    private Status status;
     private LocalDate startDate, endDate;
-    private Priority taskPriority;
+    private Priority priority;
 
     public Task() {
         this.description = "";
         this.startDate = LocalDate.now();
-        this.taskStatus = Status.PENDING;
-        this.taskPriority = Priority.NONE;
+        this.status = Status.PENDING;
+        this.priority = Priority.NONE;
     }
 
-    public Task(String description, Status taskStatus, LocalDate startDate, LocalDate endDate, Priority taskPriority) {
+    public Task(int taskID, String description, Status taskStatus, LocalDate startDate, LocalDate endDate, Priority taskPriority, int projectID) {
         this.description = description;
-        this.taskStatus = taskStatus;
+        this.status = taskStatus;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.taskPriority = taskPriority;
+        this.priority = taskPriority;
+        this.projectID = projectID;
     }
 
-    public Task(String description, Status taskStatus, LocalDate startDate, Priority taskPriority) {
+    public Task(String description, Status taskStatus, LocalDate startDate, LocalDate endDate, Priority taskPriority, int projectID) {
+        this.projectID = projectID;
         this.description = description;
-        this.taskStatus = taskStatus;
+        this.status = taskStatus;
         this.startDate = startDate;
-        this.taskPriority = taskPriority;
+        this.endDate = endDate;
+        this.priority = taskPriority;
     }
+    
+    
+
+    public Task(String description, Status taskStatus, LocalDate startDate, Priority taskPriority, int projectID) {
+        this.description = description;
+        this.status = taskStatus;
+        this.startDate = startDate;
+        this.priority = taskPriority;
+        this.projectID = projectID;
+    }
+
+    public Task(int taskID, String description, Status taskStatus, LocalDate startDate, LocalDate endDate, Priority taskPriority) {
+        this.taskID = taskID;
+        this.description = description;
+        this.status = taskStatus;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.priority = taskPriority;
+    }
+    
+    
 
     public int getProjectID() {
         return projectID;
@@ -47,6 +72,16 @@ public class Task {
     public void setProjectID(int projectID) {
         this.projectID = projectID;
     }
+
+    
+    
+    public int getTaskID() {
+        return taskID;
+    }
+
+    public void setTaskID(int taskID) {
+        this.taskID = taskID;
+    }
     
     
 
@@ -54,8 +89,8 @@ public class Task {
         return description;
     }
 
-    public String getTaskStatus() {
-        return taskStatus.name();
+    public String getStatus() {
+        return status.name();
     }
 
     public LocalDate getStartDate() {
@@ -66,16 +101,16 @@ public class Task {
         return endDate;
     }
 
-    public String getTaskPriority() {
-        return taskPriority.name();
+    public String getPriority() {
+        return priority.name();
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public void setTaskStatus(Status taskStatus) {
-        this.taskStatus = taskStatus;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public void setStartDate(LocalDate startDate) {
@@ -86,8 +121,8 @@ public class Task {
         this.endDate = endDate;
     }
 
-    public void setTaskPriority(Priority taskPriority) {
-        this.taskPriority = taskPriority;
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
 }
