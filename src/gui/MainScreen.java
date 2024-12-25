@@ -34,7 +34,8 @@ public class MainScreen extends javax.swing.JFrame {
         cardPanel.add(teams, "Teams");
         cardPanel.add(profile, "Profile");
         cardPanel.add(dashboard, "Dashbord");
-        cardPanel.add(projectsScreen1, "Projects");
+        cardPanel.add(projectAndTask, "Projects");
+        
 
         /* 
         //we will use this incase to use basic button look and feel
@@ -85,6 +86,7 @@ public class MainScreen extends javax.swing.JFrame {
         teams = new gui.TeamDetailsScreen();
         projectsScreen1 = new gui.ProjectsScreen();
         dashboard = new gui.DashboardScreen();
+        projectAndTask = new gui.ProjectAndTasks();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -241,6 +243,7 @@ public class MainScreen extends javax.swing.JFrame {
         cardPanel.add(teams, "card3");
         cardPanel.add(projectsScreen1, "card3");
         cardPanel.add(dashboard, "card4");
+        cardPanel.add(projectAndTask, "card5");
 
         mainPanel.add(cardPanel, java.awt.BorderLayout.CENTER);
 
@@ -411,6 +414,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JLabel profileIcon;
+    private gui.ProjectAndTasks projectAndTask;
     private gui.ProjectsScreen projectsScreen1;
     private javax.swing.JPanel tabsButtonPanel;
     private gui.TeamDetailsScreen teams;
