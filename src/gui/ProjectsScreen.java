@@ -248,7 +248,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 cellEditor.setClickCountToStart(2);
             }
             catch (NullPointerException ex) {
-                System.out.println(i + "- " + ex.getMessage());
+                // pass
             }
         }
 
