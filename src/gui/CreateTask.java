@@ -124,6 +124,7 @@ public class CreateTask extends javax.swing.JDialog {
         });
 
         descTextField.setBackground(new java.awt.Color(40, 40, 39));
+        descTextField.setForeground(new java.awt.Color(221, 255, 255));
         descTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 descTextFieldActionPerformed(evt);
