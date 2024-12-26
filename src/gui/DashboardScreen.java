@@ -9,7 +9,10 @@ import db.ProjectsDB;
 import db.TasksDB;
 import helper.CurrentSession;
 import java.awt.Color;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -34,11 +37,14 @@ public class DashboardScreen extends javax.swing.JPanel {
         
         try {
             completdProjctsSpinner.setValue(ProjectsDB.getProjectCompletion());
+            completedTaskSpinner.setValue(TasksDB.getTasksCompletion());
             lblError.setText(""); //this will empty the error label if something was written in it previously
             
         } catch (FailureException ex) {
             //JOptionPane.showConfirmDialog(this, ex.getMessage());
             lblError.setText(ex.getMessage()); //this will show error
+        } catch (SQLException ex) {
+            lblError.setText(ex.getMessage());
         }
         
         populateTable();
