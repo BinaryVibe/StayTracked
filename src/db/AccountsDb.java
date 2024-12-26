@@ -176,7 +176,7 @@ public class AccountsDb {
         }
     }
 
-    //method to add a new Normal account in database
+    //method to add a new Manager account in database
     public static void addManagerAccount(ManagerAccount account) throws FailureException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
