@@ -99,6 +99,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         showTasksBtn.setBackground(new java.awt.Color(45, 168, 216));
         showTasksBtn.setForeground(new java.awt.Color(21, 25, 34));
         showTasksBtn.setText("Show Tasks");
+        showTasksBtn.setBorderPainted(false);
         showTasksBtn.putClientProperty("JButton.buttonType", "roundRect");
         showTasksBtn.setVisible(false);
         showTasksBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -224,6 +225,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         });
         projectsTable.setFillsViewportHeight(true);
         projectsTable.setRowHeight(25);
+        projectsTable.setSelectionForeground(new java.awt.Color(21, 25, 34));
         projectsTable.setShowGrid(false);
         projectsTable.getTableHeader().setReorderingAllowed(false);
         // Set Enum columns' editor to be a JComboBox
@@ -423,6 +425,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         CreateProjectScreen screen1 = new CreateProjectScreen(parentFrame, true, this);
         screen1.pack();
         screen1.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        screen1.setLocationRelativeTo(this);
         screen1.setVisible(true);
     }//GEN-LAST:event_createProjectBtnActionPerformed
 
@@ -490,6 +493,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         ProjectInfoScreen screen1 = new ProjectInfoScreen(parentFrame, true, projectID, title, desc);
         screen1.pack();
         screen1.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        screen1.setLocationRelativeTo(this);
         screen1.setVisible(true);
     }//GEN-LAST:event_infoBtnActionPerformed
 

@@ -4,8 +4,6 @@
  */
 package gui;
 
-import javax.swing.JPanel;
-
 /**
  *
  * @author samtheradiant
