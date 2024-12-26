@@ -54,24 +54,29 @@ public class ProjectInfoScreen extends javax.swing.JDialog {
         editDescBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Project Info");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(21, 25, 34));
         jPanel1.setMinimumSize(new java.awt.Dimension(800, 455));
 
         titleLbl.setFont(new java.awt.Font("Myriad Pro", 3, 18)); // NOI18N
+        titleLbl.setForeground(new java.awt.Color(221, 255, 255));
         titleLbl.setText(this.title);
 
         descLbl.setFont(new java.awt.Font("Myriad Pro", 1, 16)); // NOI18N
+        descLbl.setForeground(new java.awt.Color(221, 255, 255));
         descLbl.setText("Description:");
 
         descTextArea.setEditable(false);
         descTextArea.setBackground(new java.awt.Color(21, 25, 34));
         descTextArea.setColumns(20);
+        descTextArea.setForeground(new java.awt.Color(221, 255, 255));
         descTextArea.setLineWrap(true);
         descTextArea.setRows(5);
         descTextArea.setText(this.desc);
         descTextArea.setWrapStyleWord(true);
+        descTextArea.setCaretColor(new java.awt.Color(221, 255, 255));
         descTextArea.setFocusable(false);
         jScrollPane2.setViewportView(descTextArea);
 
