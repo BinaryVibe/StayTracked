@@ -109,7 +109,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         deleteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash.png"))); // NOI18N
         deleteBtn.setToolTipText("Delete selected row(s)");
         deleteBtn.setBorderPainted(false);
-        deleteBtn.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash-can-disabled.png"))); // NOI18N
+        deleteBtn.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash-can-disabled-2.png"))); // NOI18N
         deleteBtn.setEnabled(false);
         deleteBtn.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash-pressed.png"))); // NOI18N
         // deleteBtn.putClientProperty("JButton.buttonType", "roundRect");
@@ -151,6 +151,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         infoBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/info.png"))); // NOI18N
         infoBtn.setToolTipText("Show project description");
         infoBtn.setBorderPainted(false);
+        infoBtn.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/info-disabled.png"))); // NOI18N
         infoBtn.setEnabled(false);
         infoBtn.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/info-pressed.png"))); // NOI18N
         infoBtn.addActionListener(new java.awt.event.ActionListener() {

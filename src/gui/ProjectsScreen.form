@@ -150,7 +150,7 @@
                 <Property name="toolTipText" type="java.lang.String" value="Delete selected row(s)"/>
                 <Property name="borderPainted" type="boolean" value="false"/>
                 <Property name="disabledIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/icons/trash-can-disabled.png"/>
+                  <Image iconType="3" name="/icons/trash-can-disabled-2.png"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
                 <Property name="pressedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -217,6 +217,9 @@
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Show project description"/>
                 <Property name="borderPainted" type="boolean" value="false"/>
+                <Property name="disabledIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/info-disabled.png"/>
+                </Property>
                 <Property name="enabled" type="boolean" value="false"/>
                 <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/info-pressed.png"/>
