@@ -4,6 +4,7 @@
  */
 package gui;
 
+import com.formdev.flatlaf.FlatDarculaLaf;
 import customexceptions.FailureException;
 import db.DBConnectionManager;
 import db.ProjectsDB;
@@ -47,9 +48,11 @@ public class ProjectsScreen extends javax.swing.JPanel {
      * Creates new form ProjectsScreen
      */
     public ProjectsScreen() {
-//        UIManager.put("Button.borderColor", new Color(21, 25, 34));
-//        UIManager.put("Button.hoverBorderColor", new Color(45, 168, 216));
-//        UIManager.put("Button.borderWidth", 2);
+        try {
+            UIManager.setLookAndFeel(new FlatDarculaLaf());
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize LaF");
+        }
         initComponents();
         populateTable();
     }
