@@ -523,7 +523,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         int rowIndex = projectsTable.getSelectedRow();
         int projectID = (int) projectsTable.getModel().getValueAt(rowIndex, 5);
         String title = (String) projectsTable.getValueAt(rowIndex, 0);
-        String desc= "";
+        String desc = "";
         try {
             desc = ProjectsDB.getDesc(projectID);
         } catch (SQLException ex) {
