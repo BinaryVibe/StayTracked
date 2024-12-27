@@ -20,6 +20,7 @@ public class Project {
     private Status projectStatus;
     private LocalDate startDate, endDate;
     private Priority projectPriority;
+    private ArrayList<Integer> assignedTo;
 
     // METHODS
     public Project() {
@@ -30,6 +31,18 @@ public class Project {
         this.projectPriority = Priority.NONE;
     }
 
+    public Project(String title, String desc, Status projectStatus, LocalDate startDate, LocalDate endDate, Priority projectPriority, ArrayList<Integer> assignedTo) {
+        this.title = title;
+        this.desc = desc;
+        this.projectStatus = projectStatus;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.projectPriority = projectPriority;
+        this.assignedTo = assignedTo;
+    }
+
+    
+    
     public Project(String title, String description, ArrayList<Task> tasks, Status projectStatus, LocalDate startDate, LocalDate endDate, Priority projectPriority) {
         this.title = title;
         this.desc = description;
@@ -143,5 +156,15 @@ public class Project {
     public String getPriority() {
         return projectPriority.name();
     }
+
+    public ArrayList<Integer> getAssignedTo() {
+        return assignedTo;
+    }
+
+    public void setAssignedTo(ArrayList<Integer> assignedTo) {
+        this.assignedTo = assignedTo;
+    }
+    
+    
     
 }
