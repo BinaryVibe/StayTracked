@@ -37,7 +37,6 @@ import model.Priority;
 import model.Project;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import javax.swing.JPanel;
 
 /**
  *
