@@ -560,7 +560,7 @@ public class AccountsDb {
         ArrayList<NormalAccount> members = new ArrayList<>();
 
         // Query to get team members and their account details using JOIN
-        String query = "SELECT a.first_name, a.last_name, a.username, a.contact_num, a.email, tm.role FROM team_members tm "
+        String query = "SELECT a.first_name, a.last_name, a.username, a.contact_num, a.email, tm.role, tm.account_id FROM team_members tm "
                 + "JOIN accounts a ON tm.account_id = a.account_id WHERE tm.team_id = ?";
 
         try (PreparedStatement ps = con.prepareStatement(query)) {
@@ -575,10 +575,11 @@ public class AccountsDb {
                     String contact = rs.getString("contact_num");
                     String email = rs.getString("email");
                     String role = rs.getString("role");
+                    int accoundID = rs.getInt("account_id");
                      
 
                     // Add member to the ArrayList
-                    members.add(new NormalAccount( role, firstName, lastName, userName, contact, email));
+                    members.add(new NormalAccount( role, firstName, lastName, userName, contact, email, accoundID));
                 }
             }
 
