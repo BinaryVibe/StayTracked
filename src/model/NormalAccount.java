@@ -9,11 +9,19 @@ public class NormalAccount extends Account {
         //refractor BOTH constructors and other function which use this constructors 
     
     
+    
     public NormalAccount(String role, String firstName, String lastName, String userName, String contactNum, String email, String password) {
         super(firstName, lastName, userName, contactNum, email, password);
         this.role = role;
     }
 
+    public NormalAccount(String role, String firstName, String lastName, String userName, String contactNum, String email, int accountID) {
+        super(firstName, lastName, userName, contactNum, email, accountID);
+        this.role = role;
+    }
+
+    
+    
         //This constructor will be used when we need to get or pass account without password
 
     public NormalAccount(String role, String firstName, String lastName, String userName, String contactNum, String email) {
