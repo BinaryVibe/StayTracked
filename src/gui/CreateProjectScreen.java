@@ -19,6 +19,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import model.NormalAccount;
 import model.Priority;
 import model.Project;
@@ -87,10 +89,11 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         priorityComBox = new javax.swing.JComboBox<>();
         membersLbl = new javax.swing.JLabel();
         membersComBox = new javax.swing.JComboBox<>();
-        jScrollPane4 = new javax.swing.JScrollPane();
+        listScrollPane = new javax.swing.JScrollPane();
         selectedMembersList = new javax.swing.JList<>();
         selecetedMembersLbl = new javax.swing.JLabel();
         addMemberBtn = new javax.swing.JButton();
+        deleteMemberBtn = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -112,11 +115,6 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         titleField.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
         titleField.setForeground(new java.awt.Color(221, 255, 255));
         titleField.setCaretColor(new java.awt.Color(221, 255, 255));
-        titleField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                titleFieldActionPerformed(evt);
-            }
-        });
 
         descLbl.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
         descLbl.setForeground(new java.awt.Color(221, 255, 255));
@@ -205,7 +203,13 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         selectedMembersList.setModel(new DefaultListModel<String>()
         );
         selectedMembersList.setFocusable(false);
-        jScrollPane4.setViewportView(selectedMembersList);
+        selectedMembersList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent evt) {
+                handleDeleteBtn(evt);
+            }
+        });
+        listScrollPane.setViewportView(selectedMembersList);
 
         selecetedMembersLbl.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
         selecetedMembersLbl.setForeground(new java.awt.Color(221, 255, 255));
@@ -217,6 +221,18 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         addMemberBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addMemberBtnActionPerformed(evt);
+            }
+        });
+
+        deleteMemberBtn.setBackground(new java.awt.Color(45, 168, 216));
+        deleteMemberBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash-black.png"))); // NOI18N
+        deleteMemberBtn.setBorderPainted(false);
+        deleteMemberBtn.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash-can-disabled-2.png"))); // NOI18N
+        deleteMemberBtn.setEnabled(false);
+        deleteMemberBtn.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash-pressed.png"))); // NOI18N
+        deleteMemberBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteMemberBtnActionPerformed(evt);
             }
         });
 
@@ -248,14 +264,16 @@ public class CreateProjectScreen extends javax.swing.JDialog {
                                 .addComponent(statusComBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(priorityLbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addMemberBtn))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(addMemberBtn, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(deleteMemberBtn, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(startDateLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(membersComBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(membersLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4)
+                            .addComponent(listScrollPane)
                             .addComponent(selecetedMembersLbl))))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
@@ -296,9 +314,11 @@ public class CreateProjectScreen extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(selecetedMembersLbl)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(listScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(priorityComBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(priorityComBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteMemberBtn))
                 .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(okButton)
@@ -311,6 +331,8 @@ public class CreateProjectScreen extends javax.swing.JDialog {
             membersComBox.setVisible(false);
             selecetedMembersLbl.setVisible(false);
             selectedMembersList.setVisible(false);
+            listScrollPane.setVisible(false);
+            addMemberBtn.setVisible(false);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -327,9 +349,11 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void titleFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleFieldActionPerformed
-
-    }//GEN-LAST:event_titleFieldActionPerformed
+    private void handleDeleteBtn(ListSelectionEvent evt) {
+        if (selectedMembersList.getSelectedIndices().length > 0) {
+            deleteMemberBtn.setEnabled(true);
+        }
+    }
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         this.dispose();
@@ -389,8 +413,7 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         Project project = null;
         if (memberIDs.isEmpty()) {
             project = new Project(title, desc, projectStatus, startDate, endDate, projectPriority);
-        }
-        else {
+        } else {
 //            System.out.println("Member IDs are not empty");
 //            for (int id : memberIDs) {
 //                System.out.println("Member IDs: " + id);
@@ -417,6 +440,12 @@ public class CreateProjectScreen extends javax.swing.JDialog {
     private void addMemberBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMemberBtnActionPerformed
         addSelectedMember();
     }//GEN-LAST:event_addMemberBtnActionPerformed
+
+    private void deleteMemberBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMemberBtnActionPerformed
+        int selectedIndex = selectedMembersList.getSelectedIndex();
+        DefaultListModel model = (DefaultListModel) selectedMembersList.getModel();
+        model.remove(selectedIndex);
+    }//GEN-LAST:event_deleteMemberBtnActionPerformed
 
     private void addSelectedMember() {
         if (membersComBox.getSelectedIndex() < 0) {
@@ -447,6 +476,7 @@ public class CreateProjectScreen extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addMemberBtn;
     private javax.swing.JButton cancelBtn;
+    private javax.swing.JButton deleteMemberBtn;
     private javax.swing.JLabel descLbl;
     private javax.swing.JTextArea descTextArea;
     private com.toedter.calendar.JDateChooser endDateChooser;
@@ -455,8 +485,8 @@ public class CreateProjectScreen extends javax.swing.JDialog {
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane listScrollPane;
     private javax.swing.JComboBox<String> membersComBox;
     private javax.swing.JLabel membersLbl;
     private javax.swing.JButton okButton;

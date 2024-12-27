@@ -67,7 +67,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePre" type="java.lang.String" value="if (CurrentSession.getAccountType().equalsIgnoreCase(&quot;Normal&quot;)) {&#xa;    membersLbl.setVisible(false);&#xa;    membersComBox.setVisible(false);&#xa;    selecetedMembersLbl.setVisible(false);&#xa;    selectedMembersList.setVisible(false);&#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePre" type="java.lang.String" value="if (CurrentSession.getAccountType().equalsIgnoreCase(&quot;Normal&quot;)) {&#xa;    membersLbl.setVisible(false);&#xa;    membersComBox.setVisible(false);&#xa;    selecetedMembersLbl.setVisible(false);&#xa;    selectedMembersList.setVisible(false);&#xa;    listScrollPane.setVisible(false);&#xa;    addMemberBtn.setVisible(false);&#xa;}"/>
       </AuxValues>
 
       <Layout>
@@ -100,7 +100,10 @@
                               </Group>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="addMemberBtn" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="addMemberBtn" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="deleteMemberBtn" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="startDateLbl" min="-2" pref="152" max="-2" attributes="0"/>
@@ -108,7 +111,7 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="membersComBox" alignment="0" max="32767" attributes="0"/>
                               <Component id="membersLbl" min="-2" pref="195" max="-2" attributes="0"/>
-                              <Component id="jScrollPane4" alignment="0" max="32767" attributes="0"/>
+                              <Component id="listScrollPane" alignment="0" max="32767" attributes="0"/>
                               <Component id="selecetedMembersLbl" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -157,11 +160,14 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="selecetedMembersLbl" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
+                          <Component id="listScrollPane" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="priorityComBox" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="priorityComBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="deleteMemberBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="okButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -199,9 +205,6 @@
               <Color blue="ff" green="ff" red="dd" type="rgb"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="titleFieldActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="descLbl">
           <Properties>
@@ -416,7 +419,7 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane4">
+        <Container class="javax.swing.JScrollPane" name="listScrollPane">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
@@ -440,6 +443,7 @@
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="selectedMembersList.addListSelectionListener(new ListSelectionListener() {&#xa;    @Override&#xa;    public void valueChanged(ListSelectionEvent evt) {&#xa;        handleDeleteBtn(evt);&#xa;    }&#xa;});&#xa;"/>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
@@ -468,6 +472,27 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addMemberBtnActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="deleteMemberBtn">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="d8" green="a8" red="2d" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/trash-black.png"/>
+            </Property>
+            <Property name="borderPainted" type="boolean" value="false"/>
+            <Property name="disabledIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/trash-can-disabled-2.png"/>
+            </Property>
+            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/trash-pressed.png"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteMemberBtnActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
