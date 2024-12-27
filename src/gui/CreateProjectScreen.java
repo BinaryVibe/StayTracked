@@ -6,14 +6,22 @@ package gui;
 
 import customexceptions.FailureException;
 import customexceptions.InvalidDateException;
+import db.AccountsDb;
 import db.ProjectsDB;
+import helper.CurrentSession;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.KeyEvent;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import model.NormalAccount;
 import model.Priority;
 import model.Project;
 import model.Status;
@@ -79,6 +87,12 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         statusComBox = new javax.swing.JComboBox<>();
         priorityLbl = new javax.swing.JLabel();
         priorityComBox = new javax.swing.JComboBox<>();
+        membersLbl = new javax.swing.JLabel();
+        membersComBox = new javax.swing.JComboBox<>();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        selectedMembersList = new javax.swing.JList<>();
+        selecetedMembersLbl = new javax.swing.JLabel();
+        addMemberBtn = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -92,10 +106,12 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        titleLbl.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
         titleLbl.setForeground(new java.awt.Color(221, 255, 255));
         titleLbl.setText("Title:");
 
         titleField.setBackground(new java.awt.Color(40, 40, 39));
+        titleField.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
         titleField.setForeground(new java.awt.Color(221, 255, 255));
         titleField.setCaretColor(new java.awt.Color(221, 255, 255));
         titleField.addActionListener(new java.awt.event.ActionListener() {
@@ -104,21 +120,26 @@ public class CreateProjectScreen extends javax.swing.JDialog {
             }
         });
 
+        descLbl.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
         descLbl.setForeground(new java.awt.Color(221, 255, 255));
         descLbl.setText("Description:");
 
+        startDateLbl.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
         startDateLbl.setForeground(new java.awt.Color(221, 255, 255));
         startDateLbl.setText("Start Date:");
 
         startDateChooser.setBackground(new java.awt.Color(40, 40, 39));
         startDateChooser.setForeground(new java.awt.Color(221, 255, 255));
         startDateChooser.setDateFormatString("yyyy-MM-dd");
+        startDateChooser.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
 
+        endDateLbl.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
         endDateLbl.setForeground(new java.awt.Color(221, 255, 255));
         endDateLbl.setText("End Date:");
 
         endDateChooser.setBackground(new java.awt.Color(40, 40, 39));
         endDateChooser.setDateFormatString("yyyy-MM-dd");
+        endDateChooser.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
 
         okButton.setBackground(new java.awt.Color(45, 168, 216));
         okButton.setForeground(new java.awt.Color(21, 25, 34));
@@ -140,58 +161,105 @@ public class CreateProjectScreen extends javax.swing.JDialog {
 
         descTextArea.setBackground(new java.awt.Color(40, 40, 39));
         descTextArea.setColumns(20);
+        descTextArea.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
         descTextArea.setForeground(new java.awt.Color(221, 255, 255));
         descTextArea.setRows(5);
         descTextArea.setCaretColor(new java.awt.Color(221, 255, 255));
         jScrollPane2.setViewportView(descTextArea);
 
+        statusLbl.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
         statusLbl.setForeground(new java.awt.Color(221, 255, 255));
         statusLbl.setText("Status:");
 
         statusComBox.setBackground(new java.awt.Color(40, 40, 39));
+        statusComBox.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
         statusComBox.setForeground(new java.awt.Color(221, 255, 255));
         statusComBox.setModel(new DefaultComboBoxModel<>(Status.values()));
 
+        priorityLbl.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
         priorityLbl.setForeground(new java.awt.Color(221, 255, 255));
         priorityLbl.setText("Priority:");
 
         priorityComBox.setBackground(new java.awt.Color(40, 40, 39));
+        priorityComBox.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
         priorityComBox.setForeground(new java.awt.Color(221, 255, 255));
         priorityComBox.setModel(new DefaultComboBoxModel<>(Priority.values()));
+
+        membersLbl.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
+        membersLbl.setForeground(new java.awt.Color(221, 255, 255));
+        membersLbl.setText("Project Members:");
+
+        membersComBox.setBackground(new java.awt.Color(40, 40, 39));
+        membersComBox.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
+        membersComBox.setForeground(new java.awt.Color(221, 255, 255));
+        membersComBox.setModel(new DefaultComboBoxModel<>(this.getUserNames())
+        );
+        membersComBox.setToolTipText("Select members to assign to the project");
+        membersComBox.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                keyHandler(evt);
+            }
+        });
+
+        selectedMembersList.setBackground(new java.awt.Color(40, 40, 39));
+        selectedMembersList.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
+        selectedMembersList.setForeground(new java.awt.Color(221, 255, 255));
+        selectedMembersList.setModel(new DefaultListModel<String>()
+        );
+        selectedMembersList.setFocusable(false);
+        jScrollPane4.setViewportView(selectedMembersList);
+
+        selecetedMembersLbl.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
+        selecetedMembersLbl.setForeground(new java.awt.Color(221, 255, 255));
+        selecetedMembersLbl.setText("Selected Members:");
+
+        addMemberBtn.setBackground(new java.awt.Color(45, 168, 216));
+        addMemberBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/plus-black.png"))); // NOI18N
+        addMemberBtn.setBorderPainted(false);
+        addMemberBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMemberBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(okButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cancelBtn)
+                .addGap(196, 196, 196))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(0, 47, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(descLbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(titleLbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(titleField, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(priorityComBox, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(statusLbl, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(startDateChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(endDateLbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(endDateChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                                .addComponent(statusComBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(priorityLbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(addMemberBtn))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(descLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(titleLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(titleField, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(priorityComBox, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(statusLbl, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(startDateLbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(startDateChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(endDateLbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(endDateChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
-                                        .addComponent(statusComBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(priorityLbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGap(108, 108, 108)))
-                        .addContainerGap(45, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(okButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancelBtn)
-                        .addGap(196, 196, 196))))
+                        .addComponent(startDateLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(membersComBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(membersLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4)
+                            .addComponent(selecetedMembersLbl))))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,19 +273,32 @@ public class CreateProjectScreen extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(startDateLbl)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(membersLbl)
+                    .addComponent(startDateLbl))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(startDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(endDateLbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(endDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(statusLbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(statusComBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(priorityLbl)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(startDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(membersComBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(endDateLbl)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(endDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(statusLbl)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(statusComBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(priorityLbl))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addMemberBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(selecetedMembersLbl)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(priorityComBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
@@ -227,6 +308,13 @@ public class CreateProjectScreen extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        if (CurrentSession.getAccountType().equalsIgnoreCase("Normal")) {
+            membersLbl.setVisible(false);
+            membersComBox.setVisible(false);
+            selecetedMembersLbl.setVisible(false);
+            selectedMembersList.setVisible(false);
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -235,9 +323,7 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -252,11 +338,15 @@ public class CreateProjectScreen extends javax.swing.JDialog {
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
+
+        // For Strings
         String title = titleField.getText();
         if (title.isEmpty()) {
             title = "Untitled";
         }
         String desc = descTextArea.getText();
+
+        // For LocalDates
         LocalDate startDate = LocalDate.ofInstant(startDateChooser.getDate().toInstant(), ZoneId.systemDefault());
         // Set start date to current date if user leaves the field empty
         if (startDate == null) {
@@ -265,24 +355,52 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         LocalDate endDate = null;
         try {
             endDate = LocalDate.ofInstant(endDateChooser.getDate().toInstant(), ZoneId.systemDefault());
-            if (!(startDate.compareTo(endDate) < 0)) {
+            if (!(startDate.compareTo(endDate) < 0)) { // If start date is less than end date
                 throw new InvalidDateException("End Date cannot be before than Start Date.");
             }
         } catch (InvalidDateException invD) {
             JOptionPane.showMessageDialog(rootPane, invD.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
         }
+
+        // For Enums
         Status projectStatus = Status.getEnum(statusComBox.getSelectedItem().toString());
         Priority projectPriority = Priority.getEnum(priorityComBox.getSelectedItem().toString());
-        Project project;
-        if (endDate != null) {
+
+        // For Project Members
+        ArrayList<Integer> memberIDs = new ArrayList<>();
+        if (CurrentSession.getAccountType().equalsIgnoreCase("Manager")) {
+            int numMembers = selectedMembersList.getModel().getSize();
+            selectedMembersList.setSelectionInterval(0, numMembers - 1);
+            String[] selectedMembers = selectedMembersList.getSelectedValuesList().toArray(new String[numMembers]);
+            for (String userName : selectedMembers) {
+                try {
+                    for (NormalAccount acc : AccountsDb.getTeamMembers(CurrentSession.getTeamID())) {
+                        if (acc.getUserName().equals(userName)) {
+                            // System.out.println("Username: " + userName);
+                            memberIDs.add(acc.getAccountID());
+                        }
+                    }
+                } catch (FailureException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        }
+
+        Project project = null;
+        if (memberIDs.isEmpty()) {
             project = new Project(title, desc, projectStatus, startDate, endDate, projectPriority);
-        } else {
-            project = new Project(title, desc, projectStatus, startDate, projectPriority);
+        }
+        else {
+//            System.out.println("Member IDs are not empty");
+//            for (int id : memberIDs) {
+//                System.out.println("Member IDs: " + id);
+//            }
+            project = new Project(title, desc, projectStatus, startDate, endDate, projectPriority, memberIDs);
         }
         try {
             ProjectsDB.save(project);
         } catch (FailureException ex) {
-            JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Error: Could not save to database.", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -290,50 +408,44 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
 
-//    private boolean checkDuplicate(String title) {
-//        try {
-//            if (!(ProjectsDB.searchDuplicateTitle(title))) {
-//                JOptionPane.showMessageDialog(rootPane, "Project with same title already created.", "Duplication Error", JOptionPane.ERROR_MESSAGE);
-//            }
-//        } catch (FailureException ex) {
-//            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
-//            return false;
-//        }
-//        return true;
-//    }
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            UIManager.setLookAndFeel(new FlatLightLaf());
-//        } catch (Exception ex) {
-//            System.err.println("Failed to initialize LaF");
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the dialog */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                CreateProjectScreen dialog = new CreateProjectScreen(new javax.swing.JFrame(), true);
-//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-//                    @Override
-//                    public void windowClosing(java.awt.event.WindowEvent e) {
-//                        System.exit(0);
-//                    }
-//                });
-//                dialog.setLocationRelativeTo(null);
-//                dialog.setVisible(true);
-//            }
-//        });
-//    }
+    private void keyHandler(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_keyHandler
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            addSelectedMember();
+        }
+    }//GEN-LAST:event_keyHandler
+
+    private void addMemberBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMemberBtnActionPerformed
+        addSelectedMember();
+    }//GEN-LAST:event_addMemberBtnActionPerformed
+
+    private void addSelectedMember() {
+        if (membersComBox.getSelectedIndex() < 0) {
+            JOptionPane.showMessageDialog(rootPane, "Please select a member.", "Selection Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        DefaultListModel model = (DefaultListModel) selectedMembersList.getModel();
+        String userName = (String) membersComBox.getSelectedItem();
+        // System.out.println("Username: " + userName);
+        if (model.contains(userName)) {
+            return;
+        }
+        model.addElement(userName);
+    }
+
+    private String[] getUserNames() {
+        ArrayList<String> userNames = new ArrayList<>();
+        try {
+            for (NormalAccount acc : AccountsDb.getTeamMembers(CurrentSession.getTeamID())) {
+                userNames.add(acc.getUserName());
+            }
+        } catch (FailureException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
+        return userNames.toArray(new String[userNames.size()]);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addMemberBtn;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JLabel descLbl;
     private javax.swing.JTextArea descTextArea;
@@ -343,10 +455,15 @@ public class CreateProjectScreen extends javax.swing.JDialog {
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JComboBox<String> membersComBox;
+    private javax.swing.JLabel membersLbl;
     private javax.swing.JButton okButton;
     private javax.swing.JComboBox<Priority> priorityComBox;
     private javax.swing.JLabel priorityLbl;
+    private javax.swing.JLabel selecetedMembersLbl;
+    private javax.swing.JList<String> selectedMembersList;
     private com.toedter.calendar.JDateChooser startDateChooser;
     private javax.swing.JLabel startDateLbl;
     private javax.swing.JComboBox<Status> statusComBox;
