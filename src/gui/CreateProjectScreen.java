@@ -360,6 +360,7 @@ public class CreateProjectScreen extends javax.swing.JDialog {
             }
         } catch (InvalidDateException invD) {
             JOptionPane.showMessageDialog(rootPane, invD.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
         // For Enums
@@ -382,6 +383,7 @@ public class CreateProjectScreen extends javax.swing.JDialog {
                     }
                 } catch (FailureException ex) {
                     System.out.println(ex.getMessage());
+                    return;
                 }
             }
         }
