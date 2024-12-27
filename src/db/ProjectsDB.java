@@ -41,6 +41,7 @@ public class ProjectsDB {
     private static final String updateStatusQuery = "UPDATE projects SET status = ? WHERE project_id = ?";
     private static final String updatePriorityQuery = "UPDATE projects SET priority = ? WHERE project_id = ?";
     private static final String getDescQuery = "SELECT description FROM projects WHERE project_id = ?";
+    private static final String getAccountType = "SELECT account_type FROM accounts WHERE account_id IN (SELECT account_id FROM assigned_to WHERE project_id = ?) AND account_type = 'Manager'";
 
     // For newly created projects at runtime  
     private static ArrayList<Integer> newProjectIDs = new ArrayList<>();
@@ -390,5 +391,17 @@ public class ProjectsDB {
             throw new SQLException(ex.getMessage());
         }
         return desc;
+    }
+
+    public static boolean checkPermission(int projectID) throws SQLException {
+        try (PreparedStatement checkStmnt = conn.prepareStatement(getAccountType)) {
+            checkStmnt.setInt(1, projectID);
+            try (ResultSet result = checkStmnt.executeQuery()) {
+                if (!(result.next())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
