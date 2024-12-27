@@ -89,7 +89,7 @@ public class ProjectsDB {
             conn.commit();
 
             // Assign to team members if account type is "Manager"
-            if (!(project.getAssignedTo().isEmpty())) {
+            if (!(project.getAssignedTo() == null)) {
                 affectedFKRows = 0;
                 for (int id : project.getAssignedTo()) {
                     System.out.println("ID:" + id);
