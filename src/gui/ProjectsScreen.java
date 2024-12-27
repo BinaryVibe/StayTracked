@@ -66,12 +66,13 @@ public class ProjectsScreen extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         centerPanel = new javax.swing.JPanel();
         hintLbl = new javax.swing.JLabel();
-        showTasksBtn = new javax.swing.JButton();
         rightPanel = new javax.swing.JPanel();
         deleteBtn = new javax.swing.JButton();
         createProjectBtn = new javax.swing.JButton();
         scanBtn = new javax.swing.JButton();
         infoBtn = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        showTasksBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         projectsTable = new javax.swing.JTable();
 
@@ -95,19 +96,6 @@ public class ProjectsScreen extends javax.swing.JPanel {
         hintLbl.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         hintLbl.setVisible(false);
         centerPanel.add(hintLbl, java.awt.BorderLayout.CENTER);
-
-        showTasksBtn.setBackground(new java.awt.Color(45, 168, 216));
-        showTasksBtn.setForeground(new java.awt.Color(21, 25, 34));
-        showTasksBtn.setText("Show Tasks");
-        showTasksBtn.setBorderPainted(false);
-        showTasksBtn.putClientProperty("JButton.buttonType", "roundRect");
-        showTasksBtn.setVisible(false);
-        showTasksBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showTasksBtnActionPerformed(evt);
-            }
-        });
-        centerPanel.add(showTasksBtn, java.awt.BorderLayout.WEST);
 
         jPanel1.add(centerPanel, java.awt.BorderLayout.CENTER);
 
@@ -174,9 +162,9 @@ public class ProjectsScreen extends javax.swing.JPanel {
             .addGroup(rightPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(deleteBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(createProjectBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(createProjectBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scanBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(infoBtn)
@@ -185,16 +173,49 @@ public class ProjectsScreen extends javax.swing.JPanel {
         rightPanelLayout.setVerticalGroup(
             rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rightPanelLayout.createSequentialGroup()
-                .addGap(0, 3, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(infoBtn)
-                    .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(deleteBtn, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(createProjectBtn, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(scanBtn, javax.swing.GroupLayout.Alignment.TRAILING))))
+                    .addComponent(scanBtn)
+                    .addComponent(createProjectBtn)
+                    .addComponent(deleteBtn))
+                .addContainerGap())
         );
 
         jPanel1.add(rightPanel, java.awt.BorderLayout.EAST);
+
+        jPanel2.setBackground(new java.awt.Color(21, 25, 34));
+
+        showTasksBtn.setBackground(new java.awt.Color(45, 168, 216));
+        showTasksBtn.setForeground(new java.awt.Color(21, 25, 34));
+        showTasksBtn.setText("Show Tasks");
+        showTasksBtn.setBorderPainted(false);
+        showTasksBtn.putClientProperty("JButton.buttonType", "roundRect");
+        showTasksBtn.setVisible(false);
+        showTasksBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showTasksBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(showTasksBtn)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(showTasksBtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel2, java.awt.BorderLayout.WEST);
 
         add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
@@ -526,6 +547,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
     private javax.swing.JButton infoBtn;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable projectsTable;
     private javax.swing.JPanel rightPanel;
