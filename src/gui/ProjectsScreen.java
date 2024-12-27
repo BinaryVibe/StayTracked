@@ -8,6 +8,7 @@ import com.formdev.flatlaf.FlatDarculaLaf;
 import customexceptions.FailureException;
 import db.DBConnectionManager;
 import db.ProjectsDB;
+import helper.CurrentSession;
 import helper.JDateChooserEditor;
 import helper.TableCellListener;
 import java.awt.CardLayout;
@@ -461,9 +462,24 @@ public class ProjectsScreen extends javax.swing.JPanel {
         }
         ArrayList<Integer> projectIDs = new ArrayList<>();
         int[] rowIndices = projectsTable.getSelectedRows();
+        String managerProjectTitles = "";
         for (int rowIndex : rowIndices) {
             int projectID = (int) projectsTable.getModel().getValueAt(rowIndex, 5);
+            if (CurrentSession.getAccountType().equals("Normal")) {
+                try {
+                    if (!(ProjectsDB.checkPermission(projectID))) {
+                        managerProjectTitles += projectsTable.getValueAt(rowIndex, 0) + ", ";
+                        continue;
+                    }
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
             projectIDs.add(projectID);
+        }
+        if (!(managerProjectTitles.isEmpty())) {
+            JOptionPane.showMessageDialog(this, "You are not allowed to delete project(s): " + managerProjectTitles, "Permission Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         try {
             ProjectsDB.deleteProjects(projectIDs);
