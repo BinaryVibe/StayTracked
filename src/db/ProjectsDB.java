@@ -74,6 +74,7 @@ public class ProjectsDB {
             }
             newProjectIDs.add(projectId);
 
+            // Assign to the creater
             assignStmnt.setInt(1, CurrentSession.getAccountID());
             assignStmnt.setInt(2, projectId);
 
@@ -83,7 +84,27 @@ public class ProjectsDB {
                 conn.rollback();
                 throw new FailureException("Insert did not work in assigned_to table");
             }
+
             conn.commit();
+
+            // Assign to team members if account type is "Manager"
+            if (!(project.getAssignedTo().isEmpty())) {
+                affectedFKRows = 0;
+                for (int id : project.getAssignedTo()) {
+                    System.out.println("ID:" + id);
+                    assignStmnt.setInt(1, id);
+                    assignStmnt.setInt(2, projectId);
+
+                    // FK: Foriegn Keys
+                    affectedFKRows = assignStmnt.executeUpdate();
+                    if (!(affectedFKRows > 0)) {
+                        conn.rollback();
+                        System.err.println("Could not assign project to team member with ID: " + id);
+                    }
+                    conn.commit();
+                }
+            }
+
         } catch (SQLException sqle) {
             throw new FailureException(sqle.getMessage());
         } finally {
