@@ -75,9 +75,11 @@ public class CreateTask extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(21, 25, 34));
 
+        jLabel1.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(221, 255, 255));
         jLabel1.setText("Description:");
 
+        jLabel2.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(221, 255, 255));
         jLabel2.setText("Priority:");
 
@@ -85,6 +87,7 @@ public class CreateTask extends javax.swing.JDialog {
         priorityComBox.setForeground(new java.awt.Color(221, 255, 255));
         priorityComBox.setModel(new DefaultComboBoxModel<>(Priority.values()));
 
+        jLabel3.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(221, 255, 255));
         jLabel3.setText("Status:");
 
@@ -92,6 +95,7 @@ public class CreateTask extends javax.swing.JDialog {
         statusComBox.setForeground(new java.awt.Color(221, 255, 255));
         statusComBox.setModel(new DefaultComboBoxModel<>(Status.values()));
 
+        startDateLbl.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
         startDateLbl.setForeground(new java.awt.Color(221, 255, 255));
         startDateLbl.setText("Start Date:");
 
@@ -102,6 +106,7 @@ public class CreateTask extends javax.swing.JDialog {
         endDateChooser.setBackground(new java.awt.Color(40, 40, 39));
         endDateChooser.setDateFormatString("yyyy-MM-dd");
 
+        endDateLbl.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
         endDateLbl.setForeground(new java.awt.Color(221, 255, 255));
         endDateLbl.setText("End Date:");
 
