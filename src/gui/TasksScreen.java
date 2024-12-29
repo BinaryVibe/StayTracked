@@ -418,8 +418,8 @@ public class TasksScreen extends javax.swing.JPanel {
             parentFrame = frame;
         }
         CreateTask screen1 = new CreateTask(parentFrame, true, this);
-        //screen1.pack();
         screen1.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        screen1.setLocationRelativeTo(this);
         screen1.setVisible(true);
     }//GEN-LAST:event_createTaskBtnActionPerformed
 
