@@ -27,7 +27,7 @@ public class TasksDB {
 
     // ATTRIBUTES
     private static final Connection conn = DBConnectionManager.getConnection();
-
+    
     // Queries
     private static final String insertTask = "INSERT INTO tasks (description, start_date, end_date, status, priority, project_id) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String dashboardDataQuery = "SELECT p.title AS 'project_title', COUNT(task_id) AS 'total_tasks', COUNT(CASE WHEN t.status = 'DONE' THEN 1 END) AS 'done_tasks' FROM projects p LEFT JOIN tasks t ON p.project_id = t.project_id WHERE p.project_id IN (SELECT project_id FROM assigned_to WHERE account_id = ?) GROUP BY t.project_id";
@@ -177,136 +177,28 @@ public class TasksDB {
         return tasks;
     }
 
-    public static void deleteTasks(ArrayList<Integer> trashProjectIDs) throws FailureException {
-        for (int id : trashProjectIDs) {
-            try (PreparedStatement deleteStmnt = conn.prepareStatement(deleteTasksQuery)) {
-                conn.setAutoCommit(false);
-                deleteStmnt.setInt(1, id);
-                int affectedRows = deleteStmnt.executeUpdate();
-                if (!(affectedRows > 0)) {
-                    conn.rollback();
-                    throw new FailureException("Could not delete project. (ID: " + id + ")");
-                }
-            } catch (SQLException ex) {
-                throw new FailureException(ex.getMessage());
-            } finally {
-                try {
-                    conn.setAutoCommit(true);
-                } catch (SQLException e) {
-                    throw new FailureException(e.getMessage());
-                }
-            }
-        }
+    public static void deleteTasks(ArrayList<Integer> trashTasksQuery) throws SQLException {
+        DatabaseUtils.deleteRows(deleteTasksQuery, trashTasksQuery);
     }
 
     public static void updateDesc(int targetTaskID, String desc) throws SQLException {
-        try (PreparedStatement updateStmnt = conn.prepareStatement(updateDescQuery)) {
-            conn.setAutoCommit(false);
-            updateStmnt.setString(1, desc);
-            updateStmnt.setInt(2, targetTaskID);
-            int affectedRows = updateStmnt.executeUpdate();
-            if (affectedRows == 0) {
-                conn.rollback();
-                throw new SQLException("Updating description failed, no rows affected.");
-            }
-            conn.commit();
-        } catch (SQLException ex) {
-            throw new SQLException(ex.getMessage());
-        } finally {
-            try {
-                conn.setAutoCommit(true);
-            } catch (SQLException ex) {
-                throw new SQLException(ex.getMessage());
-            }
-        }
+        DatabaseUtils.updateStringValue(updateDescQuery, targetTaskID, desc, "description");
     }
 
     public static void updateStartDate(int targetProjectID, LocalDate startDate) throws SQLException {
-        try (PreparedStatement updateStmnt = conn.prepareStatement(updateStartDateQuery)) {
-            conn.setAutoCommit(false);
-            updateStmnt.setDate(1, Date.valueOf(startDate));
-            updateStmnt.setInt(2, targetProjectID);
-            int affectedRows = updateStmnt.executeUpdate();
-            if (affectedRows == 0) {
-                conn.rollback();
-                throw new SQLException("Updating start date failed, no rows affected.");
-            }
-            conn.commit();
-        } catch (SQLException ex) {
-            throw new SQLException(ex.getMessage());
-        } finally {
-            try {
-                conn.setAutoCommit(true);
-            } catch (SQLException ex) {
-                throw new SQLException(ex.getMessage());
-            }
-        }
+        DatabaseUtils.updateDateValue(updateStartDateQuery, targetProjectID, startDate, "start");
     }
 
     public static void updateEndDate(int targetProjectID, LocalDate endDate) throws SQLException {
-        try (PreparedStatement updateStmnt = conn.prepareStatement(updateEndDateQuery)) {
-            conn.setAutoCommit(false);
-            updateStmnt.setDate(1, Date.valueOf(endDate));
-            updateStmnt.setInt(2, targetProjectID);
-            int affectedRows = updateStmnt.executeUpdate();
-            if (affectedRows == 0) {
-                conn.rollback();
-                throw new SQLException("Updating end date failed, no rows affected.");
-            }
-            conn.commit();
-        } catch (SQLException ex) {
-            throw new SQLException(ex.getMessage());
-        } finally {
-            try {
-                conn.setAutoCommit(true);
-            } catch (SQLException ex) {
-                throw new SQLException(ex.getMessage());
-            }
-        }
+        DatabaseUtils.updateDateValue(updateEndDateQuery, targetProjectID, endDate, "end");
     }
 
-    public static void updateStatus(int targetProjectID, Status newStatus) throws SQLException {
-        try (PreparedStatement pstmt = conn.prepareStatement(updateStatusQuery)) {
-            conn.setAutoCommit(false);
-            pstmt.setString(1, newStatus.name());
-            pstmt.setInt(2, targetProjectID);
-            int affectedRows = pstmt.executeUpdate();
-            if (affectedRows == 0) {
-                conn.rollback();
-                throw new SQLException("Updating status failed, no rows affected.");
-            }
-            conn.commit();
-        } catch (SQLException ex) {
-            throw new SQLException(ex.getMessage());
-        } finally {
-            try {
-                conn.setAutoCommit(true);
-            } catch (SQLException ex) {
-                throw new SQLException(ex.getMessage());
-            }
-        }
+    public static void updateStatus(int targetTaskID, Status newStatus) throws SQLException {
+        DatabaseUtils.updateEnumValue(updateStatusQuery, targetTaskID, newStatus, "status");
     }
 
-    public static void updatePriority(int targetProjectID, Priority newPriority) throws SQLException {
-        try (PreparedStatement pstmt = conn.prepareStatement(updatePriorityQuery)) {
-            conn.setAutoCommit(false);
-            pstmt.setString(1, newPriority.name());
-            pstmt.setInt(2, targetProjectID);
-            int affectedRows = pstmt.executeUpdate();
-            if (affectedRows == 0) {
-                conn.rollback();
-                throw new SQLException("Updating priority failed, no rows affected.");
-            }
-            conn.commit();
-        } catch (SQLException ex) {
-            throw new SQLException(ex.getMessage());
-        } finally {
-            try {
-                conn.setAutoCommit(true);
-            } catch (SQLException ex) {
-                throw new SQLException(ex.getMessage());
-            }
-        }
+    public static void updatePriority(int targetTaskID, Priority newPriority) throws SQLException {
+        DatabaseUtils.updateEnumValue(updatePriorityQuery, targetTaskID, newPriority, "priority");
     }
 
     public static int getTasksCompletion() throws SQLException {
