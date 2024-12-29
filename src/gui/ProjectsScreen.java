@@ -326,6 +326,15 @@ public class ProjectsScreen extends javax.swing.JPanel {
         int row = tcl.getRow();
         int column = tcl.getColumn();
         int projectID = (int) projectsTable.getModel().getValueAt(row, 5);
+        try {
+            if (!(DatabaseUtils.checkPermission(projectID))) {
+                JOptionPane.showMessageDialog(this, "You are not allowed to edit properties of this project.", "Permission Error", JOptionPane.ERROR_MESSAGE);
+                projectsTable.setValueAt(tcl.getOldValue(), row, column);
+                return;
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
         //System.out.println(projectsTable.getColumnName(column));
         switch (column) {
             // For "Title" Column

@@ -5,6 +5,7 @@
 package gui;
 
 import db.DBConnectionManager;
+import db.DatabaseUtils;
 import db.TasksDB;
 import helper.JDateChooserEditor;
 import helper.TableCellListener;
@@ -295,6 +296,15 @@ public class TasksScreen extends javax.swing.JPanel {
     private void updateCell(TableCellListener tcl) {
         int row = tcl.getRow();
         int column = tcl.getColumn();
+        try {
+            if (!(DatabaseUtils.checkPermission(projectID))) {
+                JOptionPane.showMessageDialog(this, "You are not allowed to edit task properties of this project.", "Permission Error", JOptionPane.ERROR_MESSAGE);
+                tasksTable.setValueAt(tcl.getOldValue(), row, column);
+                return;
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
         int taskID = (int) tasksTable.getModel().getValueAt(row, 5);
         System.out.println("Task Id: " + taskID);
         System.out.println(tasksTable.getColumnName(column));
@@ -423,16 +433,26 @@ public class TasksScreen extends javax.swing.JPanel {
             case JOptionPane.NO_OPTION:
                 return;
         }
+        try {
+            if (!(DatabaseUtils.checkPermission(this.projectID))) {
+                JOptionPane.showMessageDialog(this, "You are not allowed to delete tasks of this project.", "Permission Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         ArrayList<Integer> taskIDs = new ArrayList<>();
         int[] rowIndices = tasksTable.getSelectedRows();
         for (int rowIndex : rowIndices) {
             int targetProjectID = (int) tasksTable.getModel().getValueAt(rowIndex, 5);
+
             taskIDs.add(targetProjectID);
         }
         try {
             TasksDB.deleteTasks(taskIDs);
             DefaultTableModel model = (DefaultTableModel) tasksTable.getModel();
-            for (int i = rowIndices.length - 1; i >= 0; i--) { 
+            for (int i = rowIndices.length - 1; i >= 0; i--) {
                 model.removeRow(rowIndices[i]);
             }
         } catch (SQLException ex) {
