@@ -293,9 +293,6 @@ public class TasksScreen extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateCell(TableCellListener tcl) {
-        if (tcl.getOldValue().equals(tcl.getNewValue())) {
-            return;
-        }
         int row = tcl.getRow();
         int column = tcl.getColumn();
         int taskID = (int) tasksTable.getModel().getValueAt(row, 5);

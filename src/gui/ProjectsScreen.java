@@ -322,9 +322,6 @@ public class ProjectsScreen extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateCell(TableCellListener tcl) {
-        if (tcl.getOldValue().equals(tcl.getNewValue())) {
-            return;
-        }
         int row = tcl.getRow();
         int column = tcl.getColumn();
         int projectID = (int) projectsTable.getModel().getValueAt(row, 5);
