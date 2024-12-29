@@ -251,7 +251,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         });
         projectsTable.setFillsViewportHeight(true);
         projectsTable.setRowHeight(25);
-        projectsTable.setSelectionForeground(new java.awt.Color(21, 25, 34));
+        projectsTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
         projectsTable.setShowGrid(false);
         projectsTable.getTableHeader().setReorderingAllowed(false);
         // Set Enum columns' editor to be a JComboBox
