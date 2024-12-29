@@ -7,6 +7,7 @@ package gui;
 import com.formdev.flatlaf.FlatDarculaLaf;
 import customexceptions.FailureException;
 import db.DBConnectionManager;
+import db.DatabaseUtils;
 import db.ProjectsDB;
 import helper.CurrentSession;
 import helper.JDateChooserEditor;
@@ -461,12 +462,12 @@ public class ProjectsScreen extends javax.swing.JPanel {
         ArrayList<Integer> projectIDs = new ArrayList<>();
         int[] rowIndices = projectsTable.getSelectedRows();
         StringBuilder managerProjectTitles = new StringBuilder();
-        
+
         for (int rowIndex : rowIndices) {
             int projectID = (int) projectsTable.getModel().getValueAt(rowIndex, 5);
             if (CurrentSession.getAccountType().equals("Normal")) {
                 try {
-                    if (!(ProjectsDB.checkPermission(projectID))) {
+                    if (!(DatabaseUtils.checkPermission(projectID))) {
                         managerProjectTitles.append(projectsTable.getValueAt(rowIndex, 0)).append(", ");
                         continue;
                     }
@@ -484,8 +485,8 @@ public class ProjectsScreen extends javax.swing.JPanel {
         try {
             ProjectsDB.deleteProjects(projectIDs);
             DefaultTableModel model = (DefaultTableModel) projectsTable.getModel();
-           
-            for (int i = rowIndices.length - 1; i >= 0; i--) { 
+
+            for (int i = rowIndices.length - 1; i >= 0; i--) {
                 model.removeRow(rowIndices[i]);
             }
         } catch (SQLException ex) {
