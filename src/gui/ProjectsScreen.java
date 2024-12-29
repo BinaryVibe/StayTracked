@@ -485,11 +485,12 @@ public class ProjectsScreen extends javax.swing.JPanel {
         try {
             ProjectsDB.deleteProjects(projectIDs);
             DefaultTableModel model = (DefaultTableModel) projectsTable.getModel();
-            for (int rowIndex : rowIndices) {
-                model.removeRow(rowIndex);
+           
+            for (int i = rowIndices.length - 1; i >= 0; i--) { 
+                model.removeRow(rowIndices[i]);
             }
-        } catch (FailureException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error deleting projects: " + ex.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_deleteBtnActionPerformed
 

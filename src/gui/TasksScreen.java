@@ -437,11 +437,11 @@ public class TasksScreen extends javax.swing.JPanel {
         try {
             TasksDB.deleteTasks(taskIDs);
             DefaultTableModel model = (DefaultTableModel) tasksTable.getModel();
-            for (int rowIndex : rowIndices) {
-                model.removeRow(rowIndex);
+            for (int i = rowIndices.length - 1; i >= 0; i--) { 
+                model.removeRow(rowIndices[i]);
             }
-        } catch (FailureException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error deleting tasks: " + ex.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_deleteBtnActionPerformed
 
