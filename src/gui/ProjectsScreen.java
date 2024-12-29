@@ -463,13 +463,14 @@ public class ProjectsScreen extends javax.swing.JPanel {
         }
         ArrayList<Integer> projectIDs = new ArrayList<>();
         int[] rowIndices = projectsTable.getSelectedRows();
-        String managerProjectTitles = "";
+        StringBuilder managerProjectTitles = new StringBuilder();
+        
         for (int rowIndex : rowIndices) {
             int projectID = (int) projectsTable.getModel().getValueAt(rowIndex, 5);
             if (CurrentSession.getAccountType().equals("Normal")) {
                 try {
                     if (!(ProjectsDB.checkPermission(projectID))) {
-                        managerProjectTitles += projectsTable.getValueAt(rowIndex, 0) + ", ";
+                        managerProjectTitles.append(projectsTable.getValueAt(rowIndex, 0)).append(", ");
                         continue;
                     }
                 } catch (SQLException ex) {
@@ -478,7 +479,8 @@ public class ProjectsScreen extends javax.swing.JPanel {
             }
             projectIDs.add(projectID);
         }
-        if (!(managerProjectTitles.isEmpty())) {
+        if (managerProjectTitles.length() > 0) {
+            managerProjectTitles.setLength(managerProjectTitles.length() - 2); // Remove trailing comma and space
             JOptionPane.showMessageDialog(this, "You are not allowed to delete project(s): " + managerProjectTitles, "Permission Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
