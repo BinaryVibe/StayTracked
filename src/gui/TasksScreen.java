@@ -4,9 +4,7 @@
  */
 package gui;
 
-import customexceptions.FailureException;
 import db.DBConnectionManager;
-import db.ProjectsDB;
 import db.TasksDB;
 import helper.JDateChooserEditor;
 import helper.TableCellListener;
@@ -24,7 +22,6 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -225,6 +222,7 @@ public class TasksScreen extends javax.swing.JPanel {
         });
         tasksTable.setFillsViewportHeight(true);
         tasksTable.setRowHeight(25);
+        tasksTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tasksTable.setShowGrid(false);
         tasksTable.getTableHeader().setReorderingAllowed(false);
         // Set Enum columns' editor to be a JComboBox
