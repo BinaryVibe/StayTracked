@@ -202,27 +202,23 @@ public class TasksDB {
     }
 
     public static int getTasksCompletion() throws SQLException {
-        if (conn == null) {
-            throw new SQLException("Database connection is null");
-        }
-        double percentage;
-        percentage = 0;
-        double done = 0, total = 0;
-        try (PreparedStatement completionStmnt = conn.prepareStatement(countTasksQuery)) {
-            completionStmnt.setInt(1, CurrentSession.getAccountID());
-            completionStmnt.setInt(2, CurrentSession.getAccountID());
-            try (ResultSet projectsData = completionStmnt.executeQuery()) {
-                projectsData.next();
-                total = projectsData.getInt(1);
-                done = projectsData.getInt(2);
-            } catch (SQLException ex) {
-                throw new SQLException(ex.getMessage());
-            }
-
-        } catch (SQLException ex) {
-            throw new SQLException(ex.getMessage());
-        }
-        percentage = (done / total) * 100;
-        return (int) percentage;
+//        if (conn == null) {
+//            throw new SQLException("Database connection is null");
+//        }
+//        double percentage;
+//        percentage = 0;
+//        double done = 0, total = 0;
+//        try (PreparedStatement completionStmnt = conn.prepareStatement(countTasksQuery)) {
+//            completionStmnt.setInt(1, CurrentSession.getAccountID());
+//            completionStmnt.setInt(2, CurrentSession.getAccountID());
+//            try (ResultSet projectsData = completionStmnt.executeQuery()) {
+//                projectsData.next();
+//                total = projectsData.getInt(1);
+//                done = projectsData.getInt(2);
+//            }
+//        }
+//        percentage = (done / total) * 100;
+//        return (int) percentage;
+        return DatabaseUtils.getWorkCompletion(countTasksQuery);
     }
 }
