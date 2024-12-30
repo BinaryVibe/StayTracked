@@ -612,7 +612,7 @@ public class SignUp extends javax.swing.JFrame {
                 password = new String (txtPass.getPassword());
                 validatePassword(password);
                 userName = txtUsername.getText();
-                AccountsDb.validateUserName(userName);
+                validateUserName(userName);
 
                 //Next slide
                 if (currentPanelIndex < totalPanels - 1) {
