@@ -42,12 +42,12 @@ public class DatabaseUtils {
             }
             conn.commit();
         } catch (SQLException ex) {
-            throw new SQLException(ex.getMessage());
+            throw ex;
         } finally {
             try {
                 conn.setAutoCommit(true);
             } catch (SQLException ex) {
-                throw new SQLException(ex.getMessage());
+                throw ex;
             }
         }
     }
@@ -72,12 +72,12 @@ public class DatabaseUtils {
             }
             conn.commit();
         } catch (SQLException ex) {
-            throw new SQLException(ex.getMessage());
+            throw ex;
         } finally {
             try {
                 conn.setAutoCommit(true);
             } catch (SQLException ex) {
-                throw new SQLException(ex.getMessage());
+                throw ex;
             }
         }
     }
@@ -102,34 +102,14 @@ public class DatabaseUtils {
             }
             conn.commit();
         } catch (SQLException ex) {
-            throw new SQLException(ex.getMessage());
+            throw ex;
         } finally {
             try {
                 conn.setAutoCommit(true);
             } catch (SQLException ex) {
-                throw new SQLException(ex.getMessage());
+                throw ex;
             }
         }
-    }
-
-    public static int getWorkCompletion(String query) throws SQLException {
-        if (conn == null) {
-            throw new SQLException("Database connection is null");
-        }
-        double percentage;
-        percentage = 0;
-        double done = 0, total = 0;
-        try (PreparedStatement ps = conn.prepareStatement(query)) {
-            ps.setInt(1, CurrentSession.getAccountID());
-            ps.setInt(2, CurrentSession.getAccountID());
-            try (ResultSet projectsData = ps.executeQuery()) {
-                projectsData.next();
-                total = projectsData.getInt(1);
-                done = projectsData.getInt(2);
-            }
-        }
-        percentage = (done / total) * 100;
-        return (int) percentage;
     }
 
     /**
@@ -151,8 +131,8 @@ public class DatabaseUtils {
             } finally {
                 try {
                     conn.setAutoCommit(true);
-                } catch (SQLException e) {
-                    throw new SQLException(e.getMessage());
+                } catch (SQLException ex) {
+                    throw ex;
                 }
             }
         }
