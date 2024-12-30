@@ -8,6 +8,9 @@ import customexceptions.FailureException;
 import customexceptions.InvalidInputException;
 import db.AccountsDb;
 import helper.CurrentSession;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -215,6 +218,8 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
                 txtConfirmPass.setEnabled(false);
             } catch (FailureException fe) {
                 lblError.setText(fe.getMessage());
+            } catch (SQLException se) {
+               lblError.setText(se.getMessage());
             }
 
         } else {
