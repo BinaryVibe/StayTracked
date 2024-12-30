@@ -293,7 +293,7 @@ public class AccountsDb {
     }
 
     //Metohd to update Last name
-    public static void updateLastName(int accountID, String newLastName) throws FailureException {
+    public static void updateLastName(int accountID, String newLastName) throws FailureException, SQLException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
@@ -313,7 +313,7 @@ public class AccountsDb {
             }
 
         } catch (SQLException e) {
-            throw new FailureException(e.getMessage());
+            throw e;
         }
     }
 
