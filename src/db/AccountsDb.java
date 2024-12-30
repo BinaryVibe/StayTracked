@@ -318,7 +318,7 @@ public class AccountsDb {
     }
 
     //mMethod to update email
-    public static void updateEmail(int accountID, String newEmail) throws FailureException {
+    public static void updateEmail(int accountID, String newEmail) throws FailureException, SQLException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
@@ -338,7 +338,7 @@ public class AccountsDb {
             }
 
         } catch (SQLException e) {
-            throw new FailureException(e.getMessage());
+            throw e;
         }
     }
 
