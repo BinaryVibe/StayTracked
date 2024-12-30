@@ -562,6 +562,9 @@ public class ProfileScreen extends javax.swing.JPanel {
         } catch (FailureException fe) {
             lblFirstNameError1.setText(fe.getMessage());
         }
+        catch (SQLException se) {
+            lblUserNameError1.setText(se.getMessage());
+        }
 
         //again hide update button , txtField and show edit button, label
         lblCurrentFirstName.setVisible(true);
