@@ -613,6 +613,8 @@ public class ProfileScreen extends javax.swing.JPanel {
             lblEmailError1.setText(fe.getMessage());
         } catch (InvalidInputException ie){
             lblEmailError1.setText(ie.getMessage());
+        } catch (SQLException se) {
+             lblEmailError1.setText(se.getMessage());
         }
         
 
