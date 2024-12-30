@@ -707,8 +707,11 @@ public class SignUp extends javax.swing.JFrame {
                     dialog.setVisible(true);
                     this.dispose();
                 } catch (FailureException e) {
-                    String errMsg = e.getMessage();
-                    lblTeamDetailsError.setText(errMsg);
+                    
+                    lblTeamDetailsError.setText(e.getMessage());
+                    
+                } catch (SQLException se) {
+                    lblTeamDetailsError.setText(se.getMessage());
                 }
             }
         }
