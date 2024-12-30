@@ -611,8 +611,12 @@ public class SignUp extends javax.swing.JFrame {
             try {
                 password = new String(txtPass.getPassword());
                 AccountsDb.validatePassword(password);
+                
                 userName = txtUsername.getText();
-                validateUserName(userName);
+                if (userName.isEmpty()) {
+                    throw new InvalidInputException("Enter user name!");
+                }
+                
 
                 //Next slide
                 if (currentPanelIndex < totalPanels - 1) {
@@ -723,14 +727,7 @@ public class SignUp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnManagerActionPerformed
 
-    public static void validateUserName(String userName) throws InvalidInputException {
 
-        if (userName.isEmpty()) {
-            throw new InvalidInputException("Enter user name!");
-        }
-
-        //add a logic to check if userName is already taken
-    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
