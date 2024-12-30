@@ -653,9 +653,9 @@ public class SignUp extends javax.swing.JFrame {
                 }
 
             } catch (InvalidInputException e) {
-                String errMsg = e.getMessage();
-                System.out.println("Error: " + errMsg);
-                lblDetailsError.setText("Error: " + errMsg);
+                
+                System.out.println("Error: " + e.getMessage());
+                lblDetailsError.setText("Error: " + e.getMessage());
 
             }
 
