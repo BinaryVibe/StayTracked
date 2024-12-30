@@ -248,10 +248,10 @@ public class Login extends javax.swing.JFrame {
             MainScreenFrame.setLocationRelativeTo(null);
             this.dispose();
 
-        } catch (InvalidInputException e) {
-            String errMsg = e.getMessage();
-            System.out.println("Error: " + errMsg);
-            loginResult.setText("Error: " + errMsg);
+        } catch (InvalidInputException ie) {
+            
+            System.out.println("Error: " + ie.getMessage());
+            loginResult.setText("Error: " + ie.getMessage());
             
         } catch(FailureException fe){
             
