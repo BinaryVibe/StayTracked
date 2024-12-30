@@ -177,7 +177,7 @@ public class AccountsDb {
     }
 
     //method to add a new Manager account in database
-    public static void addManagerAccount(ManagerAccount account) throws FailureException {
+    public static void addManagerAccount(ManagerAccount account) throws FailureException, SQLException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
@@ -236,7 +236,7 @@ public class AccountsDb {
                 }
 
             } catch (SQLException e) {
-                throw new FailureException(e.getMessage());
+                throw e;
             }
 
         }
