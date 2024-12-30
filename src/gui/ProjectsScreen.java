@@ -51,7 +51,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
      */
     public ProjectsScreen() {
         try {
-            UIManager.setLookAndFeel(new FlatDarculaLaf());
+            UIManager.setLookAndFeel(new FlatMacDarkLaf());
         } catch (Exception ex) {
             System.err.println("Failed to initialize LaF");
         }
