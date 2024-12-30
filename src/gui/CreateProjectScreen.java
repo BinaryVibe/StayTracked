@@ -12,6 +12,7 @@ import helper.CurrentSession;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -422,7 +423,7 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         }
         try {
             ProjectsDB.save(project);
-        } catch (FailureException ex) {
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
