@@ -421,7 +421,7 @@ public class AccountsDb {
             }
 
         } catch (SQLException e) {
-            throw new FailureException(e.getMessage());
+            throw e;
         }
     }
 
