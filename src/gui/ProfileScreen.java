@@ -563,7 +563,7 @@ public class ProfileScreen extends javax.swing.JPanel {
             lblFirstNameError1.setText(fe.getMessage());
         }
         catch (SQLException se) {
-            lblUserNameError1.setText(se.getMessage());
+            lblFirstNameError1.setText(se.getMessage());
         }
 
         //again hide update button , txtField and show edit button, label
@@ -586,6 +586,9 @@ public class ProfileScreen extends javax.swing.JPanel {
             lblCurrentLastName.setText(CurrentSession.getLastName());
         } catch (FailureException fe) {
             lblLastNameError1.setText(fe.getMessage());
+        }
+        catch (SQLException se) {
+            lblLastNameError1.setText(se.getMessage());
         }
 
         //again hide update button , txtField and show edit button, label
