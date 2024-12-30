@@ -129,7 +129,6 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         startDateChooser.setBackground(new java.awt.Color(40, 40, 39));
         startDateChooser.setForeground(new java.awt.Color(221, 255, 255));
         startDateChooser.setDateFormatString("yyyy-MM-dd");
-        startDateChooser.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
 
         endDateLbl.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
         endDateLbl.setForeground(new java.awt.Color(221, 255, 255));
@@ -137,7 +136,6 @@ public class CreateProjectScreen extends javax.swing.JDialog {
 
         endDateChooser.setBackground(new java.awt.Color(40, 40, 39));
         endDateChooser.setDateFormatString("yyyy-MM-dd");
-        endDateChooser.setFont(new java.awt.Font("Myriad Pro", 0, 15)); // NOI18N
 
         okButton.setBackground(new java.awt.Color(45, 168, 216));
         okButton.setForeground(new java.awt.Color(21, 25, 34));
