@@ -761,6 +761,16 @@ public class SignUp extends javax.swing.JFrame {
         }
 
     }
+        
+            public static void validateUserName(String userName) throws InvalidInputException {
+
+        if (userName.isEmpty()) {
+            throw new InvalidInputException("Enter user name!");
+        }
+
+        //add a logic to check if userName is already taken
+    }
+            
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
