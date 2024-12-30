@@ -27,10 +27,10 @@ public class TasksDB {
 
     // ATTRIBUTES
     private static final Connection conn = DBConnectionManager.getConnection();
-    
+
     // Queries
     private static final String insertTask = "INSERT INTO tasks (description, start_date, end_date, status, priority, project_id) VALUES (?, ?, ?, ?, ?, ?)";
-    private static final String dashboardDataQuery = "SELECT p.title AS 'project_title', COUNT(task_id) AS 'total_tasks', COUNT(CASE WHEN t.status = 'DONE' THEN 1 END) AS 'done_tasks' FROM projects p LEFT JOIN tasks t ON p.project_id = t.project_id WHERE p.project_id IN (SELECT project_id FROM assigned_to WHERE account_id = ?) GROUP BY t.project_id";
+    private static final String dashboardDataQuery = "SELECT p.title AS 'project_title', COUNT(task_id) AS 'total_tasks', COUNT(CASE WHEN t.status = 'DONE' THEN 1 END) AS 'done_tasks' FROM projects p LEFT JOIN tasks t ON p.project_id = t.project_id WHERE p.project_id IN (SELECT project_id FROM assigned_to WHERE account_id = ?) GROUP BY p.project_id, p.title";
     private static final String getTasksQuery = "SELECT task_id, description, start_date, end_date, status, priority FROM tasks WHERE project_id = ?";
     private static final String getNewTaskQuery = "SELECT task_id, description, start_date, end_date, status, priority FROM tasks WHERE task_id = ?";
     private static final String deleteTasksQuery = "DELETE FROM tasks WHERE task_id = ?";
@@ -50,7 +50,7 @@ public class TasksDB {
     public static void save(Task task) throws SQLException {
         try (PreparedStatement saveStmnt = conn.prepareStatement(insertTask, Statement.RETURN_GENERATED_KEYS)) {
             conn.setAutoCommit(false);
-            saveStmnt.setString(1, task.getDescription());
+            saveStmnt.setString(1, task.getDesc());
             saveStmnt.setDate(2, Date.valueOf(task.getStartDate()));
             saveStmnt.setDate(3, Date.valueOf(task.getEndDate()));
             saveStmnt.setString(4, task.getStatus());
@@ -74,13 +74,11 @@ public class TasksDB {
             newTaskIDs.add(taskId);
 
             conn.commit();
-        } catch (SQLException sqle) {
-            throw new SQLException(sqle.getMessage());
         } finally {
             try {
                 conn.setAutoCommit(true);
-            } catch (SQLException e) {
-                throw new SQLException(e.getMessage());
+            } catch (SQLException ex) {
+                throw ex;
             }
         }
     }
@@ -133,12 +131,7 @@ public class TasksDB {
                     tasks.add(new Task(task_id, desc, taskStatus, startDate, endDate, taskPriority));
                     taskIDs.add(task_id);
                 }
-            } catch (SQLException sqle) {
-                throw new SQLException(sqle.getMessage());
             }
-
-        } catch (SQLException ex) {
-            throw new SQLException(ex.getMessage());
         }
         return tasks;
     }
@@ -164,15 +157,11 @@ public class TasksDB {
                         tasks.add(new Task(taskID, desc, status, startDate, endDate, priority));
                         tempIDs.add(id);
                     }
-                } catch (SQLException ex) {
-                    throw new SQLException(ex.getMessage());
                 }
             }
             for (int id : tempIDs) {
                 taskIDs.add(newTaskIDs.remove(newTaskIDs.indexOf(id)));
             }
-        } catch (SQLException ex) {
-            throw new SQLException(ex.getMessage());
         }
         return tasks;
     }
@@ -202,23 +191,22 @@ public class TasksDB {
     }
 
     public static int getTasksCompletion() throws SQLException {
-//        if (conn == null) {
-//            throw new SQLException("Database connection is null");
-//        }
-//        double percentage;
-//        percentage = 0;
-//        double done = 0, total = 0;
-//        try (PreparedStatement completionStmnt = conn.prepareStatement(countTasksQuery)) {
-//            completionStmnt.setInt(1, CurrentSession.getAccountID());
-//            completionStmnt.setInt(2, CurrentSession.getAccountID());
-//            try (ResultSet projectsData = completionStmnt.executeQuery()) {
-//                projectsData.next();
-//                total = projectsData.getInt(1);
-//                done = projectsData.getInt(2);
-//            }
-//        }
-//        percentage = (done / total) * 100;
-//        return (int) percentage;
-        return DatabaseUtils.getWorkCompletion(countTasksQuery);
+        if (conn == null) {
+            throw new SQLException("Database connection is null");
+        }
+        double percentage;
+        percentage = 0;
+        double done = 0, total = 0;
+        try (PreparedStatement completionStmnt = conn.prepareStatement(countTasksQuery)) {
+            completionStmnt.setInt(1, CurrentSession.getAccountID());
+            completionStmnt.setInt(2, CurrentSession.getAccountID());
+            try (ResultSet projectsData = completionStmnt.executeQuery()) {
+                projectsData.next();
+                total = projectsData.getInt(1);
+                done = projectsData.getInt(2);
+            }
+        }
+        percentage = (done / total) * 100;
+        return (int) percentage;
     }
 }
