@@ -4,8 +4,7 @@
  */
 package gui;
 
-import com.formdev.flatlaf.FlatDarculaLaf;
-import customexceptions.FailureException;
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import db.DBConnectionManager;
 import db.DatabaseUtils;
 import db.ProjectsDB;
@@ -51,7 +50,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
      */
     public ProjectsScreen() {
         try {
-            UIManager.setLookAndFeel(new FlatDarculaLaf());
+            UIManager.setLookAndFeel(new FlatMacDarkLaf());
         } catch (Exception ex) {
             System.err.println("Failed to initialize LaF");
         }
@@ -327,16 +326,17 @@ public class ProjectsScreen extends javax.swing.JPanel {
         int row = tcl.getRow();
         int column = tcl.getColumn();
         int projectID = (int) projectsTable.getModel().getValueAt(row, 5);
-        try {
-            if (!(DatabaseUtils.checkPermission(projectID))) {
-                JOptionPane.showMessageDialog(this, "You are not allowed to edit properties of this project.", "Permission Error", JOptionPane.ERROR_MESSAGE);
-                projectsTable.setValueAt(tcl.getOldValue(), row, column);
-                return;
+        if (CurrentSession.getAccountType().equals("Normal")) {
+            try {
+                if (!(DatabaseUtils.checkPermission(projectID))) {
+                    JOptionPane.showMessageDialog(this, "You are not allowed to edit properties of this project.", "Permission Error", JOptionPane.ERROR_MESSAGE);
+                    projectsTable.setValueAt(tcl.getOldValue(), row, column);
+                    return;
+                }
+            } catch (SQLException ex) {
+                System.err.println(ex.getMessage());
             }
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
         }
-        //System.out.println(projectsTable.getColumnName(column));
         switch (column) {
             // For "Title" Column
             case 0:
@@ -344,7 +344,6 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 String newTitle = (String) tcl.getNewValue();
                 try {
                     ProjectsDB.updateTitle(projectID, newTitle);
-                    //System.out.println("New Title Set");
                 } catch (SQLException ex) {
                     projectsTable.setValueAt(oldTitle, row, column);
                     JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -367,7 +366,6 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 }
                 try {
                     ProjectsDB.updateStartDate(projectID, newStartDate);
-                    // System.out.println("New Start Date Set");
                 } catch (SQLException ex) {
                     projectsTable.setValueAt(oldStartDate, row, column);
                     JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -390,7 +388,6 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 }
                 try {
                     ProjectsDB.updateEndDate(projectID, newEndDate);
-                    //System.out.println("New End Date Set");
                 } catch (SQLException ex) {
                     projectsTable.setValueAt(oldEndDate, row, column);
                     JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -402,7 +399,6 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 Status newStatus = Status.getEnum(tcl.getNewValue().toString());
                 try {
                     ProjectsDB.updateStatus(projectID, newStatus);
-                    //System.out.println("New Status Set");
                 } catch (SQLException ex) {
                     projectsTable.setValueAt(oldStatus, row, column);
                     JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -413,7 +409,6 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 Priority newPriority = Priority.getEnum(tcl.getNewValue().toString());
                 try {
                     ProjectsDB.updatePriority(projectID, newPriority);
-                    //System.out.println("New Status Set");
                 } catch (SQLException ex) {
                     projectsTable.setValueAt(oldPriority, row, column);
                     JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -445,7 +440,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
             for (Project project : projects) {
                 model.addRow(new Object[]{project.getTitle(), project.getStartDate(), project.getEndDate(), project.getStatus(), project.getPriority(), project.getId()});
             }
-        } catch (FailureException ex) {
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }
@@ -563,7 +558,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
             for (Project project : projects) {
                 model.addRow(new Object[]{project.getTitle(), project.getStartDate(), project.getEndDate(), project.getStatus(), project.getPriority(), project.getId()});
             }
-        } catch (FailureException ex) {
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
         }
 

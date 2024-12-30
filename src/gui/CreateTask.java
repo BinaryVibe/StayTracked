@@ -52,18 +52,19 @@ public class CreateTask extends javax.swing.JDialog {
         startDateChooser = new com.toedter.calendar.JDateChooser();
         //startDateChooser.setDateFormatString("dd-MM-yyyy");
 
-        for (Component c : startDateChooser.getComponents()) {
-            ((JComponent) c).setBackground(new Color(40, 40, 39));
-        }
+        //for (Component c : startDateChooser.getComponents()) {
+            //    ((JComponent) c).setBackground(new Color(40, 40, 39));
+            //}
 
         // JComponent editorUI = startDateChooser.getDateEditor().getUiComponent();
         // editorUI.setForeground(new Color(221, 255, 255));
         endDateChooser = new com.toedter.calendar.JDateChooser();
         // endDateChooser.setDateFormatString("dd-mm-yyyy");
 
-        for (Component c : endDateChooser.getComponents()) {
-            ((JComponent) c).setBackground(new Color(40, 40, 39));
-        }
+        //
+        //for (Component c : endDateChooser.getComponents()) {
+            //    ((JComponent) c).setBackground(new Color(40, 40, 39));
+            //}
         endDateLbl = new javax.swing.JLabel();
         okButton = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();

@@ -35,9 +35,21 @@ public class JDateChooserEditor extends DefaultCellEditor {
     @Override
     public Object getCellEditorValue() {
         DateFormat temp = new SimpleDateFormat(this.dateFormat);
-        return temp.format(dateChooser.getDate());
+        try {
+            return temp.format(dateChooser.getDate());
+        } catch (NullPointerException ex) {
+            return null; 
+        }
     }
-    
-   
+
+    @Override
+    public boolean stopCellEditing() {
+        if (dateChooser.getDate() == null) {
+            cancelCellEditing();
+            return false;
+        }
+        return super.stopCellEditing(); 
+    }
+
     
 }

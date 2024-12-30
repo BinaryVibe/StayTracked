@@ -130,8 +130,8 @@
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Component id="descLbl" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" pref="207" max="32767" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jScrollPane2" min="-2" pref="197" max="-2" attributes="0"/>
+                  <EmptySpace pref="28" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="membersLbl" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="startDateLbl" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -237,12 +237,9 @@
               <Color blue="ff" green="ff" red="dd" type="rgb"/>
             </Property>
             <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Myriad Pro" size="15" style="0"/>
-            </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="//startDateChooser.setDateFormatString(&quot;dd-MM-yyyy&quot;);&#xa;&#xa;for (Component c : startDateChooser.getComponents()) {&#xa;    ((JComponent) c).setBackground(new Color(40, 40, 39));&#xa;}&#xa;&#xa;// JComponent editorUI = startDateChooser.getDateEditor().getUiComponent();&#xa;// editorUI.setForeground(new Color(221, 255, 255));&#xa;"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="//startDateChooser.setDateFormatString(&quot;dd-MM-yyyy&quot;);&#xa;&#xa;//for (Component c : startDateChooser.getComponents()) {&#xa;//    ((JComponent) c).setForeground(new Color(255, 255, 255));&#xa;//}&#xa;&#xa;// JComponent editorUI = startDateChooser.getDateEditor().getUiComponent();&#xa;// editorUI.setForeground(new Color(255, 255, 255));&#xa;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="endDateLbl">
@@ -262,12 +259,9 @@
               <Color blue="27" green="28" red="28" type="rgb"/>
             </Property>
             <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Myriad Pro" size="15" style="0"/>
-            </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="// endDateChooser.setDateFormatString(&quot;dd-mm-yyyy&quot;);&#xa;&#xa;&#xa;for (Component c : endDateChooser.getComponents()) {&#xa;    ((JComponent) c).setBackground(new Color(40, 40, 39));&#xa;}&#xa;"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="// endDateChooser.setDateFormatString(&quot;dd-mm-yyyy&quot;);&#xa;&#xa;&#xa;//for (Component c : endDateChooser.getComponents()) {&#xa;//    ((JComponent) c).setBackground(new Color(40, 40, 39));&#xa;//}&#xa;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="okButton">
