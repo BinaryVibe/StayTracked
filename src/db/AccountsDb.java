@@ -243,7 +243,7 @@ public class AccountsDb {
     }
 
     //Method to update userName
-    public static void updateUserName(int accountID, String newUserName) throws FailureException {
+    public static void updateUserName(int accountID, String newUserName) throws FailureException, SQLException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
@@ -263,7 +263,7 @@ public class AccountsDb {
             }
 
         } catch (SQLException e) {
-            throw new FailureException(e.getMessage());
+            throw e;
         }
     }
 
