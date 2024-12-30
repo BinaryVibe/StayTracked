@@ -460,7 +460,7 @@ public class AccountsDb {
     }
 
     //Method to add team members
-    public static void addTeamMember(String email) throws FailureException {
+    public static void addTeamMember(String email) throws FailureException, SQLException {
 
         if (con == null) {
             throw new FailureException("Database connection failed!");
@@ -505,7 +505,7 @@ public class AccountsDb {
                 }
             }
         } catch (SQLException se) {
-            throw new FailureException(se.getMessage());
+            throw se;
 
         }
 
