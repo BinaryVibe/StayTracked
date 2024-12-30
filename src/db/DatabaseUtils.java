@@ -27,10 +27,10 @@ public class DatabaseUtils {
      * @param query The DML query to update a value
      * @param targetID The primary key of the database entity in which the Enum is in
      * @param newValue The new Enum value
-     * @param enumName The name of the Enum e.g, priority, task
+     * @param columnName The name of the Enum e.g, priority, task
      * @throws SQLException
      */
-    public static void updateEnumValue(String query, int targetID, Enum newValue, String enumName) throws SQLException {
+    public static void updateEnumValue(String query, int targetID, Enum newValue, String columnName) throws SQLException {
         try (PreparedStatement ps = conn.prepareStatement(query)) {
             conn.setAutoCommit(false);
             ps.setString(1, newValue.name());
@@ -38,7 +38,7 @@ public class DatabaseUtils {
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0) {
                 conn.rollback();
-                throw new SQLException("Updating " + enumName + " failed, no rows affected.");
+                throw new SQLException("Updating " + columnName + " failed, no rows affected.");
             }
             conn.commit();
         } catch (SQLException ex) {
@@ -57,10 +57,10 @@ public class DatabaseUtils {
      * @param query The DML query to update a value
      * @param targetID The primary key of the database entity in which the String is in
      * @param newValue The new String value
-     * @param stringName The name of the String e.g, title, description
+     * @param columnName The name of the String e.g, title, description
      * @throws SQLException
      */
-    public static void updateStringValue(String query, int targetID, String newValue, String stringName) throws SQLException {
+    public static void updateStringValue(String query, int targetID, String newValue, String columnName) throws SQLException {
         try (PreparedStatement ps = conn.prepareStatement(query)) {
             conn.setAutoCommit(false);
             ps.setString(1, newValue);
@@ -68,7 +68,7 @@ public class DatabaseUtils {
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0) {
                 conn.rollback();
-                throw new SQLException("Updating " + stringName + " failed, no rows affected.");
+                throw new SQLException("Updating " + columnName + " failed, no rows affected.");
             }
             conn.commit();
         } catch (SQLException ex) {
@@ -87,10 +87,10 @@ public class DatabaseUtils {
      * @param query The DML query to update a value
      * @param targetID The primary key of the database entity in which the Date is in
      * @param newValue The new Date value
-     * @param dateName The name of the Date e.g, start, end, deadline
+     * @param columnName The name of the Date e.g, start, end, deadline
      * @throws SQLException
      */
-    public static void updateDateValue(String query, int targetID, LocalDate newValue, String dateName) throws SQLException {
+    public static void updateDateValue(String query, int targetID, LocalDate newValue, String columnName) throws SQLException {
         try (PreparedStatement ps = conn.prepareStatement(query)) {
             conn.setAutoCommit(false);
             ps.setDate(1, Date.valueOf(newValue));
@@ -98,7 +98,7 @@ public class DatabaseUtils {
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0) {
                 conn.rollback();
-                throw new SQLException("Updating " + dateName + " date failed, no rows affected.");
+                throw new SQLException("Updating " + columnName + " date failed, no rows affected.");
             }
             conn.commit();
         } catch (SQLException ex) {
@@ -141,7 +141,7 @@ public class DatabaseUtils {
     /**
      * 
      * @param projectID
-     * @return
+     * @return 
      * @throws SQLException 
      */
     public static boolean checkPermission(int projectID) throws SQLException {
