@@ -343,7 +343,7 @@ public class AccountsDb {
     }
 
     //Method to update contact
-    public static void updateContact(int accountID, String newContact) throws FailureException {
+    public static void updateContact(int accountID, String newContact) throws FailureException, SQLException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
@@ -368,7 +368,7 @@ public class AccountsDb {
     }
 
     //Method to update password
-    public static void updatePass(int accountID, String currentPass, String newPass) throws FailureException {
+    public static void updatePass(int accountID, String currentPass, String newPass) throws FailureException, SQLException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
@@ -396,7 +396,7 @@ public class AccountsDb {
                 }
             }
         } catch (SQLException se) {
-            throw new FailureException(se.getMessage());
+            throw se;
         }
     }
 
