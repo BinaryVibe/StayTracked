@@ -337,7 +337,6 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 System.err.println(ex.getMessage());
             }
         }
-        //System.out.println(projectsTable.getColumnName(column));
         switch (column) {
             // For "Title" Column
             case 0:
@@ -345,7 +344,6 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 String newTitle = (String) tcl.getNewValue();
                 try {
                     ProjectsDB.updateTitle(projectID, newTitle);
-                    //System.out.println("New Title Set");
                 } catch (SQLException ex) {
                     projectsTable.setValueAt(oldTitle, row, column);
                     JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -368,7 +366,6 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 }
                 try {
                     ProjectsDB.updateStartDate(projectID, newStartDate);
-                    // System.out.println("New Start Date Set");
                 } catch (SQLException ex) {
                     projectsTable.setValueAt(oldStartDate, row, column);
                     JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -391,7 +388,6 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 }
                 try {
                     ProjectsDB.updateEndDate(projectID, newEndDate);
-                    //System.out.println("New End Date Set");
                 } catch (SQLException ex) {
                     projectsTable.setValueAt(oldEndDate, row, column);
                     JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -403,7 +399,6 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 Status newStatus = Status.getEnum(tcl.getNewValue().toString());
                 try {
                     ProjectsDB.updateStatus(projectID, newStatus);
-                    //System.out.println("New Status Set");
                 } catch (SQLException ex) {
                     projectsTable.setValueAt(oldStatus, row, column);
                     JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -414,7 +409,6 @@ public class ProjectsScreen extends javax.swing.JPanel {
                 Priority newPriority = Priority.getEnum(tcl.getNewValue().toString());
                 try {
                     ProjectsDB.updatePriority(projectID, newPriority);
-                    //System.out.println("New Status Set");
                 } catch (SQLException ex) {
                     projectsTable.setValueAt(oldPriority, row, column);
                     JOptionPane.showMessageDialog(this, ex.getMessage());
