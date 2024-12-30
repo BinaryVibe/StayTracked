@@ -8,8 +8,6 @@ import db.DBConnectionManager;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.UIManager;
 import model.ManagerAccount;
 import model.NormalAccount;
