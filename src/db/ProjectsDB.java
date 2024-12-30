@@ -48,9 +48,11 @@ public class ProjectsDB {
     private static ArrayList<Integer> projectIDs = new ArrayList<>();
 
     // METHODS
-    public static void save(Project project) throws FailureException {
+    public static void save(Project project) throws SQLException {
         try (PreparedStatement saveStmnt = conn.prepareStatement(insertProjectQuery, Statement.RETURN_GENERATED_KEYS); PreparedStatement assignStmnt = conn.prepareStatement(assignUserIDQuery)) {
+
             conn.setAutoCommit(false);
+
             saveStmnt.setString(1, project.getTitle());
             saveStmnt.setString(2, project.getDesc());
             saveStmnt.setString(3, project.getStatus());
@@ -70,7 +72,7 @@ public class ProjectsDB {
                 }
             } else {
                 conn.rollback();
-                throw new FailureException("Insert did not work in projects table!");
+                throw new SQLException("Insert did not work in projects table!");
             }
             newProjectIDs.add(projectId);
 
@@ -82,7 +84,7 @@ public class ProjectsDB {
             int affectedFKRows = assignStmnt.executeUpdate();
             if (!(affectedFKRows > 0)) {
                 conn.rollback();
-                throw new FailureException("Insert did not work in assigned_to table");
+                throw new SQLException("Insert did not work in assigned_to table");
             }
 
             conn.commit();
@@ -106,21 +108,19 @@ public class ProjectsDB {
             }
 
         } catch (SQLException sqle) {
-            throw new FailureException(sqle.getMessage());
+            throw sqle;
         } finally {
             try {
-
                 conn.setAutoCommit(true);
-
-            } catch (SQLException e) {
-                throw new FailureException(e.getMessage());
+            } catch (SQLException ex) {
+                throw ex;
             }
         }
     }
 
-    public static ArrayList<Project> getProjects() throws FailureException {
+    public static ArrayList<Project> getProjects() throws SQLException {
         if (conn == null) {
-            throw new FailureException("Database connection is null");
+            throw new SQLException("Database connection is null");
         }
         ArrayList<Project> projects = new ArrayList<>();
         try (PreparedStatement listProjectsStmnt = conn.prepareStatement(getProjectsQuery)) {
@@ -140,30 +140,16 @@ public class ProjectsDB {
                     projects.add(new Project(project_id, title, startDate, endDate, projectStatus, projectPriority));
                     projectIDs.add(project_id);
                 }
-            } catch (SQLException sqle) {
-                //conn.rollback();
-                System.err.print(sqle.getMessage());
-            }
-
-        } catch (SQLException ex) {
-            System.err.print(ex.getMessage());
-            if (conn != null) {
-                try {
-                    System.err.print("Transaction is being rolled back");
-                    conn.rollback();
-                } catch (SQLException sqlexcep) {
-                    System.err.print(sqlexcep.getMessage());
-                }
             }
         }
         return projects;
     }
 
-    public static ArrayList<Project> getNewProjects() throws FailureException {
+    public static ArrayList<Project> getNewProjects() throws SQLException {
         ArrayList<Project> projects = new ArrayList<>();
         ArrayList<Integer> tempIDs = new ArrayList<>();
         if (newProjectIDs.isEmpty()) {
-            throw new FailureException("Already updated to latest project");
+            throw new SQLException("Already updated to latest project");
         }
         try (PreparedStatement newProjectStmnt = conn.prepareStatement(getNewProjectQuery)) {
             for (int id : newProjectIDs) {
@@ -180,43 +166,38 @@ public class ProjectsDB {
                         projects.add(new Project(projectID, title, startDate, endDate, projectStatus, projectPriority));
                         tempIDs.add(id);
                     }
-                } catch (SQLException ex) {
-                    throw new FailureException(ex.getMessage());
                 }
             }
             for (int id : tempIDs) {
                 projectIDs.add(newProjectIDs.remove(newProjectIDs.indexOf(id)));
             }
-        } catch (SQLException ex) {
-            throw new FailureException(ex.getMessage());
         }
         return projects;
     }
 
-    public static int getProjectCompletion() throws SQLException {
-//        if (conn == null) {
-//            throw new FailureException("Database connection is null");
-//        }
-//        double percentage;
-//        percentage = 0;
-//        double done = 0, total = 0;
-//        try (PreparedStatement completionStmnt = conn.prepareStatement(countProjectsQuery)) {
-//            completionStmnt.setInt(1, CurrentSession.getAccountID());
-//            completionStmnt.setInt(2, CurrentSession.getAccountID());
-//            try (ResultSet projectsData = completionStmnt.executeQuery()) {
-//                projectsData.next();
-//                total = projectsData.getInt(1);
-//                done = projectsData.getInt(2);
-//            } catch (SQLException ex) {
-//                throw new FailureException(ex.getMessage());
-//            }
-//
-//        } catch (SQLException ex) {
-//            throw new FailureException(ex.getMessage());
-//        }
-//        percentage = (done / total) * 100;
-//        return (int) percentage;
-        return DatabaseUtils.getWorkCompletion(countProjectsQuery);
+    public static int getProjectCompletion() throws FailureException {
+        if (conn == null) {
+            throw new FailureException("Database connection is null");
+        }
+        double percentage;
+        percentage = 0;
+        double done = 0, total = 0;
+        try (PreparedStatement completionStmnt = conn.prepareStatement(countProjectsQuery)) {
+            completionStmnt.setInt(1, CurrentSession.getAccountID());
+            completionStmnt.setInt(2, CurrentSession.getAccountID());
+            try (ResultSet projectsData = completionStmnt.executeQuery()) {
+                projectsData.next();
+                total = projectsData.getInt(1);
+                done = projectsData.getInt(2);
+            } catch (SQLException ex) {
+                throw new FailureException(ex.getMessage());
+            }
+
+        } catch (SQLException ex) {
+            throw new FailureException(ex.getMessage());
+        }
+        percentage = (done / total) * 100;
+        return (int) percentage;
     }
 
     public static void deleteProjects(ArrayList<Integer> trashProjectIDs) throws SQLException {
@@ -258,11 +239,8 @@ public class ProjectsDB {
                     throw new SQLException("No project found with project_id: " + projectId);
                 }
             }
-        } catch (SQLException ex) {
-            throw new SQLException(ex.getMessage());
         }
         return desc;
     }
-
 
 }
