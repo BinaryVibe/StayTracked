@@ -4,9 +4,7 @@
  */
 package gui;
 
-import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
-import customexceptions.FailureException;
 import db.DBConnectionManager;
 import db.DatabaseUtils;
 import db.ProjectsDB;
