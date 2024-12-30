@@ -38,9 +38,6 @@ public class DashboardScreen extends javax.swing.JPanel {
         } catch (SQLException ex) {
             lblError.setText(ex.getMessage());
             System.out.println("SQLException: " + ex.getMessage());
-        } catch (FailureException ex) {
-            lblError.setText(ex.getMessage());
-            System.out.println("FailureException: " + ex.getMessage());
         }
 
         populateTable();
