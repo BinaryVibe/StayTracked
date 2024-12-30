@@ -7,16 +7,11 @@ package gui;
 import customexceptions.FailureException;
 import db.ProjectsDB;
 import db.TasksDB;
-import helper.CurrentSession;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import model.Account;
 import model.DashboardData;
 
 /**
