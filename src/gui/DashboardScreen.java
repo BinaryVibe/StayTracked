@@ -58,6 +58,7 @@ public class DashboardScreen extends javax.swing.JPanel {
             }
         } catch (FailureException fe) {
             lblError.setText(fe.getMessage());
+            System.out.println("FailureException: " + fe.getMessage());
         }
     }
 
