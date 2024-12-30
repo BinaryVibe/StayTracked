@@ -28,13 +28,13 @@ public class SignUp extends javax.swing.JFrame {
         initComponents();
         slider.init(signupPanel, personalDetailsPanel, accountTypePanel, teamDetails);
         slider.setAnimate(10);
-        
+
         //Close data base connection when user closes the window
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 DBConnectionManager.closeConnection(); // Close the database connection
-                
+
             }
         });
 
@@ -609,8 +609,8 @@ public class SignUp extends javax.swing.JFrame {
         //Validate inputs at slide 1 
         if (currentPanelIndex == 0) {
             try {
-                password = new String (txtPass.getPassword());
-                validatePassword(password);
+                password = new String(txtPass.getPassword());
+                AccountsDb.validatePassword(password);
                 userName = txtUsername.getText();
                 validateUserName(userName);
 
@@ -621,7 +621,7 @@ public class SignUp extends javax.swing.JFrame {
                 }
 
             } catch (InvalidInputException e) {
-                
+
                 lblSignUpError.setText("Error: " + e.getMessage());
 
             }
@@ -630,7 +630,7 @@ public class SignUp extends javax.swing.JFrame {
         else if (currentPanelIndex == 1) {
             try {
                 email = txtEmail.getText();
-                validateEmail(email);
+                AccountsDb.validateEmail(email);
 
                 firstName = txtFirstName.getText();
                 if (firstName.isEmpty()) {
@@ -653,7 +653,7 @@ public class SignUp extends javax.swing.JFrame {
                 }
 
             } catch (InvalidInputException e) {
-                
+
                 System.out.println("Error: " + e.getMessage());
                 lblDetailsError.setText("Error: " + e.getMessage());
 
@@ -665,8 +665,7 @@ public class SignUp extends javax.swing.JFrame {
             if (accTypeBtnGrp.getSelection() == null) {
                 System.out.println("No button is selected!");
                 lblAccountTypeError.setText("Please select an option.");
-            }
-            else if (btnPersonal.isSelected()) {
+            } else if (btnPersonal.isSelected()) {
                 try {
                     NormalAccount user = new NormalAccount("Member", firstName, lastName, userName, contactNum, email, password);
 
@@ -679,11 +678,10 @@ public class SignUp extends javax.swing.JFrame {
 
                 } catch (FailureException fe) {
 
-                    
                     lblSignUpError.setText(fe.getMessage());
-                    
+
                 } catch (SQLException se) {
-                    
+
                     lblSignUpError.setText(se.getMessage());
                 }
             } //Next Slide
@@ -707,9 +705,9 @@ public class SignUp extends javax.swing.JFrame {
                     dialog.setVisible(true);
                     this.dispose();
                 } catch (FailureException e) {
-                    
+
                     lblTeamDetailsError.setText(e.getMessage());
-                    
+
                 } catch (SQLException se) {
                     lblTeamDetailsError.setText(se.getMessage());
                 }
@@ -725,44 +723,7 @@ public class SignUp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnManagerActionPerformed
 
-    
-    public static void validateEmail(String email) throws InvalidInputException {
-        // Regex to check valid email
-        String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]+$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(email);
-        boolean validEmail = m.matches();
-
-        if (email.isEmpty()) {
-            throw new InvalidInputException("Enter Email!");
-        }
-        if (!validEmail) {
-            throw new InvalidInputException("Email s not valid! ");
-        }
-
-    }
-    
-        public static void validatePassword(String password) throws InvalidInputException {
-
-        // Regex to check valid password.
-        String regex = "^(?=.*[0-9])"
-                + "(?=.*[a-z])(?=.*[A-Z])"
-                + "(?=.*[@#$%^&+=])"
-                + "(?=\\S+$).{8,20}$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(password);
-        boolean validPass = m.matches();
-
-        if (password.isEmpty()) {
-            throw new InvalidInputException("Enter password!");
-        }
-        if (!validPass) {
-            throw new InvalidInputException("Password is not strong enough! ");
-        }
-
-    }
-        
-            public static void validateUserName(String userName) throws InvalidInputException {
+    public static void validateUserName(String userName) throws InvalidInputException {
 
         if (userName.isEmpty()) {
             throw new InvalidInputException("Enter user name!");
@@ -770,7 +731,7 @@ public class SignUp extends javax.swing.JFrame {
 
         //add a logic to check if userName is already taken
     }
-            
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
