@@ -8,6 +8,8 @@ import db.DBConnectionManager;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.UIManager;
 import model.ManagerAccount;
 import model.NormalAccount;
@@ -628,7 +630,7 @@ public class SignUp extends javax.swing.JFrame {
         else if (currentPanelIndex == 1) {
             try {
                 email = txtEmail.getText();
-                AccountsDb.validateEmail(email);
+                validateEmail(email);
 
                 firstName = txtFirstName.getText();
                 if (firstName.isEmpty()) {
@@ -723,6 +725,22 @@ public class SignUp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnManagerActionPerformed
 
+    
+    public static void validateEmail(String email) throws InvalidInputException {
+        // Regex to check valid email
+        String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]+$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(email);
+        boolean validEmail = m.matches();
+
+        if (email.isEmpty()) {
+            throw new InvalidInputException("Enter Email!");
+        }
+        if (!validEmail) {
+            throw new InvalidInputException("Email s not valid! ");
+        }
+
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
