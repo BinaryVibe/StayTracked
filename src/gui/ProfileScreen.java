@@ -8,6 +8,9 @@ import customexceptions.FailureException;
 import customexceptions.InvalidInputException;
 import db.AccountsDb;
 import helper.CurrentSession;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -532,6 +535,9 @@ public class ProfileScreen extends javax.swing.JPanel {
             lblCurrentUserName.setText(CurrentSession.getUserName());
         } catch (FailureException fe) {
             lblUserNameError1.setText(fe.getMessage());
+            
+        } catch (SQLException se) {
+            lblUserNameError1.setText(se.getMessage());
         }
 
         //again hide update button , txtField and show edit button, label
