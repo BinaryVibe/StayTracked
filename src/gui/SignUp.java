@@ -7,6 +7,9 @@ import db.AccountsDb;
 import db.DBConnectionManager;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
 import model.ManagerAccount;
 import model.NormalAccount;
@@ -674,10 +677,14 @@ public class SignUp extends javax.swing.JFrame {
                     dialog.setVisible(true);
                     this.dispose();
 
-                } catch (FailureException e) {
+                } catch (FailureException fe) {
 
-                    String errMsg = e.getMessage();
-                    lblSignUpError.setText(errMsg);
+                    
+                    lblSignUpError.setText(fe.getMessage());
+                    
+                } catch (SQLException se) {
+                    
+                    lblSignUpError.setText(se.getMessage());
                 }
             } //Next Slide
             else if (currentPanelIndex < totalPanels - 1) {
