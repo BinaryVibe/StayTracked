@@ -281,6 +281,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
             }
         }
 
+        // Remove column from "view". Data can still be accessed through table model
         TableColumnModel columnModel = projectsTable.getColumnModel();
         columnModel.removeColumn(projectsTable.getColumnModel().getColumn(5));
 
