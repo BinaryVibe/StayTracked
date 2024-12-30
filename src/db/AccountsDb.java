@@ -126,7 +126,6 @@ public class AccountsDb {
             CurrentSession.setTeamID(teamID);
             CurrentSession.setTeamName(teamName);
             CurrentSession.setRole(role);
-            
 
         } catch (SQLException e) {
             throw e;
@@ -576,10 +575,9 @@ public class AccountsDb {
                     String email = rs.getString("email");
                     String role = rs.getString("role");
                     int accoundID = rs.getInt("account_id");
-                     
 
                     // Add member to the ArrayList
-                    members.add(new NormalAccount( role, firstName, lastName, userName, contact, email, accoundID));
+                    members.add(new NormalAccount(role, firstName, lastName, userName, contact, email, accoundID));
                 }
             }
 
@@ -590,17 +588,20 @@ public class AccountsDb {
         return members;
     }
 
-    public static void validateUserName(String userName) throws InvalidInputException {
+    public static void validateEmail(String email) throws InvalidInputException {
+        // Regex to check valid email
+        String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]+$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(email);
+        boolean validEmail = m.matches();
 
-        if (con == null) {
-            throw new InvalidInputException("Database connection failed!");
+        if (email.isEmpty()) {
+            throw new InvalidInputException("Enter Email!");
+        }
+        if (!validEmail) {
+            throw new InvalidInputException("Email s not valid! ");
         }
 
-        if (userName.isEmpty()) {
-            throw new InvalidInputException("Enter user name!");
-        }
-
-        //add a logic to check if userName is already taken
     }
 
     public static void validatePassword(String password) throws InvalidInputException {
@@ -619,22 +620,6 @@ public class AccountsDb {
         }
         if (!validPass) {
             throw new InvalidInputException("Password is not strong enough! ");
-        }
-
-    }
-
-    public static void validateEmail(String email) throws InvalidInputException {
-        // Regex to check valid email
-        String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]+$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(email);
-        boolean validEmail = m.matches();
-
-        if (email.isEmpty()) {
-            throw new InvalidInputException("Enter Email!");
-        }
-        if (!validEmail) {
-            throw new InvalidInputException("Email s not valid! ");
         }
 
     }
