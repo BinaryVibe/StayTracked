@@ -50,7 +50,7 @@ public class TasksDB {
     public static void save(Task task) throws SQLException {
         try (PreparedStatement saveStmnt = conn.prepareStatement(insertTask, Statement.RETURN_GENERATED_KEYS)) {
             conn.setAutoCommit(false);
-            saveStmnt.setString(1, task.getDescription());
+            saveStmnt.setString(1, task.getDesc());
             saveStmnt.setDate(2, Date.valueOf(task.getStartDate()));
             saveStmnt.setDate(3, Date.valueOf(task.getEndDate()));
             saveStmnt.setString(4, task.getStatus());
