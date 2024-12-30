@@ -251,12 +251,12 @@ public class Login extends javax.swing.JFrame {
         } catch (InvalidInputException e) {
             String errMsg = e.getMessage();
             System.out.println("Error: " + errMsg);
-            loginResult.setText(errMsg);
+            loginResult.setText("Error: " + errMsg);
             
         } catch(FailureException fe){
             
             System.out.println("Error: " + fe.getMessage());
-            loginResult.setText(fe.getMessage());
+            loginResult.setText("Error: " +fe.getMessage());
             
         } catch (SQLException se) {
              loginResult.setText(se.getMessage());
