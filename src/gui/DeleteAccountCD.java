@@ -5,10 +5,12 @@
 package gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
-import com.sun.source.tree.ParenthesizedTree;
 import customexceptions.FailureException;
 import db.AccountsDb;
 import helper.CurrentSession;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
@@ -168,6 +170,8 @@ public class DeleteAccountCD extends javax.swing.JDialog {
 
         } catch (FailureException fe) {
             lblAccountDeleteError.setText(fe.getMessage());
+        } catch (SQLException se) {
+             lblAccountDeleteError.setText(se.getMessage());
         }
 
 

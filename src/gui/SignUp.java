@@ -7,6 +7,9 @@ import db.AccountsDb;
 import db.DBConnectionManager;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
 import model.ManagerAccount;
 import model.NormalAccount;
@@ -618,8 +621,8 @@ public class SignUp extends javax.swing.JFrame {
                 }
 
             } catch (InvalidInputException e) {
-                String errMsg = e.getMessage();
-                lblSignUpError.setText("Error: " + errMsg);
+                
+                lblSignUpError.setText("Error: " + e.getMessage());
 
             }
 
@@ -650,9 +653,9 @@ public class SignUp extends javax.swing.JFrame {
                 }
 
             } catch (InvalidInputException e) {
-                String errMsg = e.getMessage();
-                System.out.println("Error: " + errMsg);
-                lblDetailsError.setText("Error: " + errMsg);
+                
+                System.out.println("Error: " + e.getMessage());
+                lblDetailsError.setText("Error: " + e.getMessage());
 
             }
 
@@ -674,10 +677,14 @@ public class SignUp extends javax.swing.JFrame {
                     dialog.setVisible(true);
                     this.dispose();
 
-                } catch (FailureException e) {
+                } catch (FailureException fe) {
 
-                    String errMsg = e.getMessage();
-                    lblSignUpError.setText(errMsg);
+                    
+                    lblSignUpError.setText(fe.getMessage());
+                    
+                } catch (SQLException se) {
+                    
+                    lblSignUpError.setText(se.getMessage());
                 }
             } //Next Slide
             else if (currentPanelIndex < totalPanels - 1) {
@@ -700,8 +707,11 @@ public class SignUp extends javax.swing.JFrame {
                     dialog.setVisible(true);
                     this.dispose();
                 } catch (FailureException e) {
-                    String errMsg = e.getMessage();
-                    lblTeamDetailsError.setText(errMsg);
+                    
+                    lblTeamDetailsError.setText(e.getMessage());
+                    
+                } catch (SQLException se) {
+                    lblTeamDetailsError.setText(se.getMessage());
                 }
             }
         }

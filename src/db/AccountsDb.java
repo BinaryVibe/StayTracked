@@ -21,7 +21,7 @@ public class AccountsDb {
     static Connection con = DBConnectionManager.getConnection();
 
     //method to validate Input
-    public static void validateUser(String email, String password) throws InvalidInputException {
+    public static void validateUser(String email, String password) throws InvalidInputException, SQLException {
         if (con == null) {
             throw new InvalidInputException("Database connection failed!");
         }
@@ -40,11 +40,11 @@ public class AccountsDb {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw e;
         }
     }
 
-    public static void setCurrentSession(String inputEmail) throws FailureException {
+    public static void setCurrentSession(String inputEmail) throws FailureException, SQLException {
 
         int accountID = 0, teamID = 0;
         String firstName = "", lastName = "", userName = "", contact = "", accountType = "", teamName = "Not Joined yet";
@@ -129,13 +129,13 @@ public class AccountsDb {
             
 
         } catch (SQLException e) {
-            throw new FailureException(e.getMessage());
+            throw e;
         }
 
     }
     //method to add a new Normal account in database
 
-    public static void addNormalAccount(NormalAccount account) throws FailureException {
+    public static void addNormalAccount(NormalAccount account) throws FailureException, SQLException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
@@ -170,14 +170,14 @@ public class AccountsDb {
                 }
 
             } catch (SQLException e) {
-                throw new FailureException(e.getMessage());
+                throw e;
             }
 
         }
     }
 
     //method to add a new Manager account in database
-    public static void addManagerAccount(ManagerAccount account) throws FailureException {
+    public static void addManagerAccount(ManagerAccount account) throws FailureException, SQLException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
@@ -236,14 +236,14 @@ public class AccountsDb {
                 }
 
             } catch (SQLException e) {
-                throw new FailureException(e.getMessage());
+                throw e;
             }
 
         }
     }
 
     //Method to update userName
-    public static void updateUserName(int accountID, String newUserName) throws FailureException {
+    public static void updateUserName(int accountID, String newUserName) throws FailureException, SQLException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
@@ -263,12 +263,12 @@ public class AccountsDb {
             }
 
         } catch (SQLException e) {
-            throw new FailureException(e.getMessage());
+            throw e;
         }
     }
 
     //Metohd to update first name
-    public static void updateFirstName(int accountID, String newFirstName) throws FailureException {
+    public static void updateFirstName(int accountID, String newFirstName) throws FailureException, SQLException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
@@ -288,12 +288,12 @@ public class AccountsDb {
             }
 
         } catch (SQLException e) {
-            throw new FailureException(e.getMessage());
+            throw e;
         }
     }
 
     //Metohd to update Last name
-    public static void updateLastName(int accountID, String newLastName) throws FailureException {
+    public static void updateLastName(int accountID, String newLastName) throws FailureException, SQLException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
@@ -313,12 +313,12 @@ public class AccountsDb {
             }
 
         } catch (SQLException e) {
-            throw new FailureException(e.getMessage());
+            throw e;
         }
     }
 
     //mMethod to update email
-    public static void updateEmail(int accountID, String newEmail) throws FailureException {
+    public static void updateEmail(int accountID, String newEmail) throws FailureException, SQLException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
@@ -338,12 +338,12 @@ public class AccountsDb {
             }
 
         } catch (SQLException e) {
-            throw new FailureException(e.getMessage());
+            throw e;
         }
     }
 
     //Method to update contact
-    public static void updateContact(int accountID, String newContact) throws FailureException {
+    public static void updateContact(int accountID, String newContact) throws FailureException, SQLException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
@@ -363,12 +363,12 @@ public class AccountsDb {
             }
 
         } catch (SQLException e) {
-            throw new FailureException(e.getMessage());
+            throw e;
         }
     }
 
     //Method to update password
-    public static void updatePass(int accountID, String currentPass, String newPass) throws FailureException {
+    public static void updatePass(int accountID, String currentPass, String newPass) throws FailureException, SQLException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
@@ -396,12 +396,12 @@ public class AccountsDb {
                 }
             }
         } catch (SQLException se) {
-            throw new FailureException(se.getMessage());
+            throw se;
         }
     }
 
     //Method to update team name
-    public static void updateTeamName(int teamID, String newTeamName) throws FailureException {
+    public static void updateTeamName(int teamID, String newTeamName) throws FailureException, SQLException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
@@ -421,12 +421,12 @@ public class AccountsDb {
             }
 
         } catch (SQLException e) {
-            throw new FailureException(e.getMessage());
+            throw e;
         }
     }
 
     //Method to delete account
-    public static void deleteAccount(String pass, int accountID) throws FailureException {
+    public static void deleteAccount(String pass, int accountID) throws FailureException, SQLException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
@@ -454,13 +454,13 @@ public class AccountsDb {
                 }
             }
         } catch (SQLException se) {
-            throw new FailureException(se.getMessage());
+            throw se;
         }
 
     }
 
     //Method to add team members
-    public static void addTeamMember(String email) throws FailureException {
+    public static void addTeamMember(String email) throws FailureException, SQLException {
 
         if (con == null) {
             throw new FailureException("Database connection failed!");
@@ -505,14 +505,14 @@ public class AccountsDb {
                 }
             }
         } catch (SQLException se) {
-            throw new FailureException(se.getMessage());
+            throw se;
 
         }
 
     }
 
     //Method to remove team members
-    public static void removeTeamMember(String email) throws FailureException {
+    public static void removeTeamMember(String email) throws FailureException, SQLException {
 
         if (con == null) {
             throw new FailureException("Database connection failed!");
@@ -545,14 +545,14 @@ public class AccountsDb {
                 }
             }
         } catch (SQLException se) {
-            throw new FailureException(se.getMessage());
+            throw se;
 
         }
 
     }
 
     //Method to get team members list
-    public static ArrayList<NormalAccount> getTeamMembers(int teamID) throws FailureException {
+    public static ArrayList<NormalAccount> getTeamMembers(int teamID) throws FailureException, SQLException {
 
         if (con == null) {
             throw new FailureException("Database connection failed!");
@@ -584,7 +584,7 @@ public class AccountsDb {
             }
 
         } catch (SQLException se) {
-            throw new FailureException(se.getMessage());
+            throw se;
         }
 
         return members;

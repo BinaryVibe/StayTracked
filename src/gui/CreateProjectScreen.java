@@ -16,6 +16,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JComponent;
@@ -407,6 +409,8 @@ public class CreateProjectScreen extends javax.swing.JDialog {
                 } catch (FailureException ex) {
                     System.out.println(ex.getMessage());
                     return;
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
                 }
             }
         }
@@ -470,6 +474,8 @@ public class CreateProjectScreen extends javax.swing.JDialog {
             }
         } catch (FailureException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         }
         return userNames.toArray(new String[userNames.size()]);
     }

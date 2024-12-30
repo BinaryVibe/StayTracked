@@ -8,6 +8,9 @@ import customexceptions.FailureException;
 import customexceptions.InvalidInputException;
 import db.AccountsDb;
 import helper.CurrentSession;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -532,6 +535,9 @@ public class ProfileScreen extends javax.swing.JPanel {
             lblCurrentUserName.setText(CurrentSession.getUserName());
         } catch (FailureException fe) {
             lblUserNameError1.setText(fe.getMessage());
+            
+        } catch (SQLException se) {
+            lblUserNameError1.setText(se.getMessage());
         }
 
         //again hide update button , txtField and show edit button, label
@@ -556,6 +562,9 @@ public class ProfileScreen extends javax.swing.JPanel {
         } catch (FailureException fe) {
             lblFirstNameError1.setText(fe.getMessage());
         }
+        catch (SQLException se) {
+            lblFirstNameError1.setText(se.getMessage());
+        }
 
         //again hide update button , txtField and show edit button, label
         lblCurrentFirstName.setVisible(true);
@@ -577,6 +586,9 @@ public class ProfileScreen extends javax.swing.JPanel {
             lblCurrentLastName.setText(CurrentSession.getLastName());
         } catch (FailureException fe) {
             lblLastNameError1.setText(fe.getMessage());
+        }
+        catch (SQLException se) {
+            lblLastNameError1.setText(se.getMessage());
         }
 
         //again hide update button , txtField and show edit button, label
@@ -601,6 +613,8 @@ public class ProfileScreen extends javax.swing.JPanel {
             lblEmailError1.setText(fe.getMessage());
         } catch (InvalidInputException ie){
             lblEmailError1.setText(ie.getMessage());
+        } catch (SQLException se) {
+             lblEmailError1.setText(se.getMessage());
         }
         
 
@@ -625,6 +639,8 @@ public class ProfileScreen extends javax.swing.JPanel {
             lblCurrentContact.setText(CurrentSession.getContact());
         } catch (FailureException fe) {
             lblContactError.setText(fe.getMessage());
+        } catch (SQLException se) {
+            lblContactError.setText(se.getMessage());
         }
        
 

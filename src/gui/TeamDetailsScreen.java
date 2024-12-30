@@ -5,7 +5,10 @@ import customexceptions.FailureException;
 import db.AccountsDb;
 import helper.CurrentSession;
 import java.awt.Color;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import model.NormalAccount;
@@ -230,6 +233,9 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
 
         } catch (FailureException fe) {
             lblTeamNameError.setText(fe.getMessage());
+            
+        } catch (SQLException se) {
+            lblTeamNameError.setText(se.getMessage());
         }
 
         //again hide update button , txtField and show edit button, label
@@ -264,6 +270,8 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
         catch(FailureException fe){
             lblTeamMembersError.setText(fe.getMessage());
             
+        } catch (SQLException se) {
+            lblTeamMembersError.setText(se.getMessage());
         }
         
         
@@ -287,6 +295,9 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
             }
         }catch (FailureException fe){
             lblTeamMembersError.setText(fe.getMessage());
+            
+        } catch (SQLException se) {
+            lblTeamMembersError.setText(se.getMessage());
         }
     }
 
