@@ -44,7 +44,7 @@ public class AccountsDb {
         }
     }
 
-    public static void setCurrentSession(String inputEmail) throws FailureException {
+    public static void setCurrentSession(String inputEmail) throws FailureException, SQLException {
 
         int accountID = 0, teamID = 0;
         String firstName = "", lastName = "", userName = "", contact = "", accountType = "", teamName = "Not Joined yet";
@@ -129,7 +129,7 @@ public class AccountsDb {
             
 
         } catch (SQLException e) {
-            throw new FailureException(e.getMessage());
+            throw e;
         }
 
     }
