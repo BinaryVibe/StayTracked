@@ -21,7 +21,7 @@ public class AccountsDb {
     static Connection con = DBConnectionManager.getConnection();
 
     //method to validate Input
-    public static void validateUser(String email, String password) throws InvalidInputException {
+    public static void validateUser(String email, String password) throws InvalidInputException, SQLException {
         if (con == null) {
             throw new InvalidInputException("Database connection failed!");
         }
@@ -40,7 +40,7 @@ public class AccountsDb {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw e;
         }
     }
 
