@@ -7,6 +7,9 @@ import db.AccountsDb;
 import db.DBConnectionManager;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
 
 public class Login extends javax.swing.JFrame {
@@ -251,9 +254,12 @@ public class Login extends javax.swing.JFrame {
             loginResult.setText(errMsg);
             
         } catch(FailureException fe){
-            String errMsg = fe.getMessage();
-            System.out.println("Error: " + errMsg);
-            loginResult.setText(errMsg);
+            
+            System.out.println("Error: " + fe.getMessage());
+            loginResult.setText(fe.getMessage());
+            
+        } catch (SQLException se) {
+             loginResult.setText(se.getMessage());
         }
     }//GEN-LAST:event_loginBtnActionPerformed
 
