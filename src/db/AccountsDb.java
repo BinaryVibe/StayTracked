@@ -135,7 +135,7 @@ public class AccountsDb {
     }
     //method to add a new Normal account in database
 
-    public static void addNormalAccount(NormalAccount account) throws FailureException {
+    public static void addNormalAccount(NormalAccount account) throws FailureException, SQLException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
@@ -170,7 +170,7 @@ public class AccountsDb {
                 }
 
             } catch (SQLException e) {
-                throw new FailureException(e.getMessage());
+                throw e;
             }
 
         }
