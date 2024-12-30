@@ -6,6 +6,9 @@ package gui;
 
 import customexceptions.FailureException;
 import db.AccountsDb;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -157,6 +160,8 @@ public class AddTeamMemberDialog extends javax.swing.JDialog {
             doneBtn.setVisible(false);
         } catch (FailureException fe) {
             lblMemberAdditionError.setText(fe.getMessage());
+        } catch (SQLException se) {
+           lblMemberAdditionError.setText(se.getMessage());
         }
 
 
