@@ -30,7 +30,7 @@ public class TasksDB {
     
     // Queries
     private static final String insertTask = "INSERT INTO tasks (description, start_date, end_date, status, priority, project_id) VALUES (?, ?, ?, ?, ?, ?)";
-    private static final String dashboardDataQuery = "SELECT p.title AS 'project_title', COUNT(task_id) AS 'total_tasks', COUNT(CASE WHEN t.status = 'DONE' THEN 1 END) AS 'done_tasks' FROM projects p LEFT JOIN tasks t ON p.project_id = t.project_id WHERE p.project_id IN (SELECT project_id FROM assigned_to WHERE account_id = ?) GROUP BY t.project_id";
+    private static final String dashboardDataQuery = "SELECT p.title AS 'project_title', COUNT(task_id) AS 'total_tasks', COUNT(CASE WHEN t.status = 'DONE' THEN 1 END) AS 'done_tasks' FROM projects p LEFT JOIN tasks t ON p.project_id = t.project_id WHERE p.project_id IN (SELECT project_id FROM assigned_to WHERE account_id = ?) GROUP BY p.project_id, p.title";
     private static final String getTasksQuery = "SELECT task_id, description, start_date, end_date, status, priority FROM tasks WHERE project_id = ?";
     private static final String getNewTaskQuery = "SELECT task_id, description, start_date, end_date, status, priority FROM tasks WHERE task_id = ?";
     private static final String deleteTasksQuery = "DELETE FROM tasks WHERE task_id = ?";
