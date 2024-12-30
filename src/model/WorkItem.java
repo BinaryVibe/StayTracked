@@ -11,6 +11,7 @@ import java.time.LocalDate;
  * @author samtheradiant
  */
 public class WorkItem {
+
     private int id;
     private String desc;
     private Status status;
@@ -48,8 +49,6 @@ public class WorkItem {
         this.endDate = endDate;
         this.priority = priority;
     }
-    
-    
 
     public int getId() {
         return id;
@@ -98,6 +97,5 @@ public class WorkItem {
     public void setPriority(Priority priority) {
         this.priority = priority;
     }
-    
-    
+
 }
