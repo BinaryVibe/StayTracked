@@ -475,7 +475,7 @@ public class TasksScreen extends javax.swing.JPanel {
         try {
             tasks = TasksDB.getNewTasks();
             for (Task task : tasks) {
-                model.addRow(new Object[]{task.getDescription(), task.getStartDate(), task.getEndDate(), task.getStatus(), task.getPriority(), task.getTaskID()});
+                model.addRow(new Object[]{task.getDesc(), task.getStartDate(), task.getEndDate(), task.getStatus(), task.getPriority(), task.getId()});
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -494,7 +494,7 @@ public class TasksScreen extends javax.swing.JPanel {
                 return;
             }
             for (Task task : tasks) {
-                model.addRow(new Object[]{task.getDescription(), task.getStartDate(), task.getEndDate(), task.getStatus(), task.getPriority(), task.getTaskID()});
+                model.addRow(new Object[]{task.getDesc(), task.getStartDate(), task.getEndDate(), task.getStatus(), task.getPriority(), task.getId()});
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
