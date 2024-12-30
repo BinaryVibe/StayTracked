@@ -48,7 +48,6 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         super(parent, modal);
         this.obj = obj;
         initComponents();
-        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -69,19 +68,19 @@ public class CreateProjectScreen extends javax.swing.JDialog {
         startDateChooser = new com.toedter.calendar.JDateChooser();
         //startDateChooser.setDateFormatString("dd-MM-yyyy");
 
-        for (Component c : startDateChooser.getComponents()) {
-            ((JComponent) c).setBackground(new Color(40, 40, 39));
-        }
+        //for (Component c : startDateChooser.getComponents()) {
+            //    ((JComponent) c).setForeground(new Color(255, 255, 255));
+            //}
 
         // JComponent editorUI = startDateChooser.getDateEditor().getUiComponent();
-        // editorUI.setForeground(new Color(221, 255, 255));
+        // editorUI.setForeground(new Color(255, 255, 255));
         endDateLbl = new javax.swing.JLabel();
         endDateChooser = new com.toedter.calendar.JDateChooser();
         // endDateChooser.setDateFormatString("dd-mm-yyyy");
 
-        for (Component c : endDateChooser.getComponents()) {
-            ((JComponent) c).setBackground(new Color(40, 40, 39));
-        }
+        //for (Component c : endDateChooser.getComponents()) {
+            //    ((JComponent) c).setBackground(new Color(40, 40, 39));
+            //}
         okButton = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -290,8 +289,8 @@ public class CreateProjectScreen extends javax.swing.JDialog {
                 .addGap(26, 26, 26)
                 .addComponent(descLbl)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(membersLbl)
                     .addComponent(startDateLbl))
