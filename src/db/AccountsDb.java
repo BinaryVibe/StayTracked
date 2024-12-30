@@ -545,7 +545,7 @@ public class AccountsDb {
                 }
             }
         } catch (SQLException se) {
-            throw new FailureException(se.getMessage());
+            throw se;
 
         }
 
