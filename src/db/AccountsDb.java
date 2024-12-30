@@ -512,7 +512,7 @@ public class AccountsDb {
     }
 
     //Method to remove team members
-    public static void removeTeamMember(String email) throws FailureException {
+    public static void removeTeamMember(String email) throws FailureException, SQLException {
 
         if (con == null) {
             throw new FailureException("Database connection failed!");
@@ -552,7 +552,7 @@ public class AccountsDb {
     }
 
     //Method to get team members list
-    public static ArrayList<NormalAccount> getTeamMembers(int teamID) throws FailureException {
+    public static ArrayList<NormalAccount> getTeamMembers(int teamID) throws FailureException, SQLException {
 
         if (con == null) {
             throw new FailureException("Database connection failed!");
@@ -584,7 +584,7 @@ public class AccountsDb {
             }
 
         } catch (SQLException se) {
-            throw new FailureException(se.getMessage());
+            throw se;
         }
 
         return members;
