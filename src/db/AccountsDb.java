@@ -268,7 +268,7 @@ public class AccountsDb {
     }
 
     //Metohd to update first name
-    public static void updateFirstName(int accountID, String newFirstName) throws FailureException {
+    public static void updateFirstName(int accountID, String newFirstName) throws FailureException, SQLException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
@@ -288,7 +288,7 @@ public class AccountsDb {
             }
 
         } catch (SQLException e) {
-            throw new FailureException(e.getMessage());
+            throw e;
         }
     }
 
