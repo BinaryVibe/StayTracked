@@ -7,6 +7,7 @@ package gui;
 import db.DBConnectionManager;
 import db.DatabaseUtils;
 import db.TasksDB;
+import helper.CurrentSession;
 import helper.JDateChooserEditor;
 import helper.TableCellListener;
 import java.awt.CardLayout;
@@ -296,14 +297,16 @@ public class TasksScreen extends javax.swing.JPanel {
     private void updateCell(TableCellListener tcl) {
         int row = tcl.getRow();
         int column = tcl.getColumn();
-        try {
-            if (!(DatabaseUtils.checkPermission(projectID))) {
-                JOptionPane.showMessageDialog(this, "You are not allowed to edit task properties of this project.", "Permission Error", JOptionPane.ERROR_MESSAGE);
-                tasksTable.setValueAt(tcl.getOldValue(), row, column);
-                return;
+        if (CurrentSession.getAccountType().equals("Normal")) {
+            try {
+                if (!(DatabaseUtils.checkPermission(projectID))) {
+                    JOptionPane.showMessageDialog(this, "You are not allowed to edit task properties of this project.", "Permission Error", JOptionPane.ERROR_MESSAGE);
+                    tasksTable.setValueAt(tcl.getOldValue(), row, column);
+                    return;
+                }
+            } catch (SQLException ex) {
+                System.err.println(ex.getMessage());
             }
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
         }
         int taskID = (int) tasksTable.getModel().getValueAt(row, 5);
         System.out.println("Task Id: " + taskID);
