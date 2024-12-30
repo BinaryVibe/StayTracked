@@ -132,6 +132,12 @@ public class DatabaseUtils {
         return (int) percentage;
     }
 
+    /**
+     * 
+     * @param query The DML query to delete rows
+     * @param ids The primary keys of the rows
+     * @throws SQLException 
+     */
     public static void deleteRows(String query, ArrayList<Integer> ids) throws SQLException {
         for (int id : ids) {
             try (PreparedStatement deleteStmnt = conn.prepareStatement(query)) {
@@ -152,6 +158,12 @@ public class DatabaseUtils {
         }
     }
 
+    /**
+     * 
+     * @param projectID
+     * @return
+     * @throws SQLException 
+     */
     public static boolean checkPermission(int projectID) throws SQLException {
         try (PreparedStatement checkStmnt = conn.prepareStatement(getAccountType)) {
             checkStmnt.setInt(1, projectID);
