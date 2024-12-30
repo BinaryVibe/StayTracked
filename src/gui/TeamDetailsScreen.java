@@ -270,6 +270,8 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
         catch(FailureException fe){
             lblTeamMembersError.setText(fe.getMessage());
             
+        } catch (SQLException se) {
+            lblTeamMembersError.setText(se.getMessage());
         }
         
         
