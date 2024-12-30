@@ -426,7 +426,7 @@ public class AccountsDb {
     }
 
     //Method to delete account
-    public static void deleteAccount(String pass, int accountID) throws FailureException {
+    public static void deleteAccount(String pass, int accountID) throws FailureException, SQLException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
