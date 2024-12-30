@@ -639,6 +639,8 @@ public class ProfileScreen extends javax.swing.JPanel {
             lblCurrentContact.setText(CurrentSession.getContact());
         } catch (FailureException fe) {
             lblContactError.setText(fe.getMessage());
+        } catch (SQLException se) {
+            lblContactError.setText(se.getMessage());
         }
        
 
