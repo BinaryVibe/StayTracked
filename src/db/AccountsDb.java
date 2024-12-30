@@ -401,7 +401,7 @@ public class AccountsDb {
     }
 
     //Method to update team name
-    public static void updateTeamName(int teamID, String newTeamName) throws FailureException {
+    public static void updateTeamName(int teamID, String newTeamName) throws FailureException, SQLException {
         if (con == null) {
             throw new FailureException("Database connection failed!");
         }
@@ -454,7 +454,7 @@ public class AccountsDb {
                 }
             }
         } catch (SQLException se) {
-            throw new FailureException(se.getMessage());
+            throw se;
         }
 
     }
