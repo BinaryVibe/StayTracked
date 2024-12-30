@@ -67,8 +67,6 @@ public class ProjectsDB {
                     if (keys.next()) {
                         projectId = keys.getInt(1);
                     }
-                } catch (SQLException keyExcep) {
-                    System.err.print(keyExcep.getMessage());
                 }
             } else {
                 conn.rollback();
@@ -107,8 +105,6 @@ public class ProjectsDB {
                 }
             }
 
-        } catch (SQLException sqle) {
-            throw sqle;
         } finally {
             try {
                 conn.setAutoCommit(true);

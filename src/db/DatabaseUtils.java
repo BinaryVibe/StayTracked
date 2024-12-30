@@ -41,8 +41,6 @@ public class DatabaseUtils {
                 throw new SQLException("Updating " + columnName + " failed, no rows affected.");
             }
             conn.commit();
-        } catch (SQLException ex) {
-            throw ex;
         } finally {
             try {
                 conn.setAutoCommit(true);
@@ -71,8 +69,6 @@ public class DatabaseUtils {
                 throw new SQLException("Updating " + columnName + " failed, no rows affected.");
             }
             conn.commit();
-        } catch (SQLException ex) {
-            throw ex;
         } finally {
             try {
                 conn.setAutoCommit(true);
@@ -101,8 +97,6 @@ public class DatabaseUtils {
                 throw new SQLException("Updating " + columnName + " date failed, no rows affected.");
             }
             conn.commit();
-        } catch (SQLException ex) {
-            throw ex;
         } finally {
             try {
                 conn.setAutoCommit(true);
