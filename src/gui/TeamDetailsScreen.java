@@ -1,4 +1,3 @@
-
 package gui;
 
 import customexceptions.FailureException;
@@ -26,10 +25,9 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
         initComponents();
         //Table header color
         JTableHeader tableHeader = tableTeamMembers.getTableHeader();
-        tableHeader.setBackground(new Color(45,168,216));
-        tableHeader.setForeground(new Color(21,25,34));
-        
-     
+        tableHeader.setBackground(new Color(45, 168, 216));
+        tableHeader.setForeground(new Color(21, 25, 34));
+
         //initially hide these 
         txtTeamName.setVisible(false);
         updateTeamNameBtn.setVisible(false);
@@ -37,20 +35,19 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
         //set text according to current session
         txtTeamName.setText(CurrentSession.getTeamName());
         lblTeamrName.setText(CurrentSession.getTeamName());
-        
-        if(CurrentSession.getAccountType().equalsIgnoreCase("manager")){
+
+        if (CurrentSession.getAccountType().equalsIgnoreCase("manager")) {
             removeBtn.setVisible(true);
             addTeamMemberBtn.setVisible(true);
             editTeamNameBtn.setVisible(true);
-        }
-        else{
+        } else {
             removeBtn.setVisible(false);
             addTeamMemberBtn.setVisible(false);
             editTeamNameBtn.setVisible(false);
         }
         //populate table 
         populateTable();
-        
+
     }
 
     /**
@@ -174,7 +171,7 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                true, true, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -241,7 +238,7 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
 
         } catch (FailureException fe) {
             lblTeamNameError.setText(fe.getMessage());
-            
+
         } catch (SQLException se) {
             lblTeamNameError.setText(se.getMessage());
         }
@@ -271,40 +268,43 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
 
     private void removeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeBtnActionPerformed
         // TODO add your handling code here:
-        String memberEmail = (String)tableTeamMembers.getValueAt(tableTeamMembers.getSelectedRow(), 3);
-        try{
-            AccountsDb.removeTeamMember(memberEmail);
-            lblTeamMembersError.setText(""); //empty label if it was not empty before
-        }
-        catch(FailureException fe){
+
+        try {
+            if (tableTeamMembers.getSelectedRow() == -1) {
+                throw new FailureException("No member elected to be removed");
+
+            } else {
+                String memberEmail = (String) tableTeamMembers.getValueAt(tableTeamMembers.getSelectedRow(), 3);
+                AccountsDb.removeTeamMember(memberEmail);
+                lblTeamMembersError.setText(""); //empty label if it was not empty before 
+            }
+
+        } catch (FailureException fe) {
             lblTeamMembersError.setText(fe.getMessage());
-            
+
         } catch (SQLException se) {
             lblTeamMembersError.setText(se.getMessage());
         }
-        
-        
-        
-       populateTable(); //refresh table
+
+        populateTable(); //refresh table
     }//GEN-LAST:event_removeBtnActionPerformed
 
-    
     //Method to populate table
-    public void populateTable(){
+    public void populateTable() {
         lblTeamMembersError.setText("");
-        DefaultTableModel model = (DefaultTableModel)tableTeamMembers.getModel();
+        DefaultTableModel model = (DefaultTableModel) tableTeamMembers.getModel();
         //delete all existing rows
         model.setRowCount(0);
 
         ArrayList<NormalAccount> members = null;
-        try{
+        try {
             members = AccountsDb.getTeamMembers(CurrentSession.getTeamID());
-            for (NormalAccount member : members){
-                model.addRow(new Object[]{member.getFirstName()+" "+member.getLastName(), member.getUserName(), member.getContactNum(), member.getEmail()});
+            for (NormalAccount member : members) {
+                model.addRow(new Object[]{member.getFirstName() + " " + member.getLastName(), member.getUserName(), member.getContactNum(), member.getEmail()});
             }
-        }catch (FailureException fe){
+        } catch (FailureException fe) {
             lblTeamMembersError.setText(fe.getMessage());
-            
+
         } catch (SQLException se) {
             lblTeamMembersError.setText(se.getMessage());
         }
