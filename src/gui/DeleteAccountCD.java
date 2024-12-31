@@ -4,6 +4,7 @@
  */
 package gui;
 
+import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import customexceptions.FailureException;
 import db.AccountsDb;
@@ -154,7 +155,7 @@ public class DeleteAccountCD extends javax.swing.JDialog {
             AccountsDb.deleteAccount(AccPassword, CurrentSession.getAccountID());
             //redirect to login page
             try {
-                UIManager.setLookAndFeel(new FlatLightLaf());
+                UIManager.setLookAndFeel(new FlatDarculaLaf());
             } catch (Exception ex) {
                 System.err.println("Failed to initialize LaF");
             }
