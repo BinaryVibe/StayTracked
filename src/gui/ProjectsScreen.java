@@ -49,11 +49,11 @@ public class ProjectsScreen extends javax.swing.JPanel {
      * Creates new form ProjectsScreen
      */
     public ProjectsScreen() {
-        try {
-            UIManager.setLookAndFeel(new FlatMacDarkLaf());
-        } catch (Exception ex) {
-            System.err.println("Failed to initialize LaF");
-        }
+//        try {
+//            UIManager.setLookAndFeel(new FlatMacDarkLaf());
+//        } catch (Exception ex) {
+//            System.err.println("Failed to initialize LaF");
+//        }
         initComponents();
         populateTable();
     }
