@@ -193,11 +193,11 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
 
             if (confirmNewPass.isEmpty() || newPass.isEmpty() || currentPass.isEmpty()) {
 
-                lblError.setText("No text fields should be empty");
+                throw new InvalidInputException("No text fields should be empty");
 
             } else if (!confirmNewPass.equals(newPass)) {
 
-                lblError.setText("Password doesn't match");
+                throw new InvalidInputException("Password doesn't match");
 
             } else {
                 //Check if pass is valid
