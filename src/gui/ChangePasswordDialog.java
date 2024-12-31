@@ -9,8 +9,6 @@ import customexceptions.InvalidInputException;
 import db.AccountsDb;
 import helper.CurrentSession;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -26,7 +24,7 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
         setResizable(false);
         initComponents();
         setLocationRelativeTo(parent); // Center the dialog
-        BackToProfileBtn.setVisible(false);
+
     }
 
     /**
@@ -113,18 +111,16 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
                 .addGroup(PassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jSeparator1)
                     .addComponent(lblCurrentPassword)
-                    .addGroup(PassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblConfirmPass)
-                        .addComponent(txtConfirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(PassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblNewPass, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNewPass, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)))
+                    .addComponent(lblConfirmPass)
+                    .addComponent(txtConfirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNewPass)
+                    .addComponent(txtNewPass, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                     .addComponent(txtCurrentPassword)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
                     .addGroup(PassPanelLayout.createSequentialGroup()
                         .addComponent(updatePassBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BackToProfileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(BackToProfileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator2)
                     .addComponent(lblSucces, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -189,42 +185,40 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
 
     private void updatePassBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePassBtnActionPerformed
         // TODO add your handling code here:
-        String confirmPass = new String(txtConfirmPass.getPassword());;
+        String confirmNewPass = new String(txtConfirmPass.getPassword());
         String newPass = new String(txtNewPass.getPassword());
         String currentPass = new String(txtCurrentPassword.getPassword());
-        Boolean validPass = false;
 
-        //Check if pass is valid
         try {
 
-            AccountsDb.validatePassword(newPass);
-            validPass = true;
-        } catch (InvalidInputException ie) {
-            lblError.setText(ie.getMessage());
-        }
+            if (confirmNewPass.isEmpty() || newPass.isEmpty() || currentPass.isEmpty()) {
 
-        if (confirmPass.isEmpty() || newPass.isEmpty() || currentPass.isEmpty()) {
-            lblError.setText("No text fields should be empty");
-        } else if (confirmPass.equals(newPass) && validPass) {
-            //call method to update pass
-            try {
+                lblError.setText("No text fields should be empty");
+
+            } else if (!confirmNewPass.equals(newPass)) {
+
+                lblError.setText("Password doesn't match");
+
+            } else {
+                //Check if pass is valid
+                AccountsDb.validatePassword(newPass);
+                //call method to update pass
                 AccountsDb.updatePass(CurrentSession.getAccountID(), currentPass, newPass);
                 lblError.setText("");
-                lblSucces.setText("Password successfuly updated! \n Go back to profile...");
+                lblSucces.setText("Password successfuly updated! Go back to profile...");
                 updatePassBtn.setVisible(false);
-                BackToProfileBtn.setVisible(true);
+
                 txtCurrentPassword.setEnabled(false);
                 txtNewPass.setEnabled(false);
                 txtConfirmPass.setEnabled(false);
-            } catch (FailureException fe) {
-                lblError.setText(fe.getMessage());
-            } catch (SQLException se) {
-               lblError.setText(se.getMessage());
             }
 
-        } else {
-            lblError.setText("Password doesn't match");
-
+        } catch (FailureException fe) {
+            lblError.setText(fe.getMessage());
+        } catch (SQLException se) {
+            lblError.setText(se.getMessage());
+        } catch (InvalidInputException ie) {
+            lblError.setText(ie.getMessage());
         }
     }//GEN-LAST:event_updatePassBtnActionPerformed
 
