@@ -13,6 +13,7 @@ import helper.JDateChooserEditor;
 import helper.TableCellListener;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -250,9 +251,10 @@ public class ProjectsScreen extends javax.swing.JPanel {
             }
         });
         projectsTable.setFillsViewportHeight(true);
-        projectsTable.setRowHeight(25);
+        projectsTable.setRowHeight(35);
         projectsTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
         projectsTable.setShowGrid(false);
+        projectsTable.setShowHorizontalLines(true);
         projectsTable.getTableHeader().setReorderingAllowed(false);
         // Set Enum columns' editor to be a JComboBox
 
@@ -285,9 +287,9 @@ public class ProjectsScreen extends javax.swing.JPanel {
         columnModel.removeColumn(projectsTable.getColumnModel().getColumn(5));
 
         JTableHeader tableHeader = projectsTable.getTableHeader();
-        tableHeader.setBackground(new Color(45, 168, 216));
-        tableHeader.setForeground(new Color(21, 25, 34));
-        // tableHeader.setFont(new Font(projectsTable.getFont().getFontName(), Font.BOLD, projectsTable.getFont().getSize()));
+        tableHeader.setBackground(new Color(16, 17, 25));
+        tableHeader.setForeground(new Color(240, 242, 239));
+        tableHeader.setFont(new Font(projectsTable.getFont().getFontName(), Font.BOLD, projectsTable.getFont().getSize()));
 
         Action action = new AbstractAction()
         {

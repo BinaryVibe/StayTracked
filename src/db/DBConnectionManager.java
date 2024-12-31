@@ -13,13 +13,18 @@ public class DBConnectionManager {
 //    static String passWord = "123Password";
 //    static private Connection con; 
     
+    // localhost Connection for NextStep-IM
+    private static String url = "jdbc:mariadb://localhost:3306/StayTracked";
+    private static String userName = "mysql";
+    private static String passWord = "dustrunner42";
+    private static Connection con;
     
    //Connection details for Talal
-    static String url = "jdbc:mysql://localhost:3306/staytracked";
-    static String userName = "root";
-    static String passWord = "bythebandit@028";
-    static private Connection con;
-    
+//    static String url = "jdbc:mysql://localhost:3306/staytracked";
+//    static String userName = "root";
+//    static String passWord = "bythebandit@028";
+//    static private Connection con;
+//    
     //Connection details for Ayaan(PC) local host
 //    static String url = "jdbc:mysql://localhost:3306/staytracked";
 //    static String userName = "root";

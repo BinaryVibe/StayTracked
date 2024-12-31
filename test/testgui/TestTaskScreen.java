@@ -27,7 +27,7 @@ public class TestTaskScreen {
         }
         DBConnectionManager.setConnection();
         JFrame frame = new JFrame();
-        TasksScreen screen = new TasksScreen(2);
+        TasksScreen screen = new TasksScreen();
         frame.add(screen);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);

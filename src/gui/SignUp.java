@@ -8,8 +8,6 @@ import db.DBConnectionManager;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.UIManager;
 import model.ManagerAccount;
 import model.NormalAccount;
@@ -17,7 +15,7 @@ import model.Team;
 
 public class SignUp extends javax.swing.JFrame {
 
-    private int currentPanelIndex = 0;
+    private int currentPanelIndex = 1;
     private int totalPanels = 4;
     private String firstName, lastName, userName, contactNum, email, password;
     private String teamName;
@@ -607,19 +605,18 @@ public class SignUp extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         //Validate inputs at slide 1 
-        if (currentPanelIndex == 0) {
+        if (currentPanelIndex == 1) {
             try {
                 password = new String(txtPass.getPassword());
                 AccountsDb.validatePassword(password);
-                
+
                 userName = txtUsername.getText();
                 if (userName.isEmpty()) {
                     throw new InvalidInputException("Enter user name!");
                 }
-                
 
                 //Next slide
-                if (currentPanelIndex < totalPanels - 1) {
+                if (currentPanelIndex < totalPanels) {
                     currentPanelIndex++; // Move to the next panel
                     slider.show(currentPanelIndex);
                 }
@@ -631,7 +628,7 @@ public class SignUp extends javax.swing.JFrame {
             }
 
         } //Validate inputs at slide 2 
-        else if (currentPanelIndex == 1) {
+        else if (currentPanelIndex == 2) {
             try {
                 email = txtEmail.getText();
                 AccountsDb.validateEmail(email);
@@ -651,7 +648,7 @@ public class SignUp extends javax.swing.JFrame {
                 }
 
                 //Next slide
-                if (currentPanelIndex < totalPanels - 1) {
+                if (currentPanelIndex < totalPanels) {
                     currentPanelIndex++; // Move to the next panel
                     slider.show(currentPanelIndex);
                 }
@@ -664,7 +661,7 @@ public class SignUp extends javax.swing.JFrame {
             }
 
         } //if it's 2nd last panel and personal is selected then save the values and make an object of account and pass that to database
-        else if (currentPanelIndex == 2) {
+        else if (currentPanelIndex == 3) {
 
             if (accTypeBtnGrp.getSelection() == null) {
                 System.out.println("No button is selected!");
@@ -689,13 +686,13 @@ public class SignUp extends javax.swing.JFrame {
                     lblSignUpError.setText(se.getMessage());
                 }
             } //Next Slide
-            else if (currentPanelIndex < totalPanels - 1) {
+            else if (currentPanelIndex < totalPanels) {
                 currentPanelIndex++; // Move to the next panel
                 slider.show(currentPanelIndex);
             }
 
         } //if it's last panel then save the values and make an object of manager account and pass that to database
-        else if (currentPanelIndex == 3) {
+        else if (currentPanelIndex == 4) {
             if (btnManager.isSelected()) {
                 try {
                     teamName = txtTeamName.getText();
@@ -726,8 +723,6 @@ public class SignUp extends javax.swing.JFrame {
     private void btnManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManagerActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnManagerActionPerformed
-
-
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

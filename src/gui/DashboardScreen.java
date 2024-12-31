@@ -10,6 +10,8 @@ import db.TasksDB;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import model.DashboardData;
@@ -29,7 +31,9 @@ public class DashboardScreen extends javax.swing.JPanel {
         JTableHeader tableHeader = tableMain.getTableHeader();
         tableHeader.setBackground(new Color(45, 168, 216));
         tableHeader.setForeground(new Color(21, 25, 34));
-
+        completdProjctsSpinner.setForeground(new Color(45, 168, 216));
+        completedTaskSpinner.setForeground(new Color(45, 168, 216));
+        
         try {
             completdProjctsSpinner.setValue(ProjectsDB.getProjectCompletion());
             completedTaskSpinner.setValue(TasksDB.getTasksCompletion());
