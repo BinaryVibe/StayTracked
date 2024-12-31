@@ -4,7 +4,6 @@
  */
 package gui;
 
-import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import db.DBConnectionManager;
 import db.DatabaseUtils;
 import db.ProjectsDB;
@@ -13,7 +12,6 @@ import helper.CustomTableHeader;
 import helper.JDateChooserEditor;
 import helper.TableCellListener;
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Window;
@@ -39,7 +37,6 @@ import model.Priority;
 import model.Project;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import javax.swing.UIManager;
 
 /**
  *
@@ -308,7 +305,6 @@ public class ProjectsScreen extends javax.swing.JPanel {
         });
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        centerRenderer.setBorder(new EmptyBorder(0, 5, 0, 5));
         jScrollPane1.setViewportView(projectsTable);
         if (projectsTable.getColumnModel().getColumnCount() > 0) {
             projectsTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
