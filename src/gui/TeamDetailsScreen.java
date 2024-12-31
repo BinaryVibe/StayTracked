@@ -271,12 +271,14 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
 
         try {
             if (tableTeamMembers.getSelectedRow() == -1) {
+
                 throw new FailureException("No member elected to be removed");
 
             } else {
                 String memberEmail = (String) tableTeamMembers.getValueAt(tableTeamMembers.getSelectedRow(), 3);
                 AccountsDb.removeTeamMember(memberEmail);
                 lblTeamMembersError.setText(""); //empty label if it was not empty before 
+                populateTable(); //refresh table
             }
 
         } catch (FailureException fe) {
@@ -286,7 +288,7 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
             lblTeamMembersError.setText(se.getMessage());
         }
 
-        populateTable(); //refresh table
+
     }//GEN-LAST:event_removeBtnActionPerformed
 
     //Method to populate table
