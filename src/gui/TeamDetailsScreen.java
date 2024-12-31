@@ -4,10 +4,13 @@ import customexceptions.FailureException;
 import db.AccountsDb;
 import helper.CurrentSession;
 import java.awt.Color;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import model.NormalAccount;
@@ -47,6 +50,21 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
         }
         //populate table 
         populateTable();
+        
+        //TO UN SELECT ROW ,  important , otherwise if once the row is selected we can't unselect
+        tableTeamMembers.addMouseListener(new java.awt.event.MouseAdapter() {
+            
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                int clickedRow = tableTeamMembers.rowAtPoint(evt.getPoint());
+
+                if (evt.getClickCount() == 2 && tableTeamMembers.getSelectedRow() == clickedRow) {
+                    
+                    tableTeamMembers.clearSelection();
+
+                }
+            }
+        });
 
     }
 
@@ -171,7 +189,7 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, true, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
