@@ -8,10 +8,12 @@ import db.DBConnectionManager;
 import db.DatabaseUtils;
 import db.TasksDB;
 import helper.CurrentSession;
+import helper.CustomTableHeader;
 import helper.JDateChooserEditor;
 import helper.TableCellListener;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -114,7 +116,7 @@ public class TasksScreen extends javax.swing.JPanel {
         deleteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash.png"))); // NOI18N
         deleteBtn.setToolTipText("Delete selected row(s)");
         deleteBtn.setBorderPainted(false);
-        deleteBtn.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash-can-disabled.png"))); // NOI18N
+        deleteBtn.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash-can-disabled-2.png"))); // NOI18N
         deleteBtn.setEnabled(false);
         deleteBtn.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/trash-pressed.png"))); // NOI18N
         // deleteBtn.putClientProperty("JButton.buttonType", "roundRect");
@@ -223,10 +225,12 @@ public class TasksScreen extends javax.swing.JPanel {
             }
         });
         tasksTable.setFillsViewportHeight(true);
+        tasksTable.setGridColor(new java.awt.Color(49, 49, 49));
         tasksTable.setRowHeight(25);
         tasksTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tasksTable.setShowGrid(false);
-        tasksTable.getTableHeader().setReorderingAllowed(false);
+        tasksTable.setShowHorizontalLines(true);
+        tasksTable.setTableHeader(new CustomTableHeader(tasksTable.getColumnModel()));
         // Set Enum columns' editor to be a JComboBox
 
         tasksTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JComboBox<>(Status.values())));
@@ -257,9 +261,7 @@ public class TasksScreen extends javax.swing.JPanel {
         columnModel.removeColumn(tasksTable.getColumnModel().getColumn(5));
 
         JTableHeader tableHeader = tasksTable.getTableHeader();
-        tableHeader.setBackground(new Color(45, 168, 216));
-        tableHeader.setForeground(new Color(21, 25, 34));
-        // tableHeader.setFont(new Font(tasksTable.getFont().getFontName(), Font.BOLD, tasksTable.getFont().getSize()));
+        tableHeader.setFont(new Font(tasksTable.getFont().getFontName(), Font.BOLD, tasksTable.getFont().getSize()));
 
         Action action = new AbstractAction()
         {
