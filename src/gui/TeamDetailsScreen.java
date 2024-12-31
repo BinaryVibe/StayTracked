@@ -4,13 +4,10 @@ import customexceptions.FailureException;
 import db.AccountsDb;
 import helper.CurrentSession;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ListSelectionModel;
-import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import model.NormalAccount;
@@ -52,7 +49,7 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
         populateTable();
         
         //TO UN SELECT ROW ,  important , otherwise if once the row is selected we can't unselect
-        tableTeamMembers.addMouseListener(new java.awt.event.MouseAdapter() {
+        tableTeamMembers.addMouseListener(new MouseAdapter() {
             
             @Override
             public void mouseClicked(MouseEvent evt) {
