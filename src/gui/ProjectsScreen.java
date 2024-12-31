@@ -9,6 +9,7 @@ import db.DBConnectionManager;
 import db.DatabaseUtils;
 import db.ProjectsDB;
 import helper.CurrentSession;
+import helper.CustomTableHeader;
 import helper.JDateChooserEditor;
 import helper.TableCellListener;
 import java.awt.CardLayout;
@@ -247,11 +248,12 @@ public class ProjectsScreen extends javax.swing.JPanel {
             }
         });
         projectsTable.setFillsViewportHeight(true);
+        projectsTable.setGridColor(new java.awt.Color(49, 49, 49));
         projectsTable.setRowHeight(35);
         projectsTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
         projectsTable.setShowGrid(false);
         projectsTable.setShowHorizontalLines(true);
-        projectsTable.getTableHeader().setReorderingAllowed(false);
+        projectsTable.setTableHeader(new CustomTableHeader(projectsTable.getColumnModel()));
         // Set Enum columns' editor to be a JComboBox
 
         projectsTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JComboBox<>(Status.values())));
@@ -283,8 +285,6 @@ public class ProjectsScreen extends javax.swing.JPanel {
         columnModel.removeColumn(projectsTable.getColumnModel().getColumn(5));
 
         JTableHeader tableHeader = projectsTable.getTableHeader();
-        tableHeader.setBackground(new Color(16, 17, 25));
-        tableHeader.setForeground(new Color(240, 242, 239));
         tableHeader.setFont(new Font(projectsTable.getFont().getFontName(), Font.BOLD, projectsTable.getFont().getSize()));
 
         Action action = new AbstractAction()
@@ -308,6 +308,7 @@ public class ProjectsScreen extends javax.swing.JPanel {
         });
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        centerRenderer.setBorder(new EmptyBorder(0, 5, 0, 5));
         jScrollPane1.setViewportView(projectsTable);
         if (projectsTable.getColumnModel().getColumnCount() > 0) {
             projectsTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
