@@ -24,7 +24,7 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
         setResizable(false);
         initComponents();
         setLocationRelativeTo(parent); // Center the dialog
-        
+
     }
 
     /**
@@ -185,43 +185,40 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
 
     private void updatePassBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePassBtnActionPerformed
         // TODO add your handling code here:
-        String confirmPass = new String(txtConfirmPass.getPassword());
+        String confirmNewPass = new String(txtConfirmPass.getPassword());
         String newPass = new String(txtNewPass.getPassword());
         String currentPass = new String(txtCurrentPassword.getPassword());
-        Boolean validPass = false;
 
-        //Check if pass is valid
         try {
 
-            AccountsDb.validatePassword(newPass);
-            validPass = true;
-        } catch (InvalidInputException ie) {
-            lblError.setText(ie.getMessage());
-        }
+            if (confirmNewPass.isEmpty() || newPass.isEmpty() || currentPass.isEmpty()) {
 
-        if (confirmPass.isEmpty() || newPass.isEmpty() || currentPass.isEmpty()) {
-            lblError.setText("No text fields should be empty");
-        } 
-        else if (confirmPass.equals(newPass) && validPass) {
-            //call method to update pass
-            try {
+                lblError.setText("No text fields should be empty");
+
+            } else if (!confirmNewPass.equals(newPass)) {
+
+                lblError.setText("Password doesn't match");
+
+            } else {
+                //Check if pass is valid
+                AccountsDb.validatePassword(newPass);
+                //call method to update pass
                 AccountsDb.updatePass(CurrentSession.getAccountID(), currentPass, newPass);
                 lblError.setText("");
-                lblSucces.setText("Password successfuly updated! \n Go back to profile...");
+                lblSucces.setText("Password successfuly updated! Go back to profile...");
                 updatePassBtn.setVisible(false);
-                
+
                 txtCurrentPassword.setEnabled(false);
                 txtNewPass.setEnabled(false);
                 txtConfirmPass.setEnabled(false);
-            } catch (FailureException fe) {
-                lblError.setText(fe.getMessage());
-            } catch (SQLException se) {
-               lblError.setText(se.getMessage());
             }
 
-        } else {
-            lblError.setText("Password doesn't match");
-
+        } catch (FailureException fe) {
+            lblError.setText(fe.getMessage());
+        } catch (SQLException se) {
+            lblError.setText(se.getMessage());
+        } catch (InvalidInputException ie) {
+            lblError.setText(ie.getMessage());
         }
     }//GEN-LAST:event_updatePassBtnActionPerformed
 
