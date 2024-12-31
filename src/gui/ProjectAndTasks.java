@@ -4,8 +4,7 @@
  */
 package gui;
 
-import com.formdev.flatlaf.themes.FlatMacDarkLaf;
-import javax.swing.LookAndFeel;
+import com.formdev.flatlaf.FlatDarculaLaf;
 import javax.swing.UIManager;
 
 /**
@@ -18,18 +17,13 @@ public class ProjectAndTasks extends javax.swing.JPanel {
      * Creates new form ProjectAndTasks
      */
     public ProjectAndTasks() {
-        LookAndFeel previousLaF = UIManager.getLookAndFeel();
         try {
-            UIManager.setLookAndFeel(new FlatMacDarkLaf());
+            UIManager.setLookAndFeel(new FlatDarculaLaf());
         } catch (Exception ex) {
             System.err.println("Failed to initialize LaF");
         }
         initComponents();
-        try {
-            UIManager.setLookAndFeel(previousLaF);
-        } catch (Exception ex) {
-            System.err.println("Failed to revert to previous LaF");
-        }
+        
     }
 
     /**
