@@ -1,5 +1,7 @@
 package gui;
 
+import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import customexceptions.FailureException;
 import customexceptions.InvalidInputException;
@@ -579,7 +581,7 @@ public class SignUp extends javax.swing.JFrame {
 
         //adding flatLife
         try {
-            UIManager.setLookAndFeel(new FlatLightLaf());
+           UIManager.setLookAndFeel(new FlatDarculaLaf());
         } catch (Exception ex) {
             System.err.println("Failed to initialize LaF");
         }
