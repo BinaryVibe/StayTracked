@@ -172,7 +172,15 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
             new String [] {
                 "Name", "Username", "Contact", "Email"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tableTeamMembers.setGridColor(new java.awt.Color(221, 255, 255));
         tableTeamMembers.setInheritsPopupMenu(true);
         tableTeamMembers.setShowGrid(true);
@@ -257,6 +265,7 @@ public class TeamDetailsScreen extends javax.swing.JPanel {
     private void addTeamMemberBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTeamMemberBtnActionPerformed
         // TODO add your handling code here:
         AddTeamMemberDialog dialog = new AddTeamMemberDialog(null, true, this); //When you add it to mainScreen , change null to this
+        dialog.setTitle("Add Team Member");
         dialog.setVisible(true);
     }//GEN-LAST:event_addTeamMemberBtnActionPerformed
 
