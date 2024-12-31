@@ -294,19 +294,25 @@ public class TasksScreen extends javax.swing.JPanel {
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void updateCell(TableCellListener tcl) {
-        int row = tcl.getRow();
-        int column = tcl.getColumn();
+    private boolean checkPermission() {
         if (CurrentSession.getAccountType().equals("Normal")) {
             try {
                 if (!(DatabaseUtils.checkPermission(projectID))) {
-                    JOptionPane.showMessageDialog(this, "You are not allowed to edit task properties of this project.", "Permission Error", JOptionPane.ERROR_MESSAGE);
-                    tasksTable.setValueAt(tcl.getOldValue(), row, column);
-                    return;
+                    return false;
                 }
             } catch (SQLException ex) {
                 System.err.println(ex.getMessage());
             }
+        }
+        return true;
+    }
+
+    private void updateCell(TableCellListener tcl) {
+        int row = tcl.getRow();
+        int column = tcl.getColumn();
+        if (!(checkPermission())) {
+            JOptionPane.showMessageDialog(this, "You are not allowed to edit task properties of this project.", "Permission Error", JOptionPane.ERROR_MESSAGE);
+            tasksTable.setValueAt(tcl.getOldValue(), row, column);
         }
         int taskID = (int) tasksTable.getModel().getValueAt(row, 5);
         System.out.println("Task Id: " + taskID);
@@ -415,6 +421,10 @@ public class TasksScreen extends javax.swing.JPanel {
     }//GEN-LAST:event_tasksTableclickHandler
 
     private void createTaskBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createTaskBtnActionPerformed
+        if (!(checkPermission())) {
+            JOptionPane.showMessageDialog(this, "You are not allowed to add tasks to this project.", "Permission Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         Window parentWindow = SwingUtilities.windowForComponent(this);
         Frame parentFrame = null;
         if (parentWindow instanceof Frame frame) {

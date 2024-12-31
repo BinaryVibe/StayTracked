@@ -5,6 +5,7 @@
 package helper;
 
 import com.toedter.calendar.JDateChooser;
+import java.awt.Color;
 import java.awt.Component;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -25,6 +26,7 @@ public class JDateChooserEditor extends DefaultCellEditor {
         super(textField);
         dateChooser = new JDateChooser();
         dateChooser.setDateFormatString(dateFormat);
+        dateChooser.setForeground(new Color(255, 255, 255));
     }
 
     @Override
