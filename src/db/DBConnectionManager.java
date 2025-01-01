@@ -7,30 +7,30 @@ import java.sql.SQLException;
 
 public class DBConnectionManager {
     
-    //Connection for hostel internet host:haris
+    //Connection for hostel internet
 //    static String url = "jdbc:mariadb://192.168.1.9:3306/StayTracked";
 //    static String userName = "Ayaan";
 //    static String passWord = "123Password";
 //    static private Connection con; 
     
     // localhost Connection for NextStep-IM
-    private static String url = "jdbc:mariadb://localhost:3306/StayTracked";
-    private static String userName = "mysql";
-    private static String passWord = "dustrunner42";
-    private static Connection con;
+//    private static String url = "jdbc:mariadb://localhost:3306/StayTracked";
+//    private static String userName = "mysql";
+//    private static String passWord = "dustrunner42";
+//    private static Connection con;
     
-   //Connection details for Talal
-//    static String url = "jdbc:mysql://localhost:3306/staytracked";
-//    static String userName = "root";
-//    static String passWord = "bythebandit@028";
-//    static private Connection con;
-//    
-    //Connection details for Ayaan(PC) local host
+   //Connection details for - ByteBandit
+    static String url = "jdbc:mysql://localhost:3306/staytracked";
+    static String userName = "root";
+    static String passWord = "bythebandit@028";
+    static private Connection con;
+    
+   // Connection details for local host - Ersatz
 //    static String url = "jdbc:mysql://localhost:3306/staytracked";
 //    static String userName = "root";
 //    static String passWord = "ersatzSQL";
 //    static private Connection con;
-    
+//    
     public static void setConnection(){
         con = null;
         try{
