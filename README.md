@@ -28,29 +28,48 @@ StayTracked is a simple **Project Tracking System** developed in **Java** with a
 -  **GUI Framework**: Swing (with FlatLaf theme)
 
 ## 📥 Installation
-### **1. Clone the Repository**
-```bash
- git clone https://github.com/your-org/StayTracked.git
- cd StayTracked
-```
+### **1️⃣ Extract the ZIP File**
+- Download and extract **StayTracked.zip**.
+- You will get a folder named **StayTracked/** (NetBeans project).
+- Keep the **Additional NetBeans Libraries/** folder in the same location (it contains required external JARs).
 
-### **2. Set Up MySQL Database**
-1. Create a database named `StayTracked`:
-```sql
-CREATE DATABASE StayTracked;
-```
-2. Import the provided SQL script (`staytracked.sql`) to set up tables.
-3. Update database connection details in the DBConnectionManager.java file:
-```properties
-userName= [your sql username]
-passWord= [your sql password , if any]
-```
+### **2️⃣ Import Project in NetBeans**
+1. Open **Apache NetBeans**.
+2. Go to **File** → **Open Project**.
+3. Select the extracted **StayTracked/** folder and open it.
+4. If prompted, install missing plugins.
 
-### **3. Compile and Run**
-#### **Using an IDE (Apache NetBeans)**
-1. 📥 Import the project.
-2. ⚙️ Configure the MySQL connector.
-3. ▶️ Run `StayTracked.java`.
+### **3️⃣ Configure Libraries**
+1. Right-click **StayTracked** in NetBeans.
+2. Select **Properties** → **Libraries**.
+3. Click **Add JAR/Folder**.
+4. Navigate to the **Additional NetBeans Libraries/** folder.
+5. Select all JAR files inside and add them to the project.
+6. Click **OK** to save changes.
+
+### **4️⃣ Set Up MySQL Database**
+1. Open **MySQL Workbench** (or any SQL client).
+2. Create a new database named **`StayTracked`**:
+   ```sql
+   CREATE DATABASE StayTracked;
+   ```  
+3. Inside the **StayTracked/** project folder, find `StayTrackedDB.sql`.
+4. Import `StayTrackedDB.sql` into MySQL:
+   - In MySQL Workbench, go to **Server** → **Data Import**.
+   - Select **Import from Self-Contained File** and choose `StayTrackedDB.sql`.
+   - Click **Start Import**.
+
+### **5️⃣ Update Database Credentials**
+1. Open **`DBConnectionManager.java`** inside NetBeans.
+2. Update your database credentials:
+   ```java
+   String userName = "[your SQL username]";
+   String passWord = "[your SQL password, if any]";
+   ```  
+
+### **6️⃣ Run the Project**
+- In NetBeans, right-click **StayTracked** and select **Run**.
+- The StayTracked system should now launch successfully! 
 
 ## 🏗️ Usage
 ### **1. Creating a New Account**
