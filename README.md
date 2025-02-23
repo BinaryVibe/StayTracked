@@ -22,7 +22,7 @@ StayTracked is a simple **Project Tracking System** developed in **Java** with a
 
 ## 🛠️ Tech Stack
 -  **Programming Language**: Java
-- 🗄 **Database**: MySQL
+-  **Database**: MySQL
 -  **IDE**: Apache NetBeans
 -  **Version Control**: Git & GitHub
 -  **GUI Framework**: Swing (with FlatLaf theme)
